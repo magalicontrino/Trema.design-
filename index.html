@@ -57,13 +57,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;tex
   transition:width .3s var(--e),height .3s var(--e)}
 @media(pointer:coarse){#cur{display:none}}
 #prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--rouge);z-index:9997;mix-blend-mode:difference}
-#rail{position:fixed;left:6px;top:50%;transform:translateY(-50%);z-index:9990;display:flex;flex-direction:column;
-  mix-blend-mode:difference;color:#fff;max-height:88vh;overflow:hidden}
-#rail button{font-family:var(--fm);font-size:8px;letter-spacing:.08em;padding:1px 5px;opacity:.3;
-  transition:opacity .2s,transform .2s;white-space:nowrap}
-#rail button.on{opacity:1;transform:translateX(4px)}
+/* rail : numéros seuls au repos, titres révélés au survol du rail */
+#rail{position:fixed;left:4px;top:50%;transform:translateY(-50%);z-index:9990;display:flex;flex-direction:column;
+  mix-blend-mode:difference;color:#fff;max-height:88vh;padding:6px 4px}
+#rail button{font-family:var(--fm);font-size:8px;letter-spacing:.08em;padding:1.5px 5px;opacity:.28;
+  transition:opacity .2s,transform .2s;white-space:nowrap;display:flex;gap:.7em;align-items:baseline}
+#rail button b{font-weight:400}
+#rail button i{font-style:normal;max-width:0;overflow:hidden;opacity:0;
+  transition:max-width .4s var(--e),opacity .3s}
+#rail:hover button i{max-width:170px;opacity:1}
+#rail button.on{opacity:1;transform:translateX(3px)}
 #rail button:hover{opacity:1}
-@media(max-width:1100px){#rail{display:none}}
+@media(max-width:1240px){#rail{display:none}}
 
 /* ── sections ──────────────────────────────────────────── */
 section{position:relative;padding:clamp(56px,9vw,150px) var(--pad);border-top:var(--rule)}
@@ -78,15 +83,15 @@ section.full{min-height:100svh;display:flex;flex-direction:column;justify-conten
 
 .num{position:absolute;top:clamp(6px,1.5vw,24px);right:var(--pad);font-family:var(--fd);
   font-size:clamp(80px,18vw,270px);line-height:.72;font-variation-settings:"wght" 1000,"FLAR" 100;
-  opacity:.06;pointer-events:none;user-select:none;letter-spacing:-.045em}
+  opacity:.06;pointer-events:none;user-select:none;letter-spacing:0}
 .part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
 .tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
   display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.4em}
 .tag::before{content:"";width:24px;height:1.4px;background:currentColor}
 
-h2{font-family:var(--fd);font-size:clamp(36px,7.6vw,120px);line-height:.85;letter-spacing:-.04em;
+h2{font-family:var(--fd);font-size:clamp(36px,7.6vw,120px);line-height:.85;letter-spacing:0;
   font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance}
-h3{font-family:var(--fd);font-size:clamp(18px,2.2vw,30px);line-height:1.02;letter-spacing:-.025em;
+h3{font-family:var(--fd);font-size:clamp(18px,2.2vw,30px);line-height:1.02;letter-spacing:0;
   font-variation-settings:"wght" 700,"FLAR" 60;margin-bottom:.45em}
 h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
   opacity:.55;margin-bottom:.9em}
@@ -97,7 +102,7 @@ p{font-family:var(--fs);font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;let
 p + p{margin-top:.9em}
 .lead{font-family:var(--fs);font-size:clamp(17px,1.7vw,23px);line-height:1.38;letter-spacing:-.014em;
   max-width:44ch;font-weight:400}
-.disp{font-family:var(--fd);font-size:clamp(20px,2.6vw,36px);line-height:1.02;letter-spacing:-.03em;
+.disp{font-family:var(--fd);font-size:clamp(20px,2.6vw,36px);line-height:1.02;letter-spacing:0;
   font-variation-settings:"wght" 800,"FLAR" 100;max-width:22ch}
 .mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
 .dim{opacity:.55}
@@ -131,7 +136,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* ── bandeaux ──────────────────────────────────────────── */
 .mq{overflow:hidden;white-space:nowrap;display:flex;border-top:var(--rule);border-bottom:var(--rule);padding:clamp(6px,.8vw,14px) 0}
 .mq span{display:inline-flex;align-items:center;gap:.4em;padding-right:.4em;flex:0 0 auto;font-family:var(--fd);
-  font-size:clamp(24px,5vw,80px);line-height:.9;letter-spacing:-.035em;font-variation-settings:"wght" 800,"FLAR" 100;
+  font-size:clamp(24px,5vw,80px);line-height:.9;letter-spacing:0;font-variation-settings:"wght" 800,"FLAR" 100;
   animation:sl 26s linear infinite}
 .mq:hover span{animation-play-state:paused}
 .mq.rev2 span{animation-direction:reverse}
@@ -142,7 +147,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* ══ ROLLOVERS ═════════════════════════════════════════════ */
 [data-fx]{cursor:default}
 .fx-flare{font-variation-settings:"wght" 900,"FLAR" 0,"slnt" 0;transition:font-variation-settings .55s var(--e),letter-spacing .55s var(--e)}
-.fx-flare:hover{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 9;letter-spacing:-.055em}
+.fx-flare:hover{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 9;letter-spacing:-.006em}
 .fx-thin{font-variation-settings:"wght" 1000,"FLAR" 100;transition:font-variation-settings .6s var(--e)}
 .fx-thin:hover{font-variation-settings:"wght" 300,"FLAR" 0}
 .fx-wave span{display:inline-block;transition:font-variation-settings .18s linear,transform .18s linear;will-change:font-variation-settings}
@@ -150,19 +155,20 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-stretch:hover{transform:scaleX(1.28) scaleY(.94)}
 .fx-slice{position:relative;display:inline-block;overflow:hidden}
 .fx-slice i{font-style:normal;display:block}
-.fx-slice i:nth-child(2){position:absolute;inset:0;clip-path:inset(0 0 50% 0);color:var(--rouge);
-  transition:transform .45s var(--e);pointer-events:none}
-.fx-slice:hover i:nth-child(2){transform:translateX(-.06em)}
-.fx-slice i:nth-child(3){position:absolute;inset:0;clip-path:inset(50% 0 0 0);color:var(--menthe);
-  transition:transform .45s var(--e);pointer-events:none}
-.fx-slice:hover i:nth-child(3){transform:translateX(.06em)}
+.fx-slice i:nth-child(2),.fx-slice i:nth-child(3){position:absolute;inset:0;opacity:0;pointer-events:none;
+  transition:transform .45s var(--e),opacity .25s}
+.fx-slice i:nth-child(2){clip-path:inset(0 0 50% 0);color:var(--rouge)}
+.fx-slice i:nth-child(3){clip-path:inset(50% 0 0 0);color:var(--menthe)}
+.fx-slice:hover i:nth-child(2),.fx-slice:hover i:nth-child(3){opacity:1}
+.fx-slice:hover i:nth-child(2){transform:translateX(-.07em)}
+.fx-slice:hover i:nth-child(3){transform:translateX(.07em)}
 .fx-inv{transition:background .3s,color .3s,padding .3s var(--e)}
 .fx-inv:hover{background:currentColor;color:var(--bg)}
 
 /* ══ COUVERTURE ════════════════════════════════════════════ */
 #cover{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);border-top:0;position:relative;overflow:hidden}
 .cov-top,.cov-bot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;z-index:3}
-#wm{font-family:var(--fd);font-size:clamp(70px,23vw,400px);line-height:.7;letter-spacing:-.06em;
+#wm{font-family:var(--fd);font-size:clamp(58px,19.5vw,330px);line-height:.72;letter-spacing:-.008em;
   position:relative;z-index:3;margin:clamp(14px,3vw,40px) 0;user-select:none}
 #wm span{display:inline-block;transition:font-variation-settings .22s linear}
 .cov-sym{position:absolute;right:calc(var(--pad) - 1vw);top:18vh;width:clamp(90px,17vw,290px);opacity:.92;z-index:2;
@@ -174,7 +180,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .toc button{width:100%;display:grid;grid-template-columns:52px 1fr auto;gap:var(--gut);align-items:baseline;
   padding:clamp(7px,1.1vw,15px) 0;border-bottom:var(--rule);transition:padding-left .32s var(--e),background .32s}
 .toc button:hover{padding-left:20px;background:color-mix(in srgb,currentColor 8%,transparent)}
-.toc .t{font-family:var(--fd);font-size:clamp(18px,3.2vw,44px);line-height:.98;letter-spacing:-.03em;
+.toc .t{font-family:var(--fd);font-size:clamp(18px,3.2vw,44px);line-height:.98;letter-spacing:0;
   font-variation-settings:"wght" 700,"FLAR" 10;transition:font-variation-settings .35s var(--e)}
 .toc button:hover .t{font-variation-settings:"wght" 1000,"FLAR" 100}
 .toc .n,.toc .s{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:.5}
@@ -182,13 +188,15 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   opacity:.35;padding:22px 0 6px;border-bottom:var(--rule)}
 
 /* ══ SPÉCIMEN PLEIN ÉCRAN ══════════════════════════════════ */
-.specimen{font-family:var(--fd);line-height:.78;letter-spacing:-.045em;text-align:left;
-  font-size:clamp(38px,9.6vw,168px);word-spacing:-.02em}
+/* crénage prudent : en Extra (wght 1000 / FLAR 100) les glyphes se percutent vite */
+.specimen{font-family:var(--fd);line-height:.8;letter-spacing:.004em;text-align:left;
+  font-size:clamp(38px,9.6vw,168px)}
+.specimen > span{margin-right:.1em}
 .specimen em{font-style:normal}
 .spec-note{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.45;
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:1.6em}
 .axis-line{border-bottom:var(--rule);padding:.06em 0;white-space:nowrap;overflow:hidden;position:relative;
-  font-family:var(--fd);line-height:.92;letter-spacing:-.035em;cursor:default}
+  font-family:var(--fd);line-height:.92;letter-spacing:0;cursor:default}
 .axis-line .meta{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:0;position:absolute;
   right:0;top:50%;transform:translateY(-50%);transition:opacity .3s;background:var(--bg);padding-left:14px}
 .axis-line:hover .meta{opacity:.75}
@@ -210,7 +218,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .lab{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:var(--gut);border:var(--rule);
   padding:clamp(14px,2vw,30px);align-items:center}
 @media(max-width:900px){.lab{grid-template-columns:1fr}}
-#play{font-family:var(--fd);font-size:clamp(40px,9.5vw,140px);line-height:.84;letter-spacing:-.045em;
+#play{font-family:var(--fd);font-size:clamp(40px,9.5vw,140px);line-height:.84;letter-spacing:0;
   word-break:break-word;outline:none}
 .sl{margin-bottom:15px}
 .sl label{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;margin-bottom:6px}
@@ -245,7 +253,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:1px;background:currentColor;border:var(--rule)}
 .sw{padding:clamp(12px,1.6vw,20px);min-height:clamp(160px,20vw,235px);display:flex;flex-direction:column;
   justify-content:space-between;cursor:pointer;position:relative}
-.sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,22px);letter-spacing:-.02em;font-variation-settings:"wght" 800,"FLAR" 80}
+.sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,22px);letter-spacing:0;font-variation-settings:"wght" 800,"FLAR" 80}
 .sw .vl{font-family:var(--fm);font-size:9px;line-height:1.78;letter-spacing:.03em;opacity:.85}
 .sw::after{content:"copié ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;opacity:0;transition:opacity .3s}
 .sw.cp::after{opacity:1}
@@ -275,8 +283,11 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .p5 i{-webkit-mask:url("Logo.svg") repeat center/76px;mask:url("Logo.svg") repeat center/76px;background:var(--rouge)}
 .p6 i{background:repeating-radial-gradient(circle at 50% 50%,currentColor 0 1.4px,transparent 1.4px 13px);opacity:.55}
 
-.ico{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:currentColor;border:var(--rule)}
-.ico figure{background:var(--bg);padding:22px 12px;display:grid;place-items:center;gap:14px;text-align:center;transition:background .25s,color .25s}
+/* bordures portées par les cellules : pas de fond qui déborde sur la dernière rangée incomplète */
+.ico{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  border-top:var(--rule);border-left:var(--rule)}
+.ico figure{border-right:var(--rule);border-bottom:var(--rule);
+  padding:22px 12px;display:grid;place-items:center;gap:14px;text-align:center;transition:background .25s,color .25s}
 .ico figure:hover{background:var(--rouge);color:#fff}
 .ico figcaption{font-family:var(--fm);font-size:8px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
 .ico figure:hover figcaption{opacity:1}
@@ -290,13 +301,13 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .poster{background:var(--blanc);color:var(--encre);border:var(--rule);padding:clamp(22px,3.4vw,52px);
   display:flex;flex-direction:column;gap:clamp(12px,1.6vw,22px);min-height:clamp(420px,62vh,760px)}
 .poster .k{font-family:var(--fm);font-size:clamp(10px,1.05vw,14px);letter-spacing:.34em;text-transform:uppercase}
-.poster .big{font-family:var(--fd);font-size:clamp(52px,11.5vw,190px);line-height:.8;letter-spacing:-.055em;
+.poster .big{font-family:var(--fd);font-size:clamp(52px,11.5vw,190px);line-height:.8;letter-spacing:-.006em;
   font-variation-settings:"wght" 1000,"FLAR" 0}
 .poster .sub{font-family:var(--fd);font-size:clamp(15px,2.1vw,32px);letter-spacing:.06em;
   font-variation-settings:"wght" 500,"FLAR" 0;text-transform:uppercase}
 .poster .duo{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(16px,2.4vw,44px);align-items:start;margin-top:auto}
 @media(max-width:640px){.poster .duo{grid-template-columns:1fr}}
-.poster .duo .shout{font-family:var(--fd);font-size:clamp(16px,2.1vw,30px);line-height:1.04;letter-spacing:-.02em;
+.poster .duo .shout{font-family:var(--fd);font-size:clamp(16px,2.1vw,30px);line-height:1.04;letter-spacing:0;
   font-variation-settings:"wght" 1000,"FLAR" 0;text-transform:uppercase}
 .rank{counter-reset:r;display:grid;gap:1px;background:currentColor;border:var(--rule)}
 .rank li{list-style:none;background:var(--bg);padding:12px 14px;display:grid;
@@ -322,11 +333,11 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
   mask:url("Logo.svg") no-repeat center/contain;background:currentColor}
 
 /* mot-symbole minuscule */
-.lower{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;letter-spacing:-.045em;line-height:.9}
+.lower{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;letter-spacing:0;line-height:.9}
 
 /* ── hors-format / débord ─────────────────────────────── */
 .bleed{position:relative;overflow:hidden;min-height:clamp(360px,72vh,820px);border:var(--rule)}
-.bleed .w{position:absolute;font-family:var(--fd);line-height:.78;letter-spacing:-.05em;white-space:nowrap;
+.bleed .w{position:absolute;font-family:var(--fd);line-height:.78;letter-spacing:0;white-space:nowrap;
   font-variation-settings:"wght" 400,"FLAR" 0;transition:font-variation-settings .5s var(--e),color .5s var(--e)}
 .bleed .w:hover{font-variation-settings:"wght" 1000,"FLAR" 100;color:var(--rouge)}
 .bleed .meta{position:absolute;font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;line-height:1.7;opacity:.8}
@@ -563,7 +574,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
         <div style="text-align:center">
           <div style="display:inline-flex;align-items:center;gap:10px;border:var(--rule);padding:12px 20px">
             <svg class="sym" viewBox="0 0 78 91" style="width:24px"><use href="#tm"/></svg>
-            <b style="font-family:var(--fd);font-size:20px;font-variation-settings:'wght' 1000,'FLAR' 0;letter-spacing:-.03em">TRÉMA</b>
+            <b style="font-family:var(--fd);font-size:20px;font-variation-settings:'wght' 1000,'FLAR' 0;letter-spacing:0">TRÉMA</b>
           </div>
           <div style="height:26px;width:1.4px;background:currentColor;margin:0 auto;opacity:.4"></div>
           <div style="height:1.4px;background:currentColor;opacity:.4;margin-bottom:0"></div>
@@ -691,15 +702,15 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="grid c3">
     <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="display:flex;align-items:center;gap:13px">
       <svg class="sym" viewBox="0 0 78 91" style="width:36px"><use href="#tm"/></svg>
-      <span style="font-family:var(--fd);font-size:clamp(24px,3.2vw,44px);letter-spacing:-.05em;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
+      <span style="font-family:var(--fd);font-size:clamp(24px,3.2vw,44px);letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
       <p class="mono dim" style="margin-top:9px">A · Horizontal — usage principal</p></div>
     <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="text-align:center">
       <svg class="sym" viewBox="0 0 78 91" style="width:32px;margin:0 auto 10px"><use href="#tm"/></svg>
-      <span style="font-family:var(--fd);font-size:clamp(19px,2.4vw,32px);letter-spacing:-.045em;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
+      <span style="font-family:var(--fd);font-size:clamp(19px,2.4vw,32px);letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
       <p class="mono dim" style="margin-top:9px">B · Vertical — carrés, avatars</p></div>
     <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="display:flex;align-items:center;gap:13px">
       <svg class="sym" viewBox="0 0 78 91" style="width:32px"><use href="#tm"/></svg>
-      <div style="border-left:var(--rule);padding-left:13px"><div style="font-family:var(--fd);font-size:19px;letter-spacing:-.035em;font-variation-settings:'wght' 900,'FLAR' 0">TRÉMA</div>
+      <div style="border-left:var(--rule);padding-left:13px"><div style="font-family:var(--fd);font-size:19px;letter-spacing:0;font-variation-settings:'wght' 900,'FLAR' 0">TRÉMA</div>
       <div class="mono dim" style="font-size:8.5px">TORRÉFACTEUR · PARIS</div></div></div></div>
       <p class="mono dim" style="margin-top:9px">C · Avec signature — papeterie, B2B</p></div>
     <div class="rev"><div class="box fill" style="aspect-ratio:1.6;display:grid;place-items:center">
@@ -939,7 +950,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
     <div class="box rev">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
       <p>Créer un style est aussi simple que de poser une image. Le titre porte la marque, le paragraphe porte
       l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste qui fait tenir la page.</p>
       <p>Interlignage 1,58. Longueur de ligne entre 45 et 75 signes. Alignement à gauche, drapeau à droite,
@@ -947,7 +958,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
       <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
     </div>
     <div class="box rev" style="border-color:var(--rouge)">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
       <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Créer un style est aussi simple que de poser une image. Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste qui fait tenir la page.</p>
       <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Interlignage 1,58. Longueur de ligne entre 45 et 75 signes. Alignement à gauche, drapeau à droite, jamais de justification.</p>
       <div class="mono" style="margin-top:16px;color:var(--rouge)">✕ Paragraphe en Flair — refusé</div>
@@ -1070,7 +1081,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
         <div class="cols"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="cnt">
           <div><div class="mono dim" style="margin-bottom:7px">NOUVEAUTÉ · ÉTHIOPIE</div>
-          <div style="font-family:var(--fd);font-size:clamp(22px,3.2vw,46px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div></div>
+          <div style="font-family:var(--fd);font-size:clamp(22px,3.2vw,46px);line-height:.9;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div></div>
           <div style="display:flex;justify-content:space-between;align-items:flex-end">
             <div class="mono dim">1 800 m · lavé<br>prune, jasmin, cacao</div>
             <svg class="sym" viewBox="0 0 78 91" style="width:28px"><use href="#tm"/></svg></div>
@@ -1197,12 +1208,12 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="bleed rev" id="bleed">
     <div class="meta" style="top:16px;left:18px">12.03.26</div>
     <div class="meta" style="top:16px;left:34%">ATELIER TRÉMA<br>12 RUE DU FOUR<br>PARIS 6<sup>e</sup><br>ENTRÉE LIBRE</div>
-    <div class="meta" style="top:31%;left:18px;max-width:22ch">10.00 — Dégustation à l'aveugle<br>12.00 — Torréfaction, atelier<br>14.00 — Origines &amp; producteurs<br>16.00 — Extraction, table ronde</div>
-    <div class="w" style="top:26%;left:44%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">Tré</div>
-    <div class="w" style="top:41%;left:-4%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">éma&nbsp;Off</div>
-    <div class="w" style="top:58%;left:34%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">Sai</div>
-    <div class="w" style="top:73%;left:-8%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">ison&nbsp;:</div>
-    <div class="meta" style="top:56%;right:20px;text-align:right">Une série de<br>conversations<br>autour du grain</div>
+    <div class="meta" style="top:16px;left:60%;max-width:24ch">10.00 — Dégustation à l'aveugle<br>12.00 — Torréfaction, atelier<br>14.00 — Origines &amp; producteurs<br>16.00 — Extraction, table ronde</div>
+    <div class="meta" style="top:23%;left:18px;text-align:left">Une série de conversations<br>autour du grain</div>
+    <div class="w" style="top:33%;left:46%;font-size:clamp(48px,13vw,200px);font-variation-settings:'wght' 400,'FLAR' 0">Tré</div>
+    <div class="w" style="top:47%;left:-4%;font-size:clamp(48px,13vw,200px);font-variation-settings:'wght' 400,'FLAR' 0">éma&nbsp;Off</div>
+    <div class="w" style="top:62%;left:36%;font-size:clamp(48px,13vw,200px);font-variation-settings:'wght' 400,'FLAR' 0">Sai</div>
+    <div class="w" style="top:77%;left:-8%;font-size:clamp(48px,13vw,200px);font-variation-settings:'wght' 400,'FLAR' 0">ison&nbsp;:</div>
   </div>
   <div class="grid c4 rev" style="margin-top:var(--gut)">
     <div class="box"><h4>Autorisé sur</h4><p class="mono">Affiche événement<br>Bâche, kakémono<br>Couverture d'édition<br>Story pleine hauteur</p></div>
@@ -1269,11 +1280,11 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   origine → process → poids → date. Le signe est toujours en haut à gauche.<span class="todo">maquettes à remplacer par photos</span></p></div>
   <div class="grid c4">
     <div class="app rev"><div class="bag"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div><b class="mono" style="font-size:8px">ÉTHIOPIE · 250 G · 12/03</b></div></div><div class="cap">Paquet 250 g — Filtre</div></div>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div><b class="mono" style="font-size:8px">ÉTHIOPIE · 250 G · 12/03</b></div></div><div class="cap">Paquet 250 g — Filtre</div></div>
     <div class="app rev"><div class="bag" style="background:var(--encre)"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Santa<br>Rita</div><b class="mono" style="font-size:8px">BRÉSIL · 1 KG · 09/03</b></div></div><div class="cap">Sac 1 kg — Espresso</div></div>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Santa<br>Rita</div><b class="mono" style="font-size:8px">BRÉSIL · 1 KG · 09/03</b></div></div><div class="cap">Sac 1 kg — Espresso</div></div>
     <div class="app rev"><div class="bag" style="background:var(--rouge);color:#fff"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Lot 07</div><b class="mono" style="font-size:8px">ÉDITION · 120 EX. · N° ___</b></div></div><div class="cap">Édition limitée numérotée</div></div>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Lot 07</div><b class="mono" style="font-size:8px">ÉDITION · 120 EX. · N° ___</b></div></div><div class="cap">Édition limitée numérotée</div></div>
     <div class="app rev"><div class="cup"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Gobelet 25 cl</div></div>
   </div>
   <div class="grid c3 rev" style="margin-top:var(--gut)">
@@ -1298,7 +1309,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
       <svg class="sym" viewBox="0 0 78 91" style="width:22%;color:var(--lait)"><use href="#tm"/></svg></div><div class="cap">Enveloppe DL</div></div>
     <div class="app rev"><div style="width:58%;aspect-ratio:.7;background:var(--blanc);border:var(--rule);padding:9%;display:flex;flex-direction:column;justify-content:space-between;color:var(--encre)">
       <div class="mono" style="font-size:7px;letter-spacing:.2em">TRÉMA · ADDITION</div>
-      <div style="font-family:var(--fd);font-size:clamp(16px,2vw,26px);letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Merci.</div>
+      <div style="font-family:var(--fd);font-size:clamp(16px,2vw,26px);letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Merci.</div>
       <svg class="sym" viewBox="0 0 78 91" style="width:16%"><use href="#tm"/></svg></div><div class="cap">Ticket de caisse</div></div>
   </div>
 </section>
@@ -1312,7 +1323,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="app rev" style="background:var(--brume)"><div class="sign"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Enseigne · caisson lumineux</div></div>
     <div class="app rev" style="background:var(--encre)"><div style="width:62%;aspect-ratio:.8;background:var(--espresso);display:flex;flex-direction:column;justify-content:space-between;padding:9%;color:var(--lait)">
       <div class="mono" style="font-size:7.5px;letter-spacing:.2em">AUJOURD'HUI</div>
-      <div style="font-family:var(--fd);font-size:clamp(14px,1.7vw,22px);line-height:.98;letter-spacing:-.03em;font-variation-settings:'wght' 900,'FLAR' 100">Guji Natural<br>Santa Rita</div>
+      <div style="font-family:var(--fd);font-size:clamp(14px,1.7vw,22px);line-height:.98;letter-spacing:0;font-variation-settings:'wght' 900,'FLAR' 100">Guji Natural<br>Santa Rita</div>
       <div class="mono" style="font-size:7.5px">FILTRE 4,50 · ESPRESSO 2,20</div></div><div class="cap">Ardoise du jour</div></div>
     <div class="app rev"><div class="tee"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Tablier / T-shirt équipe</div></div>
     <div class="app rev" style="background:var(--papier)"><div class="truck"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Véhicule de livraison</div></div>
@@ -1387,7 +1398,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
       </div><div class="cap">Grille — rythme 1 photo / 2 aplats</div></div>
     <div class="app rev" style="padding:0;aspect-ratio:1"><div style="width:100%;height:100%;background:var(--encre);display:flex;flex-direction:column;justify-content:space-between;padding:9%">
       <svg class="sym" viewBox="0 0 78 91" style="width:12%;color:var(--papier)"><use href="#tm"/></svg>
-      <div style="font-family:var(--fd);color:var(--papier);font-size:clamp(18px,2.4vw,32px);line-height:.92;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100">Retour<br>du Guji.</div>
+      <div style="font-family:var(--fd);color:var(--papier);font-size:clamp(18px,2.4vw,32px);line-height:.92;letter-spacing:0;font-variation-settings:'wght' 1000,'FLAR' 100">Retour<br>du Guji.</div>
       <div class="mono" style="color:var(--papier);opacity:.6;font-size:7.5px">EN LIGNE ET EN BOUTIQUE · VENDREDI</div></div>
       <div class="cap">Post 1:1 — annonce</div></div>
     <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
@@ -1555,7 +1566,8 @@ secs.forEach((s, i) => {
     toc.appendChild(b);
   }
   const r = document.createElement("button");
-  r.textContent = `${n} ${t}`;
+  r.innerHTML = `<b>${n}</b><i></i>`;
+  r.querySelector("i").textContent = t;
   r.onclick = () => s.scrollIntoView({behavior:"smooth"});
   rail.appendChild(r);
 });
@@ -1577,11 +1589,11 @@ $$("section").forEach(s => {
 
 /* ── pictogrammes maison ── */
 const PICTOS = [
-  ["faq 1.svg","FAQ"],["gallery 1.svg","Galerie"],["link 1.svg","Lien"],["mentions 1.svg","Mentions"],
-  ["menu 1.svg","Menu"],["playlist 1.svg","Playlist"],["post 1.svg","Post"],["reviews 1.svg","Avis"]
+  ["faq","FAQ"],["gallery","Galerie"],["link","Lien"],["mentions","Mentions"],
+  ["menu","Menu"],["playlist","Playlist"],["post","Post"],["reviews","Avis"]
 ];
 $("#picoGrid").innerHTML = PICTOS.map(([f, label]) => {
-  const u = `url("picto/${encodeURIComponent(f)}")`;
+  const u = `url('picto/web/${f}.svg')`;   // guillemets simples : on est dans un attribut style="…"
   return `<figure><div class="pico" style="-webkit-mask-image:${u};mask-image:${u}"></div>
     <figcaption>${label}</figcaption></figure>`;
 }).join("");
