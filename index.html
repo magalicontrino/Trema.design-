@@ -18,10 +18,11 @@
 }
 
 :root{
-  --encre:#141312; --noir:#000; --papier:#EFEDEA; --blanc:#FFF;
-  --espresso:#4E321E; --crema:#956F59; --lait:#D8CFC4;
-  --beton:#5C5E5F; --brume:#949596;
-  --rouge:#E63329; --kraft:#E8B33F; --menthe:#7FA08A;
+  /* Système strictement monochrome. Aucune couleur : seule la photo en apporte. */
+  --encre:#111111; --noir:#000000; --papier:#F2F2F1; --blanc:#FFFFFF;
+  --espresso:#1C1C1C; --crema:#8C8C8C; --lait:#E4E4E3;
+  --beton:#5E5E5E; --brume:#9B9B9B;
+  --rouge:#000000; --kraft:#E4E4E3; --menthe:#7A7A7A;
 
   --bg:var(--papier); --fg:var(--encre); --ac:var(--rouge);
 
@@ -270,9 +271,9 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .ph:hover img{transform:scale(1.05)}
 .ph .cap{position:absolute;left:0;right:0;bottom:0;padding:7px 11px;font-family:var(--fm);font-size:9px;
   letter-spacing:.07em;background:color-mix(in srgb,#000 76%,transparent);color:#fff}
-.f-warm img{filter:sepia(.26) saturate(1.12) contrast(1.06)}
+.f-warm img{filter:contrast(1.06) brightness(1.02)}
 .f-bw img{filter:grayscale(1) contrast(1.14) brightness(.96)}
-.f-bad img{filter:saturate(2.4) hue-rotate(28deg) contrast(1.5)}
+.f-bad img{filter:contrast(2.6) brightness(1.15)}
 .pat{aspect-ratio:1;border:var(--rule);position:relative;overflow:hidden}
 .pat i{position:absolute;inset:0;transition:transform .8s var(--e)}
 .pat:hover i{transform:scale(1.25) rotate(6deg)}
@@ -313,6 +314,70 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .rank li{list-style:none;background:var(--bg);padding:12px 14px;display:grid;
   grid-template-columns:30px 1fr auto;gap:14px;align-items:baseline;font-family:var(--fm);font-size:10px;letter-spacing:.05em}
 .rank li::before{counter-increment:r;content:counter(r);opacity:.4}
+
+/* ── PLANCHE 2 : matières du signe + affiche fenêtre ──── */
+.plate{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,44px);align-items:center}
+@media(max-width:760px){.plate{grid-template-columns:1fr 1fr}}
+.mat{position:relative;aspect-ratio:1.05;display:grid;place-items:center}
+.mat i{position:absolute;width:82%;aspect-ratio:78/91;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+/* la copie du dessous, en aplat plein, fait l'ombre portée nette */
+.mat i.shadow{background:currentColor;transform:translate(5%,5.5%)}
+.mat i.front{z-index:2;background:currentColor}
+/* trame croisée */
+.m-hatch i.front{background:
+  repeating-linear-gradient(45deg,currentColor 0 1.5px,transparent 1.5px 6px),
+  repeating-linear-gradient(-45deg,currentColor 0 1.5px,transparent 1.5px 6px),
+  var(--bg)}
+/* lignes fines verticales */
+.m-line i.front{background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 4px),var(--bg)}
+
+/* contour : un signe plein derrière, un signe couleur de fond devant, légèrement réduit */
+.m-outline i.back{background:currentColor}
+.m-outline i.front{background:var(--bg);-webkit-mask-size:93% 94%;mask-size:93% 94%}
+
+/* pattern dense : la tuile respecte 78:91, les barres se touchent d'une rangée à l'autre */
+.tiles{position:relative;aspect-ratio:.72;border:var(--rule);overflow:hidden;background:var(--blanc)}
+.tiles i{position:absolute;inset:0;background:var(--encre);
+  -webkit-mask:url("Logo.svg") repeat center/58.3px 68px;mask:url("Logo.svg") repeat center/58.3px 68px}
+.tiles.inv{background:var(--encre)}
+.tiles.inv i{background:var(--blanc)}
+.tiles.dense i{-webkit-mask-size:29.1px 34px;mask-size:29.1px 34px}
+
+/* affiche : le signe évide la photo, cerné de blanc */
+.hero{position:relative;aspect-ratio:.72;overflow:hidden;border:var(--rule);background:var(--beton)}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.88)}
+.hero .stroke,.hero .cutout{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:86%;height:78%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;-webkit-mask-image:url("Logo.svg");mask-image:url("Logo.svg")}
+.hero .stroke{-webkit-mask-size:contain;mask-size:contain;background:#fff}
+/* le calque photo est légèrement plus petit : la différence dessine le filet blanc */
+.hero .cutout{-webkit-mask-size:91% 92%;mask-size:91% 92%;overflow:hidden}
+.hero .cutout img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
+.hero:hover .cutout img{transform:scale(1.07)}
+
+/* ── templates téléphone ──────────────────────────────── */
+.phones{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,15vw,210px),1fr));
+  gap:clamp(14px,2vw,30px)}
+.phones figcaption{margin-top:9px;text-align:center}
+.phone{aspect-ratio:9/19.5;border:7px solid var(--encre);border-radius:clamp(16px,2vw,28px);
+  overflow:hidden;position:relative;background:var(--blanc);color:var(--encre);
+  display:flex;flex-direction:column;transition:transform .5s var(--e)}
+.phone:hover{transform:translateY(-8px)}
+.phone::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:32%;height:9px;background:var(--encre);border-radius:99px;z-index:6}
+.phone .full-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phone .pad{position:relative;z-index:3;padding:11% 9%;display:flex;flex-direction:column;height:100%}
+.phone .wm{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;letter-spacing:-.008em;
+  font-size:clamp(15px,1.7vw,24px);line-height:.9}
+.phone .ttl{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;letter-spacing:0;
+  font-size:clamp(19px,2.3vw,32px);line-height:.88}
+.phone .mn{font-family:var(--fm);font-size:7px;letter-spacing:.16em;text-transform:uppercase}
+.phone .tile{position:absolute;inset:0;background:var(--encre);
+  -webkit-mask:url("Logo.svg") repeat center/32px 37.3px;mask:url("Logo.svg") repeat center/32px 37.3px}
+.phone .win-img{width:100%}
+.phone.dark{background:var(--encre);color:var(--papier)}
+.phone.dark::before{background:var(--papier)}
 
 /* ── le signe comme fenêtre ───────────────────────────── */
 .win{position:relative;aspect-ratio:.78;border:var(--rule);overflow:hidden;background:var(--bg)}
@@ -442,6 +507,58 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   </div>
 </div>
 </section>
+
+<!-- ═════ PLANCHE 02 — LE SIGNE EN MATIÈRES ═════ -->
+<section id="s0b" data-t="Planche — le signe" data-p="" class="wht full">
+  <div class="part">Planche 02</div>
+  <h2 class="rev" style="margin-bottom:.35em">Le signe,<br>en matières</h2>
+  <p class="rev" style="margin-bottom:clamp(24px,3.5vw,54px);max-width:62ch">Une seule forme, six états.
+  Contour, aplat, trame croisée, lignes, ombre portée nette, découpe photo. Rien d'autre n'est autorisé —
+  et rien d'autre n'est nécessaire.</p>
+
+  <div class="plate rev" style="margin-bottom:clamp(20px,3vw,44px)">
+    <div class="mat m-outline"><i class="back"></i><i class="front"></i></div>
+    <div class="mat m-hatch"><i class="shadow"></i><i class="front"></i></div>
+    <div class="mat m-line"><i class="shadow"></i><i class="front"></i></div>
+  </div>
+
+  <div class="grid c3">
+    <div class="rev">
+      <div class="hero">
+        <img class="bg" src="image%20347.jpg" alt="">
+        <div class="stroke"></div>
+        <div class="cutout"><img src="image%20347.jpg" alt=""></div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">A · La forme évide la photo, cernée d'un filet blanc</p>
+    </div>
+
+    <div class="rev">
+      <div class="hero">
+        <img class="bg" src="image%20347.jpg" alt="">
+        <div class="stroke" style="background:var(--encre)"></div>
+        <div class="stroke" style="-webkit-mask-size:93% 94%;mask-size:93% 94%;background:var(--blanc)"></div>
+        <div style="position:absolute;left:50%;top:32%;transform:translate(-50%,-50%);z-index:4;
+          font-family:var(--fd);font-variation-settings:'wght' 1000,'FLAR' 100,'slnt' 15;
+          font-size:clamp(15px,2.1vw,30px);letter-spacing:0">Bieeen</div>
+        <img src="image%20349.svg" alt="QR Tréma" style="position:absolute;left:7%;bottom:5%;width:30%;z-index:5;background:#fff">
+      </div>
+      <p class="mono dim" style="margin-top:9px">B · Forme pleine cernée de noir, mot et QR à l'intérieur</p>
+    </div>
+
+    <div class="rev">
+      <div class="tiles"><i></i></div>
+      <p class="mono dim" style="margin-top:9px">C · Répétition serrée — les barres se soudent d'une rangée à l'autre</p>
+    </div>
+  </div>
+
+  <div class="grid c4 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Contour</h4><p class="mono">Filet égal à 1/12 de la hauteur de barre.<br>Uniquement en petite taille ou sur fond chargé.</p></div>
+    <div class="box"><h4>Trames</h4><p class="mono">Croisée 45° ou lignes verticales, 1,5 px.<br>Réservées au print une couleur et au packaging.</p></div>
+    <div class="box"><h4>Ombre portée</h4><p class="mono">Décalage 4,5 % / 5 %, nette, jamais floue.<br>Une seule copie, jamais d'extrusion multiple.</p></div>
+    <div class="box"><h4>Répétition</h4><p class="mono">Tuile 78 × 91 exacte, aucun espacement.<br>Sens toujours identique — jamais de rotation alternée.</p></div>
+  </div>
+</section>
+
 
 <div class="mq"><span>MAISON DE CAFÉ&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;TORRÉFACTION LENTE&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;RÉVÉLER JAMAIS RECOUVRIR&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;</span><span>MAISON DE CAFÉ&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;TORRÉFACTION LENTE&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;RÉVÉLER JAMAIS RECOUVRIR&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;</span></div>
 
@@ -718,7 +835,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
       <p class="mono dim" style="margin-top:9px">D · Signe seul inversé — tampon, marquage à chaud</p></div>
     <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center;background:var(--rouge);border-color:var(--rouge);color:#fff">
       <svg class="sym" viewBox="0 0 78 91" style="width:54px"><use href="#tm"/></svg></div>
-      <p class="mono dim" style="margin-top:9px">E · Sur couleur d'expression — 1 couleur, jamais deux</p></div>
+      <p class="mono dim" style="margin-top:9px">E · Sur aplat encre — jamais sur un gris intermédiaire</p></div>
     <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center;overflow:hidden;padding:0">
       <div style="position:relative;width:100%;height:100%;display:grid;place-items:center">
         <img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)">
@@ -755,7 +872,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="win rev"><div class="cut"><img src="image%20347.jpg" alt=""></div><div class="cap">Photo découpée</div></div>
     <div class="win rev" style="background:var(--encre);color:var(--papier)"><div class="outline"></div><div class="cap" style="color:var(--papier)">Aplat plein</div></div>
     <div class="win rev"><div class="halftone"></div><div class="cap">Trame de points</div></div>
-    <div class="win rev" style="background:var(--rouge);color:#fff"><div class="outline"></div><div class="cap" style="color:#fff">Couleur d'expression</div></div>
+    <div class="win rev" style="background:var(--rouge);color:#fff"><div class="outline"></div><div class="cap" style="color:#fff">Aplat encre</div></div>
   </div>
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
@@ -768,7 +885,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     </div>
     <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
       <div class="box"><h4>Les quatre remplissages</h4><p class="mono">01 · PHOTO — le sujet doit rester lisible dans la découpe<br>
-      02 · APLAT — noir, papier, ou une couleur d'expression<br>
+      02 · APLAT — noir, encre ou papier, jamais un gris<br>
       03 · TRAME — points ou hachures, impression 1 ton<br>
       04 · BLANC SUR PHOTO — la forme évide l'image</p></div>
       <div class="box"><h4>Règles de découpe</h4><p class="mono">Le signe garde ses proportions 78 : 91, toujours.<br>
@@ -800,9 +917,9 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="grid c5">
     <div class="ok rev" style="background:var(--papier)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--encre)"><use href="#tm"/></svg><div class="lab2">Encre / Papier</div></div>
     <div class="ok rev" style="background:var(--encre)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--papier)"><use href="#tm"/></svg><div class="lab2" style="color:var(--papier)">Papier / Encre</div></div>
-    <div class="ok rev" style="background:var(--espresso)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--lait)"><use href="#tm"/></svg><div class="lab2" style="color:var(--lait)">Lait / Espresso</div></div>
-    <div class="ok rev" style="background:var(--rouge)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:#fff"><use href="#tm"/></svg><div class="lab2" style="color:#fff">Blanc / Rouge</div></div>
-    <div class="dont rev" style="background:var(--kraft)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--crema)"><use href="#tm"/></svg><div class="lab2">Crema / Kraft — 1,9:1</div></div>
+    <div class="ok rev" style="background:var(--espresso)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--lait)"><use href="#tm"/></svg><div class="lab2" style="color:var(--lait)">Lait / Encre</div></div>
+    <div class="ok rev" style="background:var(--rouge)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:#fff"><use href="#tm"/></svg><div class="lab2" style="color:#fff">Blanc / Noir</div></div>
+    <div class="dont rev" style="background:var(--kraft)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--crema)"><use href="#tm"/></svg><div class="lab2">Brume / Lait — 1,8:1</div></div>
   </div>
 </section>
 
@@ -1003,45 +1120,47 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
 <section id="s23" data-t="Palette" data-p="IV · Couleur">
   <div class="num">21</div>
   <div class="hd"><div><div class="part">Partie IV — Couleur</div><div class="tag">Chapitre 21</div><h2 class="rev">Palette</h2></div>
-  <p class="rev">Le socle vient de la matière : le grain, le lait, l'ombre du comptoir. Les couleurs d'expression
-  donnent le rythme saisonnier — elles ne portent jamais le logo seules. Cliquez pour copier.<span class="todo">à valider</span></p></div>
+  <p class="rev">Il n'y en a pas. Le système est strictement monochrome : six valeurs entre le noir et le papier,
+  et rien d'autre. Toute la couleur du dispositif vient des photographies. Cliquez pour copier.<span class="todo">à valider</span></p></div>
 
-  <h4>Socle — 90 % des surfaces</h4>
+  <h4>Le nuancier complet — six valeurs, zéro teinte</h4>
   <div class="sws rev" style="margin-bottom:var(--gut)">
-    <div class="sw" data-hex="#141312" style="background:#141312;color:#EFEDEA"><div class="nm">Encre</div><div class="vl">HEX #141312<br>RGB 20 19 18<br>CMJN 0 0 0 100<br>PANTONE Black 6 C<span class="todo">?</span></div></div>
-    <div class="sw" data-hex="#EFEDEA" style="background:#EFEDEA;color:#141312"><div class="nm">Papier</div><div class="vl">HEX #EFEDEA<br>RGB 239 237 234<br>CMJN 0 0 2 8<br>Offset non couché 120 g</div></div>
-    <div class="sw" data-hex="#4E321E" style="background:#4E321E;color:#D8CFC4"><div class="nm">Espresso</div><div class="vl">HEX #4E321E<br>RGB 78 50 30<br>CMJN 40 65 85 45<br>PANTONE 4625 C<span class="todo">?</span></div></div>
-    <div class="sw" data-hex="#956F59" style="background:#956F59;color:#fff"><div class="nm">Crema</div><div class="vl">HEX #956F59<br>RGB 149 111 89<br>CMJN 30 50 60 15<br>Aplats secondaires</div></div>
-    <div class="sw" data-hex="#D8CFC4" style="background:#D8CFC4;color:#141312"><div class="nm">Lait</div><div class="vl">HEX #D8CFC4<br>RGB 216 207 196<br>CMJN 4 8 14 5<br>Fonds doux, cartes</div></div>
-    <div class="sw" data-hex="#5C5E5F" style="background:#5C5E5F;color:#fff"><div class="nm">Béton</div><div class="vl">HEX #5C5E5F<br>RGB 92 94 95<br>CMJN 60 48 46 15<br>Texte secondaire, filets</div></div>
+    <div class="sw" data-hex="#000000" style="background:#000;color:#fff"><div class="nm">Noir</div><div class="vl">HEX #000000<br>RGB 0 0 0<br>CMJN 0 0 0 100<br>Réservé au signe et au marquage</div></div>
+    <div class="sw" data-hex="#111111" style="background:#111;color:#F2F2F1"><div class="nm">Encre</div><div class="vl">HEX #111111<br>RGB 17 17 17<br>CMJN 0 0 0 96<br>Texte, aplats, fonds sombres</div></div>
+    <div class="sw" data-hex="#5E5E5E" style="background:#5E5E5E;color:#fff"><div class="nm">Béton</div><div class="vl">HEX #5E5E5E<br>RGB 94 94 94<br>CMJN 0 0 0 72<br>Texte secondaire, légendes</div></div>
+    <div class="sw" data-hex="#9B9B9B" style="background:#9B9B9B;color:#111"><div class="nm">Brume</div><div class="vl">HEX #9B9B9B<br>RGB 155 155 155<br>CMJN 0 0 0 45<br>Filets, états désactivés</div></div>
+    <div class="sw" data-hex="#E4E4E3" style="background:#E4E4E3;color:#111"><div class="nm">Lait</div><div class="vl">HEX #E4E4E3<br>RGB 228 228 227<br>CMJN 0 0 0 12<br>Fonds doux, cartes, blocs</div></div>
+    <div class="sw" data-hex="#F2F2F1" style="background:#F2F2F1;color:#111"><div class="nm">Papier</div><div class="vl">HEX #F2F2F1<br>RGB 242 242 241<br>CMJN 0 0 0 5<br>Fond par défaut du système</div></div>
   </div>
 
-  <h4>Expression — 10 % maximum, jamais deux ensemble</h4>
-  <div class="sws rev" style="margin-bottom:var(--gut)">
-    <div class="sw" data-hex="#E63329" style="background:#E63329;color:#fff"><div class="nm">Ristretto</div><div class="vl">HEX #E63329 · éditions limitées, alertes, soldes<br>PANTONE 485 C<span class="todo">?</span></div></div>
-    <div class="sw" data-hex="#E8B33F" style="background:#E8B33F;color:#141312"><div class="nm">Kraft</div><div class="vl">HEX #E8B33F · signalétique, événements, été</div></div>
-    <div class="sw" data-hex="#7FA08A" style="background:#7FA08A;color:#141312"><div class="nm">Menthe</div><div class="vl">HEX #7FA08A · filtre, cold brew, printemps</div></div>
+  <div class="box rev" style="margin-bottom:var(--gut)">
+    <h4>Pourquoi pas de couleur</h4>
+    <p>Le signe est une forme forte : dès qu'on lui ajoute une couleur, on lui retire de la force.
+    Le noir et blanc oblige à travailler la composition, l'échelle et le vide — pas la décoration.
+    Et il rend la marque reproductible partout : tampon, marquage à chaud, sérigraphie une couleur, fax, photocopie.</p>
+    <p><b>La seule couleur du système vient des photographies.</b> Elles sont donc le seul endroit
+    où l'on regarde vraiment. C'est voulu.</p>
   </div>
 
   <div class="grid c2">
-    <div class="rev"><h4>Répartition — règle 60/25/10/5</h4>
+    <div class="rev"><h4>Répartition — règle 70/25/5</h4>
       <div class="ratios">
-        <div style="flex:60;background:#EFEDEA;color:#141312">60 % PAPIER</div>
-        <div style="flex:25;background:#141312;color:#EFEDEA">25 % ENCRE</div>
-        <div style="flex:10;background:#4E321E;color:#D8CFC4">10 %</div>
-        <div style="flex:5;background:#E63329;color:#fff">5 %</div>
+        <div style="flex:70;background:#F2F2F1;color:#111">70 % PAPIER</div>
+        <div style="flex:25;background:#111;color:#F2F2F1">25 % ENCRE</div>
+        <div style="flex:5;background:#9B9B9B;color:#111">5 %</div>
       </div>
-      <p class="mono dim" style="margin-top:10px">La couleur d'expression n'occupe jamais plus de 5 % de la surface visible d'une composition.</p>
+      <p class="mono dim" style="margin-top:10px">Les gris intermédiaires ne servent jamais d'aplat de fond :
+      ils portent du texte secondaire ou des filets, rien d'autre.</p>
     </div>
     <div class="rev"><h4>Contrastes — WCAG</h4>
       <div class="scrollx"><table>
         <tr><th>Combinaison</th><th>Ratio</th><th>Taille min.</th><th>Verdict</th></tr>
-        <tr><td>Encre / Papier</td><td>15,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
-        <tr><td>Papier / Espresso</td><td>8,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
-        <tr><td>Blanc / Ristretto</td><td>4,3:1</td><td>≥ 18 px</td><td>AA ✓</td></tr>
-        <tr><td>Encre / Kraft</td><td>9,6:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
-        <tr><td>Blanc / Crema</td><td>3,6:1</td><td>≥ 24 px</td><td>AA large</td></tr>
-        <tr><td>Crema / Kraft</td><td>1,9:1</td><td>—</td><td>Interdit ✕</td></tr>
+        <tr><td>Encre / Papier</td><td>17,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Noir / Blanc</td><td>21:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Béton / Papier</td><td>6,4:1</td><td>≥ 12 px</td><td>AA ✓</td></tr>
+        <tr><td>Papier / Encre</td><td>17,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Brume / Papier</td><td>2,5:1</td><td>—</td><td>Filets seuls ✕</td></tr>
+        <tr><td>Lait / Papier</td><td>1,1:1</td><td>—</td><td>Interdit ✕</td></tr>
       </table></div>
     </div>
   </div>
@@ -1054,16 +1173,17 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   on part de la référence du tableau.<span class="todo">à compléter avec l'imprimeur</span></p></div>
   <div class="scrollx rev"><table>
     <tr><th>Couleur</th><th>Écran (HEX)</th><th>Offset (CMJN)</th><th>Pantone</th><th>Vinyle / signalétique</th><th>Textile</th><th>Peinture</th></tr>
-    <tr><td>Encre</td><td>#141312</td><td>0 0 0 100</td><td>Black 6 C</td><td>Oracal 070</td><td>Pantone Black TCX</td><td>RAL 9005</td></tr>
-    <tr><td>Papier</td><td>#EFEDEA</td><td>0 0 2 8</td><td>11-0602 TCX</td><td>Oracal 010</td><td>écru naturel</td><td>RAL 9001</td></tr>
-    <tr><td>Espresso</td><td>#4E321E</td><td>40 65 85 45</td><td>4625 C</td><td>Oracal 080</td><td>19-1218 TCX</td><td>RAL 8028</td></tr>
-    <tr><td>Ristretto</td><td>#E63329</td><td>0 90 85 0</td><td>485 C</td><td>Oracal 032</td><td>18-1662 TCX</td><td>RAL 3020</td></tr>
-    <tr><td>Kraft</td><td>#E8B33F</td><td>5 30 85 0</td><td>142 C</td><td>Oracal 021</td><td>14-0952 TCX</td><td>RAL 1017</td></tr>
+    <tr><td>Noir</td><td>#000000</td><td>0 0 0 100</td><td>Black C</td><td>Oracal 070</td><td>Pantone Black TCX</td><td>RAL 9005</td></tr>
+    <tr><td>Encre</td><td>#111111</td><td>0 0 0 96</td><td>Black 6 C</td><td>Oracal 070</td><td>19-0303 TCX</td><td>RAL 9004</td></tr>
+    <tr><td>Béton</td><td>#5E5E5E</td><td>0 0 0 72</td><td>Cool Gray 10 C</td><td>Oracal 073</td><td>18-0201 TCX</td><td>RAL 7043</td></tr>
+    <tr><td>Brume</td><td>#9B9B9B</td><td>0 0 0 45</td><td>Cool Gray 6 C</td><td>Oracal 071</td><td>16-3801 TCX</td><td>RAL 7040</td></tr>
+    <tr><td>Lait</td><td>#E4E4E3</td><td>0 0 0 12</td><td>Cool Gray 1 C</td><td>Oracal 010</td><td>12-4302 TCX</td><td>RAL 9002</td></tr>
+    <tr><td>Papier</td><td>#F2F2F1</td><td>0 0 0 5</td><td>11-0601 TCX</td><td>Oracal 010</td><td>blanc naturel</td><td>RAL 9003</td></tr>
   </table></div>
   <div class="grid c3 rev" style="margin-top:var(--gut)">
     <div class="box"><h4>Papiers de référence</h4><p class="mono">Édition : offset non couché 120 g<br>Carte de visite : 600 g, tranche teintée encre<br>Étiquette : kraft brun adhésif<br>Sac : kraft 90 g, impression 1 ton direct</p></div>
-    <div class="box"><h4>Ennoblissements</h4><p class="mono">Marquage à chaud noir mat sur le signe seul<br>Gaufrage à sec autorisé<br>Jamais de dorure or ou argent<br>Jamais de vernis sélectif brillant</p></div>
-    <div class="box"><h4>Écran</h4><p class="mono">Espace sRGB pour le web<br>Display P3 autorisé sur les visuels photo<br>Mode sombre : Encre → #0E0D0D, texte → Papier</p></div>
+    <div class="box"><h4>Ennoblissements</h4><p class="mono">Marquage à chaud noir mat sur le signe seul<br>Gaufrage à sec autorisé<br>Jamais de dorure or ou argent<br>Jamais de vernis sélectif brillant<br>Jamais d'encre couleur, même en second passage</p></div>
+    <div class="box"><h4>Écran</h4><p class="mono">Espace sRGB pour le web<br>Display P3 autorisé sur les visuels photo<br>Mode sombre : fond → #000, texte → Papier</p></div>
   </div>
 </section>
 
@@ -1115,7 +1235,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="grid c3 rev">
     <div class="ph f-warm" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap">✓ Chaud — usage courant</div></div>
     <div class="ph f-bw" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap">✓ N&amp;B — archives, portraits, presse</div></div>
-    <div class="ph f-bad" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap" style="background:var(--rouge)">✕ Saturé / filtré — jamais</div></div>
+    <div class="ph f-bad" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap" style="background:var(--encre)">✕ Sur-contrasté / postérisé — jamais</div></div>
   </div>
 </section>
 
@@ -1148,7 +1268,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="grid c4 rev" style="margin-top:var(--gut)">
     <div class="box"><h4>Construction</h4><p class="mono">Grille 1024 × 1024<br>Marge de sécurité 80 unités<br>Formes pleines, pas de contour<br>Angles cohérents avec l'arc du signe</p></div>
     <div class="box"><h4>Tailles</h4><p class="mono">Écran 24 · 32 · 48 px<br>Print 6 · 10 · 18 mm<br>En dessous de 24 px : simplifier, ne pas réduire</p></div>
-    <div class="box"><h4>Couleur</h4><p class="mono">Toujours monochrome, couleur du texte.<br>Inversion au survol (fond Ristretto, picto blanc).<br>Jamais de picto bicolore.</p></div>
+    <div class="box"><h4>Valeur</h4><p class="mono">Toujours monochrome, couleur du texte.<br>Inversion au survol (fond encre, picto papier).<br>Jamais de picto bicolore.</p></div>
     <div class="box"><h4>Interdits</h4><p class="mono">Ajouter un cercle de fond<br>Mélanger avec une autre bibliothèque d'icônes<br>Utiliser un picto seul comme logo<br>Animer autrement qu'en fondu</p></div>
   </div>
 </section>
@@ -1221,7 +1341,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="box"><h4>Règles du débord</h4><p class="mono">Le mot reste reconnaissable : on coupe au maximum 30 % d'un mot.<br>
     Une seule graisse pour tout le bloc débordant.<br>Le texte d'information ne déborde jamais.</p></div>
     <div class="box"><h4>Contraste</h4><p class="mono">Fond Encre, texte Papier — ou l'inverse.<br>
-    Une seule couleur d'expression, sur un seul mot.<br>Survolez les mots pour voir la variante.</p></div>
+    Une seule valeur pleine, sur un seul mot.<br>Survolez les mots pour voir la variante.</p></div>
   </div>
 </section>
 
@@ -1243,13 +1363,13 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
       <svg viewBox="0 0 200 120" style="width:100%;margin-top:12px">
         <path d="M4 112 L196 112" stroke="currentColor" stroke-width="1" opacity=".3"/>
         <path d="M4 4 L4 112" stroke="currentColor" stroke-width="1" opacity=".3"/>
-        <path d="M4 108 C50 96 74 60 108 40 C140 22 170 16 196 12" fill="none" stroke="#E63329" stroke-width="2.4"/>
+        <path d="M4 108 C50 96 74 60 108 40 C140 22 170 16 196 12" fill="none" stroke="#111" stroke-width="2.4"/>
         <path d="M4 110 C56 104 86 84 120 68 C150 54 174 46 196 42" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 4" opacity=".55"/>
-        <circle cx="108" cy="40" r="3.4" fill="#E63329"/>
+        <circle cx="108" cy="40" r="3.4" fill="#111"/>
       </svg>
       <p class="mono dim" style="margin-top:8px">Trait plein = lot en cours · pointillé = référence.</p>
     </div>
-    <div class="box rev"><h4>Règles</h4><p class="mono">1 couleur d'expression max par graphique<br>Axes en Béton, 1 px<br>Étiquettes en mono 9 px<br>Valeurs toujours affichées<br>Jamais : camembert, 3D, dégradé, ombre<br>Alternative texte obligatoire</p></div>
+    <div class="box rev"><h4>Règles</h4><p class="mono">Une seule valeur pleine par graphique<br>Axes en Brume, 1 px<br>Étiquettes en mono 9 px<br>Valeurs toujours affichées<br>Jamais : camembert, 3D, dégradé, ombre, couleur<br>Alternative texte obligatoire</p></div>
   </div>
 </section>
 
@@ -1289,7 +1409,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   </div>
   <div class="grid c3 rev" style="margin-top:var(--gut)">
     <div class="box"><h4>Hiérarchie imposée</h4><p class="mono">1 · Signe (haut gauche)<br>2 · Origine — Display FLAR 100<br>3 · Process + altitude — mono<br>4 · Poids + date de torréfaction<br>5 · Notes de dégustation — 3 mots max</p></div>
-    <div class="box"><h4>Codes couleur de gamme</h4><p class="mono">Filtre → Espresso (brun)<br>Espresso → Encre (noir)<br>Édition → Ristretto (rouge)<br>Décaféiné → Menthe</p></div>
+    <div class="box"><h4>Codes couleur de gamme</h4><p class="mono">Filtre → Papier (sac clair)<br>Espresso → Encre (sac noir)<br>Édition → Noir + marquage à chaud<br>Décaféiné → Lait</p></div>
     <div class="box"><h4>Mentions légales</h4><p class="mono">DDM, poids net, origine, importateur, contact, tri.<br>Corps minimum 8 pt · toujours en Béton sur Papier.<span class="todo">à valider juridique</span></p></div>
   </div>
 </section>
@@ -1373,8 +1493,8 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="box"><h4>Rayons</h4><p class="mono">Commandes 999 px<br>Cartes 0<br>Images 0<br>Avatar 50 %</p></div>
     <div class="box"><h4>Espacement</h4><p class="mono">Base 8<br>4 · 8 · 16 · 24 · 40 · 64 · 96</p></div>
     <div class="box"><h4>Filets</h4><p class="mono">1,4 px, couleur du texte.<br>Jamais de gris arbitraire.</p></div>
-    <div class="box"><h4>États</h4><p class="mono">Survol : inversion<br>Focus : contour 2 px Ristretto<br>Désactivé : opacité 35 %</p></div>
-    <div class="box"><h4>Mode sombre</h4><p class="mono">Fond #0E0D0D<br>Texte Papier<br>Ristretto → #FF4B3E<br>Filets à 22 % d'opacité</p></div>
+    <div class="box"><h4>États</h4><p class="mono">Survol : inversion<br>Focus : contour 2 px Encre<br>Désactivé : opacité 35 %</p></div>
+    <div class="box"><h4>Mode sombre</h4><p class="mono">Fond #0E0D0D<br>Texte Papier<br>Encre → #F2F2F1<br>Filets à 22 % d'opacité</p></div>
   </div>
 </section>
 
@@ -1392,7 +1512,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
         <div style="background:var(--espresso)"><svg class="sym" viewBox="0 0 78 91" style="color:var(--lait)"><use href="#tm"/></svg></div>
         <div style="background:var(--lait);color:var(--encre)"><span style="font-family:var(--fd);font-size:12px;font-variation-settings:'wght' 1000,'FLAR' 100">GUJI</span></div>
         <div><img src="image%20347.jpg" alt="" style="filter:grayscale(1)"></div>
-        <div><img src="image%20347.jpg" alt="" style="filter:sepia(.3)"></div>
+        <div><img src="image%20347.jpg" alt="" style="filter:contrast(1.1)"></div>
         <div style="background:var(--rouge)"><svg class="sym" viewBox="0 0 78 91" style="color:#fff"><use href="#tm"/></svg></div>
         <div style="background:var(--papier);color:var(--encre)"><span class="mono" style="font-size:7px">12/03</span></div>
       </div><div class="cap">Grille — rythme 1 photo / 2 aplats</div></div>
@@ -1408,6 +1528,115 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     </div>
   </div>
 </section>
+
+<!-- ═════ TEMPLATES TÉLÉPHONE ═════ -->
+<section id="s36b" data-t="Templates téléphone" data-p="VI · Applications" class="wht">
+  <div class="num"></div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag"></div><h2 class="rev">Templates<br>téléphone</h2></div>
+  <p class="rev">Douze gabarits verticaux, prêts à décliner : story, post plein écran, écran d'accueil,
+  fiche produit, carte cadeau. Un seul principe par écran — jamais deux idées graphiques en même temps.</p></div>
+
+  <div class="phones">
+    <figure class="rev"><div class="phone">
+      <div class="pad" style="justify-content:center;align-items:center">
+        <img src="Union.png" alt="" class="win-img"></div>
+      <div class="pad" style="position:absolute;inset:auto 0 0 0;height:auto;align-items:center;padding-bottom:9%">
+        <div class="wm">trema</div></div>
+    </div><figcaption class="mono dim">01 · Signe-fenêtre centré, mot en pied</figcaption></figure>
+
+    <figure class="rev"><div class="phone dark">
+      <img class="full-img" src="image%20347.jpg" alt="" style="filter:brightness(.55)">
+      <div class="pad" style="justify-content:space-between;color:#fff">
+        <div class="mn">12.03 — NOUVEAU LOT</div>
+        <div class="ttl">Guji<br>Natural</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <div class="mn">ÉTHIOPIE · 1 800 M</div>
+          <svg class="sym" viewBox="0 0 78 91" style="width:16%"><use href="#tm"/></svg></div>
+      </div>
+    </div><figcaption class="mono dim">02 · Photo pleine, texte en surimpression</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div class="tile"></div>
+    </div><figcaption class="mono dim">03 · Motif plein écran — écran de veille, fond de story</figcaption></figure>
+
+    <figure class="rev"><div class="phone dark">
+      <div class="pad" style="justify-content:center;align-items:center">
+        <svg class="sym" viewBox="0 0 78 91" style="width:44%"><use href="#tm"/></svg></div>
+    </div><figcaption class="mono dim">04 · Splash — signe seul, aplat encre</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div class="pad" style="justify-content:flex-start;padding-top:22%">
+        <div class="ttl" style="font-size:clamp(26px,3.4vw,46px)">Révé-<br>ler,<br>jamais<br>recou-<br>vrir.</div>
+        <div style="margin-top:auto" class="mn">MANIFESTE</div></div>
+    </div><figcaption class="mono dim">05 · Citation — display coupé, drapeau à droite</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div style="position:absolute;inset:0 0 46% 0;overflow:hidden"><img src="image%20347.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="pad" style="justify-content:flex-end">
+        <div class="ttl">Santa<br>Rita</div>
+        <p class="mn" style="margin-top:8px;opacity:.6">BRÉSIL · LAVÉ · 250 G<br>TORRÉFIÉ LE 09/03</p>
+        <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+          <span class="mn">14,00 €</span>
+          <svg class="sym" viewBox="0 0 78 91" style="width:13%"><use href="#tm"/></svg></div></div>
+    </div><figcaption class="mono dim">06 · Fiche produit — photo haute, info basse</figcaption></figure>
+
+    <figure class="rev"><div class="phone dark">
+      <div class="tile" style="background:var(--papier);-webkit-mask-size:52px 60.7px;mask-size:52px 60.7px;opacity:.16"></div>
+      <div class="pad" style="justify-content:center;align-items:center;color:#fff">
+        <div class="mn" style="margin-bottom:10px">CARTE CADEAU</div>
+        <div class="ttl" style="text-align:center">30 €</div></div>
+    </div><figcaption class="mono dim">07 · Carte cadeau — motif en filigrane</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div class="pad" style="justify-content:center;align-items:center;background:var(--blanc)">
+        <img src="image%20349.svg" alt="QR Tréma" style="width:74%"></div>
+      <div class="pad" style="position:absolute;inset:auto 0 0 0;height:auto;align-items:center;padding-bottom:8%">
+        <div class="mn">SCANNEZ EN BOUTIQUE</div></div>
+    </div><figcaption class="mono dim">08 · QR — fidélité, menu, atelier</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div class="pad" style="padding:8% 6%;display:grid;grid-template-columns:1fr 1fr;gap:5px;align-content:center">
+        <div style="aspect-ratio:1;background:var(--encre)"></div>
+        <div style="aspect-ratio:1;overflow:hidden"><img src="image%20347.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="aspect-ratio:1;overflow:hidden"><img src="Union.png" alt="" style="width:100%;height:100%;object-fit:contain"></div>
+        <div style="aspect-ratio:1;background:var(--lait);display:grid;place-items:center">
+          <svg class="sym" viewBox="0 0 78 91" style="width:38%"><use href="#tm"/></svg></div>
+      </div>
+    </div><figcaption class="mono dim">09 · Grille — carrousel, sélection</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <div class="pad" style="justify-content:center;overflow:hidden">
+        <div class="ttl" style="font-size:clamp(40px,5.4vw,74px);white-space:nowrap;margin-left:-22%">trema<br>trema<br>trema</div></div>
+    </div><figcaption class="mono dim">10 · Débord — mot répété, coupé aux deux bords</figcaption></figure>
+
+    <figure class="rev"><div class="phone dark">
+      <div class="pad" style="justify-content:space-between;color:#fff">
+        <svg class="sym" viewBox="0 0 78 91" style="width:15%"><use href="#tm"/></svg>
+        <div>
+          <div class="mn" style="opacity:.55;margin-bottom:7px">AUJOURD'HUI</div>
+          <div style="font-family:var(--fd);font-variation-settings:'wght' 700,'FLAR' 40;font-size:clamp(13px,1.5vw,20px);line-height:1.14">
+            Guji Natural<br>Santa Rita<br>Décaféiné Sumatra</div></div>
+        <div class="mn" style="opacity:.55">FILTRE 4,50 · ESPRESSO 2,20</div></div>
+    </div><figcaption class="mono dim">11 · Ardoise du jour — liste, aplat encre</figcaption></figure>
+
+    <figure class="rev"><div class="phone">
+      <img class="full-img" src="image%20347.jpg" alt="">
+      <div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:70%;height:46%;
+        -webkit-mask:url('Logo.svg') no-repeat center/contain;mask:url('Logo.svg') no-repeat center/contain;
+        background:var(--blanc);z-index:3"></div>
+      <div class="pad" style="position:absolute;inset:auto 0 0 0;height:auto;align-items:center;padding-bottom:13%;z-index:4">
+        <div class="wm" style="color:#fff">trema</div></div>
+    </div><figcaption class="mono dim">12 · Signe évidé en blanc sur photo</figcaption></figure>
+  </div>
+
+  <div class="grid c4 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Formats</h4><p class="mono">1080 × 1920 (9:16)<br>Zone sûre : 220 px en haut, 320 px en bas<br>Export PNG ou MP4 &lt; 4 Mo</p></div>
+    <div class="box"><h4>Règle du un</h4><p class="mono">Un principe graphique par écran :<br>soit la photo, soit le motif, soit le display.<br>Jamais deux ensemble.</p></div>
+    <div class="box"><h4>Le mot</h4><p class="mono">« trema » en minuscules sur les écrans.<br>Toujours en pied, centré, jamais collé au bord.</p></div>
+    <div class="box"><h4>Interdits</h4><p class="mono">Dégradé de fond<br>Texte sur la moitié chargée d'une photo<br>Plus de trois niveaux typographiques<br>Toute couleur ajoutée</p></div>
+  </div>
+</section>
+
 
 <section id="s37" data-t="Email & bureautique" data-p="VI · Applications" class="lai">
   <div class="num">35</div>
@@ -1447,7 +1676,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
   <div class="grid c3">
     <div class="box rev"><h4>Signe</h4><p class="mono">☐ Version officielle (non redessinée)<br>☐ Zone de protection respectée<br>☐ Taille ≥ minimum<br>☐ Contraste ≥ 4,5:1</p></div>
     <div class="box rev"><h4>Typographie</h4><p class="mono">☐ JT Flair en titre, grotesque en corps<br>☐ Échelle respectée<br>☐ Apostrophes courbes, guillemets français<br>☐ Aucune veuve ni orpheline</p></div>
-    <div class="box rev"><h4>Couleur</h4><p class="mono">☐ Palette officielle uniquement<br>☐ Répartition 60/25/10/5<br>☐ Une seule couleur d'expression<br>☐ Référentiel print correct (CMJN / Pantone)</p></div>
+    <div class="box rev"><h4>Couleur</h4><p class="mono">☐ Nuancier officiel uniquement<br>☐ Répartition 70/25/5<br>☐ Aucune couleur ajoutée<br>☐ Référentiel print correct (CMJN / Pantone)</p></div>
     <div class="box rev"><h4>Composition</h4><p class="mono">☐ Grille 12 colonnes<br>☐ Titre haut gauche, signe bas droite<br>☐ Marges = 2× gouttière<br>☐ Fonds perdus 3 mm si print</p></div>
     <div class="box rev"><h4>Contenu</h4><p class="mono">☐ Ton de voix respecté<br>☐ Aucun mot de la liste noire<br>☐ Mentions légales présentes<br>☐ Relecture par une 2ᵉ personne</p></div>
     <div class="box rev"><h4>Fichiers</h4><p class="mono">☐ Nommage conforme<br>☐ Sources archivées<br>☐ Polices vectorisées si envoi externe<br>☐ Droits photo à jour</p></div>
@@ -1463,7 +1692,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="rev scrollx"><table>
       <tr><th>Décision</th><th>Propose</th><th>Valide</th><th>Délai</th></tr>
       <tr><td>Nouveau support courant</td><td>Design</td><td>Direction artistique</td><td>48 h</td></tr>
-      <tr><td>Nouvelle couleur d'expression</td><td>Design</td><td>Direction + fondateur·rice</td><td>2 semaines</td></tr>
+      <tr><td>Nouvelle valeur de gris</td><td>Design</td><td>Direction + fondateur·rice</td><td>2 semaines</td></tr>
       <tr><td>Modification du signe</td><td>—</td><td>Fondateur·rice uniquement</td><td>—</td></tr>
       <tr><td>Nouveau nom de produit</td><td>Torréfaction</td><td>Direction</td><td>1 semaine</td></tr>
       <tr><td>Partenariat / co-branding</td><td>Commerce</td><td>Direction + DA</td><td>3 semaines</td></tr>
@@ -1514,7 +1743,7 @@ footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
     <div class="box rev"><h4>Zone de protection</h4><p>L'espace vide minimum autour du signe. Elle protège sa lisibilité, elle n'est pas décorative.</p></div>
     <div class="box rev"><h4>Verrouillage (lockup)</h4><p>Une association figée signe + texte. Elle ne se recompose pas : on utilise le fichier.</p></div>
     <div class="box rev"><h4>Approche</h4><p>L'espace entre les lettres d'un mot. Négative sur les grands corps, neutre en texte courant.</p></div>
-    <div class="box rev"><h4>Couleur d'expression</h4><p>Une couleur secondaire, saisonnière, qui ne porte jamais le signe seule et n'excède jamais 5 % de la surface.</p></div>
+    <div class="box rev"><h4>Couleur d'expression</h4><p>Il n'y en a aucune. Toute demande de couleur passe par la gouvernance — et la réponse par défaut est non.</p></div>
   </div>
 </section>
 
