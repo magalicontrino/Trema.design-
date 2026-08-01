@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRÉMA — Brand Book</title>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   TRÉMA · BRAND BOOK — canevas complet
+   Display : JT Flair (variable, 3 axes) · Texte : grotesque système
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@font-face{
+  font-family:"JT Flair";
+  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
+  font-weight:300 1000;font-display:block;
+}
+
+:root{
+  --encre:#141312; --noir:#000; --papier:#EFEDEA; --blanc:#FFF;
+  --espresso:#4E321E; --crema:#956F59; --lait:#D8CFC4;
+  --beton:#5C5E5F; --brume:#949596;
+  --rouge:#E63329; --kraft:#E8B33F; --menthe:#7FA08A;
+
+  --bg:var(--papier); --fg:var(--encre); --ac:var(--rouge);
+
+  --fd:"JT Flair","Helvetica Neue",Arial,sans-serif;
+  --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --fm:ui-monospace,"SF Mono",Menlo,monospace;
+
+  --gut:clamp(14px,2vw,30px);
+  --pad:clamp(18px,4vw,72px);
+  --rule:1.4px solid currentColor;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--fs);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  transition:background .5s var(--e),color .5s var(--e);
+}
+::selection{background:var(--ac);color:#fff}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+
+/* ── décor ─────────────────────────────────────────────── */
+.grain{position:fixed;inset:-50%;z-index:9998;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:gr 1s steps(4) infinite}
+@keyframes gr{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(3%,3%)}}
+#cur{position:fixed;top:0;left:0;width:18px;height:18px;border-radius:50%;background:var(--rouge);
+  mix-blend-mode:difference;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  transition:width .3s var(--e),height .3s var(--e)}
+@media(pointer:coarse){#cur{display:none}}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--rouge);z-index:9997;mix-blend-mode:difference}
+#rail{position:fixed;left:6px;top:50%;transform:translateY(-50%);z-index:9990;display:flex;flex-direction:column;
+  mix-blend-mode:difference;color:#fff;max-height:88vh;overflow:hidden}
+#rail button{font-family:var(--fm);font-size:8px;letter-spacing:.08em;padding:1px 5px;opacity:.3;
+  transition:opacity .2s,transform .2s;white-space:nowrap}
+#rail button.on{opacity:1;transform:translateX(4px)}
+#rail button:hover{opacity:1}
+@media(max-width:1100px){#rail{display:none}}
+
+/* ── sections ──────────────────────────────────────────── */
+section{position:relative;padding:clamp(56px,9vw,150px) var(--pad);border-top:var(--rule)}
+section.full{min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.inv{--bg:var(--encre);--fg:var(--papier);background:var(--bg);color:var(--fg)}
+.blk{--bg:var(--noir);--fg:var(--blanc);background:var(--bg);color:var(--fg)}
+.esp{--bg:var(--espresso);--fg:var(--lait);background:var(--bg);color:var(--fg)}
+.krf{--bg:var(--kraft);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.rst{--bg:var(--rouge);--fg:#fff;background:var(--bg);color:var(--fg)}
+.lai{--bg:var(--lait);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.wht{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+
+.num{position:absolute;top:clamp(6px,1.5vw,24px);right:var(--pad);font-family:var(--fd);
+  font-size:clamp(80px,18vw,270px);line-height:.72;font-variation-settings:"wght" 1000,"FLAR" 100;
+  opacity:.06;pointer-events:none;user-select:none;letter-spacing:-.045em}
+.part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
+.tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.4em}
+.tag::before{content:"";width:24px;height:1.4px;background:currentColor}
+
+h2{font-family:var(--fd);font-size:clamp(36px,7.6vw,120px);line-height:.85;letter-spacing:-.04em;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance}
+h3{font-family:var(--fd);font-size:clamp(18px,2.2vw,30px);line-height:1.02;letter-spacing:-.025em;
+  font-variation-settings:"wght" 700,"FLAR" 60;margin-bottom:.45em}
+h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  opacity:.55;margin-bottom:.9em}
+
+/* paragraphes : grotesque neutre, réglé pour la lecture */
+p{font-family:var(--fs);font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;
+  max-width:66ch;font-weight:400}
+p + p{margin-top:.9em}
+.lead{font-family:var(--fs);font-size:clamp(17px,1.7vw,23px);line-height:1.38;letter-spacing:-.014em;
+  max-width:44ch;font-weight:400}
+.disp{font-family:var(--fd);font-size:clamp(20px,2.6vw,36px);line-height:1.02;letter-spacing:-.03em;
+  font-variation-settings:"wght" 800,"FLAR" 100;max-width:22ch}
+.mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
+.dim{opacity:.55}
+code{font-family:var(--fm);font-size:.88em;background:color-mix(in srgb,currentColor 12%,transparent);padding:.1em .35em;border-radius:3px}
+
+.grid{display:grid;gap:var(--gut)}
+.c2{grid-template-columns:repeat(2,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c4{grid-template-columns:repeat(4,1fr)}
+.c5{grid-template-columns:repeat(5,1fr)}
+.hd{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gut);align-items:end;
+  margin-bottom:clamp(28px,4.5vw,70px)}
+@media(max-width:900px){.c4,.c5{grid-template-columns:repeat(2,1fr)}.hd{grid-template-columns:1fr}}
+@media(max-width:640px){.c3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.c2,.c3,.c4,.c5{grid-template-columns:1fr}}
+
+.box{border:var(--rule);padding:clamp(14px,1.9vw,26px);position:relative}
+.box.fill{background:var(--fg);color:var(--bg)}
+.box.ac{background:var(--rouge);color:#fff;border-color:var(--rouge)}
+.sym{display:block;fill:currentColor}
+.rev{opacity:0;transform:translateY(22px);transition:opacity .75s var(--e),transform .75s var(--e)}
+.rev.in{opacity:1;transform:none}
+.todo{display:inline-block;font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--kraft);color:var(--encre);padding:.22em .55em;border-radius:3px;vertical-align:middle;margin-left:.5em}
+
+table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:10.5px}
+th,td{border:var(--rule);padding:7px 10px;text-align:left;vertical-align:middle}
+th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;font-size:9px}
+.scrollx{overflow-x:auto}
+
+/* ── bandeaux ──────────────────────────────────────────── */
+.mq{overflow:hidden;white-space:nowrap;display:flex;border-top:var(--rule);border-bottom:var(--rule);padding:clamp(6px,.8vw,14px) 0}
+.mq span{display:inline-flex;align-items:center;gap:.4em;padding-right:.4em;flex:0 0 auto;font-family:var(--fd);
+  font-size:clamp(24px,5vw,80px);line-height:.9;letter-spacing:-.035em;font-variation-settings:"wght" 800,"FLAR" 100;
+  animation:sl 26s linear infinite}
+.mq:hover span{animation-play-state:paused}
+.mq.rev2 span{animation-direction:reverse}
+.mq.slow span{animation-duration:46s}
+.mq .sym{width:.5em;height:.58em;flex:0 0 auto}
+@keyframes sl{to{transform:translateX(-100%)}}
+
+/* ══ ROLLOVERS ═════════════════════════════════════════════ */
+[data-fx]{cursor:default}
+.fx-flare{font-variation-settings:"wght" 900,"FLAR" 0,"slnt" 0;transition:font-variation-settings .55s var(--e),letter-spacing .55s var(--e)}
+.fx-flare:hover{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 9;letter-spacing:-.055em}
+.fx-thin{font-variation-settings:"wght" 1000,"FLAR" 100;transition:font-variation-settings .6s var(--e)}
+.fx-thin:hover{font-variation-settings:"wght" 300,"FLAR" 0}
+.fx-wave span{display:inline-block;transition:font-variation-settings .18s linear,transform .18s linear;will-change:font-variation-settings}
+.fx-stretch{display:inline-block;transition:transform .5s var(--e);transform-origin:left center}
+.fx-stretch:hover{transform:scaleX(1.28) scaleY(.94)}
+.fx-slice{position:relative;display:inline-block;overflow:hidden}
+.fx-slice i{font-style:normal;display:block}
+.fx-slice i:nth-child(2){position:absolute;inset:0;clip-path:inset(0 0 50% 0);color:var(--rouge);
+  transition:transform .45s var(--e);pointer-events:none}
+.fx-slice:hover i:nth-child(2){transform:translateX(-.06em)}
+.fx-slice i:nth-child(3){position:absolute;inset:0;clip-path:inset(50% 0 0 0);color:var(--menthe);
+  transition:transform .45s var(--e);pointer-events:none}
+.fx-slice:hover i:nth-child(3){transform:translateX(.06em)}
+.fx-inv{transition:background .3s,color .3s,padding .3s var(--e)}
+.fx-inv:hover{background:currentColor;color:var(--bg)}
+
+/* ══ COUVERTURE ════════════════════════════════════════════ */
+#cover{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);border-top:0;position:relative;overflow:hidden}
+.cov-top,.cov-bot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;z-index:3}
+#wm{font-family:var(--fd);font-size:clamp(70px,23vw,400px);line-height:.7;letter-spacing:-.06em;
+  position:relative;z-index:3;margin:clamp(14px,3vw,40px) 0;user-select:none}
+#wm span{display:inline-block;transition:font-variation-settings .22s linear}
+.cov-sym{position:absolute;right:calc(var(--pad) - 1vw);top:18vh;width:clamp(90px,17vw,290px);opacity:.92;z-index:2;
+  animation:fl 9s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-22px) rotate(-5deg)}}
+
+/* ══ SOMMAIRE ══════════════════════════════════════════════ */
+.toc{border-top:var(--rule)}
+.toc button{width:100%;display:grid;grid-template-columns:52px 1fr auto;gap:var(--gut);align-items:baseline;
+  padding:clamp(7px,1.1vw,15px) 0;border-bottom:var(--rule);transition:padding-left .32s var(--e),background .32s}
+.toc button:hover{padding-left:20px;background:color-mix(in srgb,currentColor 8%,transparent)}
+.toc .t{font-family:var(--fd);font-size:clamp(18px,3.2vw,44px);line-height:.98;letter-spacing:-.03em;
+  font-variation-settings:"wght" 700,"FLAR" 10;transition:font-variation-settings .35s var(--e)}
+.toc button:hover .t{font-variation-settings:"wght" 1000,"FLAR" 100}
+.toc .n,.toc .s{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:.5}
+.toc .p{grid-column:1/-1;font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;
+  opacity:.35;padding:22px 0 6px;border-bottom:var(--rule)}
+
+/* ══ SPÉCIMEN PLEIN ÉCRAN ══════════════════════════════════ */
+.specimen{font-family:var(--fd);line-height:.78;letter-spacing:-.045em;text-align:left;
+  font-size:clamp(38px,9.6vw,168px);word-spacing:-.02em}
+.specimen em{font-style:normal}
+.spec-note{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.45;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:1.6em}
+.axis-line{border-bottom:var(--rule);padding:.06em 0;white-space:nowrap;overflow:hidden;position:relative;
+  font-family:var(--fd);line-height:.92;letter-spacing:-.035em;cursor:default}
+.axis-line .meta{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:0;position:absolute;
+  right:0;top:50%;transform:translateY(-50%);transition:opacity .3s;background:var(--bg);padding-left:14px}
+.axis-line:hover .meta{opacity:.75}
+.axis-line:hover{color:var(--rouge)}
+
+/* grille de glyphes façon spécimen de fonderie */
+.gset{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(48px,5.6vw,96px),1fr));gap:1px;
+  background:currentColor;border:var(--rule)}
+.gset span{background:var(--bg);color:var(--fg);aspect-ratio:1;display:grid;place-items:center;font-family:var(--fd);
+  font-size:clamp(20px,3vw,46px);transition:background .16s,color .16s,font-variation-settings .3s var(--e),transform .3s var(--e);
+  position:relative;z-index:1}
+.gset span.hot{background:var(--rouge);color:#fff}
+.gset span.ink{background:var(--fg);color:var(--bg)}
+.gset span:hover{background:var(--fg);color:var(--bg);font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15;
+  transform:scale(1.7);z-index:5;border-radius:2px}
+.gset span.hot:hover{background:var(--rouge);color:#fff}
+
+/* laboratoire */
+.lab{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:var(--gut);border:var(--rule);
+  padding:clamp(14px,2vw,30px);align-items:center}
+@media(max-width:900px){.lab{grid-template-columns:1fr}}
+#play{font-family:var(--fd);font-size:clamp(40px,9.5vw,140px);line-height:.84;letter-spacing:-.045em;
+  word-break:break-word;outline:none}
+.sl{margin-bottom:15px}
+.sl label{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;margin-bottom:6px}
+.sl input{width:100%;accent-color:var(--rouge)}
+
+/* ══ LOGO ══════════════════════════════════════════════════ */
+.constr{position:relative;border:var(--rule);aspect-ratio:1;display:grid;place-items:center;overflow:hidden}
+.constr .sym{width:44%;position:relative;z-index:2}
+.constr::before{content:"";position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s;
+  background:repeating-linear-gradient(to right,currentColor 0 1px,transparent 1px 12.5%),
+             repeating-linear-gradient(to bottom,currentColor 0 1px,transparent 1px 12.5%)}
+.constr.show::before{opacity:.3}
+.constr::after{content:"";position:absolute;left:50%;top:50%;width:52%;height:52%;transform:translate(-50%,-50%);
+  border-radius:50%;border:1.4px dashed currentColor;opacity:0;transition:opacity .35s;z-index:1}
+.constr.show::after{opacity:.45}
+.clear{border:var(--rule);aspect-ratio:1;display:grid;place-items:center}
+.clear .z{border:1.4px dashed currentColor;padding:14%;display:grid;place-items:center;
+  background:color-mix(in srgb,currentColor 6%,transparent)}
+.sizes{display:flex;align-items:flex-end;gap:clamp(14px,2.6vw,40px);flex-wrap:wrap}
+.sizes figure{text-align:center}
+.sizes .sym{margin:0 auto 8px}
+figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;line-height:1.5}
+.dont{position:relative;border:var(--rule);aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+.dont .lab2{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;border-top:var(--rule);
+  font-family:var(--fm);font-size:9px;letter-spacing:.04em}
+.dont::after{content:"✕";position:absolute;top:6px;right:9px;font-family:var(--fm);font-size:13px;color:var(--rouge)}
+.ok{position:relative;border:var(--rule);aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+.ok .lab2{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;border-top:var(--rule);font-family:var(--fm);font-size:9px}
+.ok::after{content:"✓";position:absolute;top:6px;right:9px;font-family:var(--fm);font-size:13px;color:var(--menthe)}
+
+/* ══ COULEUR ═══════════════════════════════════════════════ */
+.sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:1px;background:currentColor;border:var(--rule)}
+.sw{padding:clamp(12px,1.6vw,20px);min-height:clamp(160px,20vw,235px);display:flex;flex-direction:column;
+  justify-content:space-between;cursor:pointer;position:relative}
+.sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,22px);letter-spacing:-.02em;font-variation-settings:"wght" 800,"FLAR" 80}
+.sw .vl{font-family:var(--fm);font-size:9px;line-height:1.78;letter-spacing:.03em;opacity:.85}
+.sw::after{content:"copié ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;opacity:0;transition:opacity .3s}
+.sw.cp::after{opacity:1}
+.ratios{display:flex;height:58px;border:var(--rule)}
+.ratios div{display:grid;place-items:center;font-family:var(--fm);font-size:9px;letter-spacing:.1em}
+
+/* ══ GRILLE / MOTIFS / PHOTO ═══════════════════════════════ */
+.gdemo{position:relative;border:var(--rule);aspect-ratio:16/10;padding:6%;overflow:hidden}
+.gdemo .cols{position:absolute;inset:6%;display:grid;grid-template-columns:repeat(12,1fr);gap:7px;z-index:1}
+.gdemo .cols i{background:var(--rouge);opacity:.15}
+.gdemo .cnt{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.ph{position:relative;overflow:hidden;border:var(--rule)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e)}
+.ph:hover img{transform:scale(1.05)}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:7px 11px;font-family:var(--fm);font-size:9px;
+  letter-spacing:.07em;background:color-mix(in srgb,#000 76%,transparent);color:#fff}
+.f-warm img{filter:sepia(.26) saturate(1.12) contrast(1.06)}
+.f-bw img{filter:grayscale(1) contrast(1.14) brightness(.96)}
+.f-bad img{filter:saturate(2.4) hue-rotate(28deg) contrast(1.5)}
+.pat{aspect-ratio:1;border:var(--rule);position:relative;overflow:hidden}
+.pat i{position:absolute;inset:0;transition:transform .8s var(--e)}
+.pat:hover i{transform:scale(1.25) rotate(6deg)}
+.p1 i{-webkit-mask:url("Logo.svg") repeat center/30px;mask:url("Logo.svg") repeat center/30px;background:currentColor;opacity:.85}
+.p2 i{-webkit-mask:url("Logo.svg") repeat center/50px;mask:url("Logo.svg") repeat center/50px;background:linear-gradient(135deg,var(--espresso),var(--kraft))}
+.p3 i{background:repeating-linear-gradient(45deg,currentColor 0 8px,transparent 8px 20px);opacity:.5}
+.p4 i{background:radial-gradient(circle at 30% 30%,var(--crema),transparent 62%),radial-gradient(circle at 72% 74%,var(--espresso),transparent 58%)}
+.p5 i{-webkit-mask:url("Logo.svg") repeat center/76px;mask:url("Logo.svg") repeat center/76px;background:var(--rouge)}
+.p6 i{background:repeating-radial-gradient(circle at 50% 50%,currentColor 0 1.4px,transparent 1.4px 13px);opacity:.55}
+
+.ico{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:currentColor;border:var(--rule)}
+.ico figure{background:var(--bg);padding:22px 12px;display:grid;place-items:center;gap:14px;text-align:center;transition:background .25s,color .25s}
+.ico figure:hover{background:var(--rouge);color:#fff}
+.ico figcaption{font-family:var(--fm);font-size:8px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
+.ico figure:hover figcaption{opacity:1}
+/* pictos maison — masqués pour suivre la couleur du texte */
+.pico{width:clamp(38px,4.4vw,60px);aspect-ratio:1;background:currentColor;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain;transition:transform .45s var(--e)}
+.ico figure:hover .pico{transform:scale(1.14) rotate(-4deg)}
+
+/* ── hiérarchie visuelle (poster) ─────────────────────── */
+.poster{background:var(--blanc);color:var(--encre);border:var(--rule);padding:clamp(22px,3.4vw,52px);
+  display:flex;flex-direction:column;gap:clamp(12px,1.6vw,22px);min-height:clamp(420px,62vh,760px)}
+.poster .k{font-family:var(--fm);font-size:clamp(10px,1.05vw,14px);letter-spacing:.34em;text-transform:uppercase}
+.poster .big{font-family:var(--fd);font-size:clamp(52px,11.5vw,190px);line-height:.8;letter-spacing:-.055em;
+  font-variation-settings:"wght" 1000,"FLAR" 0}
+.poster .sub{font-family:var(--fd);font-size:clamp(15px,2.1vw,32px);letter-spacing:.06em;
+  font-variation-settings:"wght" 500,"FLAR" 0;text-transform:uppercase}
+.poster .duo{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(16px,2.4vw,44px);align-items:start;margin-top:auto}
+@media(max-width:640px){.poster .duo{grid-template-columns:1fr}}
+.poster .duo .shout{font-family:var(--fd);font-size:clamp(16px,2.1vw,30px);line-height:1.04;letter-spacing:-.02em;
+  font-variation-settings:"wght" 1000,"FLAR" 0;text-transform:uppercase}
+.rank{counter-reset:r;display:grid;gap:1px;background:currentColor;border:var(--rule)}
+.rank li{list-style:none;background:var(--bg);padding:12px 14px;display:grid;
+  grid-template-columns:30px 1fr auto;gap:14px;align-items:baseline;font-family:var(--fm);font-size:10px;letter-spacing:.05em}
+.rank li::before{counter-increment:r;content:counter(r);opacity:.4}
+
+/* ── le signe comme fenêtre ───────────────────────────── */
+.win{position:relative;aspect-ratio:.78;border:var(--rule);overflow:hidden;background:var(--bg)}
+.win .cut{position:absolute;inset:8%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain;overflow:hidden}
+.win .cut img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--e)}
+.win:hover .cut img{transform:scale(1.08)}
+.win .cut.solid{background:currentColor}
+.win .cut.half{background:currentColor;
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect}
+.win .cap{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;border-top:var(--rule);
+  font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase}
+.halftone{position:absolute;inset:8%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain;
+  background:radial-gradient(circle at center,currentColor 0 1.5px,transparent 1.6px) 0 0/9px 9px}
+.outline{position:absolute;inset:8%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain;background:currentColor}
+
+/* mot-symbole minuscule */
+.lower{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;letter-spacing:-.045em;line-height:.9}
+
+/* ── hors-format / débord ─────────────────────────────── */
+.bleed{position:relative;overflow:hidden;min-height:clamp(360px,72vh,820px);border:var(--rule)}
+.bleed .w{position:absolute;font-family:var(--fd);line-height:.78;letter-spacing:-.05em;white-space:nowrap;
+  font-variation-settings:"wght" 400,"FLAR" 0;transition:font-variation-settings .5s var(--e),color .5s var(--e)}
+.bleed .w:hover{font-variation-settings:"wght" 1000,"FLAR" 100;color:var(--rouge)}
+.bleed .meta{position:absolute;font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;line-height:1.7;opacity:.8}
+
+/* ══ APPLICATIONS ══════════════════════════════════════════ */
+.app{border:var(--rule);aspect-ratio:1;position:relative;overflow:hidden;display:grid;place-items:center;background:var(--bg)}
+.app .cap{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;border-top:var(--rule);font-family:var(--fm);
+  font-size:8.5px;letter-spacing:.14em;text-transform:uppercase}
+.cup{width:50%;aspect-ratio:1/1.14;background:var(--blanc);border:var(--rule);border-radius:5px 5px 30% 30%;
+  display:grid;place-items:center;position:relative;box-shadow:0 20px 36px -20px rgba(0,0,0,.5)}
+.cup::before{content:"";position:absolute;top:-8px;left:-5%;right:-5%;height:14px;background:var(--lait);border:var(--rule);border-radius:40px}
+.cup .sym{width:32%;color:var(--encre)}
+.bag{width:54%;aspect-ratio:.74;background:var(--espresso);color:var(--lait);border:var(--rule);
+  display:flex;flex-direction:column;justify-content:space-between;padding:12% 10%;position:relative}
+.bag::before{content:"";position:absolute;top:0;left:8%;right:8%;height:8%;background:var(--lait);opacity:.9}
+.bag .sym{width:28%}
+.sign{width:68%;aspect-ratio:2.6;background:var(--encre);color:var(--kraft);display:grid;place-items:center;
+  border-radius:3px;box-shadow:0 16px 30px -16px rgba(0,0,0,.6)}
+.sign .sym{width:15%}
+.card{width:70%;aspect-ratio:1.62;background:var(--blanc);border:var(--rule);padding:7%;display:flex;
+  flex-direction:column;justify-content:space-between;transform:rotate(-4deg);box-shadow:0 18px 30px -18px rgba(0,0,0,.45);color:var(--encre)}
+.card .sym{width:18%}
+.tee{width:62%;aspect-ratio:.92;background:var(--blanc);border:var(--rule);display:grid;place-items:center;
+  clip-path:polygon(22% 0,78% 0,100% 16%,88% 28%,88% 100%,12% 100%,12% 28%,0 16%);color:var(--encre)}
+.tee .sym{width:22%}
+.tote{width:56%;aspect-ratio:.86;background:var(--lait);border:var(--rule);display:grid;place-items:center;position:relative;color:var(--encre)}
+.tote::before,.tote::after{content:"";position:absolute;top:-16%;width:9%;height:26%;border:var(--rule);border-bottom:0;border-radius:40px 40px 0 0}
+.tote::before{left:22%}.tote::after{right:22%}
+.tote .sym{width:26%}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;width:100%;height:100%}
+.igrid>*{display:grid;place-items:center;overflow:hidden}
+.igrid img{width:100%;height:100%;object-fit:cover}
+.igrid .sym{width:42%}
+.truck{width:78%;aspect-ratio:2.1;background:var(--papier);border:var(--rule);border-radius:6px 18px 4px 4px;
+  position:relative;display:grid;place-items:center;color:var(--encre)}
+.truck::before,.truck::after{content:"";position:absolute;bottom:-9%;width:18%;aspect-ratio:1;background:var(--encre);border-radius:50%}
+.truck::before{left:14%}.truck::after{right:14%}
+.truck .sym{width:16%}
+
+/* ══ MOTION / UI ═══════════════════════════════════════════ */
+.mo{border:var(--rule);padding:clamp(13px,1.8vw,22px)}
+.mo .track{height:44px;position:relative;margin:14px 0 8px;border-bottom:1.4px dashed currentColor}
+.mo .dot{position:absolute;top:10px;left:0;width:22px;height:22px;background:currentColor;border-radius:50%}
+.mo.e1 .dot{animation:run 2.6s cubic-bezier(.16,1,.3,1) infinite}
+.mo.e2 .dot{animation:run 2.6s cubic-bezier(.34,1.56,.64,1) infinite;background:var(--rouge)}
+.mo.e3 .dot{animation:run 2.6s linear infinite;background:var(--rouge)}
+@keyframes run{0%{left:0}45%{left:calc(100% - 22px)}55%{left:calc(100% - 22px)}100%{left:0}}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.72em 1.4em;border:var(--rule);font-family:var(--fm);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px;transition:.26s var(--e)}
+.btn:hover{background:currentColor;color:var(--bg);transform:translateY(-2px)}
+.btn.solid{background:currentColor;color:var(--bg)}
+.btn.solid:hover{opacity:.82}
+.field{border:var(--rule);padding:.7em 1em;display:block;width:100%;background:transparent;color:inherit;
+  font-family:var(--fm);font-size:11px;border-radius:999px}
+.chip{display:inline-block;padding:.4em .9em;border:var(--rule);border-radius:999px;font-family:var(--fm);
+  font-size:9px;letter-spacing:.13em;text-transform:uppercase;margin:0 5px 5px 0}
+
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:currentColor;border:var(--rule)}
+@media(max-width:640px){.voice{grid-template-columns:1fr}}
+.voice>div{background:var(--bg);padding:clamp(14px,2vw,26px)}
+.voice ul{list-style:none;display:flex;flex-direction:column;gap:.75em}
+.voice li{font-family:var(--fs);font-size:clamp(14px,1.3vw,18px);line-height:1.34;display:flex;gap:.55em}
+.voice li::before{content:"→";opacity:.4;flex:0 0 auto}
+.voice .no li::before{content:"✕";color:var(--rouge);opacity:1}
+
+.slider-row{display:grid;grid-template-columns:110px 1fr 110px;align-items:center;gap:14px;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.11em;padding:9px 0;border-bottom:var(--rule)}
+.slider-row .bar{height:5px;background:color-mix(in srgb,currentColor 22%,transparent);position:relative;border-radius:99px}
+.slider-row .bar b{position:absolute;top:-4px;width:13px;height:13px;background:var(--rouge);border-radius:50%}
+.slider-row .r{text-align:right;opacity:.5}
+
+footer{padding:clamp(44px,6vw,100px) var(--pad) 34px;border-top:var(--rule)}
+.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="grain"></div><div id="cur"></div><div id="prog"></div><nav id="rail"></nav>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
+<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
+</symbol></svg>
+
+
+<!-- ═════ COUVERTURE ═════ -->
+<section id="s0" data-t="Couverture" data-p="" style="padding:0">
+<div id="cover">
+  <div class="cov-top">
+    <div class="mono">TRÉMA<br><span class="dim">Maison de café · torréfaction</span></div>
+    <div class="mono" style="text-align:right">BRAND BOOK<br><span class="dim">v1.0 — <span data-date>—</span></span></div>
+  </div>
+  <svg class="cov-sym sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+  <div>
+    <div id="wm">TRÉMA</div>
+    <p class="mono dim" style="max-width:52ch">Bougez la souris sur le mot. — Le livre de marque complet :
+    stratégie, signe, typographie JT&nbsp;Flair, couleur, image, applications, gouvernance. Une seule page.</p>
+  </div>
+  <div class="cov-bot">
+    <div class="mono dim">↓ 40 chapitres<br>7 parties</div>
+    <div class="mono dim" style="text-align:right">JT FLAIR · wght 300–1000 · FLAR 0–100 · slnt 0–15<br>28 instances · document interne</div>
+  </div>
+</div>
+</section>
+
+<div class="mq"><span>MAISON DE CAFÉ&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;TORRÉFACTION LENTE&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;RÉVÉLER JAMAIS RECOUVRIR&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;</span><span>MAISON DE CAFÉ&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;TORRÉFACTION LENTE&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;RÉVÉLER JAMAIS RECOUVRIR&nbsp;<svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>&nbsp;</span></div>
+
+
+<!-- ═════ SOMMAIRE ═════ -->
+<section id="s1" data-t="Sommaire" data-p="">
+  <div class="num">00</div>
+  <div class="tag">Sommaire</div>
+  <h2 class="rev">Tout ce que<br>contient ce livre</h2>
+  <div class="toc" id="toc" style="margin-top:clamp(26px,4vw,54px)"></div>
+</section>
+
+
+<!-- ══════════════════ PARTIE I — LA MARQUE ══════════════════ -->
+
+<section id="s2" data-t="Manifeste" data-p="I · La marque" class="blk full">
+  <div class="num">01</div>
+  <div class="part">Partie I — La marque</div>
+  <div class="tag">Chapitre 01</div>
+  <div class="specimen rev" style="margin:.2em 0 .5em">
+    <span class="fx-flare" data-fx>Révéler,</span>
+    <span class="fx-thin" data-fx>jamais</span>
+    <span class="fx-slice" data-fx><i>recouvrir.</i><i aria-hidden="true">recouvrir.</i><i aria-hidden="true">recouvrir.</i></span>
+  </div>
+  <div class="grid c3 rev">
+    <p>Un tréma, c'est deux points au-dessus d'une lettre. Un signe minuscule qui change tout : il sépare, il ouvre,
+    il fait entendre ce qui était muet.</p>
+    <p>Nous faisons du café comme on pose un tréma. Un geste précis, presque invisible, qui révèle ce qui était déjà là.
+    Le grain ne devient pas autre chose : il devient enfin lui-même.</p>
+    <p>Nous ne cherchons pas le spectaculaire, nous cherchons le juste. Torréfaction lente, origines suivies,
+    une tasse qui n'a pas besoin d'explication — et quand il en faut une, on la donne, sans jargon.<span class="todo">à réécrire</span></p>
+  </div>
+</section>
+
+<section id="s3" data-t="Origine" data-p="I · La marque">
+  <div class="num">02</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 02</div><h2 class="rev">Origine</h2></div>
+  <p class="rev">D'où vient la maison, et pourquoi ça compte encore. Le récit fondateur sert d'argument commercial :
+  il doit être vrai, court, et racontable en trente secondes.<span class="todo">à documenter</span></p></div>
+  <div class="grid c4">
+    <div class="box rev"><h4>An 0</h4><h3>Le comptoir</h3><p>Une machine d'occasion, six couverts, une seule origine à la carte.</p></div>
+    <div class="box rev"><h4>An 2</h4><h3>Le torréfacteur</h3><p>Passage en torréfaction maison. On arrête d'acheter du café qu'on n'a pas goûté vert.</p></div>
+    <div class="box rev"><h4>An 5</h4><h3>Les producteurs</h3><p>Premiers contrats directs. Le nom du producteur apparaît sur le paquet.</p></div>
+    <div class="box rev"><h4>Aujourd'hui</h4><h3>La maison</h3><p>Trois adresses, un atelier, une école de dégustation ouverte à tous.</p></div>
+  </div>
+</section>
+
+<section id="s4" data-t="Plateforme" data-p="I · La marque">
+  <div class="num">03</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 03</div><h2 class="rev">Plateforme<br>de marque</h2></div>
+  <p class="rev">Les quatre énoncés opposables. Si une proposition contredit l'un d'eux, elle ne passe pas.
+  On ne les récrit pas sans passer par la direction.</p></div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Mission</h4><h3>Rendre le café lisible</h3><p class="mono dim">Ce qu'on fait tous les jours.</p></div>
+    <div class="box fill rev"><h4 style="opacity:.75">Vision</h4><h3>La tasse la plus honnête de la ville</h3><p class="mono" style="opacity:.7">Où l'on va.</p></div>
+    <div class="box rev"><h4>Promesse</h4><h3>Même exigence, jamais la même tasse</h3><p class="mono dim">Ce qu'on garantit.</p></div>
+    <div class="box ac rev"><h4 style="opacity:.8">Raison d'être</h4><h3>Un geste juste sur une matière vivante</h3><p class="mono" style="opacity:.85">Pourquoi on existe.</p></div>
+  </div>
+  <div class="box rev" style="margin-top:var(--gut)">
+    <h4>Territoire concurrentiel</h4>
+    <div style="position:relative;aspect-ratio:2.4;border:var(--rule);margin-top:12px">
+      <div style="position:absolute;left:50%;top:0;bottom:0;width:1.4px;background:currentColor;opacity:.28"></div>
+      <div style="position:absolute;top:50%;left:0;right:0;height:1.4px;background:currentColor;opacity:.28"></div>
+      <span class="mono dim" style="position:absolute;top:7px;left:50%;transform:translateX(-50%)">POINTU</span>
+      <span class="mono dim" style="position:absolute;bottom:7px;left:50%;transform:translateX(-50%)">GRAND PUBLIC</span>
+      <span class="mono dim" style="position:absolute;left:9px;top:50%;transform:translateY(-50%)">DISTANT</span>
+      <span class="mono dim" style="position:absolute;right:9px;top:50%;transform:translateY(-50%)">CHALEUREUX</span>
+      <div style="position:absolute;left:68%;top:30%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:7px">
+        <svg class="sym" viewBox="0 0 78 91" style="width:20px;color:var(--rouge)"><use href="#tm"/></svg>
+        <b class="mono" style="color:var(--rouge)">TRÉMA</b></div>
+      <span class="mono dim" style="position:absolute;left:22%;top:23%">Spécialiste A</span>
+      <span class="mono dim" style="position:absolute;left:38%;top:72%">Chaîne B</span>
+      <span class="mono dim" style="position:absolute;left:76%;top:79%">Enseigne C</span>
+    </div>
+  </div>
+</section>
+
+<section id="s5" data-t="Personnalité" data-p="I · La marque" class="lai">
+  <div class="num">04</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 04</div><h2 class="rev">Valeurs &<br>personnalité</h2></div>
+  <p class="rev">Trois valeurs, un archétype, huit curseurs. Les curseurs servent d'arbitrage :
+  quand deux options se valent, on choisit celle qui respecte la position du curseur.</p></div>
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <div class="box rev"><h4>Valeur 01</h4><h3>Transparence</h3><p>Origine, altitude, producteur, date de torréfaction. Tout est écrit. Rien n'est arrondi.</p></div>
+    <div class="box rev"><h4>Valeur 02</h4><h3>Lenteur</h3><p>Une contrainte de production qu'on assume et qu'on explique, pas un argument marketing.</p></div>
+    <div class="box rev"><h4>Valeur 03</h4><h3>Hospitalité</h3><p>Personne ne doit se sentir bête en commandant. Le vocabulaire s'adapte à la personne en face.</p></div>
+  </div>
+  <div class="grid c2">
+    <div class="rev">
+      <h4>Curseurs de personnalité</h4>
+      <div class="slider-row"><span>Sérieux</span><div class="bar"><b style="left:62%"></b></div><span class="r">Joueur</span></div>
+      <div class="slider-row"><span>Classique</span><div class="bar"><b style="left:71%"></b></div><span class="r">Contemporain</span></div>
+      <div class="slider-row"><span>Discret</span><div class="bar"><b style="left:44%"></b></div><span class="r">Affirmé</span></div>
+      <div class="slider-row"><span>Expert</span><div class="bar"><b style="left:35%"></b></div><span class="r">Accessible</span></div>
+      <div class="slider-row"><span>Froid</span><div class="bar"><b style="left:78%"></b></div><span class="r">Chaleureux</span></div>
+      <div class="slider-row"><span>Local</span><div class="bar"><b style="left:30%"></b></div><span class="r">Global</span></div>
+      <div class="slider-row"><span>Sobre</span><div class="bar"><b style="left:58%"></b></div><span class="r">Généreux</span></div>
+      <div class="slider-row"><span>Premium</span><div class="bar"><b style="left:46%"></b></div><span class="r">Quotidien</span></div>
+    </div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Archétype dominant</h4><h3>L'Artisan</h3><p>Maîtrise, matière, geste répété. Il montre son atelier plutôt que son diplôme.</p></div>
+      <div class="box"><h4>Archétype secondaire</h4><h3>Le Guide</h3><p>Il ne sait pas mieux que vous ce que vous aimez : il vous aide à le nommer.</p></div>
+      <div class="box"><h4>Ce qu'on n'est pas</h4><p class="mono">Ni le Magicien (promesse de transformation), ni le Souverain (statut, exclusivité),
+      ni le Rebelle (provocation). Aucun de ces registres dans nos prises de parole.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s6" data-t="Audiences" data-p="I · La marque">
+  <div class="num">05</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 05</div><h2 class="rev">Audiences</h2></div>
+  <p class="rev">Quatre profils, quatre entrées dans la marque. Chaque support doit savoir à qui il parle
+  avant de savoir ce qu'il dit.<span class="todo">à valider avec les ventes</span></p></div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Cœur de cible</h4><h3>L'habitué·e du quartier</h3><p>Vient 4 fois par semaine. Veut être reconnu·e, pas conseillé·e. Ton : direct, familier, rapide.</p></div>
+    <div class="box rev"><h4>Croissance</h4><h3>Le·la curieux·se</h3><p>Boit du café filtre depuis six mois. Veut apprendre sans être jugé·e. Ton : pédagogique, jamais condescendant.</p></div>
+    <div class="box rev"><h4>Prescription</h4><h3>Le·la pro / barista</h3><p>Juge sur la fiche technique. Ton : factuel, chiffré, sans adjectif.</p></div>
+    <div class="box rev"><h4>B2B</h4><h3>Restaurant & bureau</h3><p>Achète de la régularité et un service. Ton : vouvoiement, engagements datés, prix clairs.</p></div>
+  </div>
+</section>
+
+<section id="s7" data-t="Architecture" data-p="I · La marque">
+  <div class="num">06</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 06</div><h2 class="rev">Architecture<br>de marque</h2></div>
+  <p class="rev">Marque unique, gammes descriptives. On n'invente pas de sous-marque :
+  le nom du café est toujours celui de son origine ou de son producteur.</p></div>
+  <div class="grid c2">
+    <div class="rev">
+      <div class="box" style="padding:clamp(20px,3vw,40px)">
+        <div style="text-align:center">
+          <div style="display:inline-flex;align-items:center;gap:10px;border:var(--rule);padding:12px 20px">
+            <svg class="sym" viewBox="0 0 78 91" style="width:24px"><use href="#tm"/></svg>
+            <b style="font-family:var(--fd);font-size:20px;font-variation-settings:'wght' 1000,'FLAR' 0;letter-spacing:-.03em">TRÉMA</b>
+          </div>
+          <div style="height:26px;width:1.4px;background:currentColor;margin:0 auto;opacity:.4"></div>
+          <div style="height:1.4px;background:currentColor;opacity:.4;margin-bottom:0"></div>
+          <div class="grid c4" style="gap:8px;margin-top:0">
+            <div style="border-left:1.4px solid;opacity:.4;height:20px;width:1.4px;margin:0 auto;background:currentColor;border:0"></div>
+            <div style="height:20px;width:1.4px;margin:0 auto;background:currentColor;opacity:.4"></div>
+            <div style="height:20px;width:1.4px;margin:0 auto;background:currentColor;opacity:.4"></div>
+            <div style="height:20px;width:1.4px;margin:0 auto;background:currentColor;opacity:.4"></div>
+          </div>
+          <div class="grid c4" style="gap:8px">
+            <div class="box mono" style="padding:9px 5px">ESPRESSO</div>
+            <div class="box mono" style="padding:9px 5px">FILTRE</div>
+            <div class="box mono" style="padding:9px 5px">ÉDITIONS</div>
+            <div class="box mono" style="padding:9px 5px">ÉCOLE</div>
+          </div>
+        </div>
+      </div>
+      <p class="mono dim" style="margin-top:12px">Modèle « branded house » — la marque mère porte tout.</p>
+    </div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Règles de nommage produit</h4><p class="mono">[ORIGINE] + [PROCESS] — ex. « Guji Natural »<br>
+      Édition limitée : + millésime — « Guji Natural 26 »<br>Jamais de nom poétique inventé (« Réveil d'Or », « Nuage »).</p></div>
+      <div class="box"><h4>Gammes</h4><p class="mono">ESPRESSO · torréfaction plus longue, sac noir<br>FILTRE · torréfaction claire, sac lait<br>
+      ÉDITIONS · micro-lots, sac rouge, numéroté<br>ÉCOLE · ateliers, papeterie kraft</p></div>
+      <div class="box"><h4>Co-branding</h4><p class="mono">Signe Tréma toujours à gauche, filet vertical de séparation,
+      hauteurs de signe optiquement égales. Jamais de fusion de logos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s8" data-t="Ton de voix" data-p="I · La marque" class="esp">
+  <div class="num">07</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 07</div><h2 class="rev">Ton<br>de voix</h2></div>
+  <p class="rev">On écrit comme on sert : à hauteur d'yeux. Phrases courtes, zéro superlatif gratuit.
+  Le café est déjà bon — inutile de le sur-vendre.</p></div>
+  <div class="voice rev" style="margin-bottom:var(--gut)">
+    <div><h4>On dit</h4><ul>
+      <li>« Récolté en octobre, torréfié le 12. »</li>
+      <li>« Ça a un goût de prune cuite. Franchement. »</li>
+      <li>« On n'en a plus. Il revient en mars. »</li>
+      <li>« Dis-nous ce que tu bois d'habitude, on trouve. »</li>
+      <li>« C'est plus acide que ce que tu bois. Tu veux essayer ? »</li>
+    </ul></div>
+    <div class="no"><h4>On ne dit pas</h4><ul>
+      <li>« Une expérience sensorielle d'exception. »</li>
+      <li>« Notre passion au service de votre plaisir. »</li>
+      <li>« Le meilleur café du monde. »</li>
+      <li>« Un voyage au cœur des terroirs. »</li>
+      <li>« Nos experts sélectionnent pour vous. »</li>
+    </ul></div>
+  </div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Longueurs</h4><p class="mono">Titre ≤ 6 mots<br>Paragraphe ≤ 3 phrases<br>Étiquette produit ≤ 40 signes<br>Objet d'email ≤ 42 signes</p></div>
+    <div class="box rev"><h4>Personne</h4><p class="mono">« Nous » pour la maison<br>« Tu » en boutique et en story<br>« Vous » en B2B et service client<br>Jamais « on » impersonnel dans un texte officiel</p></div>
+    <div class="box rev"><h4>Ponctuation</h4><p class="mono">Point final systématique<br>Exclamation : 1 max par page<br>Jamais de points de suspension<br>Tiret cadratin — pour l'incise</p></div>
+    <div class="box rev"><h4>Interdits</h4><p class="mono">Émojis dans les titres<br>MAJUSCULES pour crier<br>Anglicismes non traduits<br>Jeux de mots sur « expresso »</p></div>
+  </div>
+</section>
+
+<section id="s9" data-t="Messages" data-p="I · La marque">
+  <div class="num">08</div>
+  <div class="hd"><div><div class="part">Partie I</div><div class="tag">Chapitre 08</div><h2 class="rev">Messages<br>& lexique</h2></div>
+  <p class="rev">Le pitch à trois longueurs, et le vocabulaire imposé. Un mot de la colonne de gauche
+  ne se remplace jamais par un synonyme « plus vendeur ».</p></div>
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <div class="box rev"><h4>Pitch — 6 mots</h4><p class="disp" style="font-size:clamp(20px,2.4vw,32px)">Du café qu'on peut expliquer.</p></div>
+    <div class="box rev"><h4>Pitch — 25 mots</h4><p>Tréma torréfie à Paris des cafés d'origine tracés, en petites séries. On écrit tout sur le paquet, et on vous explique en trente secondes.</p></div>
+    <div class="box rev"><h4>Pitch — 60 mots</h4><p>Tréma est une maison de café née d'un comptoir de quartier. Nous achetons en direct, torréfions lentement, et datons chaque lot. Nos trois adresses servent le même café que celui vendu en paquet. Notre école ouvre la dégustation à tout le monde, sans vocabulaire d'initié. Ce qui compte : que vous sachiez ce que vous buvez.</p></div>
+  </div>
+  <div class="scrollx rev"><table>
+    <tr><th>On écrit</th><th>Pas</th><th>Pourquoi</th></tr>
+    <tr><td>café de spécialité</td><td>café d'exception</td><td>Catégorie définie, pas un jugement.</td></tr>
+    <tr><td>torréfié le 12/03</td><td>fraîchement torréfié</td><td>Une date est vérifiable.</td></tr>
+    <tr><td>producteur · coopérative</td><td>petit producteur</td><td>« Petit » est condescendant.</td></tr>
+    <tr><td>acidité</td><td>fraîcheur, vivacité</td><td>Mot technique assumé, expliqué en boutique.</td></tr>
+    <tr><td>épuisé — retour en mars</td><td>victime de son succès</td><td>Information, pas argument.</td></tr>
+    <tr><td>moudre</td><td>broyer</td><td>Vocabulaire métier correct.</td></tr>
+    <tr><td>tasse</td><td>breuvage, nectar</td><td>On parle français simple.</td></tr>
+  </table></div>
+</section>
+
+
+<div class="mq rev2 slow"><span>&nbsp;PARTIE II&nbsp;·&nbsp;LE SIGNE&nbsp;·&nbsp;PARTIE II&nbsp;·&nbsp;LE SIGNE&nbsp;·&nbsp;</span><span>&nbsp;PARTIE II&nbsp;·&nbsp;LE SIGNE&nbsp;·&nbsp;PARTIE II&nbsp;·&nbsp;LE SIGNE&nbsp;·&nbsp;</span></div>
+
+
+<!-- ══════════════════ PARTIE II — LE SIGNE ══════════════════ -->
+
+<section id="s10" data-t="Le signe" data-p="II · Le signe">
+  <div class="num">09</div>
+  <div class="hd"><div><div class="part">Partie II — Le signe</div><div class="tag">Chapitre 09</div><h2 class="rev">Anatomie<br>du signe</h2></div>
+  <p class="rev">Un rectangle plein, une découpe en arc, une contre-forme qui file vers la droite.
+  C'est un T, c'est une voile, c'est le trait du tréma. Il ne se redessine jamais à la main :
+  on utilise <code>Logo.svg</code>.</p></div>
+  <div class="grid c3">
+    <div class="rev"><h4>Construction</h4>
+      <div class="constr" id="constr"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
+      <button class="btn" style="margin-top:12px" id="gridtog">Afficher la grille</button></div>
+    <div class="rev"><h4>Zone de protection — 1× la hauteur de barre</h4>
+      <div class="clear"><div class="z"><svg class="sym" viewBox="0 0 78 91" style="width:60px"><use href="#tm"/></svg></div></div>
+      <p class="mono dim" style="margin-top:12px">Aucun élément — texte, image, bord de format — n'entre dans la zone pointillée.</p></div>
+    <div class="rev"><h4>Proportions</h4>
+      <div class="box" style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;gap:1em">
+        <div><div class="mono dim">Ratio</div><div class="disp">78 : 91</div></div>
+        <div><div class="mono dim">Hauteur de barre</div><div class="disp">0,377 H</div></div>
+        <div><div class="mono dim">Rayon de l'arc</div><div class="disp">0,52 H</div></div>
+        <div><div class="mono dim">Angle de fuite</div><div class="disp">37°</div></div>
+      </div></div>
+  </div>
+  <div class="box rev" style="margin-top:var(--gut)"><h4>Tailles minimales</h4>
+    <div class="sizes" style="margin-top:14px">
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:14px"><use href="#tm"/></svg><figcaption>14 px<br>favicon</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:22px"><use href="#tm"/></svg><figcaption>22 px<br>min. écran</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:34px"><use href="#tm"/></svg><figcaption>8 mm<br>min. print</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:60px"><use href="#tm"/></svg><figcaption>18 mm<br>packaging</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:100px"><use href="#tm"/></svg><figcaption>40 mm +<br>enseigne</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="s11" data-t="Déclinaisons" data-p="II · Le signe">
+  <div class="num">10</div>
+  <div class="hd"><div><div class="part">Partie II</div><div class="tag">Chapitre 10</div><h2 class="rev">Verrouillages</h2></div>
+  <p class="rev">Six configurations validées, aucune autre n'existe. L'espace signe ↔ mot est toujours
+  égal à la hauteur de barre.</p></div>
+  <div class="grid c3">
+    <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="display:flex;align-items:center;gap:13px">
+      <svg class="sym" viewBox="0 0 78 91" style="width:36px"><use href="#tm"/></svg>
+      <span style="font-family:var(--fd);font-size:clamp(24px,3.2vw,44px);letter-spacing:-.05em;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
+      <p class="mono dim" style="margin-top:9px">A · Horizontal — usage principal</p></div>
+    <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="text-align:center">
+      <svg class="sym" viewBox="0 0 78 91" style="width:32px;margin:0 auto 10px"><use href="#tm"/></svg>
+      <span style="font-family:var(--fd);font-size:clamp(19px,2.4vw,32px);letter-spacing:-.045em;font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span></div></div>
+      <p class="mono dim" style="margin-top:9px">B · Vertical — carrés, avatars</p></div>
+    <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center"><div style="display:flex;align-items:center;gap:13px">
+      <svg class="sym" viewBox="0 0 78 91" style="width:32px"><use href="#tm"/></svg>
+      <div style="border-left:var(--rule);padding-left:13px"><div style="font-family:var(--fd);font-size:19px;letter-spacing:-.035em;font-variation-settings:'wght' 900,'FLAR' 0">TRÉMA</div>
+      <div class="mono dim" style="font-size:8.5px">TORRÉFACTEUR · PARIS</div></div></div></div>
+      <p class="mono dim" style="margin-top:9px">C · Avec signature — papeterie, B2B</p></div>
+    <div class="rev"><div class="box fill" style="aspect-ratio:1.6;display:grid;place-items:center">
+      <svg class="sym" viewBox="0 0 78 91" style="width:54px"><use href="#tm"/></svg></div>
+      <p class="mono dim" style="margin-top:9px">D · Signe seul inversé — tampon, marquage à chaud</p></div>
+    <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center;background:var(--rouge);border-color:var(--rouge);color:#fff">
+      <svg class="sym" viewBox="0 0 78 91" style="width:54px"><use href="#tm"/></svg></div>
+      <p class="mono dim" style="margin-top:9px">E · Sur couleur d'expression — 1 couleur, jamais deux</p></div>
+    <div class="rev"><div class="box" style="aspect-ratio:1.6;display:grid;place-items:center;overflow:hidden;padding:0">
+      <div style="position:relative;width:100%;height:100%;display:grid;place-items:center">
+        <img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)">
+        <svg class="sym" viewBox="0 0 78 91" style="width:54px;position:relative;color:#fff"><use href="#tm"/></svg></div></div>
+      <p class="mono dim" style="margin-top:9px">F · Sur photo — zone sombre et calme uniquement</p></div>
+  </div>
+</section>
+
+<!-- ═════ LE SIGNE COMME FENÊTRE ═════ -->
+<section id="s11b" data-t="Le signe comme fenêtre" data-p="II · Le signe" class="wht">
+  <div class="num"></div>
+  <div class="hd"><div><div class="part">Partie II</div><div class="tag"></div><h2 class="rev">Le signe<br>comme fenêtre</h2></div>
+  <p class="rev">Le principe le plus fort du système : le signe n'est pas posé <em>sur</em> l'image, il la
+  <b>découpe</b>. La photo remplit la forme, la forme cadre la photo. C'est ce qui rend une composition
+  reconnaissable même sans le mot.</p></div>
+
+  <div class="grid c2 rev" style="margin-bottom:var(--gut);align-items:center">
+    <div style="border:var(--rule);background:var(--encre);padding:clamp(20px,3vw,48px);display:grid;place-items:center">
+      <img src="Union.png" alt="Le signe rempli d'une photographie" style="width:min(100%,420px)">
+    </div>
+    <div>
+      <h3>Fichier de référence — <code>Union.png</code></h3>
+      <p>Le signe rempli par la photo, exporté en PNG transparent. Il se pose sur n'importe quel fond
+      sans retouche : c'est le format à demander au studio pour chaque nouvelle campagne.</p>
+      <p>Le cadrage à l'intérieur suit une seule règle : le sujet — la main, le verre, la coulée —
+      occupe la partie large de la forme, jamais la pointe.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span class="chip">PNG 32 bits</span><span class="chip">3000 px min.</span><span class="chip">Fond transparent</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid c4" style="margin-bottom:var(--gut)">
+    <div class="win rev"><div class="cut"><img src="image%20347.jpg" alt=""></div><div class="cap">Photo découpée</div></div>
+    <div class="win rev" style="background:var(--encre);color:var(--papier)"><div class="outline"></div><div class="cap" style="color:var(--papier)">Aplat plein</div></div>
+    <div class="win rev"><div class="halftone"></div><div class="cap">Trame de points</div></div>
+    <div class="win rev" style="background:var(--rouge);color:#fff"><div class="outline"></div><div class="cap" style="color:#fff">Couleur d'expression</div></div>
+  </div>
+
+  <div class="grid c2" style="margin-bottom:var(--gut)">
+    <div class="rev" style="position:relative;border:var(--rule);aspect-ratio:1.6;overflow:hidden;background:var(--beton)">
+      <img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <div style="position:absolute;left:8%;top:10%;width:46%;height:78%;
+        -webkit-mask:url('Logo.svg') no-repeat center/contain;mask:url('Logo.svg') no-repeat center/contain;
+        background:#fff"></div>
+      <div class="lower" style="position:absolute;right:6%;bottom:8%;color:#fff;font-size:clamp(20px,3.4vw,52px)">trema</div>
+    </div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Les quatre remplissages</h4><p class="mono">01 · PHOTO — le sujet doit rester lisible dans la découpe<br>
+      02 · APLAT — noir, papier, ou une couleur d'expression<br>
+      03 · TRAME — points ou hachures, impression 1 ton<br>
+      04 · BLANC SUR PHOTO — la forme évide l'image</p></div>
+      <div class="box"><h4>Règles de découpe</h4><p class="mono">Le signe garde ses proportions 78 : 91, toujours.<br>
+      La forme peut sortir du format sur un seul bord.<br>La photo à l'intérieur est recadrée, jamais déformée.<br>
+      Un seul signe-fenêtre par composition.</p></div>
+      <div class="box ac"><h4 style="opacity:.85">À retenir</h4><p class="mono">Quand le signe devient fenêtre,
+      le mot « trema » peut disparaître : la forme suffit à identifier la marque.</p></div>
+    </div>
+  </div>
+
+  <h4>Le mot-symbole en minuscules</h4>
+  <div class="grid c3 rev">
+    <div class="box" style="display:grid;place-items:center;aspect-ratio:2.2"><div class="lower" style="font-size:clamp(30px,4.6vw,66px)">trema</div></div>
+    <div class="box fill" style="display:grid;place-items:center;aspect-ratio:2.2"><div class="lower" style="font-size:clamp(30px,4.6vw,66px)">trema</div></div>
+    <div class="box" style="display:grid;place-items:center;aspect-ratio:2.2;gap:14px;grid-auto-flow:column">
+      <svg class="sym" viewBox="0 0 78 91" style="width:clamp(24px,3vw,42px)"><use href="#tm"/></svg>
+      <div class="lower" style="font-size:clamp(26px,3.8vw,54px)">trema</div></div>
+  </div>
+  <p class="mono dim" style="margin-top:12px">Minuscules pour le digital et le merch (ton doux, contemporain) ·
+  capitales TRÉMA pour l'institutionnel et le packaging. Ne jamais mélanger les deux dans une même composition.</p>
+</section>
+
+
+<section id="s12" data-t="Fonds & contrastes" data-p="II · Le signe" class="wht">
+  <div class="num">11</div>
+  <div class="hd"><div><div class="part">Partie II</div><div class="tag">Chapitre 11</div><h2 class="rev">Fonds<br>autorisés</h2></div>
+  <p class="rev">Le signe est monochrome, toujours. On choisit la version qui donne le meilleur contraste,
+  jamais celle qui « fait joli ».</p></div>
+  <div class="grid c5">
+    <div class="ok rev" style="background:var(--papier)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--encre)"><use href="#tm"/></svg><div class="lab2">Encre / Papier</div></div>
+    <div class="ok rev" style="background:var(--encre)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--papier)"><use href="#tm"/></svg><div class="lab2" style="color:var(--papier)">Papier / Encre</div></div>
+    <div class="ok rev" style="background:var(--espresso)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--lait)"><use href="#tm"/></svg><div class="lab2" style="color:var(--lait)">Lait / Espresso</div></div>
+    <div class="ok rev" style="background:var(--rouge)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:#fff"><use href="#tm"/></svg><div class="lab2" style="color:#fff">Blanc / Rouge</div></div>
+    <div class="dont rev" style="background:var(--kraft)"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--crema)"><use href="#tm"/></svg><div class="lab2">Crema / Kraft — 1,9:1</div></div>
+  </div>
+</section>
+
+<section id="s13" data-t="Interdits" data-p="II · Le signe" class="rst full">
+  <div class="num">12</div>
+  <div class="hd"><div><div class="part">Partie II</div><div class="tag">Chapitre 12</div><h2 class="rev">Ce qu'on<br>ne fait pas</h2></div>
+  <p class="rev">Neuf fautes qui reviennent toujours. Si un fichier ressemble à l'un de ces cadres,
+  il ne part pas en production.</p></div>
+  <div class="grid c5">
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;transform:scaleX(1.5)"><use href="#tm"/></svg><div class="lab2">Déformer</div></div>
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;transform:rotate(24deg)"><use href="#tm"/></svg><div class="lab2">Faire pivoter</div></div>
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;color:var(--menthe)"><use href="#tm"/></svg><div class="lab2">Recolorer hors palette</div></div>
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;filter:drop-shadow(6px 8px 0 rgba(0,0,0,.5))"><use href="#tm"/></svg><div class="lab2">Ombre, relief, biseau</div></div>
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;opacity:.3"><use href="#tm"/></svg><div class="lab2">Baisser l'opacité</div></div>
+    <div class="dont rev" style="display:flex;align-items:center;justify-content:center;gap:1px"><svg class="sym" viewBox="0 0 78 91" style="width:18%"><use href="#tm"/></svg><span style="font-family:var(--fd);font-size:20px;font-variation-settings:'wght' 900">TRÉMA</span><div class="lab2">Coller le mot au signe</div></div>
+    <div class="dont rev" style="padding:0"><div style="position:relative;width:100%;height:100%;display:grid;place-items:center"><img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><svg class="sym" viewBox="0 0 78 91" style="width:26%;position:relative;color:#fff"><use href="#tm"/></svg></div><div class="lab2">Photo chargée</div></div>
+    <div class="dont rev"><span style="font-family:Georgia,serif;font-size:clamp(20px,2.6vw,34px);font-weight:700">TRÉMA</span><div class="lab2">Autre fonte</div></div>
+    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:26%;background:linear-gradient(135deg,#fff,#000);color:transparent"><use href="#tm"/></svg><div class="lab2">Dégradé dans le signe</div></div>
+  </div>
+</section>
+
+
+<div class="mq slow"><span>&nbsp;JT&nbsp;FLAIR&nbsp;·&nbsp;3&nbsp;AXES&nbsp;·&nbsp;28&nbsp;INSTANCES&nbsp;·&nbsp;</span><span>&nbsp;JT&nbsp;FLAIR&nbsp;·&nbsp;3&nbsp;AXES&nbsp;·&nbsp;28&nbsp;INSTANCES&nbsp;·&nbsp;</span></div>
+
+
+<!-- ══════════════════ PARTIE III — TYPOGRAPHIE ══════════════════ -->
+
+<!-- Spécimen éditorial plein écran -->
+<section id="s14" data-t="Spécimen" data-p="III · Typographie" class="wht full">
+  <div class="part">Partie III — Typographie</div>
+  <div class="spec-note"><span>JT FLAIR · SPÉCIMEN</span><span>SURVOLEZ CHAQUE MOT</span><span>wght 300–1000 / FLAR 0–100 / slnt 0–15</span></div>
+  <div class="specimen">
+    <span class="fx-flare" data-fx>JT&nbsp;Flair</span>
+    <span style="font-variation-settings:'wght' 400,'FLAR' 100" class="fx-thin" data-fx>Spécimen.</span>
+    <span class="fx-stretch" data-fx style="font-variation-settings:'wght' 1000,'FLAR' 0">Tréma</span>
+    <span style="font-variation-settings:'wght' 300,'FLAR' 100,'slnt' 15" class="fx-flare" data-fx>Paris—</span>
+    <span data-scramble style="font-variation-settings:'wght' 900,'FLAR' 100">TORRÉFACTION</span>
+    <span style="font-variation-settings:'wght' 500,'FLAR' 0" class="fx-slice" data-fx><i>93'</i><i aria-hidden="true">93'</i><i aria-hidden="true">93'</i></span>
+    <span style="font-variation-settings:'wght' 1000,'FLAR' 100;color:var(--rouge)" class="fx-thin" data-fx>GUJI&nbsp;NATURAL</span>
+    <span style="font-variation-settings:'wght' 700,'FLAR' 50,'slnt' 10" class="fx-flare" data-fx>&amp;&nbsp;PRÊT&nbsp;À&nbsp;MOUDRE</span>
+  </div>
+</section>
+
+<!-- Toutes les variables : les 3 axes -->
+<section id="s15" data-t="Les 3 axes" data-p="III · Typographie" class="blk full">
+  <div class="num">13</div>
+  <div class="part">Partie III</div><div class="tag">Chapitre 13</div>
+  <h2 class="rev" style="margin-bottom:.4em">Les trois axes</h2>
+  <p class="rev" style="margin-bottom:2em;max-width:70ch">Une seule fonte, trois curseurs continus.
+  <code>wght</code> donne le poids, <code>slnt</code> l'inclinaison, et <code>FLAR</code> — notre signature —
+  fait pousser les empattements évasés. Toutes les valeurs intermédiaires sont légitimes.</p>
+
+  <div class="rev" style="margin-bottom:2em">
+    <h4>wght — graisse · 300 → 1000</h4>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 300,'FLAR' 0">Trema Trema Trema<span class="meta">wght 300 · Light</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 400,'FLAR' 0">Trema Trema Trema<span class="meta">wght 400 · Regular</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 500,'FLAR' 0">Trema Trema Trema<span class="meta">wght 500 · Medium</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 700,'FLAR' 0">Trema Trema Trema<span class="meta">wght 700 · Bold</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 800,'FLAR' 0">Trema Trema Trema<span class="meta">wght 800 · Heavy</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 900,'FLAR' 0">Trema Trema Trema<span class="meta">wght 900 · Black</span></div>
+    <div class="axis-line" style="font-size:clamp(22px,4.6vw,72px);font-variation-settings:'wght' 1000,'FLAR' 0">Trema Trema Trema<span class="meta">wght 1000 · Extra</span></div>
+  </div>
+</section>
+
+<!-- Axe FLAR plein écran -->
+<section id="s16" data-t="Axe FLAR" data-p="III · Typographie" class="full">
+  <div class="num">14</div>
+  <div class="part">Partie III</div><div class="tag">Chapitre 14 — l'axe signature</div>
+  <h2 class="rev" style="margin-bottom:.35em">FLAR 0 → 100</h2>
+  <p class="rev" style="margin-bottom:1.6em;max-width:64ch">À 0 la fonte est neutre : elle informe, elle se lit partout.
+  À 100 elle devient la marque. <b>On monte le flare quand on affirme, on le baisse quand on explique.</b></p>
+  <div class="rev" id="flarStack"></div>
+  <div class="grid c3 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>FLAR 0</h4><p class="mono">Corps de texte, interface, données, mentions légales, fiches techniques.</p></div>
+    <div class="box"><h4>FLAR 40–60</h4><p class="mono">Titres courants, intertitres, navigation, étiquettes de gamme.</p></div>
+    <div class="box ac"><h4 style="opacity:.85">FLAR 100</h4><p class="mono">Marque, packaging, affiche, enseigne, couverture. Une fois par composition.</p></div>
+  </div>
+</section>
+
+<!-- slnt -->
+<section id="s17" data-t="Axe slnt" data-p="III · Typographie" class="lai full">
+  <div class="num">15</div>
+  <div class="part">Partie III</div><div class="tag">Chapitre 15</div>
+  <h2 class="rev" style="margin-bottom:.4em">slnt 0 → 15</h2>
+  <p class="rev" style="margin-bottom:1.6em;max-width:62ch">Une inclinaison mécanique, pas une italique dessinée.
+  Réservée aux mots isolés qu'on veut faire bouger : citation, mention « nouveau », prix barré.
+  Jamais sur un paragraphe entier.</p>
+  <div class="rev">
+    <div class="axis-line" style="font-size:clamp(26px,6.6vw,104px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 0">En mouvement<span class="meta">slnt 0</span></div>
+    <div class="axis-line" style="font-size:clamp(26px,6.6vw,104px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 5">En mouvement<span class="meta">slnt 5</span></div>
+    <div class="axis-line" style="font-size:clamp(26px,6.6vw,104px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 10">En mouvement<span class="meta">slnt 10</span></div>
+    <div class="axis-line" style="font-size:clamp(26px,6.6vw,104px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 15">En mouvement<span class="meta">slnt 15 · maximum</span></div>
+  </div>
+</section>
+
+<!-- 28 instances nommées -->
+<section id="s18" data-t="28 instances" data-p="III · Typographie">
+  <div class="num">16</div>
+  <div class="hd"><div><div class="part">Partie III</div><div class="tag">Chapitre 16</div><h2 class="rev">Les 28<br>instances</h2></div>
+  <p class="rev">Le fichier variable contient 28 instances nommées : deux familles (Basic = FLAR 0, Extra = FLAR 100),
+  sept graisses, deux inclinaisons. En web on préfère les valeurs continues ; en print on appelle l'instance nommée.</p></div>
+  <div class="grid c2">
+    <div class="rev"><h4>Basic — FLAR 0</h4><div class="scrollx"><table id="tblBasic"></table></div></div>
+    <div class="rev"><h4>Extra — FLAR 100</h4><div class="scrollx"><table id="tblExtra"></table></div></div>
+  </div>
+</section>
+
+<!-- Jeu de glyphes plein écran -->
+<section id="s19" data-t="Glyphes" data-p="III · Typographie" class="wht full">
+  <div class="num">17</div>
+  <div class="part">Partie III</div><div class="tag">Chapitre 17</div>
+  <h2 class="rev" style="margin-bottom:.4em">Jeu de<br>caractères</h2>
+  <p class="rev" style="margin-bottom:1.4em">Survolez : chaque signe part en <code>wght 1000 / FLAR 100 / slnt 15</code>.
+  Les cases rouges et noires sont posées au hasard à chaque chargement — c'est le principe du spécimen.</p>
+  <div class="gset rev" id="gset"></div>
+  <p class="mono dim" style="margin-top:14px">Latin étendu · chiffres tabulaires et proportionnels · ponctuation française complète · symboles monétaires · fractions.</p>
+</section>
+
+<!-- Laboratoire -->
+<section id="s20" data-t="Laboratoire" data-p="III · Typographie" class="blk">
+  <div class="num">18</div>
+  <div class="hd"><div><div class="part">Partie III</div><div class="tag">Chapitre 18</div><h2 class="rev">Laboratoire<br>d'axes</h2></div>
+  <p class="rev">Le texte est éditable, les trois curseurs sont libres. Copiez la ligne CSS pour la reporter
+  dans le code ou dans Figma.</p></div>
+  <div class="lab rev">
+    <div id="play" contenteditable="true" spellcheck="false">Trèma révèle</div>
+    <div>
+      <div class="sl"><label><span>wght</span><b id="v-w">700</b></label><input type="range" id="a-w" min="300" max="1000" value="700"></div>
+      <div class="sl"><label><span>FLAR</span><b id="v-f">60</b></label><input type="range" id="a-f" min="0" max="100" value="60"></div>
+      <div class="sl"><label><span>slnt</span><b id="v-s">0</b></label><input type="range" id="a-s" min="0" max="15" value="0"></div>
+      <div class="sl"><label><span>corps</span><b id="v-z">120</b></label><input type="range" id="a-z" min="30" max="220" value="120"></div>
+      <div class="sl"><label><span>approche</span><b id="v-t">-45</b></label><input type="range" id="a-t" min="-90" max="40" value="-45"></div>
+      <p class="mono" id="css-out" style="margin-top:12px;word-break:break-all;opacity:.75"></p>
+      <button class="btn" id="copycss" style="margin-top:10px">Copier le CSS</button>
+    </div>
+  </div>
+</section>
+
+<!-- Paragraphes / hiérarchie -->
+<section id="s21" data-t="Paragraphes" data-p="III · Typographie" class="wht">
+  <div class="num">19</div>
+  <div class="hd"><div><div class="part">Partie III</div><div class="tag">Chapitre 19</div><h2 class="rev">Titres &<br>paragraphes</h2></div>
+  <p class="rev">Règle de couple : <b>le titre est en JT Flair, le paragraphe en grotesque neutre.</b>
+  On ne compose jamais un bloc de texte long en Flair — le flare fatigue au-delà de trois lignes.</p></div>
+
+  <div class="grid c2" style="margin-bottom:var(--gut)">
+    <div class="box rev">
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+      <p>Créer un style est aussi simple que de poser une image. Le titre porte la marque, le paragraphe porte
+      l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste qui fait tenir la page.</p>
+      <p>Interlignage 1,58. Longueur de ligne entre 45 et 75 signes. Alignement à gauche, drapeau à droite,
+      jamais de justification.</p>
+      <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
+    </div>
+    <div class="box rev" style="border-color:var(--rouge)">
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.4vw,62px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+      <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Créer un style est aussi simple que de poser une image. Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste qui fait tenir la page.</p>
+      <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Interlignage 1,58. Longueur de ligne entre 45 et 75 signes. Alignement à gauche, drapeau à droite, jamais de justification.</p>
+      <div class="mono" style="margin-top:16px;color:var(--rouge)">✕ Paragraphe en Flair — refusé</div>
+    </div>
+  </div>
+
+  <h4>Échelle typographique — ratio 1,25 · base 16 px · grille 8 px</h4>
+  <div class="scrollx rev"><table>
+    <tr><th>Rôle</th><th>Fonte</th><th>Desktop</th><th>Mobile</th><th>Interlignage</th><th>Approche</th><th>wght / FLAR</th><th>Usage</th></tr>
+    <tr><td>Display</td><td>JT Flair</td><td>132 px</td><td>44 px</td><td>0,85</td><td>−4 %</td><td>1000 / 100</td><td>Couverture, affiche</td></tr>
+    <tr><td>Titre 1</td><td>JT Flair</td><td>62 px</td><td>34 px</td><td>0,92</td><td>−3,5 %</td><td>900 / 100</td><td>Ouverture de page</td></tr>
+    <tr><td>Titre 2</td><td>JT Flair</td><td>38 px</td><td>26 px</td><td>1,02</td><td>−3 %</td><td>800 / 60</td><td>Sections</td></tr>
+    <tr><td>Titre 3</td><td>JT Flair</td><td>24 px</td><td>20 px</td><td>1,12</td><td>−2,5 %</td><td>700 / 40</td><td>Sous-sections</td></tr>
+    <tr><td>Chapô</td><td>Grotesque</td><td>21 px</td><td>18 px</td><td>1,38</td><td>−1,4 %</td><td>400 / —</td><td>Intro de texte</td></tr>
+    <tr><td>Courant</td><td>Grotesque</td><td>16,5 px</td><td>16 px</td><td>1,58</td><td>−0,5 %</td><td>400 / —</td><td>Paragraphes</td></tr>
+    <tr><td>Petit texte</td><td>Grotesque</td><td>13 px</td><td>12 px</td><td>1,45</td><td>0</td><td>400 / —</td><td>Légendes, crédits</td></tr>
+    <tr><td>Étiquette</td><td>Mono</td><td>10 px</td><td>10 px</td><td>1,7</td><td>+18 %</td><td>400 · CAPS</td><td>Navigation, tableaux, specs</td></tr>
+  </table></div>
+</section>
+
+<!-- Micro-typo -->
+<section id="s22" data-t="Micro-typo" data-p="III · Typographie">
+  <div class="num">20</div>
+  <div class="hd"><div><div class="part">Partie III</div><div class="tag">Chapitre 20</div><h2 class="rev">Règles<br>de composition</h2></div>
+  <p class="rev">La micro-typographie française. Ces règles ne sont pas négociables : elles sont la différence
+  entre un document soigné et un document bricolé.</p></div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Espaces</h4><p class="mono">Espace fine insécable avant : ; ! ?<br>Espace insécable avant %, €, °C<br>Pas d'espace avant la virgule et le point</p></div>
+    <div class="box rev"><h4>Guillemets</h4><p class="mono">« français » avec espaces fines<br>“anglais” uniquement en second niveau<br>Jamais de "guillemets droits"</p></div>
+    <div class="box rev"><h4>Apostrophe</h4><p class="mono">Courbe ’ toujours<br>Jamais l'apostrophe droite '<br>Réglage automatique dans le CMS</p></div>
+    <div class="box rev"><h4>Tirets</h4><p class="mono">— cadratin pour l'incise<br>– demi-cadratin pour les plages (2019–2026)<br>- trait d'union uniquement dans les mots</p></div>
+    <div class="box rev"><h4>Capitales</h4><p class="mono">Accentuées : É, À, Ç<br>Pas de mot entier en capitales dans un paragraphe<br>Petites capitales pour les sigles</p></div>
+    <div class="box rev"><h4>Chiffres</h4><p class="mono">Espace fine comme séparateur de milliers : 1 800 m<br>Virgule décimale : 12,5 g<br>Chiffres tabulaires dans les tableaux</p></div>
+    <div class="box rev"><h4>Veuves & orphelines</h4><p class="mono">Aucun mot seul en fin de paragraphe<br>Insécable entre le chiffre et son unité<br>Titre : jamais coupé sur 1 mot</p></div>
+    <div class="box rev"><h4>Césure</h4><p class="mono">Désactivée en titre<br>Autorisée en corps de texte à partir de 3 lignes<br>Jamais deux césures consécutives</p></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PARTIE IV — COULEUR ══════════════════ -->
+
+<section id="s23" data-t="Palette" data-p="IV · Couleur">
+  <div class="num">21</div>
+  <div class="hd"><div><div class="part">Partie IV — Couleur</div><div class="tag">Chapitre 21</div><h2 class="rev">Palette</h2></div>
+  <p class="rev">Le socle vient de la matière : le grain, le lait, l'ombre du comptoir. Les couleurs d'expression
+  donnent le rythme saisonnier — elles ne portent jamais le logo seules. Cliquez pour copier.<span class="todo">à valider</span></p></div>
+
+  <h4>Socle — 90 % des surfaces</h4>
+  <div class="sws rev" style="margin-bottom:var(--gut)">
+    <div class="sw" data-hex="#141312" style="background:#141312;color:#EFEDEA"><div class="nm">Encre</div><div class="vl">HEX #141312<br>RGB 20 19 18<br>CMJN 0 0 0 100<br>PANTONE Black 6 C<span class="todo">?</span></div></div>
+    <div class="sw" data-hex="#EFEDEA" style="background:#EFEDEA;color:#141312"><div class="nm">Papier</div><div class="vl">HEX #EFEDEA<br>RGB 239 237 234<br>CMJN 0 0 2 8<br>Offset non couché 120 g</div></div>
+    <div class="sw" data-hex="#4E321E" style="background:#4E321E;color:#D8CFC4"><div class="nm">Espresso</div><div class="vl">HEX #4E321E<br>RGB 78 50 30<br>CMJN 40 65 85 45<br>PANTONE 4625 C<span class="todo">?</span></div></div>
+    <div class="sw" data-hex="#956F59" style="background:#956F59;color:#fff"><div class="nm">Crema</div><div class="vl">HEX #956F59<br>RGB 149 111 89<br>CMJN 30 50 60 15<br>Aplats secondaires</div></div>
+    <div class="sw" data-hex="#D8CFC4" style="background:#D8CFC4;color:#141312"><div class="nm">Lait</div><div class="vl">HEX #D8CFC4<br>RGB 216 207 196<br>CMJN 4 8 14 5<br>Fonds doux, cartes</div></div>
+    <div class="sw" data-hex="#5C5E5F" style="background:#5C5E5F;color:#fff"><div class="nm">Béton</div><div class="vl">HEX #5C5E5F<br>RGB 92 94 95<br>CMJN 60 48 46 15<br>Texte secondaire, filets</div></div>
+  </div>
+
+  <h4>Expression — 10 % maximum, jamais deux ensemble</h4>
+  <div class="sws rev" style="margin-bottom:var(--gut)">
+    <div class="sw" data-hex="#E63329" style="background:#E63329;color:#fff"><div class="nm">Ristretto</div><div class="vl">HEX #E63329 · éditions limitées, alertes, soldes<br>PANTONE 485 C<span class="todo">?</span></div></div>
+    <div class="sw" data-hex="#E8B33F" style="background:#E8B33F;color:#141312"><div class="nm">Kraft</div><div class="vl">HEX #E8B33F · signalétique, événements, été</div></div>
+    <div class="sw" data-hex="#7FA08A" style="background:#7FA08A;color:#141312"><div class="nm">Menthe</div><div class="vl">HEX #7FA08A · filtre, cold brew, printemps</div></div>
+  </div>
+
+  <div class="grid c2">
+    <div class="rev"><h4>Répartition — règle 60/25/10/5</h4>
+      <div class="ratios">
+        <div style="flex:60;background:#EFEDEA;color:#141312">60 % PAPIER</div>
+        <div style="flex:25;background:#141312;color:#EFEDEA">25 % ENCRE</div>
+        <div style="flex:10;background:#4E321E;color:#D8CFC4">10 %</div>
+        <div style="flex:5;background:#E63329;color:#fff">5 %</div>
+      </div>
+      <p class="mono dim" style="margin-top:10px">La couleur d'expression n'occupe jamais plus de 5 % de la surface visible d'une composition.</p>
+    </div>
+    <div class="rev"><h4>Contrastes — WCAG</h4>
+      <div class="scrollx"><table>
+        <tr><th>Combinaison</th><th>Ratio</th><th>Taille min.</th><th>Verdict</th></tr>
+        <tr><td>Encre / Papier</td><td>15,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Papier / Espresso</td><td>8,4:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Blanc / Ristretto</td><td>4,3:1</td><td>≥ 18 px</td><td>AA ✓</td></tr>
+        <tr><td>Encre / Kraft</td><td>9,6:1</td><td>≥ 12 px</td><td>AAA ✓</td></tr>
+        <tr><td>Blanc / Crema</td><td>3,6:1</td><td>≥ 24 px</td><td>AA large</td></tr>
+        <tr><td>Crema / Kraft</td><td>1,9:1</td><td>—</td><td>Interdit ✕</td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<section id="s24" data-t="Couleur en production" data-p="IV · Couleur" class="lai">
+  <div class="num">22</div>
+  <div class="hd"><div><div class="part">Partie IV</div><div class="tag">Chapitre 22</div><h2 class="rev">Couleur<br>en production</h2></div>
+  <p class="rev">Chaque support a son référentiel. On ne convertit jamais un RVB écran en CMJN à l'aveugle :
+  on part de la référence du tableau.<span class="todo">à compléter avec l'imprimeur</span></p></div>
+  <div class="scrollx rev"><table>
+    <tr><th>Couleur</th><th>Écran (HEX)</th><th>Offset (CMJN)</th><th>Pantone</th><th>Vinyle / signalétique</th><th>Textile</th><th>Peinture</th></tr>
+    <tr><td>Encre</td><td>#141312</td><td>0 0 0 100</td><td>Black 6 C</td><td>Oracal 070</td><td>Pantone Black TCX</td><td>RAL 9005</td></tr>
+    <tr><td>Papier</td><td>#EFEDEA</td><td>0 0 2 8</td><td>11-0602 TCX</td><td>Oracal 010</td><td>écru naturel</td><td>RAL 9001</td></tr>
+    <tr><td>Espresso</td><td>#4E321E</td><td>40 65 85 45</td><td>4625 C</td><td>Oracal 080</td><td>19-1218 TCX</td><td>RAL 8028</td></tr>
+    <tr><td>Ristretto</td><td>#E63329</td><td>0 90 85 0</td><td>485 C</td><td>Oracal 032</td><td>18-1662 TCX</td><td>RAL 3020</td></tr>
+    <tr><td>Kraft</td><td>#E8B33F</td><td>5 30 85 0</td><td>142 C</td><td>Oracal 021</td><td>14-0952 TCX</td><td>RAL 1017</td></tr>
+  </table></div>
+  <div class="grid c3 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Papiers de référence</h4><p class="mono">Édition : offset non couché 120 g<br>Carte de visite : 600 g, tranche teintée encre<br>Étiquette : kraft brun adhésif<br>Sac : kraft 90 g, impression 1 ton direct</p></div>
+    <div class="box"><h4>Ennoblissements</h4><p class="mono">Marquage à chaud noir mat sur le signe seul<br>Gaufrage à sec autorisé<br>Jamais de dorure or ou argent<br>Jamais de vernis sélectif brillant</p></div>
+    <div class="box"><h4>Écran</h4><p class="mono">Espace sRGB pour le web<br>Display P3 autorisé sur les visuels photo<br>Mode sombre : Encre → #0E0D0D, texte → Papier</p></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PARTIE V — IMAGE ══════════════════ -->
+
+<section id="s25" data-t="Grille" data-p="V · Image">
+  <div class="num">23</div>
+  <div class="hd"><div><div class="part">Partie V — Image</div><div class="tag">Chapitre 23</div><h2 class="rev">Grille &<br>composition</h2></div>
+  <p class="rev">12 colonnes, gouttière égale au module, marge extérieure double. Le titre s'accroche en haut à gauche,
+  le signe en bas à droite. Toujours.</p></div>
+  <div class="grid c2">
+    <div class="rev">
+      <div class="gdemo">
+        <div class="cols"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="cnt">
+          <div><div class="mono dim" style="margin-bottom:7px">NOUVEAUTÉ · ÉTHIOPIE</div>
+          <div style="font-family:var(--fd);font-size:clamp(22px,3.2vw,46px);line-height:.9;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <div class="mono dim">1 800 m · lavé<br>prune, jasmin, cacao</div>
+            <svg class="sym" viewBox="0 0 78 91" style="width:28px"><use href="#tm"/></svg></div>
+        </div>
+      </div>
+      <p class="mono dim" style="margin-top:10px">Gabarit affiche / post — colonnes visibles en rouge.</p>
+    </div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Modules</h4><p class="mono">Colonnes 12 / 6 / 2 (desktop / tablette / mobile)<br>Gouttière 24 / 16 / 12 px<br>Marge = 2× gouttière<br>Ligne de base 8 px</p></div>
+      <div class="box"><h4>Formats maîtres</h4><p class="mono">Affiche 40 × 60 cm · 120 × 176 cm<br>Étiquette 90 × 120 mm<br>Post 1080 × 1350 · Story 1080 × 1920<br>Carte 85 × 55 mm · A4 210 × 297</p></div>
+      <div class="box"><h4>Ancrages non négociables</h4><p class="mono">Titre → haut gauche sur marge<br>Signe → bas droite, 1× zone de protection<br>Mentions → bas gauche, 8 pt<br>Jamais de composition centrée, sauf format carré</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s26" data-t="Photographie" data-p="V · Image" class="inv">
+  <div class="num">24</div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag">Chapitre 24</div><h2 class="rev">Direction<br>photo</h2></div>
+  <p class="rev">Lumière naturelle latérale, arrière-plan désaturé, une main dans le cadre.
+  On photographie le geste, pas le produit posé. Jamais de flash direct, jamais de fond blanc studio.</p></div>
+  <div class="grid c2" style="margin-bottom:var(--gut)">
+    <div class="ph rev" style="aspect-ratio:3/4"><img src="image%20347.jpg" alt="Versement d'un espresso sur glace"><div class="cap">RÉFÉRENCE · le geste, la main, la coulée</div></div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Les 6 règles</h4><p class="mono">01 · Lumière naturelle, fenêtre à 90°<br>02 · Un geste humain dans 1 photo sur 2<br>03 · Fond flou, gris ou bois — jamais blanc pur<br>04 · Focale 50–85 mm, faible profondeur<br>05 · Cadrage vertical par défaut<br>06 · Aucune retouche de la couleur du café</p></div>
+      <div class="box"><h4>Sujets</h4><p class="mono">Le geste · la matière · les mains · le comptoir · le grain vert<br>Les gens de la maison, à leur poste, sans pose.</p></div>
+      <div class="box"><h4>Interdits</h4><p class="mono">Grains éparpillés sur fond blanc<br>Cœur dans la mousse en gros plan<br>Sourires banque d'images<br>Sac de jute et pelle en bois</p></div>
+      <div class="box"><h4>Formats & crédits</h4><p class="mono">Livrable : RAW + JPG 3000 px min.<br>Crédit photo obligatoire en légende<br>Droits : cession 3 ans, tous supports<span class="todo">à contractualiser</span></p></div>
+    </div>
+  </div>
+  <h4>Traitements</h4>
+  <div class="grid c3 rev">
+    <div class="ph f-warm" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap">✓ Chaud — usage courant</div></div>
+    <div class="ph f-bw" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap">✓ N&amp;B — archives, portraits, presse</div></div>
+    <div class="ph f-bad" style="aspect-ratio:1"><img src="image%20347.jpg" alt=""><div class="cap" style="background:var(--rouge)">✕ Saturé / filtré — jamais</div></div>
+  </div>
+</section>
+
+<section id="s27" data-t="Motifs" data-p="V · Image" class="esp">
+  <div class="num">25</div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag">Chapitre 25</div><h2 class="rev">Motifs &<br>matières</h2></div>
+  <p class="rev">Le signe se répète, se coupe, sort du cadre. Six trames autorisées.
+  Un motif ne cohabite jamais avec une photo dans le même bloc.</p></div>
+  <div class="grid c3">
+    <div class="rev"><div class="pat p1"><i></i></div><p class="mono dim" style="margin-top:8px">01 · Trame serrée — papier de soie, doublures</p></div>
+    <div class="rev"><div class="pat p2"><i></i></div><p class="mono dim" style="margin-top:8px">02 · Trame dégradée — cartes cadeau, éditions</p></div>
+    <div class="rev"><div class="pat p3"><i></i></div><p class="mono dim" style="margin-top:8px">03 · Hachures 45° — signalétique, adhésif</p></div>
+    <div class="rev"><div class="pat p4"><i></i></div><p class="mono dim" style="margin-top:8px">04 · Halo — fonds numériques, stories</p></div>
+    <div class="rev"><div class="pat p5"><i></i></div><p class="mono dim" style="margin-top:8px">05 · Signe rouge XL — éditions limitées</p></div>
+    <div class="rev"><div class="pat p6"><i></i></div><p class="mono dim" style="margin-top:8px">06 · Trame de points — impression 1 ton, kraft</p></div>
+  </div>
+  <div class="box rev" style="margin-top:var(--gut);overflow:hidden;padding:0;aspect-ratio:3.6;position:relative">
+    <div style="position:absolute;inset:0;-webkit-mask:url('Logo.svg') repeat center/78px;mask:url('Logo.svg') repeat center/78px;background:linear-gradient(100deg,var(--lait),var(--kraft),var(--crema))"></div>
+    <div style="position:relative;height:100%;display:grid;place-items:center">
+      <span class="pill" style="background:var(--espresso);border-color:var(--lait)">Motif signature — pleine page</span></div>
+  </div>
+</section>
+
+<section id="s28" data-t="Pictogrammes" data-p="V · Image">
+  <div class="num">26</div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag">Chapitre 26</div><h2 class="rev">Picto-<br>grammes</h2></div>
+  <p class="rev">Formes pleines dessinées sur une grille 1024, sans contour, sans détail inutile.
+  Ils suivent la couleur du texte — jamais une couleur propre. Survolez pour voir le comportement au rollover.</p></div>
+  <div class="ico rev" id="picoGrid"></div>
+  <div class="grid c4 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Construction</h4><p class="mono">Grille 1024 × 1024<br>Marge de sécurité 80 unités<br>Formes pleines, pas de contour<br>Angles cohérents avec l'arc du signe</p></div>
+    <div class="box"><h4>Tailles</h4><p class="mono">Écran 24 · 32 · 48 px<br>Print 6 · 10 · 18 mm<br>En dessous de 24 px : simplifier, ne pas réduire</p></div>
+    <div class="box"><h4>Couleur</h4><p class="mono">Toujours monochrome, couleur du texte.<br>Inversion au survol (fond Ristretto, picto blanc).<br>Jamais de picto bicolore.</p></div>
+    <div class="box"><h4>Interdits</h4><p class="mono">Ajouter un cercle de fond<br>Mélanger avec une autre bibliothèque d'icônes<br>Utiliser un picto seul comme logo<br>Animer autrement qu'en fondu</p></div>
+  </div>
+</section>
+
+
+<!-- ═════ HIÉRARCHIE VISUELLE ═════ -->
+<section id="s28b" data-t="Hiérarchie" data-p="V · Image" class="wht full">
+  <div class="num"></div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag"></div><h2 class="rev">Hiérarchie<br>visuelle</h2></div>
+  <p class="rev">L'ordre de lecture ne se décrète pas, il se fabrique : taille, graisse, position, contraste.
+  Cette affiche se lit dans l'ordre exact où elle a été construite. Testez : votre œil suit les numéros.</p></div>
+  <div class="grid c2">
+    <div class="poster rev">
+      <div class="k">Revenez ici</div>
+      <div class="big">LIS<br>ÇA.</div>
+      <div class="sub">Tu liras cette ligne ensuite</div>
+      <div class="duo">
+        <p style="font-size:14px;line-height:1.55;max-width:none">Tu reviendras lire ce paragraphe seulement si tu veux
+        en savoir plus. C'est celui qui demande le plus d'effort : beaucoup de texte, petit corps, graisse légère,
+        interlignage serré. Beaucoup de gens le sautent complètement s'ils ne sont pas accrochés avant.
+        C'est exactement pour ça qu'on construit une hiérarchie.</p>
+        <div class="shout">Tu liras ça avant<br>le paragraphe.</div>
+      </div>
+      <div class="big" style="font-size:clamp(30px,5.4vw,86px);margin-top:auto">PUIS ÇA.</div>
+    </div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div>
+        <h4>Ordre de lecture fabriqué</h4>
+        <ol class="rank">
+          <li><span>Titre display</span><span class="dim">taille + graisse maximales</span></li>
+          <li><span>Sous-titre capitales</span><span class="dim">approche large, isolé</span></li>
+          <li><span>Bloc court en gras</span><span class="dim">contraste de graisse</span></li>
+          <li><span>Sur-titre mono</span><span class="dim">position haute, inhabituelle</span></li>
+          <li><span>Rappel bas de page</span><span class="dim">position terminale</span></li>
+          <li><span>Paragraphe courant</span><span class="dim">densité maximale, lu en dernier</span></li>
+        </ol>
+      </div>
+      <div class="box"><h4>Les quatre leviers</h4><p class="mono">TAILLE — l'écart doit être franc : jamais deux niveaux à moins de 1,25×<br>
+      GRAISSE — 400 contre 1000, pas 400 contre 500<br>
+      POSITION — le haut gauche et le bas gauche sont vus en premier<br>
+      VIDE — un élément isolé bat un élément gros mais entouré</p></div>
+      <div class="box ac"><h4 style="opacity:.85">La règle</h4><p class="mono">Trois niveaux visibles maximum par composition.
+      Si tout est important, plus rien ne l'est.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════ HORS-FORMAT / DÉBORD ═════ -->
+<section id="s28c" data-t="Hors-format" data-p="V · Image" class="blk full">
+  <div class="num"></div>
+  <div class="part">Partie V</div><div class="tag"></div>
+  <h2 class="rev" style="margin-bottom:.4em">Le débord</h2>
+  <p class="rev" style="margin-bottom:1.6em;max-width:62ch">Un registre réservé à l'affiche et à l'événement :
+  le mot dépasse le format, se coupe, se relit dans la tête. On ne déborde jamais une information
+  utile — seulement le nom, le thème, la date.</p>
+  <div class="bleed rev" id="bleed">
+    <div class="meta" style="top:16px;left:18px">12.03.26</div>
+    <div class="meta" style="top:16px;left:34%">ATELIER TRÉMA<br>12 RUE DU FOUR<br>PARIS 6<sup>e</sup><br>ENTRÉE LIBRE</div>
+    <div class="meta" style="top:31%;left:18px;max-width:22ch">10.00 — Dégustation à l'aveugle<br>12.00 — Torréfaction, atelier<br>14.00 — Origines &amp; producteurs<br>16.00 — Extraction, table ronde</div>
+    <div class="w" style="top:26%;left:44%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">Tré</div>
+    <div class="w" style="top:41%;left:-4%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">éma&nbsp;Off</div>
+    <div class="w" style="top:58%;left:34%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">Sai</div>
+    <div class="w" style="top:73%;left:-8%;font-size:clamp(56px,15vw,230px);font-variation-settings:'wght' 400,'FLAR' 0">ison&nbsp;:</div>
+    <div class="meta" style="top:56%;right:20px;text-align:right">Une série de<br>conversations<br>autour du grain</div>
+  </div>
+  <div class="grid c4 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Autorisé sur</h4><p class="mono">Affiche événement<br>Bâche, kakémono<br>Couverture d'édition<br>Story pleine hauteur</p></div>
+    <div class="box"><h4>Jamais sur</h4><p class="mono">Packaging<br>Fiche produit<br>Signalétique directionnelle<br>Document administratif</p></div>
+    <div class="box"><h4>Règles du débord</h4><p class="mono">Le mot reste reconnaissable : on coupe au maximum 30 % d'un mot.<br>
+    Une seule graisse pour tout le bloc débordant.<br>Le texte d'information ne déborde jamais.</p></div>
+    <div class="box"><h4>Contraste</h4><p class="mono">Fond Encre, texte Papier — ou l'inverse.<br>
+    Une seule couleur d'expression, sur un seul mot.<br>Survolez les mots pour voir la variante.</p></div>
+  </div>
+</section>
+
+<section id="s29" data-t="Data-viz" data-p="V · Image">
+  <div class="num">27</div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag">Chapitre 27</div><h2 class="rev">Data-viz</h2></div>
+  <p class="rev">Profils de tasse, courbes de torréfaction, comparatifs. Une seule couleur d'expression par graphique,
+  jamais de dégradé, jamais de 3D, jamais de camembert.</p></div>
+  <div class="grid c3">
+    <div class="box rev"><h4>Profil de tasse — barres</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        <div class="slider-row" style="border:0;padding:4px 0;grid-template-columns:80px 1fr 34px"><span>Acidité</span><div class="bar" style="background:color-mix(in srgb,currentColor 15%,transparent)"><div style="position:absolute;left:0;top:0;bottom:0;width:72%;background:var(--rouge);border-radius:99px"></div></div><span class="r">7,2</span></div>
+        <div class="slider-row" style="border:0;padding:4px 0;grid-template-columns:80px 1fr 34px"><span>Corps</span><div class="bar" style="background:color-mix(in srgb,currentColor 15%,transparent)"><div style="position:absolute;left:0;top:0;bottom:0;width:48%;background:var(--rouge);border-radius:99px"></div></div><span class="r">4,8</span></div>
+        <div class="slider-row" style="border:0;padding:4px 0;grid-template-columns:80px 1fr 34px"><span>Sucrosité</span><div class="bar" style="background:color-mix(in srgb,currentColor 15%,transparent)"><div style="position:absolute;left:0;top:0;bottom:0;width:81%;background:var(--rouge);border-radius:99px"></div></div><span class="r">8,1</span></div>
+        <div class="slider-row" style="border:0;padding:4px 0;grid-template-columns:80px 1fr 34px"><span>Amertume</span><div class="bar" style="background:color-mix(in srgb,currentColor 15%,transparent)"><div style="position:absolute;left:0;top:0;bottom:0;width:26%;background:var(--rouge);border-radius:99px"></div></div><span class="r">2,6</span></div>
+      </div>
+    </div>
+    <div class="box rev"><h4>Courbe de torréfaction</h4>
+      <svg viewBox="0 0 200 120" style="width:100%;margin-top:12px">
+        <path d="M4 112 L196 112" stroke="currentColor" stroke-width="1" opacity=".3"/>
+        <path d="M4 4 L4 112" stroke="currentColor" stroke-width="1" opacity=".3"/>
+        <path d="M4 108 C50 96 74 60 108 40 C140 22 170 16 196 12" fill="none" stroke="#E63329" stroke-width="2.4"/>
+        <path d="M4 110 C56 104 86 84 120 68 C150 54 174 46 196 42" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 4" opacity=".55"/>
+        <circle cx="108" cy="40" r="3.4" fill="#E63329"/>
+      </svg>
+      <p class="mono dim" style="margin-top:8px">Trait plein = lot en cours · pointillé = référence.</p>
+    </div>
+    <div class="box rev"><h4>Règles</h4><p class="mono">1 couleur d'expression max par graphique<br>Axes en Béton, 1 px<br>Étiquettes en mono 9 px<br>Valeurs toujours affichées<br>Jamais : camembert, 3D, dégradé, ombre<br>Alternative texte obligatoire</p></div>
+  </div>
+</section>
+
+<section id="s30" data-t="Motion" data-p="V · Image" class="blk">
+  <div class="num">28</div>
+  <div class="hd"><div><div class="part">Partie V</div><div class="tag">Chapitre 28</div><h2 class="rev">Motion</h2></div>
+  <p class="rev">Le mouvement imite la coulée : lent au départ, rapide au milieu, arrêt net. Rien ne rebondit, rien ne clignote.</p></div>
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <div class="mo e1 rev"><h4>✓ Coulée — <code>cubic-bezier(.16,1,.3,1)</code></h4><div class="track"><div class="dot"></div></div><p class="mono dim">Transition par défaut · 600 ms</p></div>
+    <div class="mo e2 rev"><h4>✕ Rebond — <code>cubic-bezier(.34,1.56,.64,1)</code></h4><div class="track"><div class="dot"></div></div><p class="mono dim">Interdit — trop joueur pour la marque</p></div>
+    <div class="mo e3 rev"><h4>✕ Linéaire — <code>linear</code></h4><div class="track"><div class="dot"></div></div><p class="mono dim">Interdit hors défilement continu</p></div>
+  </div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Durées</h4><p class="mono">Micro-interaction 180 ms<br>Transition de bloc 600 ms<br>Entrée de page 900 ms<br>Boucle logo 2 400 ms</p></div>
+    <div class="box rev"><h4>Animation du signe</h4><p class="mono">L'arc se dessine de gauche à droite, puis la barre tombe. Jamais de rotation, jamais de morphing.</p></div>
+    <div class="box rev"><h4>Typographie animée</h4><p class="mono">On anime <b>FLAR 0 → 100</b>, jamais la position lettre à lettre. Le mot s'ouvre, il ne saute pas.</p></div>
+    <div class="box rev"><h4>Accessibilité</h4><p class="mono">Tout est coupé sous <code>prefers-reduced-motion</code>. Aucune information portée uniquement par le mouvement.</p></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PARTIE VI — APPLICATIONS ══════════════════ -->
+
+<section id="s31" data-t="Packaging" data-p="VI · Applications">
+  <div class="num">29</div>
+  <div class="hd"><div><div class="part">Partie VI — Applications</div><div class="tag">Chapitre 29</div><h2 class="rev">Packaging</h2></div>
+  <p class="rev">Le paquet est notre premier support éditorial. Hiérarchie imposée :
+  origine → process → poids → date. Le signe est toujours en haut à gauche.<span class="todo">maquettes à remplacer par photos</span></p></div>
+  <div class="grid c4">
+    <div class="app rev"><div class="bag"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Guji<br>Natural</div><b class="mono" style="font-size:8px">ÉTHIOPIE · 250 G · 12/03</b></div></div><div class="cap">Paquet 250 g — Filtre</div></div>
+    <div class="app rev"><div class="bag" style="background:var(--encre)"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Santa<br>Rita</div><b class="mono" style="font-size:8px">BRÉSIL · 1 KG · 09/03</b></div></div><div class="cap">Sac 1 kg — Espresso</div></div>
+    <div class="app rev"><div class="bag" style="background:var(--rouge);color:#fff"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <div><div style="font-family:var(--fd);font-size:clamp(15px,1.8vw,24px);line-height:.95;letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Lot 07</div><b class="mono" style="font-size:8px">ÉDITION · 120 EX. · N° ___</b></div></div><div class="cap">Édition limitée numérotée</div></div>
+    <div class="app rev"><div class="cup"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Gobelet 25 cl</div></div>
+  </div>
+  <div class="grid c3 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Hiérarchie imposée</h4><p class="mono">1 · Signe (haut gauche)<br>2 · Origine — Display FLAR 100<br>3 · Process + altitude — mono<br>4 · Poids + date de torréfaction<br>5 · Notes de dégustation — 3 mots max</p></div>
+    <div class="box"><h4>Codes couleur de gamme</h4><p class="mono">Filtre → Espresso (brun)<br>Espresso → Encre (noir)<br>Édition → Ristretto (rouge)<br>Décaféiné → Menthe</p></div>
+    <div class="box"><h4>Mentions légales</h4><p class="mono">DDM, poids net, origine, importateur, contact, tri.<br>Corps minimum 8 pt · toujours en Béton sur Papier.<span class="todo">à valider juridique</span></p></div>
+  </div>
+</section>
+
+<section id="s32" data-t="Papeterie" data-p="VI · Applications" class="lai">
+  <div class="num">30</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 30</div><h2 class="rev">Papeterie<br>& édition</h2></div>
+  <p class="rev">Une règle unique : beaucoup de blanc, un seul point d'accroche. Le signe en marquage à chaud
+  quand le budget le permet, sinon en noir plein.</p></div>
+  <div class="grid c4">
+    <div class="app rev"><div class="card"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <div class="mono" style="font-size:9px">MAGALI CONTRINO<br><span style="opacity:.6">Torréfaction</span></div></div><div class="cap">Carte de visite 85 × 55</div></div>
+    <div class="app rev"><div style="width:62%;aspect-ratio:.707;background:var(--blanc);border:var(--rule);padding:8%;display:flex;flex-direction:column;justify-content:space-between;color:var(--encre)">
+      <svg class="sym" viewBox="0 0 78 91" style="width:14%"><use href="#tm"/></svg>
+      <div class="mono" style="font-size:7px;opacity:.55">TRÉMA · 12 RUE DU FOUR, PARIS<br>SIRET 000 000 000 · trema.fr</div></div><div class="cap">Papier à en-tête A4</div></div>
+    <div class="app rev"><div style="width:66%;aspect-ratio:1.4;background:var(--espresso);border:var(--rule);display:grid;place-items:center">
+      <svg class="sym" viewBox="0 0 78 91" style="width:22%;color:var(--lait)"><use href="#tm"/></svg></div><div class="cap">Enveloppe DL</div></div>
+    <div class="app rev"><div style="width:58%;aspect-ratio:.7;background:var(--blanc);border:var(--rule);padding:9%;display:flex;flex-direction:column;justify-content:space-between;color:var(--encre)">
+      <div class="mono" style="font-size:7px;letter-spacing:.2em">TRÉMA · ADDITION</div>
+      <div style="font-family:var(--fd);font-size:clamp(16px,2vw,26px);letter-spacing:-.035em;font-variation-settings:'wght' 1000,'FLAR' 100">Merci.</div>
+      <svg class="sym" viewBox="0 0 78 91" style="width:16%"><use href="#tm"/></svg></div><div class="cap">Ticket de caisse</div></div>
+  </div>
+</section>
+
+<section id="s33" data-t="Retail" data-p="VI · Applications">
+  <div class="num">31</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 31</div><h2 class="rev">Retail &<br>signalétique</h2></div>
+  <p class="rev">En boutique, la marque se voit trois fois : l'enseigne, le tablier, l'ardoise. Pas plus.
+  Le reste de l'espace appartient au café et aux gens.</p></div>
+  <div class="grid c4">
+    <div class="app rev" style="background:var(--brume)"><div class="sign"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Enseigne · caisson lumineux</div></div>
+    <div class="app rev" style="background:var(--encre)"><div style="width:62%;aspect-ratio:.8;background:var(--espresso);display:flex;flex-direction:column;justify-content:space-between;padding:9%;color:var(--lait)">
+      <div class="mono" style="font-size:7.5px;letter-spacing:.2em">AUJOURD'HUI</div>
+      <div style="font-family:var(--fd);font-size:clamp(14px,1.7vw,22px);line-height:.98;letter-spacing:-.03em;font-variation-settings:'wght' 900,'FLAR' 100">Guji Natural<br>Santa Rita</div>
+      <div class="mono" style="font-size:7.5px">FILTRE 4,50 · ESPRESSO 2,20</div></div><div class="cap">Ardoise du jour</div></div>
+    <div class="app rev"><div class="tee"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Tablier / T-shirt équipe</div></div>
+    <div class="app rev" style="background:var(--papier)"><div class="truck"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Véhicule de livraison</div></div>
+  </div>
+  <div class="grid c3 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Signalétique directionnelle</h4><p class="mono">Pictos seuls, sans texte, sur fond Encre.<br>Hauteur de picto 60 mm minimum.<br>Contraste ≥ 4,5:1 à 3 m.</p></div>
+    <div class="box"><h4>Vitrine</h4><p class="mono">Signe adhésif dépoli, 40 cm, centré à 1,50 m du sol.<br>Horaires en mono 30 mm, bas droite.<br>Jamais d'affiche promo collée à l'intérieur de la vitre.</p></div>
+    <div class="box"><h4>Ambiance</h4><p class="mono">Matériaux : béton, bois brut, inox brossé, céramique mate.<br>Lumière 2 700 K.<br>Jamais de néon coloré ni de citation murale.</p></div>
+  </div>
+</section>
+
+<section id="s34" data-t="Merch" data-p="VI · Applications" class="krf">
+  <div class="num">32</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 32</div><h2 class="rev">Textile<br>& objets</h2></div>
+  <p class="rev">On ne fabrique un objet que s'il sert. Le signe s'y pose petit et discret :
+  un objet Tréma ne crie pas son logo.</p></div>
+  <div class="grid c4">
+    <div class="app rev" style="background:var(--papier)"><div class="tote"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">Tote bag coton brut</div></div>
+    <div class="app rev" style="background:var(--papier)"><div class="tee" style="background:var(--encre);color:var(--papier)"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div><div class="cap">T-shirt — signe poitrine 40 mm</div></div>
+    <div class="app rev" style="background:var(--papier)"><div style="width:46%;aspect-ratio:1;border-radius:50%;background:var(--blanc);border:var(--rule);display:grid;place-items:center;color:var(--encre)"><svg class="sym" viewBox="0 0 78 91" style="width:30%"><use href="#tm"/></svg></div><div class="cap">Tasse céramique 20 cl</div></div>
+    <div class="app rev" style="background:var(--papier)"><div style="width:44%;aspect-ratio:.62;background:var(--encre);border-radius:6px;display:grid;place-items:center"><svg class="sym" viewBox="0 0 78 91" style="width:34%;color:var(--kraft)"><use href="#tm"/></svg></div><div class="cap">Mug isotherme</div></div>
+  </div>
+</section>
+
+<section id="s35" data-t="Digital / UI" data-p="VI · Applications" class="wht">
+  <div class="num">33</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 33</div><h2 class="rev">Interface</h2></div>
+  <p class="rev">Formes pleines, angles arrondis à 999 px sur les commandes, angles vifs sur les blocs de contenu.
+  Le contraste fait le travail : pas d'ombre portée.</p></div>
+  <div class="grid c3">
+    <div class="box rev"><h4>Boutons</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:4px">
+        <button class="btn solid">Commander</button><button class="btn">En savoir plus</button>
+        <button class="btn" style="opacity:.35;pointer-events:none">Épuisé</button></div>
+      <p class="mono dim" style="margin-top:14px">Un seul bouton plein par écran.</p></div>
+    <div class="box rev"><h4>Champs</h4>
+      <input class="field" placeholder="votre@email.fr" style="margin-bottom:9px">
+      <input class="field" placeholder="Code postal">
+      <p class="mono dim" style="margin-top:14px">Libellé au-dessus, jamais en placeholder seul.</p></div>
+    <div class="box rev"><h4>Étiquettes produit</h4>
+      <div><span class="chip">Éthiopie</span><span class="chip">Lavé</span><span class="chip">Filtre</span>
+      <span class="chip" style="background:var(--rouge);color:#fff;border-color:var(--rouge)">Série limitée</span>
+      <span class="chip" style="background:var(--kraft);border-color:var(--kraft)">Nouveau</span></div>
+      <p class="mono dim" style="margin-top:14px">4 étiquettes maximum par fiche produit.</p></div>
+  </div>
+  <div class="grid c5 rev" style="margin-top:var(--gut)">
+    <div class="box"><h4>Rayons</h4><p class="mono">Commandes 999 px<br>Cartes 0<br>Images 0<br>Avatar 50 %</p></div>
+    <div class="box"><h4>Espacement</h4><p class="mono">Base 8<br>4 · 8 · 16 · 24 · 40 · 64 · 96</p></div>
+    <div class="box"><h4>Filets</h4><p class="mono">1,4 px, couleur du texte.<br>Jamais de gris arbitraire.</p></div>
+    <div class="box"><h4>États</h4><p class="mono">Survol : inversion<br>Focus : contour 2 px Ristretto<br>Désactivé : opacité 35 %</p></div>
+    <div class="box"><h4>Mode sombre</h4><p class="mono">Fond #0E0D0D<br>Texte Papier<br>Ristretto → #FF4B3E<br>Filets à 22 % d'opacité</p></div>
+  </div>
+</section>
+
+<section id="s36" data-t="Réseaux sociaux" data-p="VI · Applications">
+  <div class="num">34</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 34</div><h2 class="rev">Réseaux<br>sociaux</h2></div>
+  <p class="rev">Rythme de grille : une photo pour deux aplats. Jamais trois photos d'affilée,
+  jamais trois aplats d'affilée. La grille se lit comme une page.</p></div>
+  <div class="grid c3">
+    <div class="app rev" style="padding:0">
+      <div class="igrid">
+        <div style="background:var(--encre)"><svg class="sym" viewBox="0 0 78 91" style="color:var(--papier)"><use href="#tm"/></svg></div>
+        <div><img src="image%20347.jpg" alt=""></div>
+        <div style="background:var(--kraft);color:var(--encre)"><span class="mono" style="font-size:7px">NOUVEAU</span></div>
+        <div style="background:var(--espresso)"><svg class="sym" viewBox="0 0 78 91" style="color:var(--lait)"><use href="#tm"/></svg></div>
+        <div style="background:var(--lait);color:var(--encre)"><span style="font-family:var(--fd);font-size:12px;font-variation-settings:'wght' 1000,'FLAR' 100">GUJI</span></div>
+        <div><img src="image%20347.jpg" alt="" style="filter:grayscale(1)"></div>
+        <div><img src="image%20347.jpg" alt="" style="filter:sepia(.3)"></div>
+        <div style="background:var(--rouge)"><svg class="sym" viewBox="0 0 78 91" style="color:#fff"><use href="#tm"/></svg></div>
+        <div style="background:var(--papier);color:var(--encre)"><span class="mono" style="font-size:7px">12/03</span></div>
+      </div><div class="cap">Grille — rythme 1 photo / 2 aplats</div></div>
+    <div class="app rev" style="padding:0;aspect-ratio:1"><div style="width:100%;height:100%;background:var(--encre);display:flex;flex-direction:column;justify-content:space-between;padding:9%">
+      <svg class="sym" viewBox="0 0 78 91" style="width:12%;color:var(--papier)"><use href="#tm"/></svg>
+      <div style="font-family:var(--fd);color:var(--papier);font-size:clamp(18px,2.4vw,32px);line-height:.92;letter-spacing:-.04em;font-variation-settings:'wght' 1000,'FLAR' 100">Retour<br>du Guji.</div>
+      <div class="mono" style="color:var(--papier);opacity:.6;font-size:7.5px">EN LIGNE ET EN BOUTIQUE · VENDREDI</div></div>
+      <div class="cap">Post 1:1 — annonce</div></div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Formats</h4><p class="mono">Post 1080 × 1350 (4:5)<br>Story / Reel 1080 × 1920<br>Vignette 1080 × 1080<br>Bannière 1500 × 500</p></div>
+      <div class="box"><h4>Règles d'écriture</h4><p class="mono">Première ligne = l'information, pas l'accroche.<br>3 hashtags maximum, en fin de texte.<br>Jamais d'émoji dans la première phrase.<br>Alt-text obligatoire.</p></div>
+      <div class="box"><h4>Ce qu'on ne poste pas</h4><p class="mono">Citations inspirantes sur fond de café.<br>Compte à rebours.<br>Sondages « Team A ou Team B ».<br>Reposts sans crédit.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s37" data-t="Email & bureautique" data-p="VI · Applications" class="lai">
+  <div class="num">35</div>
+  <div class="hd"><div><div class="part">Partie VI</div><div class="tag">Chapitre 35</div><h2 class="rev">Email &<br>bureautique</h2></div>
+  <p class="rev">Là où JT Flair n'est pas disponible, on compose en Arial. Ce n'est pas un pis-aller :
+  c'est la substitution officielle, et elle doit être propre.</p></div>
+  <div class="grid c3">
+    <div class="box rev"><h4>Signature d'email</h4><p class="mono" style="opacity:.9">
+      <b>Prénom Nom</b><br>Fonction — Tréma<br>+33 0 00 00 00 00 · trema.fr<br>—<br>12 rue du Four, 75006 Paris</p>
+      <p class="mono dim" style="margin-top:12px">Texte seul, aucune image, aucune citation, aucun logo lourd.</p></div>
+    <div class="box rev"><h4>Newsletter</h4><p class="mono">Largeur 600 px<br>Titre Arial Bold 26 px<br>Corps Arial 16/26<br>1 image max en tête<br>Bouton : rectangle plein Encre, texte Papier, 44 px de haut</p></div>
+    <div class="box rev"><h4>Présentation</h4><p class="mono">16:9 · marges 60 px<br>Une idée par diapositive<br>Titre Arial Black, corps Arial<br>Signe en bas à droite sur toutes les pages sauf la couverture<br>Jamais de transition animée</p></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════ PARTIE VII — OPÉRATIONS ══════════════════ -->
+
+<section id="s38" data-t="Accessibilité" data-p="VII · Opérations" class="blk">
+  <div class="num">36</div>
+  <div class="hd"><div><div class="part">Partie VII — Opérations</div><div class="tag">Chapitre 36</div><h2 class="rev">Accessibilité</h2></div>
+  <p class="rev">Une marque lisible par tout le monde. Ces points sont des critères de recette :
+  un support qui ne les respecte pas n'est pas livré.</p></div>
+  <div class="grid c4">
+    <div class="box rev"><h4>Contraste</h4><p class="mono">Texte courant ≥ 4,5:1<br>Grand texte ≥ 3:1<br>Éléments d'interface ≥ 3:1<br>Vérifié à chaque nouvelle association de couleurs</p></div>
+    <div class="box rev"><h4>Corps minimum</h4><p class="mono">Écran 16 px<br>Print 9 pt<br>Mentions légales 8 pt<br>Jamais de texte en dessous, même en légende</p></div>
+    <div class="box rev"><h4>Alternatives</h4><p class="mono">Alt-text sur toutes les images informatives<br>Transcription des vidéos<br>Sous-titres brûlés sur les stories<br>Data-viz doublée d'un tableau</p></div>
+    <div class="box rev"><h4>Interaction</h4><p class="mono">Cible tactile 44 × 44 px<br>Focus visible, jamais supprimé<br>Navigation clavier complète<br>Aucune info portée par la couleur seule</p></div>
+  </div>
+</section>
+
+<section id="s39" data-t="Checklist" data-p="VII · Opérations">
+  <div class="num">37</div>
+  <div class="hd"><div><div class="part">Partie VII</div><div class="tag">Chapitre 37</div><h2 class="rev">Checklist<br>de validation</h2></div>
+  <p class="rev">À passer avant tout envoi en production. Douze points, deux minutes.
+  Un seul « non » suffit à bloquer le fichier.</p></div>
+  <div class="grid c3">
+    <div class="box rev"><h4>Signe</h4><p class="mono">☐ Version officielle (non redessinée)<br>☐ Zone de protection respectée<br>☐ Taille ≥ minimum<br>☐ Contraste ≥ 4,5:1</p></div>
+    <div class="box rev"><h4>Typographie</h4><p class="mono">☐ JT Flair en titre, grotesque en corps<br>☐ Échelle respectée<br>☐ Apostrophes courbes, guillemets français<br>☐ Aucune veuve ni orpheline</p></div>
+    <div class="box rev"><h4>Couleur</h4><p class="mono">☐ Palette officielle uniquement<br>☐ Répartition 60/25/10/5<br>☐ Une seule couleur d'expression<br>☐ Référentiel print correct (CMJN / Pantone)</p></div>
+    <div class="box rev"><h4>Composition</h4><p class="mono">☐ Grille 12 colonnes<br>☐ Titre haut gauche, signe bas droite<br>☐ Marges = 2× gouttière<br>☐ Fonds perdus 3 mm si print</p></div>
+    <div class="box rev"><h4>Contenu</h4><p class="mono">☐ Ton de voix respecté<br>☐ Aucun mot de la liste noire<br>☐ Mentions légales présentes<br>☐ Relecture par une 2ᵉ personne</p></div>
+    <div class="box rev"><h4>Fichiers</h4><p class="mono">☐ Nommage conforme<br>☐ Sources archivées<br>☐ Polices vectorisées si envoi externe<br>☐ Droits photo à jour</p></div>
+  </div>
+</section>
+
+<section id="s40" data-t="Gouvernance" data-p="VII · Opérations" class="esp">
+  <div class="num">38</div>
+  <div class="hd"><div><div class="part">Partie VII</div><div class="tag">Chapitre 38</div><h2 class="rev">Gouvernance</h2></div>
+  <p class="rev">Qui décide quoi, et comment on fait évoluer ce document. Une exception non documentée ici
+  n'existe pas : elle sera refaite au prochain support.<span class="todo">à nommer</span></p></div>
+  <div class="grid c2">
+    <div class="rev scrollx"><table>
+      <tr><th>Décision</th><th>Propose</th><th>Valide</th><th>Délai</th></tr>
+      <tr><td>Nouveau support courant</td><td>Design</td><td>Direction artistique</td><td>48 h</td></tr>
+      <tr><td>Nouvelle couleur d'expression</td><td>Design</td><td>Direction + fondateur·rice</td><td>2 semaines</td></tr>
+      <tr><td>Modification du signe</td><td>—</td><td>Fondateur·rice uniquement</td><td>—</td></tr>
+      <tr><td>Nouveau nom de produit</td><td>Torréfaction</td><td>Direction</td><td>1 semaine</td></tr>
+      <tr><td>Partenariat / co-branding</td><td>Commerce</td><td>Direction + DA</td><td>3 semaines</td></tr>
+      <tr><td>Exception à ce guide</td><td>Qui que ce soit</td><td>DA — puis inscrite ici</td><td>1 semaine</td></tr>
+    </table></div>
+    <div class="rev" style="display:grid;gap:var(--gut);align-content:start">
+      <div class="box"><h4>Cycle de révision</h4><p class="mono">Relecture complète : 1 fois par an<br>Correctifs mineurs : en continu<br>Version majeure : changement de numéro + note de version en pied de page</p></div>
+      <div class="box"><h4>Nommage des fichiers</h4><p class="mono">trema_[support]_[nom]_[format]_[version].[ext]<br>ex. trema_pack_guji_250g_v03.ai<br>Minuscules, underscores, pas d'accent, pas d'espace.</p></div>
+      <div class="box"><h4>En cas de doute</h4><p class="mono">On choisit la version la plus sobre.<br>On documente la question.<br>On demande avant, pas après.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="s41" data-t="Ressources" data-p="VII · Opérations" class="krf">
+  <div class="num">39</div>
+  <div class="hd"><div><div class="part">Partie VII</div><div class="tag">Chapitre 39</div><h2 class="rev">Ressources</h2></div>
+  <p class="rev">Tout part de ces fichiers. On ne recrée jamais un asset à la main.</p></div>
+  <div class="grid c2">
+    <div class="rev scrollx"><table>
+      <tr><th>Fichier</th><th>Format</th><th>Usage</th></tr>
+      <tr><td>Logo.svg</td><td>SVG</td><td>Signe — toutes tailles, écran &amp; print</td></tr>
+      <tr><td>Frame.svg · Frame-1.svg</td><td>SVG</td><td>Variantes de tracé, grandes tailles</td></tr>
+      <tr><td>Frame-2.svg</td><td>SVG</td><td>Signe + ombre décalée — usage éditorial</td></tr>
+      <tr><td>Group 71.svg</td><td>SVG</td><td>Tracé de construction — documentation seule</td></tr>
+      <tr><td>image 349.svg</td><td>SVG</td><td>QR code au signe</td></tr>
+      <tr><td>JT Flair — OTF</td><td>OTF</td><td>Print · Illustrator, InDesign</td></tr>
+      <tr><td>JT Flair — TTF</td><td>TTF</td><td>Bureautique, Figma</td></tr>
+      <tr><td>GTFlaireVF.ttf</td><td>TTF variable</td><td>Web — 3 axes, 28 instances</td></tr>
+      <tr><td>image 347.jpg</td><td>JPG</td><td>Photo de référence — direction artistique</td></tr>
+    </table>
+    <p class="mono" style="margin-top:14px"><b>Licence :</b> vérifier la portée de la licence de JT&nbsp;Flair
+    (web / desktop / app / diffusion externe) avant de partager ce document ou les fichiers de fonte.<span class="todo">à vérifier</span></p></div>
+    <div class="rev">
+      <div class="box" style="background:var(--blanc);display:grid;place-items:center;aspect-ratio:1;color:var(--encre)">
+        <img src="image%20349.svg" alt="QR code Tréma" style="width:60%"></div>
+      <p class="mono" style="margin-top:10px">QR au signe — cœur occupé par le symbole, contraste ≥ 4:1, taille minimale 25 mm.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s42" data-t="Glossaire" data-p="VII · Opérations">
+  <div class="num">40</div>
+  <div class="hd"><div><div class="part">Partie VII</div><div class="tag">Chapitre 40</div><h2 class="rev">Glossaire</h2></div>
+  <p class="rev">Le vocabulaire de ce document, pour que tout le monde parle la même langue.</p></div>
+  <div class="grid c3">
+    <div class="box rev"><h4>Axe variable</h4><p>Un curseur continu à l'intérieur d'une fonte (ici <code>wght</code>, <code>FLAR</code>, <code>slnt</code>). Toutes les valeurs intermédiaires sont valides.</p></div>
+    <div class="box rev"><h4>Flare</h4><p>L'évasement en bout de fût d'une lettre. Notre axe signature : à 100, la fonte devient reconnaissable entre mille.</p></div>
+    <div class="box rev"><h4>Zone de protection</h4><p>L'espace vide minimum autour du signe. Elle protège sa lisibilité, elle n'est pas décorative.</p></div>
+    <div class="box rev"><h4>Verrouillage (lockup)</h4><p>Une association figée signe + texte. Elle ne se recompose pas : on utilise le fichier.</p></div>
+    <div class="box rev"><h4>Approche</h4><p>L'espace entre les lettres d'un mot. Négative sur les grands corps, neutre en texte courant.</p></div>
+    <div class="box rev"><h4>Couleur d'expression</h4><p>Une couleur secondaire, saisonnière, qui ne porte jamais le signe seule et n'excède jamais 5 % de la surface.</p></div>
+  </div>
+</section>
+
+
+<footer class="blk">
+  <div class="hd" style="margin-bottom:clamp(26px,3.5vw,54px)">
+    <div>
+      <svg class="sym" viewBox="0 0 78 91" style="width:clamp(46px,6vw,84px);margin-bottom:22px"><use href="#tm"/></svg>
+      <h2 class="fx-flare" data-fx>Révéler,<br>jamais recouvrir.</h2>
+    </div>
+    <div>
+      <p class="mono dim">Ce guide est vivant. Toute exception se documente ici plutôt que de se décider dans un coin.
+      Une question, un cas non couvert, une envie de casser une règle : on en parle avant, pas après.</p>
+      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:7px">
+        <span class="pill">design@trema.fr</span><span class="pill">v1.0</span><span class="pill">MàJ <span data-date>—</span></span>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
+    <span class="mono dim">© <span data-year>2026</span> Tréma — document interne</span>
+    <span class="mono dim">Composé en JT Flair · 3 axes · 28 instances</span>
+    <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Haut de page</button>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const rnd = n => Math.floor(Math.random() * n);
+
+/* ── dates ── */
+const now = new Date();
+$$("[data-year]").forEach(e => e.textContent = now.getFullYear());
+$$("[data-date]").forEach(e => e.textContent = now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"}));
+
+/* ── sommaire + rail ── */
+const secs = $$("section[data-t]"), toc = $("#toc"), rail = $("#rail");
+let lastPart = null;
+secs.forEach((s, i) => {
+  const n = String(Math.max(0, i - 1)).padStart(2, "0"), t = s.dataset.t, p = s.dataset.p || "";
+  if (i > 1) {
+    if (p && p !== lastPart) { const h = document.createElement("div"); h.className = "p"; h.textContent = p; toc.appendChild(h); lastPart = p; }
+    const b = document.createElement("button");
+    b.innerHTML = `<span class="n">${n}</span><span class="t"></span><span class="s">→</span>`;
+    b.querySelector(".t").textContent = t;
+    b.onclick = () => s.scrollIntoView({behavior:"smooth"});
+    toc.appendChild(b);
+  }
+  const r = document.createElement("button");
+  r.textContent = `${n} ${t}`;
+  r.onclick = () => s.scrollIntoView({behavior:"smooth"});
+  rail.appendChild(r);
+});
+
+/* ── numérotation automatique des chapitres ── */
+let ch = 0;
+$$("section").forEach(s => {
+  const num = s.querySelector(".num");
+  if (!num) return;
+  ch++;
+  const nn = String(ch).padStart(2, "0");
+  num.textContent = nn;
+  const tag = s.querySelector(".tag");
+  if (tag) {
+    const suffix = (tag.textContent.match(/—.*$/) || [""])[0];
+    tag.textContent = `Chapitre ${nn}${suffix ? " " + suffix : ""}`;
+  }
+});
+
+/* ── pictogrammes maison ── */
+const PICTOS = [
+  ["faq 1.svg","FAQ"],["gallery 1.svg","Galerie"],["link 1.svg","Lien"],["mentions 1.svg","Mentions"],
+  ["menu 1.svg","Menu"],["playlist 1.svg","Playlist"],["post 1.svg","Post"],["reviews 1.svg","Avis"]
+];
+$("#picoGrid").innerHTML = PICTOS.map(([f, label]) => {
+  const u = `url("picto/${encodeURIComponent(f)}")`;
+  return `<figure><div class="pico" style="-webkit-mask-image:${u};mask-image:${u}"></div>
+    <figcaption>${label}</figcaption></figure>`;
+}).join("");
+
+/* ── progression / section active ── */
+const rb = [...rail.children];
+const onScroll = () => {
+  const h = document.documentElement;
+  $("#prog").style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+  let cur = 0;
+  secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= innerHeight * .4) cur = i; });
+  rb.forEach((b, i) => b.classList.toggle("on", i === cur));
+};
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+/* ── révélation ── */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}), {threshold:.1});
+$$(".rev").forEach(e => io.observe(e));
+
+/* ── curseur ── */
+const cur = $("#cur");
+addEventListener("pointermove", e => { cur.style.left = e.clientX + "px"; cur.style.top = e.clientY + "px"; });
+const grow = (el, big) => {
+  el.addEventListener("pointerenter", () => { cur.style.width = big + "px"; cur.style.height = big + "px"; });
+  el.addEventListener("pointerleave", () => { cur.style.width = "18px"; cur.style.height = "18px"; });
+};
+$$("button,a,input,.sw,.gset span,[contenteditable],[data-fx],[data-scramble],.axis-line,.bleed .w,.ico figure").forEach(el => grow(el, 46));
+
+/* ── ROLLOVER 1 : le mot de couverture réagit au curseur, lettre par lettre ── */
+const wm = $("#wm");
+wm.innerHTML = [..."TRÉMA"].map(c => `<span>${c}</span>`).join("");
+const wmSpans = [...wm.children];
+const paintWM = (cx, cy) => {
+  wmSpans.forEach(sp => {
+    const r = sp.getBoundingClientRect();
+    const d = Math.hypot(cx - (r.left + r.width/2), cy - (r.top + r.height/2));
+    const k = Math.max(0, 1 - d / 620);
+    sp.style.fontVariationSettings =
+      `"wght" ${Math.round(300 + k*700)},"FLAR" ${Math.round(k*100)},"slnt" ${Math.round(k*15)}`;
+  });
+};
+/* état de repos : Extra plein, flare fermé — le curseur l'ouvre */
+wmSpans.forEach(sp => sp.style.fontVariationSettings = `"wght" 1000,"FLAR" 0,"slnt" 0`);
+addEventListener("pointermove", e => paintWM(e.clientX, e.clientY), {passive:true});
+
+/* ── ROLLOVER 2 : vague de graisse sur les mots taggués ── */
+$$("[data-fx].fx-wave").forEach(el => {
+  el.innerHTML = [...el.textContent].map(c => `<span>${c === " " ? "&nbsp;" : c}</span>`).join("");
+});
+
+/* ── ROLLOVER 3 : brouillage de glyphes ── */
+const POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#&%*/";
+$$("[data-scramble]").forEach(el => {
+  const real = el.textContent; let timer = null;
+  el.addEventListener("pointerenter", () => {
+    let step = 0;
+    clearInterval(timer);
+    timer = setInterval(() => {
+      el.textContent = [...real].map((c, i) =>
+        c === " " ? " " : (i < step ? c : POOL[rnd(POOL.length)])).join("");
+      if (step++ > real.length) { clearInterval(timer); el.textContent = real; }
+    }, 34);
+  });
+  el.addEventListener("pointerleave", () => { clearInterval(timer); el.textContent = real; });
+});
+
+/* ── AXE FLAR : pile générée ── */
+const flarStack = $("#flarStack");
+[0, 20, 40, 60, 80, 100].forEach(v => {
+  const d = document.createElement("div");
+  d.className = "axis-line";
+  d.style.cssText = `font-size:clamp(24px,6.2vw,98px);font-variation-settings:"wght" 900,"FLAR" ${v}`;
+  d.innerHTML = `Révéler le grain<span class="meta">FLAR ${v}</span>`;
+  flarStack.appendChild(d);
+  grow(d, 46);
+});
+
+/* ── 28 INSTANCES : tableaux générés ── */
+const W = [["Light",300],["Regular",400],["Medium",500],["Bold",700],["Heavy",800],["Black",900],["Extra",1000]];
+const buildTable = (el, fam, flar) => {
+  let h = `<tr><th>Instance</th><th>wght</th><th>Aperçu</th><th>Italique (slnt 15)</th></tr>`;
+  W.forEach(([nm, w]) => {
+    h += `<tr><td>${fam} ${nm}</td><td>${w}</td>
+      <td style="font-family:var(--fd);font-size:19px;font-variation-settings:'wght' ${w},'FLAR' ${flar},'slnt' 0">Trema</td>
+      <td style="font-family:var(--fd);font-size:19px;font-variation-settings:'wght' ${w},'FLAR' ${flar},'slnt' 15">Trema</td></tr>`;
+  });
+  el.innerHTML = h;
+};
+buildTable($("#tblBasic"), "Basic", 0);
+buildTable($("#tblExtra"), "Extra", 100);
+
+/* ── construction du signe ── */
+const cst = $("#constr"), tog = $("#gridtog");
+tog.onclick = () => { const on = cst.classList.toggle("show"); tog.textContent = on ? "Masquer la grille" : "Afficher la grille"; };
+
+/* ── laboratoire ── */
+const play = $("#play"), out = $("#css-out");
+const A = {w:["a-w","v-w"], f:["a-f","v-f"], s:["a-s","v-s"], z:["a-z","v-z"], t:["a-t","v-t"]};
+const g = k => $("#" + A[k][0]).value;
+const apply = () => {
+  const vs = `"wght" ${g("w")},"FLAR" ${g("f")},"slnt" ${g("s")}`;
+  play.style.fontVariationSettings = vs;
+  play.style.fontSize = g("z") + "px";
+  play.style.letterSpacing = (g("t") / 1000) + "em";
+  out.textContent = `font-variation-settings:${vs};\nfont-size:${g("z")}px;\nletter-spacing:${(g("t")/1000).toFixed(3)}em;`;
+  Object.keys(A).forEach(k => $("#" + A[k][1]).textContent = g(k));
+};
+Object.keys(A).forEach(k => $("#" + A[k][0]).addEventListener("input", apply));
+apply();
+$("#copycss").onclick = async e => {
+  try { await navigator.clipboard.writeText(out.textContent); e.target.textContent = "Copié ✓";
+    setTimeout(() => e.target.textContent = "Copier le CSS", 1400); } catch (_) {}
+};
+
+/* ── jeu de glyphes, cases rouges / noires aléatoires ── */
+const CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸŒœÆæßñ.,;:!?«»“”—–’()[]{}/\\&@#%‰€$£¥*+−×÷=<>°|¶§†©®™½¼¾";
+const gs = $("#gset");
+gs.innerHTML = [...CH].map(c => {
+  const esc = c.replace(/[<>&]/g, m => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[m]));
+  const r = Math.random();
+  const cls = r > .93 ? " class='hot'" : (r > .86 ? " class='ink'" : "");
+  const w = 300 + rnd(8) * 100, f = rnd(2) * 100;
+  return `<span${cls} style="font-variation-settings:'wght' ${w},'FLAR' ${f}">${esc}</span>`;
+}).join("");
+$$("#gset span").forEach(el => grow(el, 46));
+
+/* ── copie des hex ── */
+$$(".sw").forEach(sw => sw.onclick = async () => {
+  try { await navigator.clipboard.writeText(sw.dataset.hex); } catch (_) {}
+  sw.classList.add("cp"); setTimeout(() => sw.classList.remove("cp"), 1100);
+});
+
+/* ── mouvement réduit ── */
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  $$(".mq span,.cov-sym,.grain,.mo .dot").forEach(e => e.style.animation = "none");
+  $$(".rev").forEach(e => e.classList.add("in"));
+}
+})();
+</script>
+</body>
+</html>
