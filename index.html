@@ -251,9 +251,12 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .ok::after{content:"✓";position:absolute;top:6px;right:9px;font-family:var(--fm);font-size:13px;color:var(--menthe)}
 
 /* ══ COULEUR ═══════════════════════════════════════════════ */
-.sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:1px;background:currentColor;border:var(--rule)}
+/* bordures portées par les cases : une rangée incomplète ne laisse pas de fond apparent */
+.sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
+  border-top:var(--rule);border-left:var(--rule)}
 .sw{padding:clamp(12px,1.6vw,20px);min-height:clamp(160px,20vw,235px);display:flex;flex-direction:column;
-  justify-content:space-between;cursor:pointer;position:relative}
+  justify-content:space-between;cursor:pointer;position:relative;
+  border-right:var(--rule);border-bottom:var(--rule)}
 .sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,22px);letter-spacing:0;font-variation-settings:"wght" 800,"FLAR" 80}
 .sw .vl{font-family:var(--fm);font-size:9px;line-height:1.78;letter-spacing:.03em;opacity:.85}
 .sw::after{content:"copié ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;opacity:0;transition:opacity .3s}
