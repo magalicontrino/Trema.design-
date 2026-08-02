@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<style>
+  /* Le signe applique sa propre regle de bascule : sur un onglet
+     clair il est en negatif dans un carre encre, sur un onglet
+     sombre le carre passe en papier. */
+  .fond{fill:#141414}
+  .signe{fill:#F2F1EF}
+  @media (prefers-color-scheme: dark){
+    .fond{fill:#F2F1EF}
+    .signe{fill:#141414}
+  }
+</style>
+<rect class="fond" width="100" height="100"/>
+<g class="signe" transform="translate(23.4 19) scale(0.6813)">
+<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
+</g>
+</svg>

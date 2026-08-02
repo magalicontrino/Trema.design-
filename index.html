@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tréma — Brand Book</title>
 
+<!-- Favicon : le signe, en negatif dans un carre encre. Le SVG suit
+     le theme du navigateur ; les PNG servent de repli. -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#141414">
+
 <style>
 /* ═══════════════════════════════════════════════════════════
    TRÉMA · BRAND BOOK
@@ -81,7 +88,7 @@ section.full{min-height:100svh;display:flex;flex-direction:column;justify-conten
   display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.4em}
 .tag::before{content:"";width:24px;height:1.4px;background:currentColor}
 
-h2{font-family:var(--fd);font-size:clamp(36px,7.4vw,116px);line-height:.85;
+h2{font-family:var(--fd);font-size:clamp(36px,7.4vw,116px);line-height:.98;
   font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance}
 h3{font-family:var(--fd);font-size:clamp(18px,2.2vw,29px);line-height:1.02;
   font-variation-settings:"wght" 700,"FLAR" 60;margin-bottom:.45em}
@@ -239,7 +246,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .lab{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:var(--gut);border:var(--rule);
   padding:clamp(14px,2vw,28px);align-items:center}
 @media(max-width:900px){.lab{grid-template-columns:1fr}}
-#play{font-family:var(--fd);font-size:clamp(40px,9vw,132px);line-height:.9;word-break:break-word;outline:none}
+#play{font-family:var(--fd);font-size:clamp(40px,9vw,132px);line-height:1;word-break:break-word;outline:none}
 .sl{margin-bottom:14px}
 .sl label{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;margin-bottom:6px}
 .sl input{width:100%;accent-color:currentColor}
@@ -277,7 +284,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .post .n{position:absolute;top:5px;left:6px;z-index:5;font-family:var(--fm);font-size:7px;
   letter-spacing:.12em;opacity:.45}
 .post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:clamp(15px,2.2vw,30px);line-height:.88;letter-spacing:0}
+  font-size:clamp(15px,2.2vw,30px);line-height:1.02;letter-spacing:0}
 .post .mn{font-family:var(--fm);font-size:clamp(6px,.72vw,8px);letter-spacing:.16em;text-transform:uppercase}
 .post .ctr{margin:auto;display:grid;place-items:center}
 .post .tilebg{position:absolute;inset:0;background:currentColor;
@@ -518,6 +525,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       <tr><td>trema-signature-noir / -blanc.svg</td><td>Signe + mot + mention</td><td>SVG / EPS</td><td>Papeterie, B2B</td></tr>
       <tr><td>trema-signe.png</td><td>Signe seul, fond transparent</td><td>PNG 32 bits, 3000 px</td><td>Bureautique, partenaires</td></tr>
       <tr><td>Union.png</td><td>Signe rempli d'une photo</td><td>PNG 32 bits, 3000 px</td><td>Campagne, signe-fenêtre</td></tr>
+      <tr><td>logotrema.svg</td><td>Logotype seul</td><td>SVG</td><td>Verrouillages, web, signature</td></tr>
+      <tr><td>favicon.svg</td><td>Signe négatif, carré encre</td><td>SVG, suit le thème</td><td>Onglet navigateur</td></tr>
+      <tr><td>apple-touch-icon.png</td><td>Idem, couleurs fixes</td><td>PNG 180 px</td><td>iOS, écran d'accueil</td></tr>
     </table></div>
   </div>
 </section>
@@ -671,14 +681,14 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
     <div class="box">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:.9;
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
         font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
       <p>Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère
       propre. C'est ce contraste qui fait tenir la page.</p>
       <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
     </div>
     <div class="box">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:.9;
+      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
         font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
       <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Le titre porte la marque,
       le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste
