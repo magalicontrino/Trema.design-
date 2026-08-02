@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TRÉMA — Brand Book</title>
+<title>Tréma — Brand Book</title>
 
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -52,10 +52,6 @@ body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidde
 img{display:block;max-width:100%;filter:grayscale(1)}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
-
-/* ── RÈGLE ABSOLUE : le nom de la marque s'écrit toujours en JT Flair ── */
-.tm{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;
-  letter-spacing:-.004em;font-size:1.16em;line-height:1;font-weight:400}
 
 /* ── navigation ─────────────────────────────────────────── */
 #prog{position:fixed;top:0;left:0;height:2px;width:0;background:currentColor;z-index:9997;mix-blend-mode:difference;color:#fff}
@@ -112,8 +108,15 @@ code{font-family:var(--fm);font-size:.88em;background:color-mix(in srgb,currentC
 .box{border:var(--rule);padding:clamp(14px,1.9vw,24px)}
 .box.fill{background:var(--fg);color:var(--bg)}
 .sym{display:block;fill:currentColor}
-.rev{opacity:0;transform:translateY(20px);transition:opacity .7s var(--e),transform .7s var(--e)}
-.rev.in{opacity:1;transform:none}
+
+/* ── LE LOGOTYPE — dessin, jamais du texte compose ──────────
+   logotrema.svg fait 104 x 26, soit un rapport de 4 : 1.
+   On l'appelle en masque pour qu'il prenne la couleur du texte. */
+.tm{display:inline-block;width:3.6em;height:.9em;background:currentColor;vertical-align:-.06em;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.wordmark{display:block;width:4em;height:1em;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+
 table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:10.5px}
 th,td{border:var(--rule);padding:7px 10px;text-align:left;vertical-align:middle}
 th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;font-size:9px}
@@ -151,15 +154,14 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .tile.ph .sym,.tile.ph .cap{position:relative;z-index:2}
 .tile.ph .cap{position:absolute}
 
-/* verrouillages */
-.lock{display:flex;align-items:center;gap:.34em}
-.lock .sym{width:auto;height:1.02em}
-.lock .nm{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 0;letter-spacing:-.004em;line-height:.9}
-.lock.stack{flex-direction:column;gap:.22em;text-align:center}
+/* verrouillages — l'espace signe / logotype vaut la hauteur de barre */
+.lock{display:flex;align-items:center;gap:.38em}
+.lock .sym{width:auto;height:1.02em;flex:0 0 auto}
+.lock .wordmark{height:.6em;width:2.4em;flex:0 0 auto}
+.lock.stack{flex-direction:column;gap:.3em;text-align:center}
 .lock.sig{gap:.4em}
 .lock.sig .txt{border-left:var(--rule);padding-left:.4em}
-.lock.sig .nm,.lock.sig .sub{display:block}
-.lock.sig .sub{font-family:var(--fm);font-size:.17em;letter-spacing:.2em;opacity:.6;margin-top:.5em}
+.lock.sig .sub{display:block;font-family:var(--fm);font-size:.24em;letter-spacing:.16em;opacity:.65;margin-top:.7em}
 
 /* rampe de polarité */
 .rampwrap{position:relative;padding-bottom:1.8em}
@@ -200,8 +202,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .win{position:relative;aspect-ratio:.82;border:var(--rule);overflow:hidden;background:var(--bg)}
 .win .cut{position:absolute;inset:9%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain;overflow:hidden}
-.win .cut img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--e)}
-.win:hover .cut img{transform:scale(1.07)}
+.win .cut img{width:100%;height:100%;object-fit:cover}
 .win .fill{position:absolute;inset:9%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain;background:currentColor}
 .win .halftone{position:absolute;inset:9%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
@@ -214,40 +215,44 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
   -webkit-mask:url("Logo.svg") repeat center/52px 60.7px;mask:url("Logo.svg") repeat center/52px 60.7px}
 
 /* ══ TYPOGRAPHIE ═══════════════════════════════════════════ */
-.specimen{font-family:var(--fd);line-height:.82;letter-spacing:.004em;font-size:clamp(38px,9.4vw,160px)}
-.specimen > span{margin-right:.1em;display:inline-block}
+/* interlignage : en Extra les jambages descendent bas, .82 faisait
+   percuter la virgule de la ligne du dessus. */
+.specimen{font-family:var(--fd);line-height:1.02;letter-spacing:.008em;font-size:clamp(38px,9vw,152px)}
 .spec-note{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.45;
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:1.6em}
+
+/* ── MODULATION LETTRE À LETTRE ─────────────────────────────
+   Chaque signe porte sa propre graisse. Rien ne bouge : la
+   variation est ecrite dans la composition, pas jouee au survol. */
+/* les lettres restent en inline : en inline-block, chacune devient
+   un point de coupure et les mots se cassent en fin de ligne. */
+.mod{font-family:var(--fd);line-height:1.02;letter-spacing:.006em}
+
 .axis-line{border-bottom:var(--rule);padding:.06em 0;white-space:nowrap;overflow:hidden;position:relative;
-  font-family:var(--fd);line-height:.94;cursor:default}
-.axis-line .meta{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:0;position:absolute;
-  right:0;top:50%;transform:translateY(-50%);transition:opacity .3s;background:var(--bg);padding-left:14px}
-.axis-line:hover .meta{opacity:.75}
+  font-family:var(--fd);line-height:.94}
+.axis-line .meta{font-family:var(--fm);font-size:9px;letter-spacing:.14em;opacity:.5;position:absolute;
+  right:0;top:50%;transform:translateY(-50%);background:var(--bg);padding-left:14px}
 .gset{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(44px,5vw,84px),1fr));gap:1.4px;
   background:currentColor;border:var(--rule)}
 .gset span{background:var(--bg);color:var(--fg);aspect-ratio:1;display:grid;place-items:center;font-family:var(--fd);
-  font-size:clamp(19px,2.8vw,42px);transition:background .16s,color .16s,font-variation-settings .3s var(--e);position:relative;z-index:1}
-.gset span:hover{background:var(--fg);color:var(--bg);font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
+  font-size:clamp(19px,2.8vw,42px)}
 .lab{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:var(--gut);border:var(--rule);
   padding:clamp(14px,2vw,28px);align-items:center}
 @media(max-width:900px){.lab{grid-template-columns:1fr}}
-#play{font-family:var(--fd);font-size:clamp(40px,9vw,132px);line-height:.84;word-break:break-word;outline:none}
+#play{font-family:var(--fd);font-size:clamp(40px,9vw,132px);line-height:.9;word-break:break-word;outline:none}
 .sl{margin-bottom:14px}
 .sl label{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;margin-bottom:6px}
 .sl input{width:100%;accent-color:currentColor}
-[data-fx]{cursor:default}
-.fx-flare{font-variation-settings:"wght" 900,"FLAR" 0,"slnt" 0;transition:font-variation-settings .55s var(--e)}
-.fx-flare:hover{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 9}
-.fx-thin{font-variation-settings:"wght" 1000,"FLAR" 100;transition:font-variation-settings .6s var(--e)}
-.fx-thin:hover{font-variation-settings:"wght" 300,"FLAR" 0}
 
 /* ══ COUVERTURE ════════════════════════════════════════════ */
 #cover{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);
   border-top:0;position:relative;overflow:hidden}
 .cov-top,.cov-bot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;z-index:3}
-#wm{font-family:var(--fd);font-size:clamp(58px,19.5vw,320px);line-height:.72;letter-spacing:-.008em;
-  position:relative;z-index:3;margin:clamp(14px,3vw,38px) 0;user-select:none}
-#wm span{display:inline-block;transition:font-variation-settings .22s linear}
+/* la couverture porte le logotype lui-meme, pas une imitation composee */
+#wm{width:min(78vw,880px);aspect-ratio:4;background:currentColor;position:relative;z-index:3;
+  margin:clamp(20px,4vw,52px) 0;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;
+  mask:url("logotrema.svg") no-repeat left center/contain}
 .cov-sym{position:absolute;right:calc(var(--pad) - 1vw);top:12vh;width:clamp(76px,12vw,196px);opacity:.9;z-index:2}
 @media(max-width:640px){.cov-sym{top:9vh}}
 
@@ -311,8 +316,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .ico{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--rule);border-left:var(--rule)}
 @media(max-width:640px){.ico{grid-template-columns:repeat(2,1fr)}}
 .ico figure{border-right:var(--rule);border-bottom:var(--rule);padding:20px 12px;display:grid;place-items:center;
-  gap:13px;text-align:center;transition:background .25s,color .25s}
-.ico figure:hover{background:var(--fg);color:var(--bg)}
+  gap:13px;text-align:center}
 .ico figcaption{font-family:var(--fm);font-size:8px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
 .pico{width:clamp(34px,4vw,52px);aspect-ratio:1;background:currentColor;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
@@ -334,18 +338,18 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s0" data-t="Couverture" style="padding:0">
 <div id="cover">
   <div class="cov-top">
-    <div class="mono"><span class="tm">TRÉMA</span><br><span class="dim">Maison de café · torréfaction</span></div>
-    <div class="mono" style="text-align:right">BRAND BOOK<br><span class="dim">v2.0 — <span data-date>—</span></span></div>
+    <div class="mono"><span class="tm" role="img" aria-label="trema"></span><br><span class="dim">Studio de design · Paris</span></div>
+    <div class="mono" style="text-align:right">BRAND BOOK<br><span class="dim">v3.0 — <span data-date>—</span></span></div>
   </div>
   <svg class="cov-sym sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
   <div>
-    <div id="wm">TRÉMA</div>
-    <p class="mono dim" style="max-width:48ch">Bougez la souris sur le mot. — Le signe, la typographie, les valeurs,
+    <div id="wm" role="img" aria-label="trema"></div>
+    <p class="mono dim" style="max-width:48ch">Le signe, le logotype, la typographie, les valeurs,
     la communication. L'essentiel du système, en dix chapitres.</p>
   </div>
   <div class="cov-bot">
     <div class="mono dim">↓ 10 chapitres</div>
-    <div class="mono dim" style="text-align:right">JT FLAIR · wght 300–1000 · FLAR 0–100 · slnt 0–15<br>document interne</div>
+    <div class="mono dim" style="text-align:right">JT FLAIR · wght 300–1000 · slnt 0–15<br>document interne</div>
   </div>
 </div>
 </section>
@@ -355,16 +359,12 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s1" data-t="Manifeste" data-p="Marque" class="k full">
   <div class="num">01</div>
   <div class="tag">Manifeste</div>
-  <div class="specimen rev" style="margin:.2em 0 .6em">
-    <span class="fx-flare" data-fx>Révéler,</span>
-    <span class="fx-thin" data-fx>jamais</span>
-    <span class="fx-flare" data-fx>recouvrir.</span>
-  </div>
-  <div class="grid c3 rev">
+  <div class="mod" data-mod="crescendo" style="font-size:clamp(38px,9vw,152px);margin:.15em 0 .55em">Révéler, jamais recouvrir.</div>
+  <div class="grid c3">
     <p>Un tréma, c'est deux points au-dessus d'une lettre. Un signe minuscule qui change tout : il sépare,
     il ouvre, il fait entendre ce qui était muet.</p>
-    <p>Nous faisons du café comme on pose un tréma. Un geste précis, presque invisible, qui révèle ce qui
-    était déjà là. Le grain ne devient pas autre chose : il devient enfin lui-même.</p>
+    <p>C'est notre façon de travailler. Un geste précis, presque invisible, qui révèle ce qui était déjà
+    là. Le projet d'un client ne devient pas autre chose : il devient enfin lui-même.</p>
     <p>De là découle tout le reste : une seule forme, une seule fonte, aucune couleur. Ce livre ne dit pas
     quoi ajouter — il dit ce qu'il ne faut pas recouvrir.</p>
   </div>
@@ -375,22 +375,22 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s2" data-t="Anatomie du signe" data-p="Le signe">
   <div class="num">02</div>
   <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 02</div>
-    <h2 class="rev">Anatomie<br>du signe</h2></div>
-  <p class="rev">Un rectangle plein, une découpe en arc, une contre-forme qui file vers la droite. C'est un T,
+    <h2>Anatomie<br>du signe</h2></div>
+  <p>Un rectangle plein, une découpe en arc, une contre-forme qui file vers la droite. C'est un T,
   c'est une voile, c'est le trait du tréma. Il ne se redessine jamais à la main : on part de
   <code>Logo.svg</code>.</p></div>
 
   <div class="grid c3">
-    <div class="rev"><h4>Construction — grille 8 × 8</h4>
+    <div><h4>Construction — grille 8 × 8</h4>
       <div class="constr" id="constr"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
       <button class="btn" style="margin-top:12px" id="gridtog">Afficher la grille</button></div>
 
-    <div class="rev"><h4>Zone de protection — 1 × la hauteur de barre</h4>
+    <div><h4>Zone de protection — 1 × la hauteur de barre</h4>
       <div class="clear"><div class="z"><svg class="sym" viewBox="0 0 78 91" style="width:60px"><use href="#tm"/></svg></div></div>
       <p class="mono dim" style="margin-top:12px">Aucun élément — texte, image, bord de format — n'entre dans
       la zone pointillée.</p></div>
 
-    <div class="rev"><h4>Proportions</h4>
+    <div><h4>Proportions</h4>
       <div class="box" style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;gap:1em">
         <div><div class="mono dim">Ratio</div><div class="disp">78 : 91</div></div>
         <div><div class="mono dim">Hauteur de barre</div><div class="disp">0,377 H</div></div>
@@ -398,7 +398,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       </div></div>
   </div>
 
-  <div class="box rev" style="margin-top:var(--gut)"><h4>Tailles minimales</h4>
+  <div class="box" style="margin-top:var(--gut)"><h4>Tailles minimales</h4>
     <div class="sizes">
       <figure><svg class="sym" viewBox="0 0 78 91" style="width:14px"><use href="#tm"/></svg><figcaption>14 px<br>favicon</figcaption></figure>
       <figure><svg class="sym" viewBox="0 0 78 91" style="width:22px"><use href="#tm"/></svg><figcaption>22 px<br>min. écran</figcaption></figure>
@@ -414,14 +414,14 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s3" data-t="Noir &amp; blanc" data-p="Le signe" class="w">
   <div class="num">03</div>
   <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 03</div>
-    <h2 class="rev">Noir<br>&amp; blanc</h2></div>
-  <p class="rev">Le signe n'existe qu'en deux états : <b>positif</b> — encre sur clair — et <b>négatif</b> —
+    <h2>Noir<br>&amp; blanc</h2></div>
+  <p>Le signe n'existe qu'en deux états : <b>positif</b> — encre sur clair — et <b>négatif</b> —
   clair sur encre. Pas de version grise, pas de version « atténuée ». On ne choisit pas la variante qui fait
   joli, on choisit celle qui contraste.</p></div>
 
   <!-- A · le signe seul -->
-  <h4 class="rev">A · Le signe seul</h4>
-  <div class="board b6 rev" style="margin-bottom:clamp(26px,3.4vw,50px)">
+  <h4>A · Le signe seul</h4>
+  <div class="board b6" style="margin-bottom:clamp(26px,3.4vw,50px)">
     <div class="tile p-pap"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Positif · papier</span></div>
     <div class="tile p-enc"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Négatif · encre</span></div>
     <div class="tile p-bla"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Noir pur · 1 ton</span></div>
@@ -433,7 +433,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   </div>
 
   <!-- rampe de bascule -->
-  <div class="rev" style="margin-bottom:clamp(26px,3.4vw,50px)">
+  <div style="margin-bottom:clamp(26px,3.4vw,50px)">
     <h4>Où bascule-t-on ? — polarité selon la clarté du fond · 0 % = noir, 100 % = blanc</h4>
     <div class="rampwrap"><div class="ramp" id="ramp"></div><div class="rampmark" id="rampmark"></div></div>
     <p class="mono dim" style="margin-top:10px">Au-dessus de 47 % de clarté le signe est en encre ; en dessous
@@ -442,65 +442,71 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   </div>
 
   <!-- B · verrouillages positif / négatif -->
-  <h4 class="rev">B · Verrouillages — chaque configuration existe dans les deux polarités</h4>
-  <div class="board b3 rev" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(22px,2.9vw,40px)">
+  <h4>B · Verrouillages — chaque configuration existe dans les deux polarités</h4>
+  <div class="board b3" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(20px,2.5vw,34px)">
     <div class="tile wide p-pap"><div class="lock">
-      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="nm">TRÉMA</span></div>
+      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <span class="wordmark" role="img" aria-label="trema"></span></div>
       <span class="cap">A · Horizontal — usage principal</span></div>
     <div class="tile wide p-pap"><div class="lock stack">
-      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="nm">TRÉMA</span></div>
+      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <span class="wordmark" role="img" aria-label="trema"></span></div>
       <span class="cap">B · Vertical — carré, avatar</span></div>
     <div class="tile wide p-pap"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <span class="txt"><span class="nm" style="font-size:.62em">TRÉMA</span>
-      <span class="sub">TORRÉFACTEUR · PARIS</span></span></div>
+      <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
+      <span class="sub">STUDIO DE DESIGN · PARIS</span></span></div>
       <span class="cap">C · Signature — papeterie, B2B</span></div>
 
     <div class="tile wide p-enc"><div class="lock">
-      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="nm">TRÉMA</span></div>
+      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <span class="wordmark" role="img" aria-label="trema"></span></div>
       <span class="cap">A · Inversé</span></div>
     <div class="tile wide p-enc"><div class="lock stack">
-      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="nm">TRÉMA</span></div>
+      <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <span class="wordmark" role="img" aria-label="trema"></span></div>
       <span class="cap">B · Inversé</span></div>
     <div class="tile wide p-enc"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <span class="txt"><span class="nm" style="font-size:.62em">TRÉMA</span>
-      <span class="sub">TORRÉFACTEUR · PARIS</span></span></div>
+      <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
+      <span class="sub">STUDIO DE DESIGN · PARIS</span></span></div>
       <span class="cap">C · Inversé</span></div>
   </div>
 
-  <!-- C · le mot -->
-  <h4 class="rev">C · Le mot seul — capitales pour l'institutionnel, bas-de-casse pour le digital</h4>
-  <div class="board b4 rev" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(26px,3.6vw,54px)">
-    <div class="tile wide p-pap"><span class="nm tm" style="font-size:1em">TRÉMA</span><span class="cap">Capitales · positif</span></div>
-    <div class="tile wide p-enc"><span class="nm tm" style="font-size:1em">TRÉMA</span><span class="cap">Capitales · négatif</span></div>
-    <div class="tile wide p-pap"><span class="nm tm" style="font-size:1em">trema</span><span class="cap">Bas-de-casse · positif</span></div>
-    <div class="tile wide p-enc"><span class="nm tm" style="font-size:1em">trema</span><span class="cap">Bas-de-casse · négatif</span></div>
+  <!-- C · le logotype seul -->
+  <h4>C · Le logotype seul</h4>
+  <div class="board b2" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(26px,3.4vw,50px)">
+    <div class="tile wide p-pap"><span class="wordmark" role="img" aria-label="trema"></span>
+      <span class="cap">Positif</span></div>
+    <div class="tile wide p-enc"><span class="wordmark" role="img" aria-label="trema"></span>
+      <span class="cap">Négatif</span></div>
   </div>
 
-  <!-- règle de fonte -->
-  <div class="grid c2 rev" style="margin-bottom:clamp(26px,3.4vw,50px)">
+  <!-- règle du logotype -->
+  <div class="grid c2" style="margin-bottom:clamp(26px,3.4vw,50px)">
     <div class="box fill">
       <h4 style="opacity:.7">Règle non négociable</h4>
-      <h3 style="margin-bottom:.5em"><span class="tm">TRÉMA</span> s'écrit toujours en JT&nbsp;Flair</h3>
-      <p>Dans un titre, dans un paragraphe, dans une légende en mono, dans une signature d'email :
-      le nom de la marque change de fonte quand le reste de la ligne n'est pas en Flair. Jamais d'exception,
-      jamais de substitution système.</p>
+      <h3 style="margin-bottom:.5em">Le logotype est un dessin,<br>jamais du texte composé</h3>
+      <p>Le nom de la marque s'écrit <b>trema</b>, en bas-de-casse, sans accent, et il vient toujours de
+      <code>logotrema.svg</code>. On ne le retape pas dans une fonte système, pas plus qu'on ne le
+      recompose en JT Flair : le dessin des lettres et leurs approches font partie de la marque.</p>
+      <p>Dans un texte courant, on écrit « Tréma » comme un mot ordinaire, dans la fonte du texte.
+      Le logotype, lui, ne se met pas dans une phrase — il se pose.</p>
     </div>
     <div class="board b2" style="align-self:start">
       <div class="tile wide p-pap" style="padding:8%">
         <div style="text-align:center">
-          <p class="mono" style="margin-bottom:.9em">Le café <span class="tm">TRÉMA</span> est torréfié à Paris.</p>
-          <span class="chip">✓ Correct</span></div></div>
+          <span class="wordmark" style="font-size:26px;margin:0 auto .9em" role="img" aria-label="trema"></span>
+          <span class="chip">✓ Le fichier</span></div></div>
       <div class="tile wide p-pap" style="padding:8%">
         <div style="text-align:center">
-          <p class="mono" style="margin-bottom:.9em">Le café TRÉMA est torréfié à Paris.</p>
-          <span class="chip">✕ Refusé</span></div></div>
+          <p style="font-family:Arial,sans-serif;font-weight:700;font-size:26px;margin-bottom:.55em">trema</p>
+          <span class="chip">✕ Retapé</span></div></div>
     </div>
   </div>
 
   <!-- fichiers -->
-  <div class="rev">
+  <div>
     <h4>Fichiers de référence — nommage imposé</h4>
     <div class="scrollx"><table>
       <tr><th>Fichier</th><th>Contenu</th><th>Format</th><th>Usage</th></tr>
@@ -521,22 +527,22 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s4" data-t="Le signe comme fenêtre" data-p="Le signe" class="l">
   <div class="num">04</div>
   <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 04</div>
-    <h2 class="rev">Le signe<br>comme fenêtre</h2></div>
-  <p class="rev">Le principe le plus fort du système : le signe n'est pas posé <em>sur</em> l'image, il la
+    <h2>Le signe<br>comme fenêtre</h2></div>
+  <p>Le principe le plus fort du système : le signe n'est pas posé <em>sur</em> l'image, il la
   <b>découpe</b>. La photo remplit la forme, la forme cadre la photo. C'est ce qui rend une composition
   reconnaissable même quand le mot a disparu.</p></div>
 
   <div class="grid c4" style="margin-bottom:var(--gut)">
-    <div class="win rev"><div class="cut"><img src="image%20347.jpg" alt=""></div><div class="cap">01 · Photo découpée</div></div>
-    <div class="win rev" style="background:var(--encre);color:var(--papier)"><div class="fill"></div>
+    <div class="win"><div class="cut"><img src="image%20347.jpg" alt=""></div><div class="cap">01 · Photo découpée</div></div>
+    <div class="win" style="background:var(--encre);color:var(--papier)"><div class="fill"></div>
       <div class="cap">02 · Aplat</div></div>
-    <div class="win rev"><div class="halftone"></div><div class="cap">03 · Trame</div></div>
-    <div class="tiles rev"><i></i><div class="cap" style="position:absolute;left:0;right:0;bottom:0;padding:7px 10px;
+    <div class="win"><div class="halftone"></div><div class="cap">03 · Trame</div></div>
+    <div class="tiles"><i></i><div class="cap" style="position:absolute;left:0;right:0;bottom:0;padding:7px 10px;
       border-top:var(--rule);font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
       background:var(--blanc);color:var(--encre)">04 · Répétition</div></div>
   </div>
 
-  <div class="grid c2 rev" style="align-items:center">
+  <div class="grid c2" style="align-items:center">
     <div style="border:var(--rule);background:var(--encre);padding:clamp(20px,3vw,44px);display:grid;place-items:center">
       <img src="Union.png" alt="Le signe rempli d'une photographie" style="width:min(100%,400px)">
     </div>
@@ -544,11 +550,13 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       <h3>Règles de découpe</h3>
       <p>Le signe garde ses proportions 78 : 91, toujours. Il peut sortir du format sur un seul bord.
       La photo à l'intérieur est recadrée, jamais déformée. Un seul signe-fenêtre par composition.</p>
-      <p>Le sujet — la main, le verre, la coulée — occupe la partie large de la forme, jamais la pointe.
+      <p>Le sujet — un écran, une page, un détail de projet — occupe la partie large de la forme, jamais la pointe.
       La tuile de répétition mesure 78 × 91 exactement : aucun espacement, aucune rotation alternée.</p>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:16px">
         <span class="chip">PNG 32 bits</span><span class="chip">3000 px min.</span><span class="chip">Fond transparent</span>
       </div>
+      <p class="mono dim" style="margin-top:16px">Les photographies de ce livre sont des images de calage.
+      À remplacer par des vues de projets — écrans, éditions, maquettes.</p>
     </div>
   </div>
 </section>
@@ -558,24 +566,24 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s5" data-t="Ce qu'on ne fait pas" data-p="Le signe" class="e">
   <div class="num">05</div>
   <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 05</div>
-    <h2 class="rev">Ce qu'on<br>ne fait pas</h2></div>
-  <p class="rev">Six fautes qui reviennent toujours. Si un fichier ressemble à l'un de ces cadres,
+    <h2>Ce qu'on<br>ne fait pas</h2></div>
+  <p>Six fautes qui reviennent toujours. Si un fichier ressemble à l'un de ces cadres,
   il ne part pas en production.</p></div>
   <div class="grid c3">
-    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:scaleX(1.5)"><use href="#tm"/></svg>
+    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:scaleX(1.5)"><use href="#tm"/></svg>
       <div class="lab2">Déformer, étirer</div></div>
-    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:rotate(24deg)"><use href="#tm"/></svg>
+    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:rotate(24deg)"><use href="#tm"/></svg>
       <div class="lab2">Faire pivoter</div></div>
-    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:22%;opacity:.32"><use href="#tm"/></svg>
+    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;opacity:.32"><use href="#tm"/></svg>
       <div class="lab2">Baisser l'opacité, griser</div></div>
-    <div class="dont rev"><svg class="sym" viewBox="0 0 78 91" style="width:22%;filter:drop-shadow(6px 8px 0 rgba(255,255,255,.4))"><use href="#tm"/></svg>
+    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;filter:drop-shadow(6px 8px 0 rgba(255,255,255,.4))"><use href="#tm"/></svg>
       <div class="lab2">Ombre, relief, biseau</div></div>
-    <div class="dont rev" style="padding:0"><div style="position:relative;width:100%;height:100%;display:grid;place-items:center">
+    <div class="dont" style="padding:0"><div style="position:relative;width:100%;height:100%;display:grid;place-items:center">
       <img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
       <svg class="sym" viewBox="0 0 78 91" style="width:22%;position:relative;color:#fff"><use href="#tm"/></svg></div>
       <div class="lab2">Poser sur une photo chargée</div></div>
-    <div class="dont rev"><span style="font-family:Georgia,serif;font-size:clamp(20px,2.6vw,32px);font-weight:700">TRÉMA</span>
-      <div class="lab2">Écrire le nom dans une autre fonte</div></div>
+    <div class="dont"><span style="font-family:Georgia,serif;font-size:clamp(20px,2.6vw,32px);font-weight:700">trema</span>
+      <div class="lab2">Retaper le logotype au lieu d'appeler le fichier</div></div>
   </div>
 </section>
 
@@ -583,16 +591,11 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <!-- ═════ 06 · SPÉCIMEN ═════ -->
 <section id="s6" data-t="Spécimen" data-p="Typographie" class="w full">
   <div class="part">Typographie</div>
-  <div class="spec-note"><span>JT FLAIR · SPÉCIMEN</span><span>SURVOLEZ CHAQUE MOT</span>
-    <span>wght 300–1000 / FLAR 0–100 / slnt 0–15</span></div>
-  <div class="specimen">
-    <span class="fx-flare" data-fx>JT&nbsp;Flair</span>
-    <span style="font-variation-settings:'wght' 400,'FLAR' 100" class="fx-thin" data-fx>Spécimen.</span>
-    <span class="fx-flare" data-fx style="font-variation-settings:'wght' 1000,'FLAR' 0">TRÉMA</span>
-    <span style="font-variation-settings:'wght' 300,'FLAR' 100,'slnt' 15" class="fx-flare" data-fx>Paris—</span>
-    <span style="font-variation-settings:'wght' 900,'FLAR' 100" class="fx-thin" data-fx>TORRÉFACTION</span>
-    <span style="font-variation-settings:'wght' 700,'FLAR' 50,'slnt' 10" class="fx-flare" data-fx>&amp;&nbsp;PRÊT&nbsp;À&nbsp;MOUDRE</span>
-  </div>
+  <div class="spec-note"><span>JT FLAIR · SPÉCIMEN</span><span>MODULATION « CASCADE »</span>
+    <span>wght 300–1000 / slnt 0–15</span></div>
+  <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identité, écrans, éditions — un studio de design à Paris.</div>
+  <p class="mono dim" style="margin-top:1.6em">Chaque signe porte sa propre graisse et sa propre inclinaison.
+  Rien ne bouge : la variation est écrite dans la composition, pas jouée au survol.</p>
 </section>
 
 
@@ -600,21 +603,21 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s7" data-t="Les trois axes" data-p="Typographie" class="k">
   <div class="num">07</div>
   <div class="hd"><div><div class="part">Typographie</div><div class="tag">Chapitre 07</div>
-    <h2 class="rev">Les trois<br>axes</h2></div>
-  <p class="rev">Une seule fonte, deux familles, trois curseurs. <code>wght</code> donne le poids,
+    <h2>Les trois<br>axes</h2></div>
+  <p>Une seule fonte, deux familles, trois curseurs. <code>wght</code> donne le poids,
   <code>slnt</code> l'inclinaison, et <code>FLAR</code> — notre signature — fait pousser les terminaisons
   évasées. On monte le flare quand on affirme, on le baisse quand on explique.</p></div>
 
-  <div class="rev" style="margin-bottom:clamp(24px,3vw,44px)">
+  <div style="margin-bottom:clamp(24px,3vw,44px)">
     <h4>FLAR — l'axe signature · Basic 0 → Extra 100</h4>
     <div class="axis-line" style="font-family:'JT Flair Basic';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Révéler le grain<span class="meta">FLAR 0 · Basic</span></div>
+      Révéler la forme<span class="meta">FLAR 0 · Basic</span></div>
     <div class="axis-line" style="font-family:'JT Flair Extra';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Révéler le grain<span class="meta">FLAR 100 · Extra</span></div>
+      Révéler la forme<span class="meta">FLAR 100 · Extra</span></div>
     <div class="axis-line" style="font-family:'JT Flair Basic';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Révéler le grain<span class="meta">FLAR 0 · Basic Light</span></div>
+      Révéler la forme<span class="meta">FLAR 0 · Basic Light</span></div>
     <div class="axis-line" style="font-family:'JT Flair Extra';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Révéler le grain<span class="meta">FLAR 100 · Extra Light</span></div>
+      Révéler la forme<span class="meta">FLAR 100 · Extra Light</span></div>
     <div class="box" style="margin-top:var(--gut)">
       <h4 style="opacity:.7">Point technique — à trancher avant diffusion</h4>
       <p><b>Le fichier variable livré ne rend pas l'axe FLAR.</b> <code>GTFlaireVF.ttf</code> déclare bien
@@ -628,7 +631,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
 
-  <div class="grid c2 rev" style="margin-bottom:clamp(24px,3vw,44px)">
+  <div class="grid c2" style="margin-bottom:clamp(24px,3vw,44px)">
     <div>
       <h4>wght — graisse · 300 → 1000</h4>
       <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 300,'FLAR' 0">Trema<span class="meta">300 · Light</span></div>
@@ -648,7 +651,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
 
-  <div class="grid c3 rev">
+  <div class="grid c3">
     <div class="box"><h4>FLAR 0</h4><p class="mono">Corps de texte, interface, données, mentions légales.</p></div>
     <div class="box"><h4>FLAR 40–60</h4><p class="mono">Titres courants, intertitres, navigation, étiquettes.</p></div>
     <div class="box fill"><h4 style="opacity:.7">FLAR 100</h4><p class="mono">Marque, packaging, affiche, enseigne.
@@ -661,22 +664,22 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s8" data-t="Usage typographique" data-p="Typographie">
   <div class="num">08</div>
   <div class="hd"><div><div class="part">Typographie</div><div class="tag">Chapitre 08</div>
-    <h2 class="rev">Titres &amp;<br>paragraphes</h2></div>
-  <p class="rev">Règle de couple : <b>le titre est en JT Flair, le paragraphe en grotesque neutre.</b>
+    <h2>Titres &amp;<br>paragraphes</h2></div>
+  <p>Règle de couple : <b>le titre est en JT Flair, le paragraphe en grotesque neutre.</b>
   On ne compose jamais un bloc long en Flair — le flare fatigue au-delà de trois lignes. Seule exception :
-  le nom <span class="tm">TRÉMA</span>, toujours en Flair, même au milieu d'un paragraphe.</p></div>
+  le logotype, qui n'est pas de la typographie mais un dessin.</p></div>
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
-    <div class="box rev">
+    <div class="box">
       <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:.9;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
       <p>Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère
       propre. C'est ce contraste qui fait tenir la page.</p>
       <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
     </div>
-    <div class="box rev">
+    <div class="box">
       <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:.9;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Guji Natural</div>
+        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
       <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Le titre porte la marque,
       le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste
       qui fait tenir la page.</p>
@@ -684,19 +687,42 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
 
-  <h4 class="rev">Échelle — ratio 1,25 · base 16 px · grille 8 px</h4>
-  <div class="scrollx rev" style="margin-bottom:var(--gut)"><table>
-    <tr><th>Rôle</th><th>Fonte</th><th>Desktop</th><th>Mobile</th><th>Interlignage</th><th>wght / FLAR</th></tr>
-    <tr><td>Display</td><td>JT Flair</td><td>132 px</td><td>44 px</td><td>0,85</td><td>1000 / 100</td></tr>
-    <tr><td>Titre 1</td><td>JT Flair</td><td>62 px</td><td>34 px</td><td>0,92</td><td>900 / 100</td></tr>
-    <tr><td>Titre 2</td><td>JT Flair</td><td>38 px</td><td>26 px</td><td>1,02</td><td>800 / 60</td></tr>
+  <h4>La modulation lettre à lettre</h4>
+  <p style="margin-bottom:1.2em">Le seul écart autorisé à l'échelle : une ligne dont chaque signe porte sa
+  propre graisse. C'est une composition, pas un effet — la variation est écrite dans le fichier, elle ne
+  se déclenche pas au survol et ne bouge jamais. Elle se reproduit donc à l'identique en print.</p>
+
+  <div class="board b2" style="margin-bottom:14px">
+    <div class="tile wide p-pap" style="padding:7% 6%;aspect-ratio:2.6">
+      <div class="mod" data-mod="crescendo" style="font-size:clamp(22px,3.4vw,52px)">Révéler la forme</div>
+      <span class="cap">Crescendo · wght 300 → 1000, régulier</span></div>
+    <div class="tile wide p-pap" style="padding:7% 6%;aspect-ratio:2.6">
+      <div class="mod" data-mod="cascade" style="font-size:clamp(22px,3.4vw,52px)">Révéler la forme</div>
+      <span class="cap">Cascade · houle wght + slnt en quadrature</span></div>
+  </div>
+
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <div class="box"><h4>Où</h4><p class="mono">Une ligne par composition, jamais deux. Titre d'ouverture,
+      affiche, post. Jamais sur un paragraphe, jamais dans une interface.</p></div>
+    <div class="box"><h4>Comment</h4><p class="mono">La graisse suit une fonction — rampe ou houle — pas
+      une décision lettre par lettre. Deux exports doivent donner le même dessin.</p></div>
+    <div class="box"><h4>Limites</h4><p class="mono">wght 300 à 1000, slnt 0 à 15. Le logotype ne module
+      jamais : c'est un dessin fixe.</p></div>
+  </div>
+
+  <h4>Échelle — ratio 1,25 · base 16 px · grille 8 px</h4>
+  <div class="scrollx" style="margin-bottom:var(--gut)"><table>
+    <tr><th>Rôle</th><th>Fonte</th><th>Desktop</th><th>Mobile</th><th>Interlignage</th><th>wght / famille</th></tr>
+    <tr><td>Display</td><td>JT Flair</td><td>132 px</td><td>44 px</td><td>0,85</td><td>1000 · Extra</td></tr>
+    <tr><td>Titre 1</td><td>JT Flair</td><td>62 px</td><td>34 px</td><td>0,92</td><td>900 · Extra</td></tr>
+    <tr><td>Titre 2</td><td>JT Flair</td><td>38 px</td><td>26 px</td><td>1,02</td><td>800 · Extra</td></tr>
     <tr><td>Chapô</td><td>Grotesque</td><td>21 px</td><td>18 px</td><td>1,38</td><td>400 / —</td></tr>
     <tr><td>Courant</td><td>Grotesque</td><td>16,5 px</td><td>16 px</td><td>1,58</td><td>400 / —</td></tr>
     <tr><td>Étiquette</td><td>Mono</td><td>10 px</td><td>10 px</td><td>1,7</td><td>400 · CAPS</td></tr>
   </table></div>
 
-  <h4 class="rev">Laboratoire — le texte est éditable</h4>
-  <div class="lab rev" style="margin-bottom:var(--gut)">
+  <h4>Laboratoire — le texte est éditable</h4>
+  <div class="lab" style="margin-bottom:var(--gut)">
     <div id="play" contenteditable="true" spellcheck="false">Trèma révèle</div>
     <div>
       <div class="sl"><label><span>wght</span><b id="v-w">700</b></label><input type="range" id="a-w" min="300" max="1000" value="700"></div>
@@ -708,8 +734,8 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
 
-  <h4 class="rev">Jeu de caractères</h4>
-  <div class="gset rev" id="gset"></div>
+  <h4>Jeu de caractères</h4>
+  <div class="gset" id="gset"></div>
 </section>
 
 
@@ -717,11 +743,11 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s9" data-t="Valeurs" data-p="Système" class="l">
   <div class="num">09</div>
   <div class="hd"><div><div class="part">Système</div><div class="tag">Chapitre 09</div>
-    <h2 class="rev">Valeurs</h2></div>
-  <p class="rev">Il n'y a pas de palette. Six valeurs entre le noir et le papier, et rien d'autre :
+    <h2>Valeurs</h2></div>
+  <p>Il n'y a pas de palette. Six valeurs entre le noir et le papier, et rien d'autre :
   toute la couleur du dispositif vient des photographies. Cliquez pour copier.</p></div>
 
-  <div class="sws rev">
+  <div class="sws">
     <div class="sw" data-hex="#000000" style="background:#000;color:#fff"><span class="nm">Noir</span>
       <span class="vl">#000000<br>Print 1 ton, enseigne<br>Contraste max</span></div>
     <div class="sw" data-hex="#141414" style="background:#141414;color:#F2F1EF"><span class="nm">Encre</span>
@@ -735,7 +761,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     <div class="sw" data-hex="#F2F1EF" style="background:#F2F1EF;color:#141414"><span class="nm">Papier</span>
       <span class="vl">#F2F1EF<br>Fond par défaut<br>Signe en positif</span></div>
   </div>
-  <p class="mono dim rev" style="margin-top:14px">Béton #767676 est une valeur de fond, pas une valeur de signe :
+  <p class="mono dim" style="margin-top:14px">Béton #767676 est une valeur de fond, pas une valeur de signe :
   c'est exactement le point de bascule. On ne compose ni texte fin ni signe en petite taille dessus.</p>
 </section>
 
@@ -744,13 +770,13 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s10" data-t="Les six posts" data-p="Communication" class="w">
   <div class="num">10</div>
   <div class="hd"><div><div class="part">Communication</div><div class="tag">Chapitre 10</div>
-    <h2 class="rev">Les six<br>posts</h2></div>
-  <p class="rev">Six publications, pas une de plus. Elles se lisent ensemble : quelqu'un qui arrive sur le compte
-  doit comprendre <span class="tm">TRÉMA</span> en un écran — la marque, le lieu, la promesse, le produit,
+    <h2>Les six<br>posts</h2></div>
+  <p>Six publications, pas une de plus. Elles se lisent ensemble : quelqu'un qui arrive sur le compte
+  doit comprendre Tréma en un écran — la marque, le lieu, la promesse, le travail,
   la signature graphique, l'information. Les valeurs alternent en damier pour que la grille tienne debout.</p></div>
 
   <div class="feedwrap">
-    <div class="feed rev">
+    <div class="feed">
       <!-- 01 · la marque — sombre -->
       <div class="post" style="background:var(--noir);color:#fff">
         <span class="n">01</span>
@@ -765,7 +791,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       <div class="post" style="color:#fff;justify-content:flex-end">
         <span class="n" style="color:#fff">03</span>
         <img class="bgimg" src="image%20347.jpg" alt="" style="filter:grayscale(1) brightness(.62)">
-        <span class="tm" style="font-size:clamp(15px,2.1vw,28px)">trema</span>
+        <span class="wordmark" style="width:clamp(56px,7.4vw,104px);height:auto;aspect-ratio:4" role="img" aria-label="trema"></span>
       </div>
       <!-- 04 · le produit — clair -->
       <div class="post" style="background:var(--papier);color:var(--encre);padding:0">
@@ -777,9 +803,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       <!-- 05 · l'information — sombre -->
       <div class="post" style="background:var(--encre);color:var(--papier);justify-content:space-between">
         <span class="n" style="color:var(--papier)">05</span>
-        <div class="mn" style="opacity:.6;margin-top:8%">NOUVEAU LOT</div>
-        <div class="big" style="margin-top:auto">Guji<br>Natural</div>
-        <div class="mn" style="opacity:.6;margin-top:.6em">ÉTHIOPIE · 1 800 M · NATUREL</div>
+        <div class="mn" style="opacity:.6;margin-top:8%">NOUVEAU PROJET</div>
+        <div class="big" style="margin-top:auto">Refonte<br>Aria</div>
+        <div class="mn" style="opacity:.6;margin-top:.6em">IDENTITÉ · SITE · ÉDITION</div>
       </div>
       <!-- 06 · la signature — clair -->
       <div class="post" style="background:var(--blanc);color:var(--encre);padding:0">
@@ -788,14 +814,14 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       </div>
     </div>
 
-    <div class="legend rev">
+    <div class="legend">
       <div><b>01</b><p><span class="t">La marque</span>Le signe seul, blanc sur noir, centré. C'est le post
         d'ancrage : il revient tous les six posts et sert de repère dans la grille.</p></div>
       <div><b>02</b><p><span class="t">La promesse</span>Le manifeste en display, noir sur blanc, rien d'autre.
         Trois lignes maximum, drapeau à droite.</p></div>
       <div><b>03</b><p><span class="t">Le lieu</span>Photo pleine en noir et blanc, le mot en bas-de-casse
         posé en pied. Jamais de texte sur la moitié chargée de l'image.</p></div>
-      <div><b>04</b><p><span class="t">Le produit</span>Le signe-fenêtre : la matière remplit la forme.
+      <div><b>04</b><p><span class="t">Le travail</span>Le signe-fenêtre : le projet remplit la forme.
         Le sujet occupe la partie large, jamais la pointe.</p></div>
       <div><b>05</b><p><span class="t">L'information</span>Fiche origine sur aplat encre : mention, nom,
         caractéristiques. Trois niveaux typographiques, pas quatre.</p></div>
@@ -804,7 +830,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
 
-  <div class="grid c3 rev" style="margin-top:clamp(24px,3vw,44px)">
+  <div class="grid c3" style="margin-top:clamp(24px,3vw,44px)">
     <div class="box"><h4>Le damier</h4><p class="mono">Deux posts de même valeur ne se touchent jamais,
       ni côte à côte ni l'un au-dessus de l'autre. Sur trois colonnes :
       sombre / clair / sombre, puis clair / sombre / clair.</p></div>
@@ -820,35 +846,35 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s11" data-t="Applications" data-p="Communication">
   <div class="num">11</div>
   <div class="hd"><div><div class="part">Communication</div><div class="tag">Chapitre 11</div>
-    <h2 class="rev">Applications</h2></div>
-  <p class="rev">Le même signe, le même noir, la même fonte. Sur un objet, la seule décision à prendre est
+    <h2>Applications</h2></div>
+  <p>Le même signe, le même noir, la même fonte. Sur un objet, la seule décision à prendre est
   la polarité — et elle se déduit de la valeur du support.</p></div>
 
   <div class="grid c4" style="margin-bottom:var(--gut)">
-    <div class="app rev"><div class="cup"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <div class="cap">Tasse · positif</div></div>
-    <div class="app rev"><div class="bag"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div><div class="tm" style="font-size:15px">TRÉMA</div><div class="mono" style="font-size:8px;opacity:.6">GUJI NATURAL · 250 G</div></div></div>
-      <div class="cap">Sachet · négatif</div></div>
-    <div class="app rev" style="background:var(--lait)"><div class="sign"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
+    <div class="app"><div class="cup"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
+      <div class="cap">Papeterie · positif</div></div>
+    <div class="app"><div class="bag"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
+      <div><span class="wordmark" style="width:52px;height:13px" role="img" aria-label="trema"></span><div class="mono" style="font-size:8px;opacity:.6;margin-top:5px">DOSSIER DE PROJET</div></div></div>
+      <div class="cap">Pochette · négatif</div></div>
+    <div class="app" style="background:var(--lait)"><div class="sign"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
       <div class="cap">Enseigne · négatif</div></div>
-    <div class="app rev"><div class="tote"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
+    <div class="app"><div class="tote"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
       <div class="cap">Tote · positif</div></div>
   </div>
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
-    <div class="app rev" style="aspect-ratio:2"><div class="card" style="width:46%">
+    <div class="app" style="aspect-ratio:2"><div class="card" style="width:46%">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div class="mono" style="font-size:8px">CAMILLE ROY<br><span style="opacity:.55">TORRÉFACTRICE</span></div></div>
+      <div class="mono" style="font-size:8px">CAMILLE ROY<br><span style="opacity:.55">DIRECTRICE ARTISTIQUE</span></div></div>
       <div class="cap">Carte · positif</div></div>
-    <div class="app rev" style="aspect-ratio:2;background:var(--encre);color:var(--papier)">
+    <div class="app" style="aspect-ratio:2;background:var(--encre);color:var(--papier)">
       <div class="lock" style="font-size:clamp(24px,3.4vw,46px)">
-        <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="nm">TRÉMA</span></div>
+        <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="wordmark" role="img" aria-label="trema"></span></div>
       <div class="cap">Véhicule, vitrine · négatif</div></div>
   </div>
 
-  <h4 class="rev">Pictogrammes</h4>
-  <div class="ico rev" id="picoGrid"></div>
+  <h4>Pictogrammes</h4>
+  <div class="ico" id="picoGrid"></div>
 </section>
 
 
@@ -856,7 +882,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   <div class="hd" style="margin-bottom:clamp(26px,3.5vw,50px)">
     <div>
       <svg class="sym" viewBox="0 0 78 91" style="width:clamp(44px,6vw,80px);margin-bottom:20px"><use href="#tm"/></svg>
-      <h2 class="fx-flare" data-fx>Révéler,<br>jamais recouvrir.</h2>
+      <h2>Révéler,<br>jamais recouvrir.</h2>
     </div>
     <div>
       <p class="mono dim">Ce guide est vivant. Toute exception se documente ici plutôt que de se décider dans
@@ -867,7 +893,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     </div>
   </div>
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
-    <span class="mono dim">© <span data-year>2026</span> <span class="tm">TRÉMA</span> — document interne</span>
+    <span class="mono dim">© <span data-year>2026</span> Tréma — document interne</span>
     <span class="mono dim">Composé en JT Flair</span>
     <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Haut de page</button>
   </div>
@@ -904,26 +930,40 @@ const onScroll = () => {
 };
 addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
-/* ── révélation ── */
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-}), {threshold:.08});
-$$(".rev").forEach(e => io.observe(e));
+/* ── MODULATION LETTRE À LETTRE ──────────────────────────────
+   Aucune animation, aucun écouteur : on écrit la variation une
+   fois dans le DOM et elle ne bouge plus. Les valeurs viennent
+   d'une fonction, pas du hasard — deux chargements donnent la
+   même composition, et on peut la reproduire en print.
 
-/* ── couverture : le mot réagit au curseur, lettre par lettre ── */
-const wm = $("#wm");
-wm.innerHTML = [..."TRÉMA"].map(c => `<span>${c}</span>`).join("");
-const wmSpans = [...wm.children];
-wmSpans.forEach(sp => sp.style.fontVariationSettings = `"wght" 1000,"FLAR" 0,"slnt" 0`);
-addEventListener("pointermove", e => {
-  wmSpans.forEach(sp => {
-    const r = sp.getBoundingClientRect();
-    const d = Math.hypot(e.clientX - (r.left + r.width/2), e.clientY - (r.top + r.height/2));
-    const k = Math.max(0, 1 - d / 620);
-    sp.style.fontVariationSettings =
-      `"wght" ${Math.round(300 + k*700)},"FLAR" ${Math.round(k*100)},"slnt" ${Math.round(k*15)}`;
+   crescendo : la graisse monte du début à la fin de la phrase.
+   cascade   : une houle lente, wght et slnt en quadrature. */
+const MOD = {
+  crescendo: (i, n) => {
+    const k = n > 1 ? i / (n - 1) : 0;
+    return {w: Math.round(300 + 700 * k), s: 0};
+  },
+  cascade: (i, n) => {
+    const k = n > 1 ? i / (n - 1) : 0;
+    const wave = .5 - .5 * Math.cos(k * Math.PI * 3);
+    return {w: Math.round(320 + 660 * wave), s: Math.round(15 * Math.max(0, Math.sin(k * Math.PI * 3)))};
+  }
+};
+$$("[data-mod]").forEach(el => {
+  const fn = MOD[el.dataset.mod] || MOD.crescendo;
+  const chars = [...el.textContent];
+  const letters = chars.filter(c => c !== " ").length;
+  let i = 0;
+  el.textContent = "";
+  chars.forEach(c => {
+    if (c === " ") { el.appendChild(document.createTextNode(" ")); return; }
+    const {w, s} = fn(i++, letters);
+    const sp = document.createElement("span");
+    sp.style.fontVariationSettings = `"wght" ${w},"slnt" ${s}`;
+    sp.textContent = c;
+    el.appendChild(sp);
   });
-}, {passive:true});
+});
 
 /* ── rampe de polarité : on calcule la bascule, on ne la devine pas ── */
 const lin = v => { const c = v/255; return c <= .03928 ? c/12.92 : Math.pow((c+.055)/1.055, 2.4); };
@@ -994,7 +1034,6 @@ $$(".sw").forEach(sw => sw.onclick = async () => {
 });
 
 /* ── mouvement réduit ── */
-if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$(".rev").forEach(e => e.classList.add("in"));
 })();
 </script>
 </body>
