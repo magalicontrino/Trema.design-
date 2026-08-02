@@ -116,6 +116,10 @@ h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
 .post .half{position:absolute;inset:0 0 46% 0;overflow:hidden;z-index:1}
 .post .half img{width:100%;height:100%;object-fit:cover}
 
+/* the tréma itself: two dots, nothing else — the name, drawn */
+.dots{display:flex;gap:7cqw;margin:auto}
+.dots i{display:block;width:5.6cqw;height:5.6cqw;border-radius:50%;background:currentColor}
+
 /* ── THE PROOF — a figure, then the words that qualify it ───
    Only the validated set of numbers is ever set this large. */
 .bignum{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
@@ -351,7 +355,7 @@ const POSTS = [
       </div>`,
    s:`background:var(--encre);color:var(--papier)`,
    c:`trema, like your insta. Lowercase, and yours.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="--br:1.04">`,
+  {v:"c", h:`<img class="bgimg" src="pics/still-life.png" alt="" style="--br:1.02">`,
    s:`background:var(--lait);color:var(--encre);padding:0`,
    c:`Born from what you already publish on Instagram and Google Maps.`},
   {v:"s", h:`<div class="defn" style="font-size:15cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Always<br>up to<br>date</div>
@@ -368,13 +372,10 @@ const POSTS = [
       <div class="tiny" style="opacity:.7;margin-top:.9em">MENU · HOURS · PHOTOS · REVIEWS</div>`,
    s:`color:#fff`,
    c:`Pastor Benjamin. Everything about the place, on one link.`},
-  {v:"c", h:`<div class="pair">
-        <svg viewBox="0 0 78 91"><use href="#tm"/></svg>
-        <svg viewBox="0 0 78 91" class="out"><use href="#tm"/></svg>
-      </div>
-      <div class="tiny" style="text-align:center;opacity:.5">TEN TEMPLATES · SIGNED BY DESIGNERS</div>`,
+  {v:"c", h:`<div class="dots"><i></i><i></i></div>
+      <div class="tiny" style="text-align:center;opacity:.4">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`Ten templates, signed by designers. Your trema picks one and it is done.`},
+   c:`Two dots over a letter change the way it is read. That is the whole idea, and the name.`},
 
   /* ── row 5 · pillar 2 · found everywhere ── */
   {v:"s", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="--br:.72;--sat:.78">
@@ -428,13 +429,13 @@ const POSTS = [
   {v:"c", h:`<div class="bignum">380+</div>
       <div class="tiny" style="opacity:.55">TREMAS PUBLISHED · HEADING TO 1,000+</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`380+ tremas published, heading to 1,000+.`},
-  {v:"s", h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
-      <div class="fit abs" style="bottom:7%">
+   c:`380+ tremas published, heading to 1,000+. Ten templates, signed by designers.`},
+  {v:"s", h:`<img class="bgimg" src="pics/brick-corner.png" alt="" style="--br:.6">
+      <div class="fit abs" style="top:9%">
         <span style="font-size:19.2cqw;font-variation-settings:'wght' 300,'FLAR' 100">Already</span>
         <span style="font-size:25cqw;font-variation-settings:'wght' 1000,'FLAR' 100">there</span>
       </div>`,
-   s:`background:var(--encre);color:var(--papier);padding:0`,
+   s:`color:#fff;padding:0`,
    c:`Start free. Your trema already exists.`},
   {v:"c", h:`<div class="idx">
         <div><b>40%</b>better conversion</div><div><b>60%</b>less bounce</div>
@@ -457,8 +458,8 @@ const POSTS = [
       <div class="tiny" style="opacity:.55">90 DAYS OF PRO · NO CARD</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
    c:`Create and customize your trema in minutes.`},
-  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:16%;max-width:26px"><use href="#tm"/></svg>
-      <div class="tiny" style="opacity:.7;text-align:center;margin-top:1.6em">TRE.MA</div></div>`,
+  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:36cqw"><use href="#tm"/></svg>
+      <div class="tiny" style="opacity:.7;text-align:center;margin-top:1.5em">TRE.MA</div></div>`,
    s:`background:var(--noir);color:#fff`,
    c:`tre.ma`}
 ];
