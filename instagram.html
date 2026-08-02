@@ -150,16 +150,19 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.smallword,.lesson,.defn,.
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
 
-/* spec sheet under each post */
-.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:var(--gut)}
+/* the captions — one line per post, the way they actually go out */
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
 @media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.specs{grid-template-columns:1fr}}
-.spec{border-top:var(--rule);padding-top:11px}
-.spec b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 40;
-  font-size:clamp(14px,1.4vw,19px);font-weight:400;line-height:1.1}
-.spec .no{font-family:var(--fm);font-size:9px;opacity:.4;letter-spacing:.14em}
-.spec p{font-size:clamp(12.5px,1vw,14.5px);line-height:1.45;margin-top:.3em}
-.spec .dim{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;opacity:.55;margin-top:.5em;display:block}
+.spec{border-top:var(--rule);padding:10px 0 13px;display:grid;grid-template-columns:26px 1fr;gap:10px;
+  align-items:baseline}
+.spec .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
+.spec p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch}
+
+/* the window cut, applied to a photograph inside a post */
+.post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post .cutmask img{width:100%;height:100%;object-fit:cover}
 
 /* gabarits : la zone sûre dessinée */
 .tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
@@ -199,16 +202,9 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 <section class="w">
   <div class="part">Communication</div>
   <h1>Twenty-seven posts,<br>one grid</h1>
-  <p>The grid has a job before it has a style: someone who lands on the account and scrolls three rows
-  should come away knowing what a tréma is, what the studio makes, and who it makes it for. So the
-  sequence is written to be read from the top — the sign, then the lesson, then the offer, then the work.
-  Our clients are places you can look up on a map, and the mark already tapers to a point, so it drops
-  onto a street grid as a pin without being redrawn.</p>
-  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Underneath that, the set runs on a single oscillation:
-  a frame where the type is blown up until the format cuts it, then a frame with almost nothing in it.
-  Loud, quiet, loud. Values alternate like a checkerboard — two posts of the same value never touch,
-  side by side or one above the other — and twenty-seven, not twenty-six, gives nine complete rows with
-  no orphan left hanging at the foot.</p>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, you should know what a tréma is, that
+  trema is a studio in Brussels, and that it works for places you can find on a map. Captions below,
+  in the order they go out.</p>
 
   <div class="feed" id="feed"></div>
 
@@ -216,84 +212,19 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 </section>
 
 
-<!-- ═════ LOUD & QUIET ═════ -->
-<section class="k">
-  <h2>Loud &amp; quiet</h2>
-  <p style="margin-bottom:clamp(24px,3vw,44px)">The range is the point. A studio that says it reveals
-  rather than covers has to be able to shout and to say nothing at all — and to do both with the same
-  mark, the same typeface and the same black.</p>
-  <div class="grid c3">
-    <div class="box"><h4>Maximal</h4><p>The glyph is scaled past the frame and cropped on three sides.
-      You read the drawing, not the word. One character, one ampersand, one number — never a sentence
-      at that size, and never a photograph underneath it.</p></div>
-    <div class="box"><h4>Minimal</h4><p>Two dots, a hairline, a small word in the bottom corner. The
-      empty field is the composition, so nothing is added to make it look finished. If a caption would
-      explain it, the post is not ready.</p></div>
-    <div class="box"><h4>The alternation</h4><p>Never two loud posts touching. A maximal frame is
-      followed by a quiet one, in the row and in the column — the same discipline as the checkerboard,
-      applied to volume instead of value.</p></div>
-  </div>
-</section>
-
-
-<!-- ═════ THE FORMATS ═════ -->
+<!-- ═════ EXPORT ═════ -->
 <section class="l">
-  <h2>The formats</h2>
-  <p style="margin-bottom:clamp(24px,3vw,44px)">We compose in 4:5. It is the ratio of the profile
-  thumbnail and the one that takes up the most height in the feed — a square gets lost there, a 9:16 gets
-  cropped. 1:1 is now only for partners who insist on it.</p>
-
-  <div class="grid c3" style="margin-bottom:var(--gut)">
-    <figure>
-      <div class="tpl" style="aspect-ratio:4/5">
-        <span class="rat">4 : 5</span>
-        <div class="safe" style="inset:8% 6%"></div>
-        <div class="lbl">Feed &amp; profile grid</div>
-      </div>
-      <p class="mono dim" style="margin-top:9px">1080 × 1350 px · the default format</p>
-    </figure>
-    <figure>
-      <div class="tpl" style="aspect-ratio:1">
-        <span class="rat">1 : 1</span>
-        <div class="safe" style="inset:8%"></div>
-        <div class="lbl">Square — on request</div>
-      </div>
-      <p class="mono dim" style="margin-top:9px">1080 × 1080 px · partners, press</p>
-    </figure>
-    <figure>
-      <div class="tpl" style="aspect-ratio:9/16">
-        <span class="rat">9 : 16</span>
-        <div class="safe" style="inset:14% 7%"></div>
-        <div class="lbl">Story &amp; reel</div>
-      </div>
-      <p class="mono dim" style="margin-top:9px">1080 × 1920 px · safe area 250 / 340</p>
-    </figure>
-  </div>
-
+  <h2>Export</h2>
+  <p style="margin-bottom:clamp(22px,2.8vw,38px)">Everything is composed 4:5 — the ratio of the profile
+  thumbnail and the one that takes the most height in the feed. The system behind these frames lives in
+  the <a href="index.html" style="text-decoration:underline">brand book</a>.</p>
   <div class="scrollx"><table>
-    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th><th>Use</th></tr>
-    <tr><td>Feed</td><td>1080 × 1350</td><td>4:5</td><td>6 % margin · 8 % top and bottom</td><td>&lt; 2 MB</td><td>Every publication</td></tr>
-    <tr><td>Square</td><td>1080 × 1080</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td><td>Partner repost</td></tr>
-    <tr><td>Story</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td><td>Behind the scenes, link out</td></tr>
-    <tr><td>Reel — cover</td><td>1080 × 1920</td><td>9:16</td><td>cropped to 1:1 in the grid</td><td>&lt; 4 MB</td><td>Keep the subject centred</td></tr>
-    <tr><td>Profile thumbnail</td><td>—</td><td>4:5</td><td>nothing useful in the outer 6 %</td><td>—</td><td>Automatic crop</td></tr>
+    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th></tr>
+    <tr><td>Feed</td><td>1080 × 1350</td><td>4:5</td><td>6 % sides · 8 % top and bottom</td><td>&lt; 2 MB</td></tr>
+    <tr><td>Square</td><td>1080 × 1080</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td></tr>
+    <tr><td>Story / reel</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td></tr>
+    <tr><td>Profile grid</td><td>—</td><td>4:5</td><td>nothing useful in the outer 6 %</td><td>—</td></tr>
   </table></div>
-</section>
-
-
-<!-- ═════ THE RULES ═════ -->
-<section>
-  <h2>Three rules</h2>
-  <div class="grid c3">
-    <div class="box"><h4>The checkerboard</h4><p>Two posts of the same value never touch. Across three
-      columns: dark / light / dark, then light / dark / light. Check the grid before publishing,
-      not after.</p></div>
-    <div class="box"><h4>The rule of one</h4><p>One graphic principle per post: the photo, or the
-      pattern, or the display. A letter cropped by the frame counts as that one principle — it is not a
-      licence to add a second. Never more than three typographic levels.</p></div>
-    <div class="box"><h4>The wordmark</h4><p>It comes from the file, never retyped. Set at the foot,
-      centred or ranged left, never tight to the edge and never over the busy half of a photograph.</p></div>
-  </div>
 </section>
 
 
@@ -312,150 +243,149 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 $$("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
 
-/* Twenty-seven posts — nine complete rows. `v` records the value —
-   s dark, c light — so the checkerboard can be verified by something
-   other than the eye. The order also alternates volume, loud to quiet,
-   and it is written to be read from the top: what a tréma is, what the
-   studio does, who it is for, then the work. */
+/* Twenty-seven real posts — nine complete rows. `v` records the value,
+   s dark and c light, so the checkerboard can be checked by something
+   other than the eye. `c` is the caption that ships with the post: one
+   line, written the way we would actually post it. */
 const POSTS = [
-  /* ── row 1 · who is speaking ── */
-  {v:"s", t:"The mark", d:"The mark alone, white on black, centred. The anchor post: it comes back through the grid and gives the eye a fixed point.", x:"1080 × 1350 · mark at 44 % of the width",
-   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
-   s:`background:var(--noir);color:#fff`},
-  {v:"c", t:"The promise", d:"The manifesto in display, black on white, nothing else. Three lines maximum, ranged left.", x:"1080 × 1350 · display, 3 lines max",
-   h:`<div class="big" style="margin:auto 0">Reveal,<br>never<br>cover.</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
-  {v:"s", t:"The wordmark, large", d:"MAXIMAL. The wordmark itself, scaled until it bleeds off both edges. Not typography — the drawing from logotrema.svg, called as a mask so it takes the colour of the frame.", x:"1080 × 1350 · wordmark at 140 % of the width",
-   h:`<span class="wordmark" style="position:absolute;left:-20%;top:50%;transform:translateY(-50%);
-        width:140%;aspect-ratio:4;z-index:2"></span>`,
-   s:`background:var(--encre);color:var(--papier)`},
+  /* ── row 1 · who is posting ── */
+  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
+   s:`background:var(--noir);color:#fff`,
+   c:`Two dots. That is the whole idea.`},
+  {v:"c", h:`<div class="ctr" style="gap:6cqw">
+        <span class="wordmark" style="width:74%;aspect-ratio:4"></span>
+        <div class="tiny" style="opacity:.5;text-align:center">STUDIO · BRUSSELS</div></div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`trema studio. Identity for places worth finding. Brussels.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.66)">
+      <span class="wordmark wm" style="margin-top:auto"></span>`,
+   s:`color:#fff`,
+   c:`New work in the window. It will still be there tomorrow.`},
 
-  /* ── row 2 · what a tréma is ── */
-  {v:"c", t:"The lesson", d:"The post that has to do the teaching. The same word twice: dimmed without its dots, solid with them. Anyone who scrolls past this one knows what a tréma is.", x:"1080 × 1350 · 25 cqw, two lines",
-   h:`<div class="lesson"><s>Naive</s><br>Naïve</div>
+  /* ── row 2 · what the name means ── */
+  {v:"c", h:`<div class="lesson"><s>Naive</s><br>Naïve</div>
       <div class="mn" style="opacity:.55">TWO DOTS · A NEW SOUND</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
-  {v:"s", t:"The tréma", d:"MINIMAL. Two dots, centred, in an empty field — the identity at its smallest possible statement, and the only post that carries no mark at all.", x:"1080 × 1350 · dots at 5.6 % of the width",
-   h:`<div class="dots"><i></i><i></i></div>
-      <div class="tiny" style="text-align:center;opacity:.4">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
-   s:`background:var(--encre);color:var(--papier)`},
-  {v:"c", t:"The definition", d:"What the sign does, in four lines of Light. It separates, it opens, it makes a silent letter sound — which is exactly the brief we take on for a place.", x:"1080 × 1350 · 10 cqw, Light 300",
-   h:`<div class="defn" style="font-size:10cqw">It separates.<br>It opens.<br>It makes the<br>silent heard.</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`Naive, naïve. Two dots and the word finally sounds like itself.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-6.png" alt="" style="filter:brightness(.78)">
+      <svg class="sym" viewBox="0 0 78 91" style="width:13%;margin-top:auto"><use href="#tm"/></svg>`,
+   s:`color:#fff`,
+   c:`Service, seven o'clock. The part of the room nobody photographs.`},
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.04)">`,
+   s:`background:var(--lait);color:var(--encre);padding:0`,
+   c:`Steel table, good light. Some rooms design themselves.`},
 
-  /* ── row 3 · what the studio does ── */
-  {v:"s", t:"Wall of type", d:"MAXIMAL. One word repeated until it fills the frame, each line a different weight. The variation is written, not animated — it exports identically every time.", x:"1080 × 1350 · 27 cqw, leading 0.76",
-   h:`<div class="wall2">
+  /* ── row 3 · the studio ── */
+  {v:"s", h:`<div class="wall2">
         <span style="font-variation-settings:'wght' 300,'FLAR' 100">STUDIO</span>
         <span style="font-variation-settings:'wght' 600,'FLAR' 100">STUDIO</span>
         <span style="font-variation-settings:'wght' 900,'FLAR' 100">STUDIO</span>
         <span style="font-variation-settings:'wght' 1000,'FLAR' 100">STUDIO</span>
       </div>`,
-   s:`background:var(--encre);color:var(--papier)`},
-  {v:"c", t:"What we make", d:"The offer, with no adjectives: four words in Light, one per line. It is the only post that states the service outright, so it never carries an image as well.", x:"1080 × 1350 · 14 cqw, Light 300",
-   h:`<div class="defn" style="font-size:14cqw">Identity<br>Screens<br>Print<br>Signage</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
-  {v:"s", t:"The pin", d:"Our clients are places you can look up. The mark already tapers to a point, so on a field of streets it becomes the pin without being redrawn — the concept post for anyone who arrives from a map.", x:"1080 × 1350 · mark at 26 %, 15 % street grid",
-   h:`<div class="mapfield"></div>
+   s:`background:var(--encre);color:var(--papier)`,
+   c:`Studio, studio, studio, studio. Say it four times and it is a brand.`},
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(1.06)">`,
+   s:`background:var(--lait);color:var(--encre);padding:0`,
+   c:`The pour is the logo. Everything else is packaging.`},
+  {v:"s", h:`<div class="mapfield"></div>
       <div class="pinmark"><svg class="sym" viewBox="0 0 78 91" style="width:26cqw"><use href="#tm"/></svg>
       <span class="ring"></span></div>
       <div class="tiny" style="text-align:center;opacity:.6;position:relative;z-index:2">A PLACE · A PIN · A NAME</div>`,
-   s:`background:var(--encre);color:var(--papier)`},
+   s:`background:var(--encre);color:var(--papier)`,
+   c:`Our clients have one thing in common: you can find them on a map.`},
 
   /* ── row 4 · the work ── */
-  {v:"c", t:"The work", d:"The window mark: the project fills the shape. The subject sits in the wide part of the form, never in the point.", x:"1080 × 1350 · form at 88 % of the height",
-   h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
-   s:`background:var(--papier);color:var(--encre);padding:0`},
-  {v:"s", t:"The place", d:"A street, a shopfront, the wordmark at the foot. The picture does the locating; the mark only signs it. Never text over the busy half.", x:"1080 × 1350 · wordmark at 58 %, foot",
-   h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.66)">
-      <span class="wordmark wm" style="margin-top:auto"></span>`,
-   s:`color:#fff`},
-  {v:"c", t:"The signature", d:"The mark tiled full bleed. A breathing post, no text: it makes the rhythm between two pieces of content visible.", x:"1080 × 1350 · exact 78 × 91 tile",
-   h:`<div class="tilebg"></div>`,
-   s:`background:var(--blanc);color:var(--encre);padding:0`},
-
-  /* ── row 5 · the window, again ── */
-  {v:"s", t:"The window, cropped", d:"The same window mark scaled to 170 % and pushed off the top corner. One asset, two completely different frames — which is the whole argument for the device.", x:"1080 × 1350 · form at 170 %, bleeds top and left",
-   h:`<img src="pics/Union.png" alt="" style="position:absolute;top:-26%;left:-18%;width:170%;z-index:2">`,
-   s:`background:var(--encre);color:var(--papier);padding:0`},
-  {v:"c", t:"Silence", d:"MINIMAL. One hairline and one caption. Nothing is added to make the frame look finished — the empty field is the composition.", x:"1080 × 1350 · rule at 100 %, 1.4 px",
-   h:`<div class="hairline"></div>
-      <div class="tiny" style="opacity:.4">NOTHING TO ADD</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
-  {v:"s", t:"The project", d:"A real place, its own logotype, our frame. The client's mark sits at the foot in paper over a darkened photograph — their name, our composition. Three typographic levels, not four.", x:"1080 × 1350 · client mark at 64 %, foot",
-   h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.74)">
-      <div class="mn" style="opacity:.75;margin-top:4%">FEATURED</div>
+  {v:"c", h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
+   s:`background:var(--papier);color:var(--encre);padding:0`,
+   c:`The mark is a window. The work goes inside it.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.74)">
       <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:64%;margin-top:auto;filter:invert(1)">
       <div class="mn" style="opacity:.7;margin-top:.8em">BAR · BRUSSELS · 2026</div>`,
-   s:`color:#fff`},
+   s:`color:#fff`,
+   c:`Pastor Benjamin — identity, menus, signage. Bar, Brussels.`},
+  {v:"c", h:`<div class="tilebg"></div>`,
+   s:`background:var(--blanc);color:var(--encre);padding:0`,
+   c:`One shape, repeated until it becomes a pattern.`},
 
-  /* ── row 6 · loud and quiet ── */
-  {v:"c", t:"The detail", d:"Tight crop on the thing being made — a pour, a plate, a surface. No text at all: this is where the block takes a breath.", x:"1080 × 1350 · no text",
-   h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:contrast(1.04) brightness(1.08)">`,
-   s:`background:var(--lait);color:var(--encre);padding:0`},
-  {v:"s", t:"In motion", d:"MAXIMAL. The slant axis at its maximum, at display size. Two words only — a slanted paragraph is refused everywhere in the system.", x:"1080 × 1350 · 31 cqw, slnt 15",
-   h:`<div class="slantbig">In<br>motion</div>`,
-   s:`background:var(--noir);color:#fff`},
-  {v:"c", t:"One word", d:"MINIMAL. A single word in Light, low in the frame, over a room with nothing happening in it. The counterweight to every maximal post.", x:"1080 × 1350 · 9 cqw, Light 300",
-   h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.86)">
+  /* ── row 5 · closer ── */
+  {v:"s", h:`<img src="pics/Union.png" alt="" style="position:absolute;top:-26%;left:-18%;width:170%;z-index:2">`,
+   s:`background:var(--encre);color:var(--papier);padding:0`,
+   c:`Same window, closer in. The crop is half the design.`},
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.9)">
       <div class="smallword" style="color:#fff">quiet</div>`,
-   s:`color:#fff`},
-
-  /* ── row 7 · numbers and words ── */
-  {v:"s", t:"The number", d:"MAXIMAL. A year, a count, an edition number — set large enough that the digits are cut by the format and read as shapes.", x:"1080 × 1350 · 155 cqw, cut left and right",
-   h:`<div class="huge cut" style="font-size:155cqw">26</div>`,
-   s:`background:var(--encre);color:var(--papier)`},
-  {v:"c", t:"The index", d:"The contents of a project, set as a mono list. Editorial rather than graphic — it earns its place by being the only post you actually read.", x:"1080 × 1350 · mono 4.6 cqw",
-   h:`<div class="idx">
-        <div><b>01</b>Identity</div><div><b>02</b>Type</div><div><b>03</b>Screens</div>
-        <div><b>04</b>Print</div><div><b>05</b>Signage</div></div>`,
-   s:`background:var(--lait);color:var(--encre)`},
-  {v:"s", t:"Split frame", d:"Photograph over the top half, ink and display below. The only post where an image and a display line share a frame — and the line never crosses onto the picture.", x:"1080 × 1350 · split at 54 %",
-   h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
-      <div class="huge" style="position:absolute;left:8%;right:8%;bottom:7%;font-size:23cqw;z-index:3">Half<br>light</div>`,
-   s:`background:var(--encre);color:var(--papier);padding:0`},
-
-  /* ── row 8 · turning to the reader ── */
-  {v:"c", t:"The question", d:"MINIMAL in weight, loud in what it asks. Light 300 on milk, three lines, no mark. It is the manifesto turned round on the reader.", x:"1080 × 1350 · 19 cqw, Light 300",
-   h:`<div class="qbig">What<br>are you<br>hiding?</div>`,
-   s:`background:var(--lait);color:var(--encre)`},
-  {v:"s", t:"The quote", d:"A line from a client, in Light over their own table. The only place we set 300 at display size, and the only place a photograph carries running text.", x:"1080 × 1350 · display Light 300",
-   h:`<img class="bgimg" src="pics/image%20347-3.png" alt="" style="filter:brightness(.62)">
+   s:`color:#fff`,
+   c:`Quiet.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-3.png" alt="" style="filter:brightness(.6)">
       <div class="flair" style="margin:auto 0;font-family:var(--fd);font-variation-settings:'wght' 300,'FLAR' 0;
         font-size:13cqw;line-height:1.06;letter-spacing:-.02em">"A line<br>from somewhere<br>else."</div>
       <div class="mn" style="opacity:.6">ATTRIBUTION</div>`,
-   s:`color:#fff`},
-  {v:"c", t:"The location", d:"The practical half of the pin: name, street, and the one line that sends someone to the map. Every place we work for is findable, and this post is where we say so.", x:"1080 × 1350 · mono, mark at 13 %",
-   h:`<div class="mn" style="opacity:.5">FIND THE PLACE</div>
+   s:`color:#fff`,
+   c:`"A line from somewhere else." The nicest thing a client said this year.`},
+
+  /* ── row 6 · the sign, the city ── */
+  {v:"c", h:`<div class="dots"><i></i><i></i></div>
+      <div class="tiny" style="text-align:center;opacity:.4">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`A tréma separates, opens, and makes a silent letter sound.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.8);object-position:70% 40%">`,
+   s:`color:#fff;padding:0`,
+   c:`Brussels, on the way to a meeting.`},
+  {v:"c", h:`<div class="defn" style="font-size:14cqw">Identity<br>Screens<br>Print<br>Signage</div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`Identity. Screens. Print. Signage. That is the whole menu.`},
+
+  /* ── row 7 · in the room ── */
+  {v:"s", h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
+      <div class="huge" style="position:absolute;left:8%;right:8%;bottom:7%;font-size:23cqw;z-index:3">Half<br>light</div>`,
+   s:`background:var(--encre);color:var(--papier);padding:0`,
+   c:`Half light, half kitchen.`},
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.02);object-position:40% 60%">
+      <span class="wordmark wm" style="margin-top:auto;background:var(--encre)"></span>`,
+   s:`color:var(--encre)`,
+   c:`Morning shift.`},
+  {v:"s", h:`<div class="slantbig">In<br>motion</div>`,
+   s:`background:var(--noir);color:#fff`,
+   c:`In motion. The slant only ever gets two words.`},
+
+  /* ── row 8 · the window again ── */
+  {v:"c", h:`<div class="cutmask"><img src="pics/image%20347-3.png" alt=""></div>`,
+   s:`background:var(--papier);color:var(--encre);padding:0`,
+   c:`The plate, cut into the mark.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.56)">
+      <svg class="sym" viewBox="0 0 78 91" style="width:15%;margin:auto"><use href="#tm"/></svg>`,
+   s:`color:#fff`,
+   c:`A room where people look up.`},
+  {v:"c", h:`<div class="mn" style="opacity:.5">FIND THE PLACE</div>
       <div class="pinmark" style="gap:2.5cqw"><svg class="sym" viewBox="0 0 78 91" style="width:13cqw"><use href="#tm"/></svg></div>
       <div class="tiny" style="opacity:.75;line-height:2">RUE DU MIDI<br>1000 BRUSSELS<br>OPEN IN MAPS →</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`Rue du Midi, 1000 Brussels. Open in maps.`},
 
   /* ── row 9 · the close ── */
-  {v:"s", t:"The toolkit", d:"What a place actually gets: a menu, a gallery, a set of reviews, a playlist. The pictograms drawn on the same grid as the mark, four to a frame and never more.", x:"1080 × 1350 · pictograms at 62 % of the width",
-   h:`<div class="toolkit">
+  {v:"s", h:`<div class="toolkit">
         <i style="-webkit-mask-image:url('picto/web/menu.svg');mask-image:url('picto/web/menu.svg')"></i>
         <i style="-webkit-mask-image:url('picto/web/gallery.svg');mask-image:url('picto/web/gallery.svg')"></i>
         <i style="-webkit-mask-image:url('picto/web/reviews.svg');mask-image:url('picto/web/reviews.svg')"></i>
         <i style="-webkit-mask-image:url('picto/web/playlist.svg');mask-image:url('picto/web/playlist.svg')"></i>
       </div>
       <div class="tiny" style="text-align:center;opacity:.55">MENU · GALLERY · REVIEWS · PLAYLIST</div>`,
-   s:`background:var(--encre);color:var(--papier)`},
-  {v:"c", t:"The call", d:"End of block: the mark and an address. The only post that asks the reader for anything.", x:"1080 × 1350 · one line of call to action",
-   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:30%;max-width:40px"><use href="#tm"/></svg></div>
+   s:`background:var(--encre);color:var(--papier)`,
+   c:`Menu, gallery, reviews, playlist — what a place actually needs online.`},
+  {v:"c", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:30%;max-width:40px"><use href="#tm"/></svg></div>
       <div class="mn" style="opacity:.7;text-align:center">TREMA.DESIGN</div>`,
-   s:`background:var(--blanc);color:var(--encre)`},
-  {v:"s", t:"Sign-off", d:"MINIMAL. The mark at its smallest published size, alone in a black field. It closes the ninth row and rhymes with post 01.", x:"1080 × 1350 · mark at 14 % of the width",
-   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:14%;max-width:22px;opacity:.9"><use href="#tm"/></svg></div>`,
-   s:`background:var(--noir);color:#fff`}
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`trema.design`},
+  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:14%;max-width:22px;opacity:.9"><use href="#tm"/></svg></div>`,
+   s:`background:var(--noir);color:#fff`,
+   c:`That is the block. Back in a week.`}
 ];
 
 $("#feed").innerHTML = POSTS.map((p, i) =>
   `<div class="post" style="${p.s}"><span class="n">${String(i+1).padStart(2,"0")}</span>${p.h}</div>`).join("");
 
+/* the captions, in the order they go out */
 $("#specs").innerHTML = POSTS.map((p, i) =>
-  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span>
-    <b>${p.t}</b><p>${p.d}</p><span class="dim">${p.x}</span></div>`).join("");
+  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${p.c}</p></div>`).join("");
 
 /* checkerboard check: no neighbour of the same value, in the row or
    in the column. Written to the console — if the grid ever breaks we
