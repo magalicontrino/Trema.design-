@@ -140,6 +140,19 @@ h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
   padding:3.6cqw 11cqw;font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
   font-size:15cqw;line-height:1;text-transform:uppercase}
 
+/* ── FLUSH BOTH SIDES — the size is solved, not chosen ──────
+   Each line's font-size is the measure divided by that word's
+   advance in ems, so words of different lengths come out flush
+   on both edges. The sizes look arbitrary; they are the answer
+   to a division. Nothing can overflow the frame — which is the
+   whole point of setting it this way rather than guessing.
+   Measure is 82 cqw in flow (the 9% padding box) and 84 cqw for
+   the .abs variant. Re-measure if a word changes. */
+.fit{font-family:var(--fd);line-height:.78;letter-spacing:-.035em;
+  text-transform:uppercase;margin:auto 0}
+.fit span{display:block;white-space:nowrap}
+.post .fit.abs{position:absolute;left:8%;right:8%;margin:0;z-index:3}
+
 /* display set in Light: the long message lines carry the page */
 .defn{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
   line-height:1.04;letter-spacing:-.02em;margin:auto 0}
@@ -152,6 +165,14 @@ h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
   align-items:baseline}
 .spec .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
 .spec p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch}
+
+/* ── THE PICTURES CARRY THE COLOUR ─────────────────────────
+   The graphic system has none, so the photographs are allowed a
+   little more than they came with. Saturation is set once here;
+   each post only dials its own brightness through --br. Keep
+   --sat under 1.3 — past that the food goes plastic. */
+.post img.bgimg,.post .half img,.post .cutmask img,.post .kw .in img{
+  filter:saturate(var(--sat,1.18)) contrast(var(--ct,1.03)) brightness(var(--br,1))}
 
 /* the window cut, applied to a photograph inside a post */
 .post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
@@ -284,23 +305,28 @@ const POSTS = [
   {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
    s:`background:var(--noir);color:#fff`,
    c:`Everything about your place. One link.`},
-  {v:"c", h:`<div class="big" style="margin:auto 0">Everything<br>about your<br>place.<br>One link.</div>`,
+  {v:"c", h:`<div class="fit">
+        <span style="font-size:12.6cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Everything</span>
+        <span style="font-size:12.3cqw;font-variation-settings:'wght' 1000,'FLAR' 100">about your</span>
+        <span style="font-size:23.7cqw;font-variation-settings:'wght' 1000,'FLAR' 100">place.</span>
+        <span style="font-size:17cqw;font-variation-settings:'wght' 1000,'FLAR' 100">One link.</span>
+      </div>`,
    s:`background:var(--blanc);color:var(--encre)`,
    c:`Every place has an address. trema is yours online.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.66)">
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="--br:.66">
       <span class="wordmark wm" style="margin-top:auto"></span>`,
    s:`color:#fff`,
    c:`Purpose-built for physical places.`},
 
   /* ── row 2 · pillar 1 · everything about your place ── */
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(1.02) saturate(.6)">
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="--br:1.02;--sat:.82">
       <div class="kw">
         <div class="in"><img src="pics/image%20347-4.png" alt=""></div>
         <svg viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet"><use href="#tm"/></svg>
       </div>`,
    s:`color:#fff;padding:0`,
    c:`Your menu, photos, news, reviews and community — behind one link.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-6.png" alt="" style="filter:brightness(.78)">
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-6.png" alt="" style="--br:.78">
       <svg class="sym" viewBox="0 0 78 91" style="width:13%;margin-top:auto"><use href="#tm"/></svg>`,
    s:`color:#fff`,
    c:`Made for places with a door, a kitchen and an opening time.`},
@@ -325,7 +351,7 @@ const POSTS = [
       </div>`,
    s:`background:var(--encre);color:var(--papier)`,
    c:`trema, like your insta. Lowercase, and yours.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.04)">`,
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="--br:1.04">`,
    s:`background:var(--lait);color:var(--encre);padding:0`,
    c:`Born from what you already publish on Instagram and Google Maps.`},
   {v:"s", h:`<div class="defn" style="font-size:15cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Always<br>up to<br>date</div>
@@ -337,7 +363,7 @@ const POSTS = [
   {v:"c", h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
    s:`background:var(--papier);color:var(--encre);padding:0`,
    c:`A page of your place, not a list of links.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.74)">
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="--br:.74">
       <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:64%;margin-top:auto;filter:invert(1)">
       <div class="tiny" style="opacity:.7;margin-top:.9em">MENU · HOURS · PHOTOS · REVIEWS</div>`,
    s:`color:#fff`,
@@ -351,7 +377,7 @@ const POSTS = [
    c:`Ten templates, signed by designers. Your trema picks one and it is done.`},
 
   /* ── row 5 · pillar 2 · found everywhere ── */
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(.72) saturate(.5)">
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="--br:.72;--sat:.78">
       <svg class="poster" viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet">
         <use href="#tm" x="3.4" y="3.4" fill="#000"/><use href="#tm" fill="#fff"/>
         <text class="pw" x="72" y="27" text-anchor="end">OPEN</text></svg>
@@ -359,19 +385,27 @@ const POSTS = [
         <svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>`,
    s:`color:#fff;padding:0`,
    c:`News, an event, a special offer: publish it as a page of your place, in minutes.`},
-  {v:"c", h:`<div class="defn" style="font-size:12cqw">Found by<br>Google<br>and AIs</div>`,
+  {v:"c", h:`<div class="fit">
+        <span style="font-size:16.9cqw;font-variation-settings:'wght' 300,'FLAR' 0">Found by</span>
+        <span style="font-size:20.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">Google</span>
+        <span style="font-size:22.2cqw;font-variation-settings:'wght' 300,'FLAR' 0">and AIs</span>
+      </div>`,
    s:`background:var(--blanc);color:var(--encre)`,
    c:`Built for search engines — and AI engines — by design.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.56)">
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="--br:.56">
       <svg class="sym" viewBox="0 0 78 91" style="width:15%;margin:auto"><use href="#tm"/></svg>`,
    s:`color:#fff`,
    c:`When someone asks an AI where to go tonight, your place has an answer.`},
 
   /* ── row 6 · pillar 3 · from followers to regulars ── */
-  {v:"c", h:`<div class="defn" style="font-size:13cqw">From<br>followers<br>to regulars</div>`,
+  {v:"c", h:`<div class="fit">
+        <span style="font-size:29.3cqw;font-variation-settings:'wght' 300,'FLAR' 0">From</span>
+        <span style="font-size:14.1cqw;font-variation-settings:'wght' 300,'FLAR' 0">followers</span>
+        <span style="font-size:12.6cqw;font-variation-settings:'wght' 300,'FLAR' 0">to regulars</span>
+      </div>`,
    s:`background:var(--blanc);color:var(--encre)`,
    c:`From followers to regulars.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.8);object-position:70% 40%">`,
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="--br:.8;object-position:70% 40%">`,
    s:`color:#fff;padding:0`,
    c:`Instagram gives you reach. Your trema gives you regulars.`},
   {v:"c", h:`<div class="joinbtn">Join</div>
@@ -396,7 +430,10 @@ const POSTS = [
    s:`background:var(--blanc);color:var(--encre)`,
    c:`380+ tremas published, heading to 1,000+.`},
   {v:"s", h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
-      <div class="huge" style="position:absolute;left:8%;right:8%;bottom:7%;font-size:19cqw;z-index:3">Already<br>there</div>`,
+      <div class="fit abs" style="bottom:7%">
+        <span style="font-size:19.2cqw;font-variation-settings:'wght' 300,'FLAR' 100">Already</span>
+        <span style="font-size:25cqw;font-variation-settings:'wght' 1000,'FLAR' 100">there</span>
+      </div>`,
    s:`background:var(--encre);color:var(--papier);padding:0`,
    c:`Start free. Your trema already exists.`},
   {v:"c", h:`<div class="idx">
@@ -412,7 +449,11 @@ const POSTS = [
       <div class="tiny" style="text-align:center;opacity:.6;margin-top:5cqw">SCAN · TRE.MA</div>`,
    s:`background:var(--encre);color:var(--papier)`,
    c:`Scan it. It opens instantly on a phone.`},
-  {v:"c", h:`<div class="big" style="margin:auto 0">Create<br>your<br>trema</div>
+  {v:"c", h:`<div class="fit">
+        <span style="font-size:22.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">Create</span>
+        <span style="font-size:30.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">your</span>
+        <span style="font-size:22.6cqw;font-variation-settings:'wght' 1000,'FLAR' 100">trema</span>
+      </div>
       <div class="tiny" style="opacity:.55">90 DAYS OF PRO · NO CARD</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
    c:`Create and customize your trema in minutes.`},

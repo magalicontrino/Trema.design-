@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trema studio — Facebook</title>
+<title>trema — Facebook</title>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -125,6 +125,11 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.flair{text-transform:uppe
 .dots{display:flex;gap:5cqw;margin:auto}
 .dots i{display:block;width:4cqw;height:4cqw;border-radius:50%;background:currentColor}
 .hairline{width:100%;height:1.4px;background:currentColor;margin:auto 0;opacity:.55}
+
+/* the pictures carry the colour: saturation once here, each post
+   dials only its own brightness through --br */
+.post img.bgimg,.post .half img{
+  filter:saturate(var(--sat,1.18)) contrast(var(--ct,1.03)) brightness(var(--br,1))}
 
 /* spec sheet beside the feed */
 .specs{display:grid;gap:1.4px;background:currentColor;border:var(--rule)}
@@ -339,7 +344,7 @@ const POSTS = [
    s:`background:var(--blanc);color:var(--encre)`},
 
   {v:"s", r:"r191", t:"The place", d:"Full-bleed photograph in the wide card, the wordmark at the foot but clear of the title bar. Never text over the busy half.", x:"1200 × 630 · 1.91:1 · wordmark at 42 %",
-   h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.62)">
+   h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="--br:.62">
       <span class="wordmark wm" style="margin-top:auto"></span>`,
    s:`color:#fff`},
 
@@ -360,7 +365,7 @@ const POSTS = [
    s:`background:var(--blanc);color:var(--encre)`},
 
   {v:"s", r:"r191", t:"The project", d:"A real place, its own logotype, our frame. The client's mark in paper over a darkened photograph — and the bottom 20 % left empty for the platform's overlay.", x:"1200 × 630 · 1.91:1 · client mark at 40 %",
-   h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.72)">
+   h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="--br:.72">
       <div class="mn" style="opacity:.75">FEATURED</div>
       <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:40%;margin:auto 0 0;filter:invert(1)">
       <div class="mn" style="opacity:.7;margin-top:.7em">BAR · IDENTITY · 2026</div>`,
@@ -383,7 +388,7 @@ const POSTS = [
    s:`background:var(--noir);color:#fff`},
 
   {v:"c", r:"r45", t:"The detail", d:"Tight crop on a material or a screen. No text at all: this is where the sequence takes a breath.", x:"1080 × 1350 · 4:5 · no text",
-   h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:contrast(1.04) brightness(1.06)">`,
+   h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="--br:1.06">`,
    s:`background:var(--lait);color:var(--encre);padding:0`},
 
   {v:"s", r:"r191", t:"The call", d:"End of sequence: the mark and an address, in the card that a share turns into a preview. The only post that asks the reader for anything.", x:"1200 × 630 · 1.91:1 · one line of call to action",
