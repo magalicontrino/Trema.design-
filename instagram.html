@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trema studio — Instagram</title>
+<title>trema — Instagram</title>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -101,7 +101,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    by the frame stays cropped the same way at every width. */
 /* GT Flaire is set in capitals, always — see brand book ch. 08.
    The wordmark is exempt: it is a drawing, not type. */
-h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.smallword,.lesson,.defn,.flair{text-transform:uppercase}
+h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
 
 .post{container-type:inline-size}
 .huge{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
@@ -112,43 +112,37 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.smallword,.lesson,.defn,.
 .post .cut{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:200cqw;z-index:2}
 .wall2{font-family:var(--fd);line-height:.76;letter-spacing:-.04em;font-size:27cqw;margin:auto 0}
 .wall2 span{display:block}
-.slantbig{font-family:var(--fd);font-variation-settings:"wght" 900,"FLAR" 100,"slnt" 15;
-  font-size:31cqw;line-height:.8;letter-spacing:-.02em;margin:auto 0}
-.qbig{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
-  font-size:19cqw;line-height:.98;letter-spacing:-.022em;margin:auto 0}
-.smallword{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
-  font-size:9cqw;line-height:1;margin-top:auto}
 .tiny{font-family:var(--fm);font-size:4.4cqw;letter-spacing:.2em;text-transform:uppercase}
-/* the tréma itself: two dots, nothing else */
-.dots{display:flex;gap:7cqw;margin:auto}
-.dots i{display:block;width:5.6cqw;height:5.6cqw;border-radius:50%;background:currentColor}
-.hairline{width:100%;height:1.4px;background:currentColor;margin:auto 0;opacity:.55}
 .post .half{position:absolute;inset:0 0 46% 0;overflow:hidden;z-index:1}
 .post .half img{width:100%;height:100%;object-fit:cover}
+
+/* ── THE PROOF — a figure, then the words that qualify it ───
+   Only the validated set of numbers is ever set this large. */
+.bignum{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:36cqw;line-height:.84;letter-spacing:-.035em;margin:auto 0}
 .idx{font-family:var(--fm);font-size:4.6cqw;line-height:2.1;margin:auto 0;opacity:.85}
-.idx b{font-weight:400;opacity:.4;margin-right:1.2em}
+.idx b{font-weight:400;opacity:.45;margin-right:1.2em}
 
-/* ── THE EXPLAINER — what a tréma actually does ─────────────
-   The grid has to teach the word before it sells the studio:
-   the dimmed line is the word without its dots. */
-.lesson{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:25cqw;line-height:1.02;letter-spacing:-.025em;margin:auto 0}
-.lesson s{text-decoration:none;opacity:.26}
-.defn{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
-  line-height:1.04;letter-spacing:-.02em;margin:auto 0}
-
-/* ── THE PIN — our clients are places, so the mark drops ────
-   The mark already tapers to a point: on a field of streets it
-   reads as a map pin without redrawing anything. */
-.mapfield{position:absolute;inset:0;z-index:1;opacity:.4;
-  background:repeating-linear-gradient(to right,currentColor 0 1px,transparent 1px 15%),
-             repeating-linear-gradient(to bottom,currentColor 0 1px,transparent 1px 15%)}
-.pinmark{margin:auto;display:grid;place-items:center;gap:3.5cqw;z-index:2}
-.pinmark .ring{width:9cqw;height:9cqw;border:1.4px solid currentColor;border-radius:50%;opacity:.55}
-.toolkit{display:grid;grid-template-columns:repeat(2,1fr);gap:10cqw;margin:auto;width:62%}
-.toolkit i{display:block;aspect-ratio:1;background:currentColor;
+/* ── THE SECTIONS — the product's own vocabulary ────────────
+   The eight section types of a trema page, each with the icon
+   it carries in the editor. Icons are called as masks, so they
+   follow the polarity of the frame like every other picto. */
+.post .sections{display:grid;grid-template-columns:repeat(2,1fr);gap:5.5cqw 7cqw;margin:auto;width:86%}
+.post .sections div{display:grid;grid-template-columns:auto 1fr;gap:4cqw;align-items:center}
+.post .sections i{display:block;width:9cqw;aspect-ratio:1;background:currentColor;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
+.post .sections b{font-family:var(--fm);font-size:3.8cqw;font-weight:400;letter-spacing:.13em;
+  text-transform:uppercase}
+
+/* ── THE BUTTON — the one interface element we show ────────*/
+.post .joinbtn{margin:auto;border:1.6px solid currentColor;border-radius:999px;
+  padding:3.6cqw 11cqw;font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:15cqw;line-height:1;text-transform:uppercase}
+
+/* display set in Light: the long message lines carry the page */
+.defn{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
+  line-height:1.04;letter-spacing:-.02em;margin:auto 0}
 
 /* the captions — one line per post, the way they actually go out */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
@@ -163,6 +157,40 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.smallword,.lesson,.defn,.
 .post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
 .post .cutmask img{width:100%;height:100%;object-fit:cover}
+
+/* ── THE KEYLINE WINDOW ─────────────────────────────────────
+   The other way round from the cut-out: the photograph runs
+   right through the frame and the shape re-crops it, drawn as
+   a white keyline. Same image twice, two different scales. */
+.post .kw{position:absolute;inset:9% 8%;z-index:3}
+.post .kw .in{position:absolute;inset:0;overflow:hidden;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post .kw .in img{position:absolute;left:-38%;top:-34%;width:176%;height:176%;max-width:none;object-fit:cover}
+.post .kw svg{position:absolute;inset:0;fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:round}
+
+/* ── THE POSTER — solid, offset, with a word inside ─────────
+   The black offset is not a drop shadow: it is a second copy of
+   the same drawing, moved. It never blurs and it never softens.
+   The word sits in the top bar, in viewBox units, so it stays
+   locked to the shape at every size. */
+.post .poster{position:absolute;inset:7% 6% 9%;z-index:3;transform:rotate(-4deg)}
+.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:15px;fill:var(--noir);letter-spacing:-.02em}
+
+/* ── THE PAIR — the same drawing, filled and drawn ──────────*/
+.post .pair{margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9cqw;width:86%;align-items:center}
+.post .pair svg{width:100%;height:auto;fill:currentColor}
+.post .pair .out{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
+
+/* ── THE CODE — a real QR, the mark sitting in the middle ───
+   Error correction H, so the centre can be covered. The mark
+   carries its own white pad; without it the modules merge. */
+.qrplate{position:relative;background:#fff;display:grid;place-items:center;padding:2%}
+.qrplate img{width:100%;height:auto}
+.qrplate svg{position:absolute;width:19%;height:auto;fill:var(--noir);background:#fff;
+  padding:1.6%;box-sizing:content-box}
+.post .qr{position:absolute;left:7%;bottom:7%;width:31%;z-index:4}
+.post .qrbig{width:62%;margin:auto}
 
 /* gabarits : la zone sûre dessinée */
 .tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
@@ -201,10 +229,13 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 <!-- ═════ THE GRID ═════ -->
 <section class="w">
   <div class="part">Communication</div>
-  <h1>Twenty-seven posts,<br>one grid</h1>
-  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, you should know what a tréma is, that
-  trema is a studio, and that it works for places you can find on a map. Captions below,
-  in the order they go out.</p>
+  <h1>Everything about<br>your place. One link.</h1>
+  <p>Twenty-seven posts, nine rows. The feed is built on the message house and reads from the top: the
+  roof, then the three pillars — everything about your place always up to date, found everywhere, and
+  followers turning into regulars — then the proof, then the call.</p>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
+  online address of a place, that it is already built from what they publish on Instagram and Google Maps,
+  and that it stays current on its own. Captions below, in the order they go out.</p>
 
   <div class="feed" id="feed"></div>
 
@@ -243,141 +274,152 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 $$("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
 
-/* Twenty-seven real posts — nine complete rows. `v` records the value,
-   s dark and c light, so the checkerboard can be checked by something
-   other than the eye. `c` is the caption that ships with the post: one
-   line, written the way we would actually post it. */
+/* Twenty-seven posts — nine complete rows, built on the message
+   house: the roof, then the three pillars, then the proof, then
+   the call. `v` records the value, s dark and c light, so the
+   checkerboard can be checked by something other than the eye.
+   `c` is the caption that ships with the post. */
 const POSTS = [
-  /* ── row 1 · who is posting ── */
+  /* ── row 1 · the roof ── */
   {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
    s:`background:var(--noir);color:#fff`,
-   c:`Two dots. That is the whole idea.`},
-  {v:"c", h:`<div class="ctr" style="gap:6cqw">
-        <span class="wordmark" style="width:74%;aspect-ratio:4"></span>
-        <div class="tiny" style="opacity:.5;text-align:center">STUDIO · EVERYWHERE</div></div>`,
+   c:`Everything about your place. One link.`},
+  {v:"c", h:`<div class="big" style="margin:auto 0">Everything<br>about your<br>place.<br>One link.</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`trema studio. Identity for places worth finding.`},
+   c:`Every place has an address. trema is yours online.`},
   {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.66)">
       <span class="wordmark wm" style="margin-top:auto"></span>`,
    s:`color:#fff`,
-   c:`New work in the window. It will still be there tomorrow.`},
+   c:`Purpose-built for physical places.`},
 
-  /* ── row 2 · what the name means ── */
-  {v:"c", h:`<div class="lesson"><s>Naive</s><br>Naïve</div>
-      <div class="mn" style="opacity:.55">TWO DOTS · A NEW SOUND</div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`Naive, naïve. Two dots and the word finally sounds like itself.`},
+  /* ── row 2 · pillar 1 · everything about your place ── */
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(1.02) saturate(.6)">
+      <div class="kw">
+        <div class="in"><img src="pics/image%20347-4.png" alt=""></div>
+        <svg viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet"><use href="#tm"/></svg>
+      </div>`,
+   s:`color:#fff;padding:0`,
+   c:`Your menu, photos, news, reviews and community — behind one link.`},
   {v:"s", h:`<img class="bgimg" src="pics/image%20347-6.png" alt="" style="filter:brightness(.78)">
       <svg class="sym" viewBox="0 0 78 91" style="width:13%;margin-top:auto"><use href="#tm"/></svg>`,
    s:`color:#fff`,
-   c:`Service, seven o'clock. The part of the room nobody photographs.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.04)">`,
-   s:`background:var(--lait);color:var(--encre);padding:0`,
-   c:`Steel table, good light. Some rooms design themselves.`},
+   c:`Made for places with a door, a kitchen and an opening time.`},
+  {v:"c", h:`<div class="sections">
+        <div><i style="-webkit-mask-image:url('picto/web/link.svg');mask-image:url('picto/web/link.svg')"></i><b>Link</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/post.svg');mask-image:url('picto/web/post.svg')"></i><b>Page</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/menu.svg');mask-image:url('picto/web/menu.svg')"></i><b>Menu</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/faq.svg');mask-image:url('picto/web/faq.svg')"></i><b>FAQ</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/gallery.svg');mask-image:url('picto/web/gallery.svg')"></i><b>Gallery</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/playlist.svg');mask-image:url('picto/web/playlist.svg')"></i><b>Playlist</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/reviews.svg');mask-image:url('picto/web/reviews.svg')"></i><b>Reviews</b></div>
+        <div><i style="-webkit-mask-image:url('picto/web/mentions.svg');mask-image:url('picto/web/mentions.svg')"></i><b>Mentions</b></div>
+      </div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`Link, Page, Menu, FAQ, Gallery, Playlist, Reviews, Mentions. Add the sections your place needs — menu and pricing, offers and events, photos from Instagram, your best reviews, the creators who talked about you, and the playlist that sets the mood.`},
 
-  /* ── row 3 · the studio ── */
+  /* ── row 3 · pillar 1 · always up to date ── */
   {v:"s", h:`<div class="wall2">
-        <span style="font-variation-settings:'wght' 300,'FLAR' 100">STUDIO</span>
-        <span style="font-variation-settings:'wght' 600,'FLAR' 100">STUDIO</span>
-        <span style="font-variation-settings:'wght' 900,'FLAR' 100">STUDIO</span>
-        <span style="font-variation-settings:'wght' 1000,'FLAR' 100">STUDIO</span>
+        <span style="font-variation-settings:'wght' 300,'FLAR' 100">TREMA</span>
+        <span style="font-variation-settings:'wght' 700,'FLAR' 100">TREMA</span>
+        <span style="font-variation-settings:'wght' 1000,'FLAR' 100">TREMA</span>
       </div>`,
    s:`background:var(--encre);color:var(--papier)`,
-   c:`Studio, studio, studio, studio. Say it four times and it is a brand.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(1.06)">`,
+   c:`trema, like your insta. Lowercase, and yours.`},
+  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.04)">`,
    s:`background:var(--lait);color:var(--encre);padding:0`,
-   c:`The pour is the logo. Everything else is packaging.`},
-  {v:"s", h:`<div class="mapfield"></div>
-      <div class="pinmark"><svg class="sym" viewBox="0 0 78 91" style="width:26cqw"><use href="#tm"/></svg>
-      <span class="ring"></span></div>
-      <div class="tiny" style="text-align:center;opacity:.6;position:relative;z-index:2">A PLACE · A PIN · A NAME</div>`,
+   c:`Born from what you already publish on Instagram and Google Maps.`},
+  {v:"s", h:`<div class="defn" style="font-size:15cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Always<br>up to<br>date</div>
+      <div class="tiny" style="opacity:.6">INSTAGRAM + GOOGLE MAPS</div>`,
    s:`background:var(--encre);color:var(--papier)`,
-   c:`Our clients have one thing in common: you can find them on a map.`},
+   c:`Connected to Instagram and Google Maps — and kept current from the same sources.`},
 
-  /* ── row 4 · the work ── */
+  /* ── row 4 · the page itself ── */
   {v:"c", h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
    s:`background:var(--papier);color:var(--encre);padding:0`,
-   c:`The mark is a window. The work goes inside it.`},
+   c:`A page of your place, not a list of links.`},
   {v:"s", h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.74)">
       <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:64%;margin-top:auto;filter:invert(1)">
-      <div class="mn" style="opacity:.7;margin-top:.8em">BAR · IDENTITY · 2026</div>`,
+      <div class="tiny" style="opacity:.7;margin-top:.9em">MENU · HOURS · PHOTOS · REVIEWS</div>`,
    s:`color:#fff`,
-   c:`Pastor Benjamin — identity, menus, signage.`},
-  {v:"c", h:`<div class="tilebg"></div>`,
-   s:`background:var(--blanc);color:var(--encre);padding:0`,
-   c:`One shape, repeated until it becomes a pattern.`},
-
-  /* ── row 5 · closer ── */
-  {v:"s", h:`<img src="pics/Union.png" alt="" style="position:absolute;top:-26%;left:-18%;width:170%;z-index:2">`,
-   s:`background:var(--encre);color:var(--papier);padding:0`,
-   c:`Same window, closer in. The crop is half the design.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.9)">
-      <div class="smallword" style="color:#fff">quiet</div>`,
-   s:`color:#fff`,
-   c:`Quiet.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-3.png" alt="" style="filter:brightness(.6)">
-      <div class="flair" style="margin:auto 0;font-family:var(--fd);font-variation-settings:'wght' 300,'FLAR' 0;
-        font-size:13cqw;line-height:1.06;letter-spacing:-.02em">"A line<br>from somewhere<br>else."</div>
-      <div class="mn" style="opacity:.6">ATTRIBUTION</div>`,
-   s:`color:#fff`,
-   c:`"A line from somewhere else." The nicest thing a client said this year.`},
-
-  /* ── row 6 · the sign, the city ── */
-  {v:"c", h:`<div class="dots"><i></i><i></i></div>
-      <div class="tiny" style="text-align:center;opacity:.4">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
+   c:`Pastor Benjamin. Everything about the place, on one link.`},
+  {v:"c", h:`<div class="pair">
+        <svg viewBox="0 0 78 91"><use href="#tm"/></svg>
+        <svg viewBox="0 0 78 91" class="out"><use href="#tm"/></svg>
+      </div>
+      <div class="tiny" style="text-align:center;opacity:.5">TEN TEMPLATES · SIGNED BY DESIGNERS</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`A tréma separates, opens, and makes a silent letter sound.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.8);object-position:70% 40%">`,
+   c:`Ten templates, signed by designers. Your trema picks one and it is done.`},
+
+  /* ── row 5 · pillar 2 · found everywhere ── */
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="filter:brightness(.72) saturate(.5)">
+      <svg class="poster" viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet">
+        <use href="#tm" x="3.4" y="3.4" fill="#000"/><use href="#tm" fill="#fff"/>
+        <text class="pw" x="72" y="27" text-anchor="end">OPEN</text></svg>
+      <div class="qr qrplate"><img src="qr-trema.png" alt="QR code to trema.design">
+        <svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>`,
    s:`color:#fff;padding:0`,
-   c:`On the way to a meeting.`},
-  {v:"c", h:`<div class="defn" style="font-size:14cqw">Identity<br>Screens<br>Print<br>Signage</div>`,
+   c:`News, an event, a special offer: publish it as a page of your place, in minutes.`},
+  {v:"c", h:`<div class="defn" style="font-size:12cqw">Found by<br>Google<br>and AIs</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`Identity. Screens. Print. Signage. That is the whole menu.`},
-
-  /* ── row 7 · in the room ── */
-  {v:"s", h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
-      <div class="huge" style="position:absolute;left:8%;right:8%;bottom:7%;font-size:23cqw;z-index:3">Half<br>light</div>`,
-   s:`background:var(--encre);color:var(--papier);padding:0`,
-   c:`Half light, half kitchen.`},
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:brightness(1.02);object-position:40% 60%">
-      <span class="wordmark wm" style="margin-top:auto;background:var(--encre)"></span>`,
-   s:`color:var(--encre)`,
-   c:`Morning shift.`},
-  {v:"s", h:`<div class="slantbig">In<br>motion</div>`,
-   s:`background:var(--noir);color:#fff`,
-   c:`In motion. The slant only ever gets two words.`},
-
-  /* ── row 8 · the window again ── */
-  {v:"c", h:`<div class="cutmask"><img src="pics/image%20347-3.png" alt=""></div>`,
-   s:`background:var(--papier);color:var(--encre);padding:0`,
-   c:`The plate, cut into the mark.`},
+   c:`Built for search engines — and AI engines — by design.`},
   {v:"s", h:`<img class="bgimg" src="pics/image%20347-5.png" alt="" style="filter:brightness(.56)">
       <svg class="sym" viewBox="0 0 78 91" style="width:15%;margin:auto"><use href="#tm"/></svg>`,
    s:`color:#fff`,
-   c:`A room where people look up.`},
-  {v:"c", h:`<div class="mn" style="opacity:.5">THE STUDIO</div>
-      <div class="defn" style="font-size:11cqw">Nowhere<br>&amp; everywhere</div>
-      <div class="tiny" style="opacity:.5">NO ADDRESS · WE WORK WHERE THE WORK IS</div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`No address. We are from nowhere and everywhere at once.`},
+   c:`When someone asks an AI where to go tonight, your place has an answer.`},
 
-  /* ── row 9 · the close ── */
-  {v:"s", h:`<div class="toolkit">
-        <i style="-webkit-mask-image:url('picto/web/menu.svg');mask-image:url('picto/web/menu.svg')"></i>
-        <i style="-webkit-mask-image:url('picto/web/gallery.svg');mask-image:url('picto/web/gallery.svg')"></i>
-        <i style="-webkit-mask-image:url('picto/web/reviews.svg');mask-image:url('picto/web/reviews.svg')"></i>
-        <i style="-webkit-mask-image:url('picto/web/playlist.svg');mask-image:url('picto/web/playlist.svg')"></i>
-      </div>
-      <div class="tiny" style="text-align:center;opacity:.55">MENU · GALLERY · REVIEWS · PLAYLIST</div>`,
-   s:`background:var(--encre);color:var(--papier)`,
-   c:`Menu, gallery, reviews, playlist — what a place actually needs online.`},
-  {v:"c", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:30%;max-width:40px"><use href="#tm"/></svg></div>
-      <div class="mn" style="opacity:.7;text-align:center">TREMA.DESIGN</div>`,
+  /* ── row 6 · pillar 3 · from followers to regulars ── */
+  {v:"c", h:`<div class="defn" style="font-size:13cqw">From<br>followers<br>to regulars</div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`trema.design`},
-  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:14%;max-width:22px;opacity:.9"><use href="#tm"/></svg></div>`,
+   c:`From followers to regulars.`},
+  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.8);object-position:70% 40%">`,
+   s:`color:#fff;padding:0`,
+   c:`Instagram gives you reach. Your trema gives you regulars.`},
+  {v:"c", h:`<div class="joinbtn">Join</div>
+      <div class="tiny" style="text-align:center;opacity:.55">MEMBERS · POINTS · TIERS</div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`A Join button on your own page. Members, points, tiers.`},
+
+  /* ── row 7 · what it is not ── */
+  {v:"s", h:`<div class="cutmask"><img src="pics/image%20347-3.png" alt=""></div>`,
+   s:`background:var(--encre);color:var(--papier);padding:0`,
+   c:`No algorithm decides who sees your menu.`},
+  {v:"c", h:`<div class="defn" style="font-size:10cqw">A bio link<br>lists your<br>links.<br>Your trema<br>is the<br>destination.</div>`,
+   s:`background:var(--lait);color:var(--encre)`,
+   c:`A bio link lists your links. Your trema is the destination.`},
+  {v:"s", h:`<div class="defn" style="font-size:11cqw;font-variation-settings:'wght' 1000,'FLAR' 100">A website<br>is a project.<br>Your trema<br>is already<br>there.</div>`,
+   s:`background:var(--encre);color:var(--papier)`,
+   c:`A website is a project. Your trema is already there.`},
+
+  /* ── row 8 · the proof ── */
+  {v:"c", h:`<div class="bignum">380+</div>
+      <div class="tiny" style="opacity:.55">TREMAS PUBLISHED · HEADING TO 1,000+</div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`380+ tremas published, heading to 1,000+.`},
+  {v:"s", h:`<div class="half"><img src="pics/image%20347-6.png" alt=""></div>
+      <div class="huge" style="position:absolute;left:8%;right:8%;bottom:7%;font-size:19cqw;z-index:3">Already<br>there</div>`,
+   s:`background:var(--encre);color:var(--papier);padding:0`,
+   c:`Start free. Your trema already exists.`},
+  {v:"c", h:`<div class="idx">
+        <div><b>40%</b>better conversion</div><div><b>60%</b>less bounce</div>
+        <div><b>3×</b>faster loading</div><div><b>2.5×</b>more engagement</div></div>
+      <div class="tiny" style="opacity:.5">MEASURED AGAINST TRADITIONAL WEBSITES</div>`,
+   s:`background:var(--lait);color:var(--encre)`,
+   c:`Converts 40% better than traditional websites. 60% less bounce. 3× faster. 2.5× more engagement.`},
+
+  /* ── row 9 · the call ── */
+  {v:"s", h:`<div class="ctr"><div class="qrbig qrplate"><img src="qr-trema.png" alt="QR code to trema.design">
+        <svg viewBox="0 0 78 91"><use href="#tm"/></svg></div></div>
+      <div class="tiny" style="text-align:center;opacity:.6;margin-top:5cqw">SCAN · TRE.MA</div>`,
+   s:`background:var(--encre);color:var(--papier)`,
+   c:`Scan it. It opens instantly on a phone.`},
+  {v:"c", h:`<div class="big" style="margin:auto 0">Create<br>your<br>trema</div>
+      <div class="tiny" style="opacity:.55">90 DAYS OF PRO · NO CARD</div>`,
+   s:`background:var(--blanc);color:var(--encre)`,
+   c:`Create and customize your trema in minutes.`},
+  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:16%;max-width:26px"><use href="#tm"/></svg>
+      <div class="tiny" style="opacity:.7;text-align:center;margin-top:1.6em">TRE.MA</div></div>`,
    s:`background:var(--noir);color:#fff`,
-   c:`That is the block. Back in a week.`}
+   c:`tre.ma`}
 ];
 
 $("#feed").innerHTML = POSTS.map((p, i) =>
