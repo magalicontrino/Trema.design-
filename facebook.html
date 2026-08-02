@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trema studio — Facebook</title>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#141414">
+
+<style>
+@font-face{
+  font-family:"GT Flaire";
+  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
+  font-weight:300 1000;font-display:block;
+}
+
+:root{
+  --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --bg:var(--papier); --fg:var(--encre);
+  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --fm:ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:clamp(14px,2vw,28px);
+  --pad:clamp(18px,4vw,72px);
+  --rule:1.4px solid currentColor;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+
+/* header */
+#top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
+  border-bottom:var(--rule)}
+#top .mk{width:78px;height:19.5px;background:currentColor;flex:0 0 auto;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;mask:url("logotrema.svg") no-repeat left center/contain}
+#top nav{display:flex;gap:clamp(14px,2vw,30px);align-items:center;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
+#top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+
+section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
+section:first-of-type{border-top:0}
+.w{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.k{--bg:var(--noir);--fg:var(--blanc);background:var(--bg);color:var(--fg)}
+.l{--bg:var(--lait);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+
+.part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
+h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance;margin-bottom:.34em}
+h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;margin-bottom:.4em}
+h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  opacity:.55;margin-bottom:.9em}
+p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
+p + p{margin-top:.9em}
+.mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
+.dim{opacity:.55}
+.grid{display:grid;gap:var(--gut)}
+.c2{grid-template-columns:repeat(2,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){.c2,.c3{grid-template-columns:1fr}}
+.box{border:var(--rule);padding:clamp(14px,1.9vw,24px)}
+.sym{display:block;fill:currentColor}
+.wordmark{display:block;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:10.5px}
+th,td{border:var(--rule);padding:7px 10px;text-align:left;vertical-align:middle}
+th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;font-size:9px}
+.scrollx{overflow-x:auto}
+.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
+
+/* ══ THE FEED — a column, not a grid ═══════════════════════
+   Facebook has no profile grid: nothing is ever seen next to
+   anything else. The rule moves from the square to the scroll. */
+.feedwrap{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:clamp(22px,3.4vw,60px);
+  align-items:start}
+@media(max-width:900px){.feedwrap{grid-template-columns:1fr}}
+.fbfeed{display:flex;flex-direction:column;gap:clamp(16px,2vw,26px);position:sticky;top:88px}
+@media(max-width:900px){.fbfeed{position:static}}
+.post{position:relative;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--bg);color:var(--fg);padding:7%;border:var(--rule);container-type:inline-size}
+.r45{aspect-ratio:4/5}
+.r11{aspect-ratio:1}
+.r191{aspect-ratio:1.91}
+.post img.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.post > *{position:relative;z-index:2}
+.post .n{position:absolute;top:5px;left:7px;z-index:5;font-family:var(--fm);font-size:7px;
+  letter-spacing:.12em;opacity:.45}
+.post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:12cqw;line-height:1.02}
+.post .mn{font-family:var(--fm);font-size:3.4cqw;letter-spacing:.16em;text-transform:uppercase}
+.post .ctr{margin:auto;display:grid;place-items:center}
+.post .tilebg{position:absolute;inset:0;background:currentColor;
+  -webkit-mask:url("Logo.svg") repeat center/26px 30.3px;mask:url("Logo.svg") repeat center/26px 30.3px;z-index:1}
+.post .wm{width:42%;aspect-ratio:4}
+
+/* GT Flaire is set in capitals, always — see brand book ch. 08.
+   The wordmark is exempt: it is a drawing, not type. */
+h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.flair{text-transform:uppercase}
+
+/* loud and quiet, in cqw so a crop survives every width */
+.huge{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  line-height:.74;letter-spacing:-.035em}
+/* 200 cqw: at this size the glyph is wider and taller than the 4:5
+   frame, so the format cuts it on all four sides. Below ~180 cqw it
+   merely fills the frame — which is not the same picture. */
+.post .cut{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:200cqw;z-index:2}
+.wall2{font-family:var(--fd);line-height:.78;letter-spacing:-.04em;font-size:22cqw;margin:auto 0}
+.wall2 span{display:block}
+.slantbig{font-family:var(--fd);font-variation-settings:"wght" 900,"FLAR" 100,"slnt" 15;
+  font-size:24cqw;line-height:.82;letter-spacing:-.02em;margin:auto 0}
+.qbig{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
+  font-size:11cqw;line-height:1;letter-spacing:-.022em;margin:auto 0}
+.tiny{font-family:var(--fm);font-size:3.2cqw;letter-spacing:.2em;text-transform:uppercase}
+.dots{display:flex;gap:5cqw;margin:auto}
+.dots i{display:block;width:4cqw;height:4cqw;border-radius:50%;background:currentColor}
+.hairline{width:100%;height:1.4px;background:currentColor;margin:auto 0;opacity:.55}
+
+/* spec sheet beside the feed */
+.specs{display:grid;gap:1.4px;background:currentColor;border:var(--rule)}
+.spec{background:var(--bg);padding:clamp(12px,1.5vw,18px);display:grid;
+  grid-template-columns:30px 1fr;gap:12px;align-items:baseline}
+.spec .no{font-family:var(--fm);font-size:9px;opacity:.4;letter-spacing:.14em}
+.spec b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 40;
+  font-size:clamp(14px,1.4vw,19px);font-weight:400;line-height:1.1;margin-bottom:.2em}
+.spec p{font-size:clamp(12.5px,1vw,14.5px);line-height:1.45;max-width:none}
+.spec .fmt{font-family:var(--fm);font-size:9px;letter-spacing:.09em;opacity:.5;margin-top:.5em;display:block}
+
+/* templates: the safe area drawn */
+.tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
+.tpl .safe{position:absolute;border:1.4px dashed currentColor;opacity:.5}
+.tpl .circle{position:absolute;border:1.4px dashed currentColor;opacity:.55;border-radius:50%}
+.tpl .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;border-top:var(--rule);
+  font-family:var(--fm);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;background:var(--blanc)}
+.tpl .rat{position:absolute;top:8px;left:9px;font-family:var(--fm);font-size:9px;opacity:.45}
+.tpl .crop{position:absolute;top:0;bottom:0;background:currentColor;opacity:.1}
+
+footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overflow:hidden}
+.wall{margin:0 calc(var(--pad) * -1) clamp(22px,3vw,44px)}
+.wall span{display:block;background:currentColor;aspect-ratio:4;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.wall .l1{width:116%;margin-left:-11%}
+.wall .l2{width:104%;margin-left:2%}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <a href="index.html" class="mk" aria-label="trema studio"></a>
+  <nav>
+    <a href="index.html">Brand book</a>
+    <a href="instagram.html">Instagram</a>
+    <a href="facebook.html" class="on">Facebook</a>
+  </nav>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">BRUSSELS</span>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
+<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
+</symbol></svg>
+
+
+<!-- ═════ THE FEED ═════ -->
+<section class="w">
+  <div class="part">Communication</div>
+  <h1>Fifteen posts,<br>one feed</h1>
+  <p>Facebook has no profile grid. Nothing is ever seen beside anything else, so the checkerboard
+  has nothing to alternate against — the rule moves from the square to the scroll. What matters here is
+  the order: no two posts of the same value in a row, and no two loud ones either.</p>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">The other difference is the crop. Facebook re-frames
+  what we upload — the link card, the cover, the circular thumbnail — so the format is never entirely
+  ours. We compose for what survives the crop, not for what leaves the studio.</p>
+
+  <div class="feedwrap">
+    <div class="fbfeed" id="feed"></div>
+    <div class="specs" id="specs"></div>
+  </div>
+</section>
+
+
+<!-- ═════ LOUD & QUIET ═════ -->
+<section class="k">
+  <h2>Loud &amp; quiet</h2>
+  <p style="margin-bottom:clamp(24px,3vw,44px)">The range is the point. A studio that says it reveals
+  rather than covers has to be able to shout and to say nothing at all — with the same mark, the same
+  typeface and the same black. On a feed that scrolls, the alternation happens in time instead of in
+  a grid.</p>
+  <div class="grid c3">
+    <div class="box"><h4>Maximal</h4><p>The glyph is scaled past the frame and cropped. In 1.91:1 it is
+      cut left and right rather than top and bottom — the wide card turns a letter into a horizon.
+      One character per frame, never a sentence.</p></div>
+    <div class="box"><h4>Minimal</h4><p>Two dots, a hairline, a mark at its smallest published size. The
+      empty field is the composition. In a feed this is what makes the next loud post land.</p></div>
+    <div class="box"><h4>The alternation</h4><p>Loud, quiet, loud — checked down the column before
+      anything is scheduled. Two maximal posts in a row read as a shouting account, and the second one
+      is the one nobody sees.</p></div>
+  </div>
+</section>
+
+
+<!-- ═════ THE FORMATS ═════ -->
+<section class="l">
+  <h2>The formats</h2>
+  <p style="margin-bottom:clamp(24px,3vw,44px)">Five exports cover everything the page needs. The feed
+  photo stays 4:5, as on Instagram — it takes the most height in the scroll. The 1.91:1 card is the one
+  that is specific to Facebook: it is what a shared link becomes, and it is cropped and overlaid by the
+  platform whatever we do.</p>
+
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <figure>
+      <div class="tpl" style="aspect-ratio:1.91">
+        <span class="rat">1.91 : 1</span>
+        <div class="safe" style="inset:10%"></div>
+        <div class="lbl">Link card &amp; event cover</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1200 × 630 px · the platform overlays the title</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:4/5">
+        <span class="rat">4 : 5</span>
+        <div class="safe" style="inset:8% 6%"></div>
+        <div class="lbl">Feed photo</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1080 × 1350 px · the default format</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:820/312">
+        <span class="rat">820 × 312</span>
+        <div class="crop" style="left:0;width:11%"></div>
+        <div class="crop" style="right:0;width:11%"></div>
+        <div class="safe" style="inset:6% 11%"></div>
+        <div class="lbl">Page cover — sides cropped on mobile</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1640 × 924 px · centre 640 × 312 always visible</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:1">
+        <span class="rat">1 : 1</span>
+        <div class="circle" style="inset:11%"></div>
+        <div class="lbl">Profile picture — circular crop</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">512 × 512 px · the mark alone, never a lockup</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:9/16">
+        <span class="rat">9 : 16</span>
+        <div class="safe" style="inset:14% 7%"></div>
+        <div class="lbl">Story &amp; reel</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1080 × 1920 px · safe area 250 / 340</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:1">
+        <span class="rat">1 : 1</span>
+        <div class="safe" style="inset:8%"></div>
+        <div class="lbl">Square — albums, partners</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1200 × 1200 px · on request only</p>
+    </figure>
+  </div>
+
+  <div class="scrollx" style="margin-bottom:14px"><table>
+    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th><th>Use</th></tr>
+    <tr><td>Feed photo</td><td>1080 × 1350</td><td>4:5</td><td>6 % sides · 8 % top and bottom</td><td>&lt; 2 MB</td><td>Standard post</td></tr>
+    <tr><td>Link card</td><td>1200 × 630</td><td>1.91:1</td><td>10 % all round</td><td>&lt; 2 MB</td><td>Shared link, article</td></tr>
+    <tr><td>Square</td><td>1200 × 1200</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td><td>Album, partner repost</td></tr>
+    <tr><td>Page cover</td><td>1640 × 924</td><td>16:9</td><td>centre 640 × 312 only</td><td>&lt; 4 MB</td><td>Top of the page</td></tr>
+    <tr><td>Profile picture</td><td>512 × 512</td><td>1:1</td><td>circle at 78 % of the side</td><td>&lt; 1 MB</td><td>Mark alone, reversed</td></tr>
+    <tr><td>Story / reel</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td><td>Behind the scenes, link out</td></tr>
+    <tr><td>Event cover</td><td>1920 × 1005</td><td>1.91:1</td><td>nothing in the bottom 20 %</td><td>&lt; 4 MB</td><td>Talks, openings</td></tr>
+  </table></div>
+  <p class="mono dim">Platform crops move. These are our export standards, not the platform's promise —
+  re-check the cover and the circular thumbnail on a real device each time the page layout changes.</p>
+</section>
+
+
+<!-- ═════ THE RULES ═════ -->
+<section>
+  <h2>Three rules</h2>
+  <div class="grid c3">
+    <div class="box"><h4>The scroll, not the grid</h4><p>No checkerboard here — nothing sits next to
+      anything. Alternate down the column instead: never two posts of the same value in a row, never two
+      maximal ones. Read the queue as a sequence before scheduling it.</p></div>
+    <div class="box"><h4>The card is cropped</h4><p>A shared link becomes a 1.91:1 card with a title bar
+      laid over the foot. Nothing important in the outer 10 %, and no display line that a crop could cut
+      mid-word. Compose for what survives.</p></div>
+    <div class="box"><h4>The circle</h4><p>The profile picture is masked to a circle. The mark alone,
+      never a lockup — the wordmark is illegible at that size. Reversed, paper on ink, so the avatar
+      still reads against a light interface.</p></div>
+  </div>
+</section>
+
+
+<footer class="k">
+  <div class="wall" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
+    <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
+    <span class="mono dim"><a href="index.html" style="text-decoration:underline">← Brand book</a></span>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+$$("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+
+/* Fifteen posts. `v` records the value — s dark, c light — and `r`
+   the ratio class. On Facebook the sequence is what gets checked,
+   not the grid: no two neighbours in the column share a value. */
+const POSTS = [
+  {v:"s", r:"r45", t:"The mark", d:"The mark alone, white on black. The anchor post — it opens the sequence and closes it.", x:"1080 × 1350 · 4:5 · mark at 44 %",
+   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:34%;max-width:74px"><use href="#tm"/></svg></div>`,
+   s:`background:var(--noir);color:#fff`},
+
+  {v:"c", r:"r191", t:"The promise", d:"The manifesto as a link card. Ranged left, well inside the safe area — the platform lays a title bar over the foot of this frame.", x:"1200 × 630 · 1.91:1 · display, 2 lines",
+   h:`<div class="big" style="margin:auto 0;font-size:9cqw">Reveal,<br>never cover.</div>`,
+   s:`background:var(--blanc);color:var(--encre)`},
+
+  {v:"s", r:"r45", t:"The wordmark, large", d:"MAXIMAL. The wordmark itself, scaled until it bleeds off both edges. Not typography — the drawing from logotrema.svg, called as a mask.", x:"1080 × 1350 · 4:5 · wordmark at 140 %",
+   h:`<span class="wordmark" style="position:absolute;left:-20%;top:50%;transform:translateY(-50%);
+        width:140%;aspect-ratio:4;z-index:2"></span>`,
+   s:`background:var(--encre);color:var(--papier)`},
+
+  {v:"c", r:"r11", t:"The tréma", d:"MINIMAL. Two dots in an empty field — the identity at its smallest possible statement. Square, so it survives an album crop.", x:"1200 × 1200 · 1:1 · dots at 4 %",
+   h:`<div class="dots"><i></i><i></i></div>
+      <div class="tiny" style="text-align:center;opacity:.35">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
+   s:`background:var(--blanc);color:var(--encre)`},
+
+  {v:"s", r:"r191", t:"The place", d:"Full-bleed photograph in the wide card, the wordmark at the foot but clear of the title bar. Never text over the busy half.", x:"1200 × 630 · 1.91:1 · wordmark at 42 %",
+   h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="filter:brightness(.62)">
+      <span class="wordmark wm" style="margin-top:auto"></span>`,
+   s:`color:#fff`},
+
+  {v:"c", r:"r45", t:"The work", d:"The window mark: the project fills the shape. The subject sits in the wide part of the form, never in the point.", x:"1080 × 1350 · 4:5 · form at 88 %",
+   h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
+   s:`background:var(--papier);color:var(--encre);padding:0`},
+
+  {v:"s", r:"r191", t:"Wall of type", d:"MAXIMAL. One word repeated until it fills the card, each line a different weight. The variation is written, not animated — it exports identically every time.", x:"1200 × 630 · 1.91:1 · 22 cqw, two lines, leading 0.78",
+   h:`<div class="wall2">
+        <span style="font-variation-settings:'wght' 300,'FLAR' 100">STUDIO</span>
+        <span style="font-variation-settings:'wght' 1000,'FLAR' 100">STUDIO</span>
+      </div>`,
+   s:`background:var(--encre);color:var(--papier)`},
+
+  {v:"c", r:"r45", t:"Silence", d:"MINIMAL. One hairline and one caption. Nothing is added to make the frame look finished.", x:"1080 × 1350 · 4:5 · rule 1.4 px",
+   h:`<div class="hairline"></div>
+      <div class="tiny" style="opacity:.4">NOTHING TO ADD</div>`,
+   s:`background:var(--blanc);color:var(--encre)`},
+
+  {v:"s", r:"r191", t:"The project", d:"A real place, its own logotype, our frame. The client's mark in paper over a darkened photograph — and the bottom 20 % left empty for the platform's overlay.", x:"1200 × 630 · 1.91:1 · client mark at 40 %",
+   h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="filter:brightness(.72)">
+      <div class="mn" style="opacity:.75">FEATURED</div>
+      <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:40%;margin:auto 0 0;filter:invert(1)">
+      <div class="mn" style="opacity:.7;margin-top:.7em">BAR · BRUSSELS · 2026</div>`,
+   s:`color:#fff`},
+
+  {v:"c", r:"r11", t:"The signature", d:"The mark tiled full bleed. A breathing post, no text: it makes the rhythm between two pieces of content visible.", x:"1200 × 1200 · 1:1 · exact 78 × 91 tile",
+   h:`<div class="tilebg"></div>`,
+   s:`background:var(--blanc);color:var(--encre);padding:0`},
+
+  {v:"s", r:"r45", t:"Ampersand", d:"MAXIMAL. The one piece of punctuation allowed to carry a whole frame, scaled until only the joint of the letter is left.", x:"1080 × 1350 · 4:5 · 200 cqw, centred on the joint",
+   h:`<div class="huge cut">&amp;</div>`,
+   s:`background:var(--noir);color:#fff`},
+
+  {v:"c", r:"r191", t:"The question", d:"MINIMAL in weight, loud in what it asks. Light 300, no mark — the manifesto turned round on the reader.", x:"1200 × 630 · 1.91:1 · 11 cqw, Light 300",
+   h:`<div class="qbig">What are you hiding?</div>`,
+   s:`background:var(--lait);color:var(--encre)`},
+
+  {v:"s", r:"r11", t:"In motion", d:"MAXIMAL. The slant axis at its maximum, at display size. Two words only — a slanted paragraph is refused everywhere in the system.", x:"1200 × 1200 · 1:1 · 24 cqw, slnt 15",
+   h:`<div class="slantbig">IN<br>MOTION</div>`,
+   s:`background:var(--noir);color:#fff`},
+
+  {v:"c", r:"r45", t:"The detail", d:"Tight crop on a material or a screen. No text at all: this is where the sequence takes a breath.", x:"1080 × 1350 · 4:5 · no text",
+   h:`<img class="bgimg" src="pics/image%20347-2.png" alt="" style="filter:contrast(1.04) brightness(1.06)">`,
+   s:`background:var(--lait);color:var(--encre);padding:0`},
+
+  {v:"s", r:"r191", t:"The call", d:"End of sequence: the mark and an address, in the card that a share turns into a preview. The only post that asks the reader for anything.", x:"1200 × 630 · 1.91:1 · one line of call to action",
+   h:`<div class="ctr" style="margin:auto"><svg class="sym" viewBox="0 0 78 91" style="width:18%;max-width:34px"><use href="#tm"/></svg>
+      <div class="mn" style="opacity:.7;text-align:center;margin-top:1.4em">TREMA.DESIGN</div></div>`,
+   s:`background:var(--noir);color:#fff`}
+];
+
+$("#feed").innerHTML = POSTS.map((p, i) =>
+  `<div class="post ${p.r}" style="${p.s}"><span class="n">${String(i+1).padStart(2,"0")}</span>${p.h}</div>`).join("");
+
+$("#specs").innerHTML = POSTS.map((p, i) =>
+  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span>
+    <div><b>${p.t}</b><p>${p.d}</p><span class="fmt">${p.x}</span></div></div>`).join("");
+
+/* sequence check: on a linear feed the only adjacency is vertical.
+   Written to the console so a broken run is caught without counting
+   it by hand. */
+const bad = [];
+POSTS.forEach((p, i) => {
+  if (POSTS[i+1] && POSTS[i+1].v === p.v) bad.push(`${i+1}↕${i+2}`);
+});
+console.log(bad.length ? "Sequence broken: " + bad.join(", ") : "Sequence: no two neighbours share a value ✓");
+})();
+</script>
+</body>
+</html>

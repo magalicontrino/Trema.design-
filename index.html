@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema studio — Brand Book</title>
 
-<!-- Favicon : le signe, en negatif dans un carre encre. Le SVG suit
-     le theme du navigateur ; les PNG servent de repli. -->
+<!-- Favicon: the mark, reversed inside an ink square. The SVG follows
+     the browser theme; the PNGs are the fallback. -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,34 +15,34 @@
 <style>
 /* ═══════════════════════════════════════════════════════════
    TRÉMA · BRAND BOOK
-   Un seul signe, une seule fonte, aucune couleur.
-   Display + nom de marque : JT Flair · Texte : grotesque système
+   One mark, one typeface, no colour.
+   Display + brand name: GT Flaire · Text: system grotesque
    ═══════════════════════════════════════════════════════════ */
 
 @font-face{
-  font-family:"JT Flair";
+  font-family:"GT Flaire";
   src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
   font-weight:300 1000;font-display:block;
 }
-/* Les deux familles statiques — l'axe FLAR du fichier variable ne rend pas
-   la différence en navigateur : on l'appelle par les statiques (voir ch. 07). */
-@font-face{font-family:"JT Flair Basic";font-weight:300;font-display:swap;
+/* The two static families — the variable file's FLAR axis renders no
+   difference in the browser, so we call the statics (see ch. 07). */
+@font-face{font-family:"GT Flaire Basic";font-weight:300;font-display:swap;
   src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireBasic-Light.ttf") format("truetype")}
-@font-face{font-family:"JT Flair Basic";font-weight:900;font-display:swap;
+@font-face{font-family:"GT Flaire Basic";font-weight:900;font-display:swap;
   src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireBasic-Black.ttf") format("truetype")}
-@font-face{font-family:"JT Flair Extra";font-weight:300;font-display:swap;
+@font-face{font-family:"GT Flaire Extra";font-weight:300;font-display:swap;
   src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireExtra-Light.ttf") format("truetype")}
-@font-face{font-family:"JT Flair Extra";font-weight:900;font-display:swap;
+@font-face{font-family:"GT Flaire Extra";font-weight:900;font-display:swap;
   src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireExtra-Black.ttf") format("truetype")}
 
 :root{
-  /* échelle de valeur — la seule « palette » du système */
+  /* value scale — the system's only "palette" */
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
   --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
 
   --bg:var(--papier); --fg:var(--encre);
 
-  --fd:"JT Flair","Helvetica Neue",Arial,sans-serif;
+  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
   --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   --fm:ui-monospace,"SF Mono",Menlo,monospace;
 
@@ -55,8 +55,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-/* système monochrome : aucune photo n'entre en couleur */
-img{display:block;max-width:100%;filter:grayscale(1)}
+/* the graphic system is monochrome — the colour comes from the
+   photographs, which are shown as they were shot (see ch. 09) */
+img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
 
@@ -72,7 +73,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;tex
 #rail button:hover{opacity:1}
 @media(max-width:1240px){#rail{display:none}}
 
-/* ── sections & thèmes ──────────────────────────────────── */
+/* ── sections & themes ──────────────────────────────────── */
 section{position:relative;padding:clamp(56px,9vw,140px) var(--pad);border-top:var(--rule)}
 section.full{min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .k{--bg:var(--noir);--fg:var(--blanc);background:var(--bg);color:var(--fg)}
@@ -103,6 +104,15 @@ p + p{margin-top:.9em}
 .dim{opacity:.55}
 code{font-family:var(--fm);font-size:.88em;background:color-mix(in srgb,currentColor 12%,transparent);padding:.1em .35em;border-radius:3px}
 
+/* ── GT FLAIRE IS SET IN CAPITALS, ALWAYS ───────────────────
+   The flare is drawn on the capitals; in lower case the flared
+   terminals and the descenders fight each other. One exception:
+   the character set in ch. 08, which has to show both cases —
+   and the wordmark, which is a drawing, not type. */
+h2,h3,.disp,.specimen,.mod,.axis-line,.sw .nm,.shop .nm2,.dlight,#play,
+.post .big,.legend .t,.flair{text-transform:uppercase}
+.axis-line .meta{text-transform:none}
+
 .grid{display:grid;gap:var(--gut)}
 .c2{grid-template-columns:repeat(2,1fr)}
 .c3{grid-template-columns:repeat(3,1fr)}
@@ -116,9 +126,9 @@ code{font-family:var(--fm);font-size:.88em;background:color-mix(in srgb,currentC
 .box.fill{background:var(--fg);color:var(--bg)}
 .sym{display:block;fill:currentColor}
 
-/* ── LE LOGOTYPE — dessin, jamais du texte compose ──────────
-   logotrema.svg fait 104 x 26, soit un rapport de 4 : 1.
-   On l'appelle en masque pour qu'il prenne la couleur du texte. */
+/* ── THE WORDMARK — a drawing, never typeset text ───────────
+   logotrema.svg is 104 x 26, a 4 : 1 ratio.
+   Called as a mask so it takes the colour of the text. */
 .tm{display:inline-block;width:3.6em;height:.9em;background:currentColor;vertical-align:-.06em;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
 .wordmark{display:block;width:4em;height:1em;background:currentColor;
@@ -134,7 +144,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .chip,.pill{display:inline-block;padding:.4em .9em;border:var(--rule);border-radius:999px;font-family:var(--fm);
   font-size:9px;letter-spacing:.13em;text-transform:uppercase}
 
-/* ══ PLANCHES — grille à filets, chaque case porte son propre fond ══ */
+/* ══ PLATES — ruled grid, each cell carries its own background ══ */
 .board{display:grid;gap:1.4px;background:currentColor;border:var(--rule)}
 .board.b2{grid-template-columns:repeat(2,1fr)}
 .board.b3{grid-template-columns:repeat(3,1fr)}
@@ -148,7 +158,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .tile .cap{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;font-family:var(--fm);
   font-size:8px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
 .tile .sym{width:38%}
-/* polarités */
+/* polarities */
 .p-pap{background:var(--papier);color:var(--encre)}
 .p-enc{background:var(--encre);color:var(--papier)}
 .p-bla{background:var(--blanc);color:var(--noir)}
@@ -161,7 +171,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .tile.ph .sym,.tile.ph .cap{position:relative;z-index:2}
 .tile.ph .cap{position:absolute}
 
-/* verrouillages — l'espace signe / logotype vaut la hauteur de barre */
+/* lockups — the gap between mark and wordmark equals the bar height */
 .lock{display:flex;align-items:center;gap:.38em}
 .lock .sym{width:auto;height:1.02em;flex:0 0 auto}
 .lock .wordmark{height:.6em;width:2.4em;flex:0 0 auto}
@@ -170,7 +180,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .lock.sig .txt{border-left:var(--rule);padding-left:.4em}
 .lock.sig .sub{display:block;font-family:var(--fm);font-size:.24em;letter-spacing:.16em;opacity:.65;margin-top:.7em}
 
-/* rampe de polarité */
+/* polarity ramp */
 .rampwrap{position:relative;padding-bottom:1.8em}
 .ramp{display:grid;grid-template-columns:repeat(11,1fr);border:var(--rule)}
 @media(max-width:700px){.ramp{grid-template-columns:repeat(6,1fr)}}
@@ -205,7 +215,14 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
   font-family:var(--fm);font-size:9px}
 .dont::after{content:"✕";position:absolute;top:6px;right:9px;font-family:var(--fm);font-size:13px;opacity:.6}
 
-/* ══ LE SIGNE COMME FENÊTRE ════════════════════════════════ */
+/* ══ THE WALL — capitals scaled until the format cuts them ══
+   Each word is sized on its own: the advance of a word is not its
+   letter count, so a single font-size would bleed unevenly. */
+.typewall{margin:0 calc(var(--pad) * -1)}
+.tw{display:block;font-family:var(--fd);line-height:.78;letter-spacing:-.03em;
+  white-space:nowrap;text-transform:uppercase}
+
+/* ══ THE MARK AS A WINDOW ══════════════════════════════════ */
 .win{position:relative;aspect-ratio:.82;border:var(--rule);overflow:hidden;background:var(--bg)}
 .win .cut{position:absolute;inset:9%;-webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain;overflow:hidden}
@@ -221,18 +238,18 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .tiles i{position:absolute;inset:0;background:var(--encre);
   -webkit-mask:url("Logo.svg") repeat center/52px 60.7px;mask:url("Logo.svg") repeat center/52px 60.7px}
 
-/* ══ TYPOGRAPHIE ═══════════════════════════════════════════ */
-/* interlignage : en Extra les jambages descendent bas, .82 faisait
-   percuter la virgule de la ligne du dessus. */
+/* ══ TYPOGRAPHY ════════════════════════════════════════════ */
+/* line height: in Extra the descenders run deep — at .82 the comma
+   collided with the line above. */
 .specimen{font-family:var(--fd);line-height:1.02;letter-spacing:.008em;font-size:clamp(38px,9vw,152px)}
 .spec-note{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.45;
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:1.6em}
 
-/* ── MODULATION LETTRE À LETTRE ─────────────────────────────
-   Chaque signe porte sa propre graisse. Rien ne bouge : la
-   variation est ecrite dans la composition, pas jouee au survol. */
-/* les lettres restent en inline : en inline-block, chacune devient
-   un point de coupure et les mots se cassent en fin de ligne. */
+/* ── LETTER-BY-LETTER MODULATION ────────────────────────────
+   Every character carries its own weight. Nothing moves: the
+   variation is written into the setting, not played on hover. */
+/* the letters stay inline: as inline-block each one becomes a
+   break opportunity and words split at the end of a line. */
 .mod{font-family:var(--fd);line-height:1.02;letter-spacing:.006em}
 
 .axis-line{border-bottom:var(--rule);padding:.06em 0;white-space:nowrap;overflow:hidden;position:relative;
@@ -251,11 +268,11 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .sl label{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:.13em;margin-bottom:6px}
 .sl input{width:100%;accent-color:currentColor}
 
-/* ══ COUVERTURE ════════════════════════════════════════════ */
+/* ══ COVER ═════════════════════════════════════════════════ */
 #cover{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);
   border-top:0;position:relative;overflow:hidden}
 .cov-top,.cov-bot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;z-index:3}
-/* la couverture porte le logotype lui-meme, pas une imitation composee */
+/* the cover carries the wordmark itself, not a typeset imitation */
 #wm{width:min(78vw,880px);aspect-ratio:4;background:currentColor;position:relative;z-index:3;
   margin:clamp(20px,4vw,52px) 0;
   -webkit-mask:url("logotrema.svg") no-repeat left center/contain;
@@ -263,17 +280,17 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .cov-sym{position:absolute;right:calc(var(--pad) - 1vw);top:12vh;width:clamp(76px,12vw,196px);opacity:.9;z-index:2}
 @media(max-width:640px){.cov-sym{top:9vh}}
 
-/* ══ VALEURS ═══════════════════════════════════════════════ */
+/* ══ VALUES ════════════════════════════════════════════════ */
 .sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:var(--rule);border-left:var(--rule)}
 .sw{padding:clamp(12px,1.6vw,18px);min-height:clamp(140px,17vw,200px);display:flex;flex-direction:column;
   justify-content:space-between;cursor:pointer;position:relative;border-right:var(--rule);border-bottom:var(--rule)}
 .sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,21px);font-variation-settings:"wght" 800,"FLAR" 80}
 .sw .vl{font-family:var(--fm);font-size:9px;line-height:1.78;opacity:.85}
-.sw::after{content:"copié ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;
+.sw::after{content:"copied ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;
   letter-spacing:.14em;opacity:0;transition:opacity .3s}
 .sw.cp::after{opacity:1}
 
-/* ══ INSTAGRAM — la grille des 6 ════════════════════════════ */
+/* ══ INSTAGRAM — the grid of 6 ═════════════════════════════ */
 .feedwrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,3vw,52px);align-items:start}
 @media(max-width:900px){.feedwrap{grid-template-columns:1fr}}
 .feed{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;border:var(--rule)}
@@ -319,7 +336,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .tote::before,.tote::after{content:"";position:absolute;top:-16%;width:9%;height:26%;border:var(--rule);border-bottom:0;border-radius:40px 40px 0 0}
 .tote::before{left:22%}.tote::after{right:22%}
 .tote .sym{width:26%}
-/* ══ EN-TÊTE ═══════════════════════════════════════════════ */
+/* ══ HEADER ════════════════════════════════════════════════ */
 #top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
   gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
   border-bottom:var(--rule)}
@@ -331,15 +348,15 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 #top nav a.on{border-bottom-color:currentColor}
 #top nav a:hover{border-bottom-color:currentColor}
 
-/* ══ PICTOGRAMMES ══════════════════════════════════════════ */
-/* composés dans la phrase, à la taille du texte qui les porte */
+/* ══ PICTOGRAMS ════════════════════════════════════════════ */
+/* set inside the sentence, at the size of the text carrying them */
 .pin{display:inline-block;width:.84em;height:.84em;background:currentColor;vertical-align:-.02em;margin:0 .07em;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
-/* display léger : les phrases longues se composent en Light, pas en Extra */
+/* light display: long sentences are set in Light, not in Extra */
 .dlight{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:-.014em}
 
-/* présentation en cases aérées, légende dessous */
+/* shown in open cells, caption underneath */
 .shop{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.2vw,34px)}
 @media(max-width:900px){.shop{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.shop{grid-template-columns:1fr}}
@@ -349,14 +366,14 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .shop .pico{width:100%;aspect-ratio:1;background:currentColor;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
-/* la regle figcaption globale grise tout : on la neutralise ici */
+/* the global figcaption rule greys everything out: neutralised here */
 .shop figcaption{margin-top:clamp(9px,1.1vw,14px);opacity:1;font-family:var(--fs);
   font-size:inherit;letter-spacing:0;line-height:1.3}
 .shop .nm2{display:block;font-family:var(--fd);font-variation-settings:"wght" 700,"FLAR" 0;
   font-size:clamp(14px,1.4vw,19px);line-height:1.1}
 .shop .sub2{display:block;font-size:clamp(12px,1.05vw,14px);opacity:.42;margin-top:.14em}
 
-/* ══ PIED DE PAGE — le mur ═════════════════════════════════ */
+/* ══ FOOTER — the wall ═════════════════════════════════════ */
 footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overflow:hidden}
 .wall{margin:0 calc(var(--pad) * -1) clamp(24px,3.2vw,50px)}
 .wall span{display:block;background:currentColor;aspect-ratio:4;
@@ -373,8 +390,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <nav>
     <a href="index.html" class="on">Brand book</a>
     <a href="instagram.html">Instagram</a>
+    <a href="facebook.html">Facebook</a>
   </nav>
-  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">BRUXELLES</span>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">BRUSSELS</span>
 </header>
 
 <div id="prog"></div><nav id="rail"></nav>
@@ -384,309 +402,296 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
 </symbol></svg>
 
 
-<!-- ═════ COUVERTURE ═════ -->
-<section id="s0" data-t="Couverture" style="padding:0">
+<!-- ═════ COVER ═════ -->
+<section id="s0" data-t="Cover" style="padding:0">
 <div id="cover">
   <div class="cov-top">
-    <div class="mono"><span class="tm" role="img" aria-label="trema"></span><br><span class="dim">studio · Bruxelles</span></div>
+    <div class="mono"><span class="tm" role="img" aria-label="trema"></span><br><span class="dim">studio · Brussels</span></div>
     <div class="mono" style="text-align:right">BRAND BOOK<br><span class="dim">v3.0 — <span data-date>—</span></span></div>
   </div>
   <svg class="cov-sym sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
   <div>
     <div id="wm" role="img" aria-label="trema"></div>
-    <p class="mono dim" style="max-width:48ch">Le signe, le logotype, la typographie, les valeurs,
-    la communication. L'essentiel du système, en dix chapitres.</p>
+    <p class="mono dim" style="max-width:48ch">The mark, the wordmark, the typography, the values,
+    the communication. The essentials of the system, chapter by chapter.</p>
   </div>
   <div class="cov-bot">
-    <div class="mono dim">↓ <span data-count>—</span> chapitres</div>
-    <div class="mono dim" style="text-align:right">JT FLAIR · wght 300–1000 · slnt 0–15<br>document interne</div>
+    <div class="mono dim">↓ <span data-count>—</span> chapters</div>
+    <div class="mono dim" style="text-align:right">GT FLAIRE · wght 300–1000 · slnt 0–15<br>concept page</div>
   </div>
 </div>
 </section>
 
 
-<!-- ═════ 01 · MANIFESTE ═════ -->
-<section id="s1" data-t="Manifeste" data-p="Marque" class="k full">
+<!-- ═════ 01 · MANIFESTO ═════ -->
+<section id="s1" data-t="Manifesto" data-p="Brand" class="k full">
   <div class="num">01</div>
-  <div class="tag">Manifeste</div>
-  <div class="mod" data-mod="crescendo" style="font-size:clamp(38px,9vw,152px);margin:.15em 0 .55em">Révéler, jamais recouvrir.</div>
+  <div class="tag">Manifesto</div>
+  <div class="mod" data-mod="crescendo" style="font-size:clamp(38px,9vw,152px);margin:.15em 0 .55em">Reveal, never cover.</div>
   <div class="grid c3">
-    <p>Un tréma, c'est deux points au-dessus d'une lettre. Un signe minuscule qui change tout : il sépare,
-    il ouvre, il fait entendre ce qui était muet.</p>
-    <p>C'est notre façon de travailler. Un geste précis, presque invisible, qui révèle ce qui était déjà
-    là. Le projet d'un client ne devient pas autre chose : il devient enfin lui-même.</p>
-    <p>De là découle tout le reste : une seule forme, une seule fonte, aucune couleur. Ce livre ne dit pas
-    quoi ajouter — il dit ce qu'il ne faut pas recouvrir.</p>
+    <p>A tréma is two dots above a letter. A tiny mark that changes everything: it separates, it opens,
+    it makes audible what was silent.</p>
+    <p>That is how we work. One precise, almost invisible gesture that reveals what was already there.
+    A client's project does not become something else: it finally becomes itself.</p>
+    <p>Everything else follows from that: one shape, one typeface, no colour. This book does not tell you
+    what to add — it tells you what not to cover.</p>
   </div>
 </section>
 
 
-<!-- ═════ 02 · ANATOMIE DU SIGNE ═════ -->
-<section id="s2" data-t="Anatomie du signe" data-p="Le signe">
+<!-- ═════ 02 · ANATOMY OF THE MARK ═════ -->
+<section id="s2" data-t="Anatomy of the mark" data-p="The mark">
   <div class="num">02</div>
-  <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 02</div>
-    <h2>Anatomie<br>du signe</h2></div>
-  <p>Un rectangle plein, une découpe en arc, une contre-forme qui file vers la droite. C'est un T,
-  c'est une voile, c'est le trait du tréma. Il ne se redessine jamais à la main : on part de
+  <div class="hd"><div><div class="part">The mark</div><div class="tag">Chapter 02</div>
+    <h2>Anatomy<br>of the mark</h2></div>
+  <p>A solid rectangle, an arc cut out of it, a counter-form running off to the right. It is a T,
+  it is a sail, it is the stroke of the tréma. It is never redrawn by hand: always start from
   <code>Logo.svg</code>.</p></div>
 
   <div class="grid c3">
-    <div><h4>Construction — grille 8 × 8</h4>
+    <div><h4>Construction — 8 × 8 grid</h4>
       <div class="constr" id="constr"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <button class="btn" style="margin-top:12px" id="gridtog">Afficher la grille</button></div>
+      <button class="btn" style="margin-top:12px" id="gridtog">Show the grid</button></div>
 
-    <div><h4>Zone de protection — 1 × la hauteur de barre</h4>
+    <div><h4>Clear space — 1 × the bar height</h4>
       <div class="clear"><div class="z"><svg class="sym" viewBox="0 0 78 91" style="width:60px"><use href="#tm"/></svg></div></div>
-      <p class="mono dim" style="margin-top:12px">Aucun élément — texte, image, bord de format — n'entre dans
-      la zone pointillée.</p></div>
+      <p class="mono dim" style="margin-top:12px">Nothing — text, image, edge of the format — comes inside
+      the dashed zone.</p></div>
 
     <div><h4>Proportions</h4>
       <div class="box" style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;gap:1em">
         <div><div class="mono dim">Ratio</div><div class="disp">78 : 91</div></div>
-        <div><div class="mono dim">Hauteur de barre</div><div class="disp">0,377 H</div></div>
-        <div><div class="mono dim">Angle de fuite</div><div class="disp">37°</div></div>
+        <div><div class="mono dim">Bar height</div><div class="disp">0.377 H</div></div>
+        <div><div class="mono dim">Taper angle</div><div class="disp">37°</div></div>
       </div></div>
   </div>
 
-  <div class="box" style="margin-top:var(--gut)"><h4>Tailles minimales</h4>
+  <div class="box" style="margin-top:var(--gut)"><h4>Minimum sizes</h4>
     <div class="sizes">
       <figure><svg class="sym" viewBox="0 0 78 91" style="width:14px"><use href="#tm"/></svg><figcaption>14 px<br>favicon</figcaption></figure>
-      <figure><svg class="sym" viewBox="0 0 78 91" style="width:22px"><use href="#tm"/></svg><figcaption>22 px<br>min. écran</figcaption></figure>
-      <figure><svg class="sym" viewBox="0 0 78 91" style="width:34px"><use href="#tm"/></svg><figcaption>8 mm<br>min. print</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:22px"><use href="#tm"/></svg><figcaption>22 px<br>screen min.</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:34px"><use href="#tm"/></svg><figcaption>8 mm<br>print min.</figcaption></figure>
       <figure><svg class="sym" viewBox="0 0 78 91" style="width:60px"><use href="#tm"/></svg><figcaption>18 mm<br>packaging</figcaption></figure>
-      <figure><svg class="sym" viewBox="0 0 78 91" style="width:100px"><use href="#tm"/></svg><figcaption>40 mm +<br>enseigne</figcaption></figure>
+      <figure><svg class="sym" viewBox="0 0 78 91" style="width:100px"><use href="#tm"/></svg><figcaption>40 mm +<br>signage</figcaption></figure>
     </div>
   </div>
 </section>
 
 
-<!-- ═════ 03 · NOIR & BLANC — TOUTES LES VARIANTES ═════ -->
-<section id="s3" data-t="Noir &amp; blanc" data-p="Le signe" class="w">
+<!-- ═════ 03 · BLACK & WHITE — EVERY VARIANT ═════ -->
+<section id="s3" data-t="Black &amp; white" data-p="The mark" class="w">
   <div class="num">03</div>
-  <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 03</div>
-    <h2>Noir<br>&amp; blanc</h2></div>
-  <p>Le signe n'existe qu'en deux états : <b>positif</b> — encre sur clair — et <b>négatif</b> —
-  clair sur encre. Pas de version grise, pas de version « atténuée ». On ne choisit pas la variante qui fait
-  joli, on choisit celle qui contraste.</p></div>
+  <div class="hd"><div><div class="part">The mark</div><div class="tag">Chapter 03</div>
+    <h2>Black<br>&amp; white</h2></div>
+  <p>The mark exists in two states only: <b>positive</b> — ink on light — and <b>reversed</b> —
+  light on ink. No grey version, no "softened" version. You don't pick the variant that looks nice,
+  you pick the one that contrasts.</p></div>
 
-  <!-- A · le signe seul -->
-  <h4>A · Le signe seul</h4>
+  <!-- A · the mark alone -->
+  <h4>A · The mark alone</h4>
   <div class="board b6" style="margin-bottom:clamp(26px,3.4vw,50px)">
-    <div class="tile p-pap"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Positif · papier</span></div>
-    <div class="tile p-enc"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Négatif · encre</span></div>
-    <div class="tile p-bla"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Noir pur · 1 ton</span></div>
-    <div class="tile p-noi"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Blanc pur · 1 ton</span></div>
-    <div class="tile p-gra"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Négatif · graphite</span></div>
-    <div class="tile ph"><img src="image%20347.jpg" alt="" style="filter:grayscale(1) brightness(.52)">
+    <div class="tile p-pap"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Positive · paper</span></div>
+    <div class="tile p-enc"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Reversed · ink</span></div>
+    <div class="tile p-bla"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Pure black · 1 colour</span></div>
+    <div class="tile p-noi"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Pure white · 1 colour</span></div>
+    <div class="tile p-gra"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="cap">Reversed · graphite</span></div>
+    <div class="tile ph"><img src="pics/image%20347.png" alt="" style="filter:brightness(.52)">
       <svg class="sym" viewBox="0 0 78 91" style="width:38%;color:#fff"><use href="#tm"/></svg>
-      <span class="cap" style="color:#fff;opacity:.8">Négatif · photo</span></div>
+      <span class="cap" style="color:#fff;opacity:.8">Reversed · photo</span></div>
   </div>
 
-  <!-- rampe de bascule -->
+  <!-- the switch ramp -->
   <div style="margin-bottom:clamp(26px,3.4vw,50px)">
-    <h4>Où bascule-t-on ? — polarité selon la clarté du fond · 0 % = noir, 100 % = blanc</h4>
+    <h4>Where does it switch? — polarity by background lightness · 0 % = black, 100 % = white</h4>
     <div class="rampwrap"><div class="ramp" id="ramp"></div><div class="rampmark" id="rampmark"></div></div>
-    <p class="mono dim" style="margin-top:10px">Au-dessus de 47 % de clarté le signe est en encre ; en dessous
-    il passe en papier. Le chiffre sous chaque case est le contraste obtenu — il ne descend jamais sous 4,5 : 1.
-    Les deux cases voisines de la bascule restent interdites en petite taille.</p>
+    <p class="mono dim" style="margin-top:10px">Above 47 % lightness the mark is set in ink; below it,
+    it switches to paper. The figure under each cell is the resulting contrast — it never drops below 4.5 : 1.
+    The two cells either side of the switch stay off-limits at small sizes.</p>
   </div>
 
-  <!-- B · verrouillages positif / négatif -->
-  <h4>B · Verrouillages — chaque configuration existe dans les deux polarités</h4>
+  <!-- B · positive / reversed lockups -->
+  <h4>B · Lockups — every configuration exists in both polarities</h4>
   <div class="board b3" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(20px,2.5vw,34px)">
     <div class="tile wide p-pap"><div class="lock">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="wordmark" role="img" aria-label="trema"></span></div>
-      <span class="cap">A · Horizontal — usage principal</span></div>
+      <span class="cap">A · Horizontal — primary use</span></div>
     <div class="tile wide p-pap"><div class="lock stack">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="wordmark" role="img" aria-label="trema"></span></div>
-      <span class="cap">B · Vertical — carré, avatar</span></div>
+      <span class="cap">B · Stacked — square, avatar</span></div>
     <div class="tile wide p-pap"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
-      <span class="sub">STUDIO · BRUXELLES</span></span></div>
-      <span class="cap">C · Signature — papeterie, B2B</span></div>
+      <span class="sub">STUDIO · BRUSSELS</span></span></div>
+      <span class="cap">C · Signature — stationery, B2B</span></div>
 
     <div class="tile wide p-enc"><div class="lock">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="wordmark" role="img" aria-label="trema"></span></div>
-      <span class="cap">A · Inversé</span></div>
+      <span class="cap">A · Reversed</span></div>
     <div class="tile wide p-enc"><div class="lock stack">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="wordmark" role="img" aria-label="trema"></span></div>
-      <span class="cap">B · Inversé</span></div>
+      <span class="cap">B · Reversed</span></div>
     <div class="tile wide p-enc"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
-      <span class="sub">STUDIO · BRUXELLES</span></span></div>
-      <span class="cap">C · Inversé</span></div>
+      <span class="sub">STUDIO · BRUSSELS</span></span></div>
+      <span class="cap">C · Reversed</span></div>
   </div>
 
-  <!-- C · le logotype seul -->
-  <h4>C · Le logotype seul</h4>
+  <!-- C · the wordmark alone -->
+  <h4>C · The wordmark alone</h4>
   <div class="board b2" style="margin-bottom:clamp(26px,3.4vw,50px);font-size:clamp(26px,3.4vw,50px)">
     <div class="tile wide p-pap"><span class="wordmark" role="img" aria-label="trema"></span>
-      <span class="cap">Positif</span></div>
+      <span class="cap">Positive</span></div>
     <div class="tile wide p-enc"><span class="wordmark" role="img" aria-label="trema"></span>
-      <span class="cap">Négatif</span></div>
+      <span class="cap">Reversed</span></div>
   </div>
 
-  <!-- règle du logotype -->
+  <!-- the wordmark rule -->
   <div class="grid c2" style="margin-bottom:clamp(26px,3.4vw,50px)">
     <div class="box fill">
-      <h4 style="opacity:.7">Règle non négociable</h4>
-      <h3 style="margin-bottom:.5em">Le logotype est un dessin,<br>jamais du texte composé</h3>
-      <p>Le nom de la marque s'écrit <b>trema</b>, en bas-de-casse, sans accent, et il vient toujours de
-      <code>logotrema.svg</code>. On ne le retape pas dans une fonte système, pas plus qu'on ne le
-      recompose en JT Flair : le dessin des lettres et leurs approches font partie de la marque.</p>
-      <p>Dans un texte courant, on écrit « Tréma » comme un mot ordinaire, dans la fonte du texte.
-      Le logotype, lui, ne se met pas dans une phrase — il se pose.</p>
+      <h4 style="opacity:.7">Non-negotiable rule</h4>
+      <h3 style="margin-bottom:.5em">The wordmark is a drawing,<br>never typeset text</h3>
+      <p>The brand name is written <b>trema</b>, lower case, no accent, and it always comes from
+      <code>logotrema.svg</code>. Never retype it in a system font, and never reset it in GT Flaire
+      either: the drawing of the letters and their spacing are part of the brand.</p>
+      <p>In running text, write "Tréma" like any other word, in the text face. The wordmark itself
+      is never dropped into a sentence — it is placed.</p>
     </div>
-    <div class="board b2" style="align-self:start">
-      <div class="tile wide p-pap" style="padding:8%">
+    <div class="board" style="align-self:start;grid-template-columns:1fr">
+      <div class="tile wide p-pap" style="padding:10%;aspect-ratio:2.4">
         <div style="text-align:center">
-          <span class="wordmark" style="font-size:26px;margin:0 auto .9em" role="img" aria-label="trema"></span>
-          <span class="chip">✓ Le fichier</span></div></div>
-      <div class="tile wide p-pap" style="padding:8%">
-        <div style="text-align:center">
-          <p style="font-family:Arial,sans-serif;font-weight:700;font-size:26px;margin-bottom:.55em">trema</p>
-          <span class="chip">✕ Retapé</span></div></div>
+          <span class="wordmark" style="font-size:34px;margin:0 auto 1em" role="img" aria-label="trema"></span>
+          <span class="chip">logotrema.svg</span></div></div>
     </div>
   </div>
 
-  <!-- fichiers -->
+  <!-- files -->
   <div>
-    <h4>Fichiers de référence — nommage imposé</h4>
+    <h4>Reference files — naming is fixed</h4>
     <div class="scrollx"><table>
-      <tr><th>Fichier</th><th>Contenu</th><th>Format</th><th>Usage</th></tr>
-      <tr><td>trema-signe-noir.svg</td><td>Signe seul, #000</td><td>SVG / EPS</td><td>Fond clair, print 1 ton</td></tr>
-      <tr><td>trema-signe-blanc.svg</td><td>Signe seul, #FFF</td><td>SVG / EPS</td><td>Fond sombre, photo</td></tr>
-      <tr><td>trema-horizontal-noir.svg</td><td>Signe + mot</td><td>SVG / EPS</td><td>Usage principal</td></tr>
-      <tr><td>trema-horizontal-blanc.svg</td><td>Signe + mot</td><td>SVG / EPS</td><td>Inversé</td></tr>
-      <tr><td>trema-vertical-noir / -blanc.svg</td><td>Signe + mot empilés</td><td>SVG / EPS</td><td>Carré, avatar</td></tr>
-      <tr><td>trema-signature-noir / -blanc.svg</td><td>Signe + mot + mention</td><td>SVG / EPS</td><td>Papeterie, B2B</td></tr>
-      <tr><td>trema-signe.png</td><td>Signe seul, fond transparent</td><td>PNG 32 bits, 3000 px</td><td>Bureautique, partenaires</td></tr>
-      <tr><td>Union.png</td><td>Signe rempli d'une photo</td><td>PNG 32 bits, 3000 px</td><td>Campagne, signe-fenêtre</td></tr>
-      <tr><td>logotrema.svg</td><td>Logotype seul</td><td>SVG</td><td>Verrouillages, web, signature</td></tr>
-      <tr><td>favicon.svg</td><td>Signe négatif, carré encre</td><td>SVG, suit le thème</td><td>Onglet navigateur</td></tr>
-      <tr><td>apple-touch-icon.png</td><td>Idem, couleurs fixes</td><td>PNG 180 px</td><td>iOS, écran d'accueil</td></tr>
+      <tr><th>File</th><th>Contents</th><th>Format</th><th>Use</th></tr>
+      <tr><td>trema-mark-black.svg</td><td>Mark alone, #000</td><td>SVG / EPS</td><td>Light background, 1-colour print</td></tr>
+      <tr><td>trema-mark-white.svg</td><td>Mark alone, #FFF</td><td>SVG / EPS</td><td>Dark background, photo</td></tr>
+      <tr><td>trema-horizontal-black.svg</td><td>Mark + word</td><td>SVG / EPS</td><td>Primary use</td></tr>
+      <tr><td>trema-horizontal-white.svg</td><td>Mark + word</td><td>SVG / EPS</td><td>Reversed</td></tr>
+      <tr><td>trema-stacked-black / -white.svg</td><td>Mark + word stacked</td><td>SVG / EPS</td><td>Square, avatar</td></tr>
+      <tr><td>trema-signature-black / -white.svg</td><td>Mark + word + line</td><td>SVG / EPS</td><td>Stationery, B2B</td></tr>
+      <tr><td>trema-mark.png</td><td>Mark alone, transparent</td><td>32-bit PNG, 3000 px</td><td>Office files, partners</td></tr>
+      <tr><td>pics/Union.png</td><td>Mark filled with a photo</td><td>32-bit PNG, 3000 px</td><td>Campaign, window mark</td></tr>
+      <tr><td>logotrema.svg</td><td>Wordmark alone</td><td>SVG</td><td>Lockups, web, signature</td></tr>
+      <tr><td>favicon.svg</td><td>Reversed mark, ink square</td><td>SVG, follows the theme</td><td>Browser tab</td></tr>
+      <tr><td>apple-touch-icon.png</td><td>Same, fixed colours</td><td>PNG 180 px</td><td>iOS, home screen</td></tr>
     </table></div>
   </div>
 </section>
 
 
-<!-- ═════ 04 · LE SIGNE COMME FENÊTRE ═════ -->
-<section id="s4" data-t="Le signe comme fenêtre" data-p="Le signe" class="l">
+<!-- ═════ 04 · THE MARK AS A WINDOW ═════ -->
+<section id="s4" data-t="The mark as a window" data-p="The mark" class="l">
   <div class="num">04</div>
-  <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 04</div>
-    <h2>Le signe<br>comme fenêtre</h2></div>
-  <p>Le principe le plus fort du système : le signe n'est pas posé <em>sur</em> l'image, il la
-  <b>découpe</b>. La photo remplit la forme, la forme cadre la photo. C'est ce qui rend une composition
-  reconnaissable même quand le mot a disparu.</p></div>
+  <div class="hd"><div><div class="part">The mark</div><div class="tag">Chapter 04</div>
+    <h2>The mark<br>as a window</h2></div>
+  <p>The strongest principle in the system: the mark is not laid <em>on</em> the image, it
+  <b>cuts into</b> it. The photo fills the shape, the shape frames the photo. That is what makes a
+  composition recognisable even once the word has gone.</p></div>
 
   <div class="grid c4" style="margin-bottom:var(--gut)">
-    <div class="win"><div class="cut"><img src="image%20347.jpg" alt=""></div><div class="cap">01 · Photo découpée</div></div>
+    <div class="win"><div class="cut"><img src="pics/image%20347-1.png" alt=""></div><div class="cap">01 · Photo cut out</div></div>
     <div class="win" style="background:var(--encre);color:var(--papier)"><div class="fill"></div>
-      <div class="cap">02 · Aplat</div></div>
-    <div class="win"><div class="halftone"></div><div class="cap">03 · Trame</div></div>
+      <div class="cap">02 · Solid</div></div>
+    <div class="win"><div class="halftone"></div><div class="cap">03 · Halftone</div></div>
     <div class="tiles"><i></i><div class="cap" style="position:absolute;left:0;right:0;bottom:0;padding:7px 10px;
       border-top:var(--rule);font-family:var(--fm);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
-      background:var(--blanc);color:var(--encre)">04 · Répétition</div></div>
+      background:var(--blanc);color:var(--encre)">04 · Repeat</div></div>
   </div>
 
   <div class="grid c2" style="align-items:center">
     <div style="border:var(--rule);background:var(--encre);padding:clamp(20px,3vw,44px);display:grid;place-items:center">
-      <img src="Union.png" alt="Le signe rempli d'une photographie" style="width:min(100%,400px)">
+      <img src="pics/Union.png" alt="The mark filled with a photograph" style="width:min(100%,400px)">
     </div>
     <div>
-      <h3>Règles de découpe</h3>
-      <p>Le signe garde ses proportions 78 : 91, toujours. Il peut sortir du format sur un seul bord.
-      La photo à l'intérieur est recadrée, jamais déformée. Un seul signe-fenêtre par composition.</p>
-      <p>Le sujet — un écran, une page, un détail de projet — occupe la partie large de la forme, jamais la pointe.
-      La tuile de répétition mesure 78 × 91 exactement : aucun espacement, aucune rotation alternée.</p>
+      <h3>Cutting rules</h3>
+      <p>The mark always keeps its 78 : 91 proportions. It may bleed off one edge of the format, one only.
+      The photo inside is cropped, never distorted. One window mark per composition.</p>
+      <p>The subject — a screen, a page, a project detail — sits in the wide part of the shape, never in the point.
+      The repeat tile measures exactly 78 × 91: no spacing, no alternating rotation.</p>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:16px">
-        <span class="chip">PNG 32 bits</span><span class="chip">3000 px min.</span><span class="chip">Fond transparent</span>
+        <span class="chip">32-bit PNG</span><span class="chip">3000 px min.</span><span class="chip">Transparent background</span>
       </div>
-      <p class="mono dim" style="margin-top:16px">Les photographies de ce livre sont des images de calage.
-      À remplacer par des vues de projets — écrans, éditions, maquettes.</p>
+      <p class="mono dim" style="margin-top:16px">The photographs come from the places we work for —
+      bars, cafés, kitchens, galleries. Colour stays in the picture; the system around it does not
+      take any.</p>
     </div>
   </div>
 </section>
 
 
-<!-- ═════ 05 · CE QU'ON NE FAIT PAS ═════ -->
-<section id="s5" data-t="Ce qu'on ne fait pas" data-p="Le signe" class="e">
+<!-- ═════ 05 · THE WALL ═════ -->
+<section id="s5" data-t="The wall" data-p="Typography" class="e full">
   <div class="num">05</div>
-  <div class="hd"><div><div class="part">Le signe</div><div class="tag">Chapitre 05</div>
-    <h2>Ce qu'on<br>ne fait pas</h2></div>
-  <p>Six fautes qui reviennent toujours. Si un fichier ressemble à l'un de ces cadres,
-  il ne part pas en production.</p></div>
-  <div class="grid c3">
-    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:scaleX(1.5)"><use href="#tm"/></svg>
-      <div class="lab2">Déformer, étirer</div></div>
-    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;transform:rotate(24deg)"><use href="#tm"/></svg>
-      <div class="lab2">Faire pivoter</div></div>
-    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;opacity:.32"><use href="#tm"/></svg>
-      <div class="lab2">Baisser l'opacité, griser</div></div>
-    <div class="dont"><svg class="sym" viewBox="0 0 78 91" style="width:22%;filter:drop-shadow(6px 8px 0 rgba(255,255,255,.4))"><use href="#tm"/></svg>
-      <div class="lab2">Ombre, relief, biseau</div></div>
-    <div class="dont" style="padding:0"><div style="position:relative;width:100%;height:100%;display:grid;place-items:center">
-      <img src="image%20347.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-      <svg class="sym" viewBox="0 0 78 91" style="width:22%;position:relative;color:#fff"><use href="#tm"/></svg></div>
-      <div class="lab2">Poser sur une photo chargée</div></div>
-    <div class="dont"><span style="font-family:Georgia,serif;font-size:clamp(20px,2.6vw,32px);font-weight:700">trema</span>
-      <div class="lab2">Retaper le logotype au lieu d'appeler le fichier</div></div>
+  <div class="tag">Typography</div>
+
+  <div class="typewall" role="img" aria-label="Reveal, never cover">
+    <span class="tw" style="font-size:27.5vw;margin-left:-6vw;font-variation-settings:'wght' 1000,'FLAR' 100">Reveal</span>
+    <span class="tw" style="font-size:32.6vw;margin-left:-9vw;font-variation-settings:'wght' 300,'FLAR' 100">Never</span>
+    <span class="tw" style="font-size:32.5vw;margin-left:-3vw;font-variation-settings:'wght' 1000,'FLAR' 100">Cover</span>
   </div>
+
+  <p class="mono dim" style="margin-top:clamp(20px,3vw,44px);max-width:52ch">Three lines, one typeface,
+  no colour. Each word is sized on its own so that every line bleeds by the same amount off both edges —
+  the width of a word is its advance, not its letter count. The middle line drops to Light 300 at the
+  same size: the loudest and the quietest setting in the system, one above the other.</p>
 </section>
 
 
-<!-- ═════ 06 · SPÉCIMEN ═════ -->
-<section id="s6" data-t="Spécimen" data-p="Typographie" class="w full">
-  <div class="part">Typographie</div>
-  <div class="spec-note"><span>JT FLAIR · SPÉCIMEN</span><span>MODULATION « CASCADE »</span>
+<!-- ═════ 06 · SPECIMEN ═════ -->
+<section id="s6" data-t="Specimen" data-p="Typography" class="w full">
+  <div class="part">Typography</div>
+  <div class="spec-note"><span>GT FLAIRE · SPECIMEN</span><span>"CASCADE" MODULATION</span>
     <span>wght 300–1000 / slnt 0–15</span></div>
-  <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identité, écrans, éditions — trema studio, Bruxelles.</div>
-  <p class="mono dim" style="margin-top:1.6em">Chaque signe porte sa propre graisse et sa propre inclinaison.
-  Rien ne bouge : la variation est écrite dans la composition, pas jouée au survol.</p>
+  <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identity, screens, print — trema studio, Brussels.</div>
+  <p class="mono dim" style="margin-top:1.6em">Every character carries its own weight and its own slant.
+  Nothing moves: the variation is written into the setting, not played on hover.</p>
 </section>
 
 
-<!-- ═════ 07 · LES TROIS AXES ═════ -->
-<section id="s7" data-t="Les trois axes" data-p="Typographie" class="k">
+<!-- ═════ 07 · THE THREE AXES ═════ -->
+<section id="s7" data-t="The three axes" data-p="Typography" class="k">
   <div class="num">07</div>
-  <div class="hd"><div><div class="part">Typographie</div><div class="tag">Chapitre 07</div>
-    <h2>Les trois<br>axes</h2></div>
-  <p>Une seule fonte, deux familles, trois curseurs. <code>wght</code> donne le poids,
-  <code>slnt</code> l'inclinaison, et <code>FLAR</code> — notre signature — fait pousser les terminaisons
-  évasées. On monte le flare quand on affirme, on le baisse quand on explique.</p></div>
+  <div class="hd"><div><div class="part">Typography</div><div class="tag">Chapter 07</div>
+    <h2>The three<br>axes</h2></div>
+  <p>One typeface, two families, three sliders. <code>wght</code> sets the weight,
+  <code>slnt</code> the slant, and <code>FLAR</code> — our signature — grows the flared
+  terminals. Raise the flare when you assert, lower it when you explain.</p></div>
 
   <div style="margin-bottom:clamp(24px,3vw,44px)">
-    <h4>FLAR — l'axe signature · Basic 0 → Extra 100</h4>
-    <div class="axis-line" style="font-family:'JT Flair Basic';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Révéler la forme<span class="meta">FLAR 0 · Basic</span></div>
-    <div class="axis-line" style="font-family:'JT Flair Extra';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Révéler la forme<span class="meta">FLAR 100 · Extra</span></div>
-    <div class="axis-line" style="font-family:'JT Flair Basic';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Révéler la forme<span class="meta">FLAR 0 · Basic Light</span></div>
-    <div class="axis-line" style="font-family:'JT Flair Extra';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Révéler la forme<span class="meta">FLAR 100 · Extra Light</span></div>
+    <h4>FLAR — the signature axis · Basic 0 → Extra 100</h4>
+    <div class="axis-line" style="font-family:'GT Flaire Basic';font-weight:900;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">FLAR 0 · Basic</span></div>
+    <div class="axis-line" style="font-family:'GT Flaire Extra';font-weight:900;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">FLAR 100 · Extra</span></div>
+    <div class="axis-line" style="font-family:'GT Flaire Basic';font-weight:300;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">FLAR 0 · Basic Light</span></div>
+    <div class="axis-line" style="font-family:'GT Flaire Extra';font-weight:300;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">FLAR 100 · Extra Light</span></div>
     <div class="box" style="margin-top:var(--gut)">
-      <h4 style="opacity:.7">Point technique — à trancher avant diffusion</h4>
-      <p><b>Le fichier variable livré ne rend pas l'axe FLAR.</b> <code>GTFlaireVF.ttf</code> déclare bien
-      les trois axes (wght 300–1000, FLAR 0–100, slnt 0–15), mais un <code>FLAR 100</code> s'affiche
-      exactement comme un <code>FLAR 0</code> : le navigateur dessine du Basic dans les deux cas. La
-      différence ci-dessus est obtenue en appelant les statiques
-      <code>GTFlaireBasic-*</code> et <code>GTFlaireExtra-*</code>.</p>
-      <p>Tant que la fonderie n'a pas renvoyé un VF corrigé, tout ce qui doit porter le flare — titres de
-      marque, packaging, affiche — appelle <code>JT Flair Extra</code> en statique. L'axe reste documenté
-      ici parce qu'il est la signature du système, pas parce qu'il fonctionne aujourd'hui.</p>
+      <h4 style="opacity:.7">How the flare is called</h4>
+      <p>The four lines above come from the static families, not from the variable file:
+      <code>GTFlaireBasic-*</code> for FLAR 0 and <code>GTFlaireExtra-*</code> for FLAR 100. That is the
+      reliable route to the flare in a browser today, and it is what the whole system is built on.</p>
+      <p>So anything that has to carry the flare — brand headlines, packaging, posters — calls
+      <code>GT Flaire Extra</code> as a static. Weight and slant keep coming from
+      <code>GTFlaireVF.ttf</code>, which handles both axes continuously.</p>
     </div>
   </div>
 
   <div class="grid c2" style="margin-bottom:clamp(24px,3vw,44px)">
     <div>
-      <h4>wght — graisse · 300 → 1000</h4>
+      <h4>wght — weight · 300 → 1000</h4>
       <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 300,'FLAR' 0">Trema<span class="meta">300 · Light</span></div>
       <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 500,'FLAR' 0">Trema<span class="meta">500 · Medium</span></div>
       <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 700,'FLAR' 0">Trema<span class="meta">700 · Bold</span></div>
@@ -694,158 +699,159 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
       <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 1000,'FLAR' 0">Trema<span class="meta">1000 · Extra</span></div>
     </div>
     <div>
-      <h4>slnt — inclinaison · 0 → 15</h4>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 0">En mouvement<span class="meta">slnt 0</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 5">En mouvement<span class="meta">slnt 5</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 10">En mouvement<span class="meta">slnt 10</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 15">En mouvement<span class="meta">slnt 15 · max</span></div>
-      <p class="mono dim" style="margin-top:12px">Inclinaison mécanique, pas une italique dessinée.
-      Mots isolés uniquement — jamais un paragraphe entier.</p>
+      <h4>slnt — slant · 0 → 15</h4>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 0">In motion<span class="meta">slnt 0</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 5">In motion<span class="meta">slnt 5</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 10">In motion<span class="meta">slnt 10</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 15">In motion<span class="meta">slnt 15 · max</span></div>
+      <p class="mono dim" style="margin-top:12px">A mechanical slant, not a drawn italic.
+      Single words only — never a whole paragraph.</p>
     </div>
   </div>
 
   <div class="grid c3">
-    <div class="box"><h4>FLAR 0</h4><p class="mono">Corps de texte, interface, données, mentions légales.</p></div>
-    <div class="box"><h4>FLAR 40–60</h4><p class="mono">Titres courants, intertitres, navigation, étiquettes.</p></div>
-    <div class="box fill"><h4 style="opacity:.7">FLAR 100</h4><p class="mono">Marque, packaging, affiche, enseigne.
-    Une seule fois par composition.</p></div>
+    <div class="box"><h4>FLAR 0</h4><p class="mono">Body text, interface, data, legal notices.</p></div>
+    <div class="box"><h4>FLAR 40–60</h4><p class="mono">Running headings, subheads, navigation, labels.</p></div>
+    <div class="box fill"><h4 style="opacity:.7">FLAR 100</h4><p class="mono">Brand, packaging, poster, signage.
+    Once per composition, no more.</p></div>
   </div>
 </section>
 
 
-<!-- ═════ 08 · USAGE TYPOGRAPHIQUE ═════ -->
-<section id="s8" data-t="Usage typographique" data-p="Typographie">
+<!-- ═════ 08 · TYPOGRAPHIC USE ═════ -->
+<section id="s8" data-t="Typographic use" data-p="Typography">
   <div class="num">08</div>
-  <div class="hd"><div><div class="part">Typographie</div><div class="tag">Chapitre 08</div>
-    <h2>Titres &amp;<br>paragraphes</h2></div>
-  <p>Règle de couple : <b>le titre est en JT Flair, le paragraphe en grotesque neutre.</b>
-  On ne compose jamais un bloc long en Flair — le flare fatigue au-delà de trois lignes. Seule exception :
-  le logotype, qui n'est pas de la typographie mais un dessin.</p></div>
+  <div class="hd"><div><div class="part">Typography</div><div class="tag">Chapter 08</div>
+    <h2>Headings &amp;<br>body text</h2></div>
+  <p>Pairing rule: <b>headings in GT Flaire, body text in a neutral grotesque.</b>
+  Never set a long block in Flair — the flare tires the eye beyond three lines. One exception:
+  the wordmark, which is not typography but a drawing.</p></div>
 
-  <div class="grid c2" style="margin-bottom:var(--gut)">
-    <div class="box">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Titre de section</div>
-      <p>Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère
-      propre. C'est ce contraste qui fait tenir la page.</p>
-      <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
-    </div>
-    <div class="box">
-      <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Titre de section</div>
-      <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Le titre porte la marque,
-      le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste
-      qui fait tenir la page.</p>
-      <div class="mono" style="margin-top:16px">✕ Paragraphe en Flair — refusé</div>
-    </div>
+  <div class="box" style="margin-bottom:var(--gut)">
+    <div class="flair" style="font-family:var(--fd);font-size:clamp(34px,5.6vw,76px);line-height:1;
+      font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Section heading</div>
+    <p>The heading carries the brand, the paragraph carries the information: it stays neutral, legible,
+    with no character of its own. That contrast is what holds the page together.</p>
+    <div class="mono dim" style="margin-top:16px">GT Flaire 1000 · Extra — grotesque 400</div>
   </div>
 
-  <h4>La modulation lettre à lettre</h4>
-  <p style="margin-bottom:1.2em">Le seul écart autorisé à l'échelle : une ligne dont chaque signe porte sa
-  propre graisse. C'est une composition, pas un effet — la variation est écrite dans le fichier, elle ne
-  se déclenche pas au survol et ne bouge jamais. Elle se reproduit donc à l'identique en print.</p>
+  <div class="box fill" style="margin-bottom:var(--gut)">
+    <h4 style="opacity:.7">Second non-negotiable rule</h4>
+    <h3 style="margin-bottom:.5em">GT Flaire is set<br>in capitals, always</h3>
+    <p>The flare is drawn on the capitals. In lower case the flared terminals and the descenders fight
+    each other, and the line loses the flat top edge that makes the display sit square in a frame. So
+    everything set in Flaire — display, headings, posts, packaging — is uppercase.</p>
+    <p>Two exceptions, both of them deliberate. The character set in this chapter shows both cases,
+    because it is an inventory rather than a setting. And the wordmark stays lower case: it is a
+    drawing, not type, and the rule does not apply to it.</p>
+  </div>
+
+  <h4>Letter-by-letter modulation</h4>
+  <p style="margin-bottom:1.2em">The one licensed departure from the scale: a line where every character
+  carries its own weight. It is a setting, not an effect — the variation is written into the file, it is
+  not triggered on hover and it never moves. So it reproduces identically in print.</p>
 
   <div class="board b2" style="margin-bottom:14px">
     <div class="tile wide p-pap" style="padding:7% 6%;aspect-ratio:2.6">
-      <div class="mod" data-mod="crescendo" style="font-size:clamp(22px,3.4vw,52px)">Révéler la forme</div>
-      <span class="cap">Crescendo · wght 300 → 1000, régulier</span></div>
+      <div class="mod" data-mod="crescendo" style="font-size:clamp(22px,3.4vw,52px)">Reveal the form</div>
+      <span class="cap">Crescendo · wght 300 → 1000, even</span></div>
     <div class="tile wide p-pap" style="padding:7% 6%;aspect-ratio:2.6">
-      <div class="mod" data-mod="cascade" style="font-size:clamp(22px,3.4vw,52px)">Révéler la forme</div>
-      <span class="cap">Cascade · houle wght + slnt en quadrature</span></div>
+      <div class="mod" data-mod="cascade" style="font-size:clamp(22px,3.4vw,52px)">Reveal the form</div>
+      <span class="cap">Cascade · a swell, wght + slnt in quadrature</span></div>
   </div>
 
   <div class="grid c3" style="margin-bottom:var(--gut)">
-    <div class="box"><h4>Où</h4><p class="mono">Une ligne par composition, jamais deux. Titre d'ouverture,
-      affiche, post. Jamais sur un paragraphe, jamais dans une interface.</p></div>
-    <div class="box"><h4>Comment</h4><p class="mono">La graisse suit une fonction — rampe ou houle — pas
-      une décision lettre par lettre. Deux exports doivent donner le même dessin.</p></div>
-    <div class="box"><h4>Limites</h4><p class="mono">wght 300 à 1000, slnt 0 à 15. Le logotype ne module
-      jamais : c'est un dessin fixe.</p></div>
+    <div class="box"><h4>Where</h4><p class="mono">One line per composition, never two. Opening headline,
+      poster, post. Never on a paragraph, never in an interface.</p></div>
+    <div class="box"><h4>How</h4><p class="mono">The weight follows a function — ramp or swell — not a
+      letter-by-letter decision. Two exports must give the same drawing.</p></div>
+    <div class="box"><h4>Limits</h4><p class="mono">wght 300 to 1000, slnt 0 to 15. The wordmark never
+      modulates: it is a fixed drawing.</p></div>
   </div>
 
-  <h4>Échelle — ratio 1,25 · base 16 px · grille 8 px</h4>
+  <h4>Scale — 1.25 ratio · 16 px base · 8 px grid</h4>
   <div class="scrollx" style="margin-bottom:var(--gut)"><table>
-    <tr><th>Rôle</th><th>Fonte</th><th>Desktop</th><th>Mobile</th><th>Interlignage</th><th>wght / famille</th></tr>
-    <tr><td>Display</td><td>JT Flair</td><td>132 px</td><td>44 px</td><td>0,85</td><td>1000 · Extra</td></tr>
-    <tr><td>Titre 1</td><td>JT Flair</td><td>62 px</td><td>34 px</td><td>0,92</td><td>900 · Extra</td></tr>
-    <tr><td>Titre 2</td><td>JT Flair</td><td>38 px</td><td>26 px</td><td>1,02</td><td>800 · Extra</td></tr>
-    <tr><td>Chapô</td><td>Grotesque</td><td>21 px</td><td>18 px</td><td>1,38</td><td>400 / —</td></tr>
-    <tr><td>Courant</td><td>Grotesque</td><td>16,5 px</td><td>16 px</td><td>1,58</td><td>400 / —</td></tr>
-    <tr><td>Étiquette</td><td>Mono</td><td>10 px</td><td>10 px</td><td>1,7</td><td>400 · CAPS</td></tr>
+    <tr><th>Role</th><th>Typeface</th><th>Desktop</th><th>Mobile</th><th>Line height</th><th>wght / family</th></tr>
+    <tr><td>Display</td><td>GT Flaire</td><td>132 px</td><td>44 px</td><td>0.85</td><td>1000 · Extra</td></tr>
+    <tr><td>Heading 1</td><td>GT Flaire</td><td>62 px</td><td>34 px</td><td>0.92</td><td>900 · Extra</td></tr>
+    <tr><td>Heading 2</td><td>GT Flaire</td><td>38 px</td><td>26 px</td><td>1.02</td><td>800 · Extra</td></tr>
+    <tr><td>Standfirst</td><td>Grotesque</td><td>21 px</td><td>18 px</td><td>1.38</td><td>400 / —</td></tr>
+    <tr><td>Body</td><td>Grotesque</td><td>16.5 px</td><td>16 px</td><td>1.58</td><td>400 / —</td></tr>
+    <tr><td>Label</td><td>Mono</td><td>10 px</td><td>10 px</td><td>1.7</td><td>400 · CAPS</td></tr>
   </table></div>
 
-  <h4>Laboratoire — le texte est éditable</h4>
+  <h4>Playground — the text is editable</h4>
   <div class="lab" style="margin-bottom:var(--gut)">
-    <div id="play" contenteditable="true" spellcheck="false">Trèma révèle</div>
+    <div id="play" contenteditable="true" spellcheck="false">Tréma reveals</div>
     <div>
       <div class="sl"><label><span>wght</span><b id="v-w">700</b></label><input type="range" id="a-w" min="300" max="1000" value="700"></div>
       <div class="sl"><label><span>FLAR</span><b id="v-f">60</b></label><input type="range" id="a-f" min="0" max="100" value="60"></div>
       <div class="sl"><label><span>slnt</span><b id="v-s">0</b></label><input type="range" id="a-s" min="0" max="15" value="0"></div>
-      <div class="sl"><label><span>corps</span><b id="v-z">120</b></label><input type="range" id="a-z" min="30" max="200" value="120"></div>
+      <div class="sl"><label><span>size</span><b id="v-z">120</b></label><input type="range" id="a-z" min="30" max="200" value="120"></div>
       <p class="mono" id="css-out" style="margin-top:12px;word-break:break-all;opacity:.75"></p>
-      <button class="btn" id="copycss" style="margin-top:10px">Copier le CSS</button>
+      <button class="btn" id="copycss" style="margin-top:10px">Copy the CSS</button>
     </div>
   </div>
 
-  <h4>Jeu de caractères</h4>
+  <h4>Character set</h4>
   <div class="gset" id="gset"></div>
 </section>
 
 
-<!-- ═════ 09 · VALEURS ═════ -->
-<section id="s9" data-t="Valeurs" data-p="Système" class="l">
+<!-- ═════ 09 · VALUES ═════ -->
+<section id="s9" data-t="Values" data-p="System" class="l">
   <div class="num">09</div>
-  <div class="hd"><div><div class="part">Système</div><div class="tag">Chapitre 09</div>
-    <h2>Valeurs</h2></div>
-  <p>Il n'y a pas de palette. Six valeurs entre le noir et le papier, et rien d'autre :
-  toute la couleur du dispositif vient des photographies. Cliquez pour copier.</p></div>
+  <div class="hd"><div><div class="part">System</div><div class="tag">Chapter 09</div>
+    <h2>Values</h2></div>
+  <p>There is no palette. Six tonal values between black and paper, and nothing else:
+  all the colour in the system comes from the photographs. Click to copy.</p></div>
 
   <div class="sws">
-    <div class="sw" data-hex="#000000" style="background:#000;color:#fff"><span class="nm">Noir</span>
-      <span class="vl">#000000<br>Print 1 ton, enseigne<br>Contraste max</span></div>
-    <div class="sw" data-hex="#141414" style="background:#141414;color:#F2F1EF"><span class="nm">Encre</span>
-      <span class="vl">#141414<br>Fond principal sombre<br>Texte sur clair</span></div>
+    <div class="sw" data-hex="#000000" style="background:#000;color:#fff"><span class="nm">Black</span>
+      <span class="vl">#000000<br>1-colour print, signage<br>Maximum contrast</span></div>
+    <div class="sw" data-hex="#141414" style="background:#141414;color:#F2F1EF"><span class="nm">Ink</span>
+      <span class="vl">#141414<br>Primary dark ground<br>Text on light</span></div>
     <div class="sw" data-hex="#3D3D3D" style="background:#3D3D3D;color:#fff"><span class="nm">Graphite</span>
-      <span class="vl">#3D3D3D<br>Aplat secondaire<br>Signe en négatif</span></div>
-    <div class="sw" data-hex="#767676" style="background:#767676;color:#fff"><span class="nm">Béton</span>
-      <span class="vl">#767676<br>Bascule de polarité<br>Jamais de texte fin</span></div>
-    <div class="sw" data-hex="#E4E3E1" style="background:#E4E3E1;color:#141414"><span class="nm">Lait</span>
-      <span class="vl">#E4E3E1<br>Fond de section<br>Séparations</span></div>
-    <div class="sw" data-hex="#F2F1EF" style="background:#F2F1EF;color:#141414"><span class="nm">Papier</span>
-      <span class="vl">#F2F1EF<br>Fond par défaut<br>Signe en positif</span></div>
+      <span class="vl">#3D3D3D<br>Secondary solid<br>Reversed mark</span></div>
+    <div class="sw" data-hex="#767676" style="background:#767676;color:#fff"><span class="nm">Concrete</span>
+      <span class="vl">#767676<br>Polarity switch<br>Never light text</span></div>
+    <div class="sw" data-hex="#E4E3E1" style="background:#E4E3E1;color:#141414"><span class="nm">Milk</span>
+      <span class="vl">#E4E3E1<br>Section ground<br>Dividers</span></div>
+    <div class="sw" data-hex="#F2F1EF" style="background:#F2F1EF;color:#141414"><span class="nm">Paper</span>
+      <span class="vl">#F2F1EF<br>Default ground<br>Positive mark</span></div>
   </div>
-  <p class="mono dim" style="margin-top:14px">Béton #767676 est une valeur de fond, pas une valeur de signe :
-  c'est exactement le point de bascule. On ne compose ni texte fin ni signe en petite taille dessus.</p>
+  <p class="mono dim" style="margin-top:14px">Concrete #767676 is a background value, not a mark value:
+  it sits exactly on the switch point. Never set light text or a small mark on it.</p>
 </section>
 
 
-<!-- ═════ 10 · PICTOGRAMMES ═════ -->
-<section id="s10" data-t="Pictogrammes" data-p="Système" class="w">
+<!-- ═════ 10 · PICTOGRAMS ═════ -->
+<section id="s10" data-t="Pictograms" data-p="System" class="w">
   <div class="num">10</div>
-  <div class="part">Système</div><div class="tag">Chapitre 10</div>
+  <div class="part">System</div><div class="tag">Chapter 10</div>
 
   <div class="dlight" style="font-size:clamp(28px,5.6vw,92px);margin-bottom:clamp(30px,4vw,64px)">trema studio
-  dessine des <span class="pin" data-pic="menu"></span>, des <span class="pin" data-pic="gallery"></span>
-  et des <span class="pin" data-pic="post"></span> pour des marques qui ont quelque chose à montrer.</div>
+  draws <span class="pin" data-pic="menu"></span>, <span class="pin" data-pic="gallery"></span>
+  and <span class="pin" data-pic="post"></span> for brands with something to show.</div>
 
   <div class="grid c2" style="margin-bottom:clamp(28px,3.6vw,56px)">
-    <p>Les pictogrammes ne sont pas des illustrations : ce sont des <b>mots</b>. Ils se composent dans la
-    phrase, à la taille du texte qui les porte, et remplacent un nom — jamais un verbe, jamais une idée
-    abstraite. Trois au maximum par phrase, sinon on lit un rébus.</p>
-    <p>Ils sont dessinés sur la même grille que le signe et suivent la couleur du texte : un picto ne
-    porte jamais sa propre valeur. En display, on compose en <b>Light</b> — une phrase longue en Extra
-    devient un mur.</p>
+    <p>Pictograms are not illustrations: they are <b>words</b>. They are set inside the sentence, at the
+    size of the text carrying them, and they stand in for a noun — never a verb, never an abstract idea.
+    Three per sentence at most, or you are reading a rebus.</p>
+    <p>They are drawn on the same grid as the mark and follow the colour of the text: a pictogram never
+    carries a value of its own. At display size, set them in <b>Light</b> — a long sentence in Extra
+    becomes a wall.</p>
   </div>
 
   <div class="shop" id="picoGrid"></div>
 
   <div class="grid c3" style="margin-top:clamp(28px,3.6vw,56px)">
-    <div class="box"><h4>Taille</h4><p class="mono">Dans une phrase : 0,84 em, aligné sur la hauteur d'x.
-      Seul : jamais sous 24 px.</p></div>
-    <div class="box"><h4>Couleur</h4><p class="mono">Toujours celle du texte. Appelés en masque, jamais
-      en image : ils suivent la polarité du fond.</p></div>
-    <div class="box"><h4>Interdits</h4><p class="mono">Deux pictos collés, un picto dans un titre en Extra,
-      un picto à la place d'un verbe.</p></div>
+    <div class="box"><h4>Size</h4><p class="mono">In a sentence: 0.84 em, aligned on the x-height.
+      On its own: never below 24 px.</p></div>
+    <div class="box"><h4>Colour</h4><p class="mono">Always that of the text. Called as masks, never as
+      images: they follow the polarity of the ground.</p></div>
+    <div class="box"><h4>Rhythm</h4><p class="mono">One pictogram per idea, three per sentence at most,
+      always standing in for a noun. Set apart by a word, never touching.</p></div>
   </div>
 </section>
 
@@ -853,32 +859,32 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
 <!-- ═════ APPLICATIONS ═════ -->
 <section id="s11" data-t="Applications" data-p="Communication">
   <div class="num">11</div>
-  <div class="hd"><div><div class="part">Communication</div><div class="tag">Chapitre 11</div>
+  <div class="hd"><div><div class="part">Communication</div><div class="tag">Chapter 11</div>
     <h2>Applications</h2></div>
-  <p>Le même signe, le même noir, la même fonte. Sur un objet, la seule décision à prendre est
-  la polarité — et elle se déduit de la valeur du support.</p></div>
+  <p>The same mark, the same black, the same typeface. On an object the only decision to make is
+  polarity — and it follows from the value of the surface.</p></div>
 
   <div class="grid c4" style="margin-bottom:var(--gut)">
     <div class="app"><div class="cup"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <div class="cap">Papeterie · positif</div></div>
+      <div class="cap">Stationery · positive</div></div>
     <div class="app"><div class="bag"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div><span class="wordmark" style="width:52px;height:13px" role="img" aria-label="trema"></span><div class="mono" style="font-size:8px;opacity:.6;margin-top:5px">DOSSIER DE PROJET</div></div></div>
-      <div class="cap">Pochette · négatif</div></div>
+      <div><span class="wordmark" style="width:52px;height:13px" role="img" aria-label="trema"></span><div class="mono" style="font-size:8px;opacity:.6;margin-top:5px">PROJECT FOLDER</div></div></div>
+      <div class="cap">Folder · reversed</div></div>
     <div class="app" style="background:var(--lait)"><div class="sign"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <div class="cap">Enseigne · négatif</div></div>
+      <div class="cap">Signage · reversed</div></div>
     <div class="app"><div class="tote"><svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <div class="cap">Tote · positif</div></div>
+      <div class="cap">Tote · positive</div></div>
   </div>
 
   <div class="grid c2" style="margin-bottom:var(--gut)">
     <div class="app" style="aspect-ratio:2"><div class="card" style="width:46%">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div class="mono" style="font-size:8px">PRÉNOM NOM<br><span style="opacity:.55">FONCTION</span></div></div>
-      <div class="cap">Carte · positif</div></div>
+      <div class="mono" style="font-size:8px">FIRST LAST<br><span style="opacity:.55">ROLE</span></div></div>
+      <div class="cap">Card · positive</div></div>
     <div class="app" style="aspect-ratio:2;background:var(--encre);color:var(--papier)">
       <div class="lock" style="font-size:clamp(24px,3.4vw,46px)">
         <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg><span class="wordmark" role="img" aria-label="trema"></span></div>
-      <div class="cap">Véhicule, vitrine · négatif</div></div>
+      <div class="cap">Vehicle, window · reversed</div></div>
   </div>
 
 </section>
@@ -892,22 +898,22 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <div class="hd" style="margin-bottom:clamp(24px,3.2vw,46px)">
     <div>
       <svg class="sym" viewBox="0 0 78 91" style="width:clamp(40px,5vw,68px);margin-bottom:18px"><use href="#tm"/></svg>
-      <h2>Révéler,<br>jamais recouvrir.</h2>
+      <h2>Reveal,<br>never cover.</h2>
     </div>
     <div>
-      <p class="mono dim">Ce guide est vivant. Toute exception se documente ici plutôt que de se décider
-      dans un coin. Une question, un cas non couvert, une envie de casser une règle : on en parle avant,
-      pas après.</p>
+      <p class="mono dim">One mark, one typeface, no colour — and a photograph whenever there is
+      something worth showing. This page is the system in the open: what we draw, how we set it, and
+      what it looks like once it is on a cup, a window or a screen.</p>
       <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:7px">
-        <span class="pill">Bruxelles</span><span class="pill">v3.0</span><span class="pill">MàJ <span data-date>—</span></span>
+        <span class="pill">Brussels</span><span class="pill">v3.0</span><span class="pill">Updated <span data-date>—</span></span>
       </div>
     </div>
   </div>
 
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
-    <span class="mono dim">© <span data-year>2026</span> trema studio — document interne</span>
-    <span class="mono dim">Composé en JT Flair</span>
-    <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Haut de page</button>
+    <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
+    <span class="mono dim">Set in GT Flaire</span>
+    <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Back to top</button>
   </div>
 </footer>
 
@@ -921,7 +927,7 @@ const rnd = n => Math.floor(Math.random() * n);
 /* ── dates ── */
 const now = new Date();
 $$("[data-year]").forEach(e => e.textContent = now.getFullYear());
-$$("[data-date]").forEach(e => e.textContent = now.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"}));
+$$("[data-date]").forEach(e => e.textContent = now.toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"}));
 
 /* ── rail ── */
 const secs = $$("section[data-t]"), rail = $("#rail");
@@ -942,14 +948,14 @@ const onScroll = () => {
 };
 addEventListener("scroll", onScroll, {passive:true}); onScroll();
 
-/* ── MODULATION LETTRE À LETTRE ──────────────────────────────
-   Aucune animation, aucun écouteur : on écrit la variation une
-   fois dans le DOM et elle ne bouge plus. Les valeurs viennent
-   d'une fonction, pas du hasard — deux chargements donnent la
-   même composition, et on peut la reproduire en print.
+/* ── LETTER-BY-LETTER MODULATION ─────────────────────────────
+   No animation, no listener: the variation is written into the
+   DOM once and never moves again. The values come from a
+   function, not from chance — two loads give the same setting,
+   and it can be reproduced in print.
 
-   crescendo : la graisse monte du début à la fin de la phrase.
-   cascade   : une houle lente, wght et slnt en quadrature. */
+   crescendo: the weight rises from the start of the line to the end.
+   cascade  : a slow swell, wght and slnt in quadrature. */
 const MOD = {
   crescendo: (i, n) => {
     const k = n > 1 ? i / (n - 1) : 0;
@@ -977,15 +983,15 @@ $$("[data-mod]").forEach(el => {
   });
 });
 
-/* ── rampe de polarité : on calcule la bascule, on ne la devine pas ── */
+/* ── polarity ramp: the switch is computed, not guessed ── */
 const lin = v => { const c = v/255; return c <= .03928 ? c/12.92 : Math.pow((c+.055)/1.055, 2.4); };
-const lum = v => .2126*lin(v) + .7152*lin(v) + .0722*lin(v);   /* gris : R=G=B */
+const lum = v => .2126*lin(v) + .7152*lin(v) + .0722*lin(v);   /* grey: R=G=B */
 const ramp = $("#ramp");
 let flipAt = -1;
 for (let i = 10; i >= 0; i--) {
   const v = Math.round(255 * i / 10), L = lum(v);
   const cNoir = (L + .05) / .05, cBlanc = 1.05 / (L + .05);
-  const neg = cBlanc > cNoir;                       /* signe clair sur fond sombre */
+  const neg = cBlanc > cNoir;                       /* light mark on a dark ground */
   if (neg && flipAt < 0) flipAt = 10 - i;
   const d = document.createElement("div");
   d.style.cssText = `background:rgb(${v},${v},${v});color:${neg ? "#fff" : "#000"}`;
@@ -997,14 +1003,14 @@ if (flipAt > 0) {
   ramp.children[flipAt].insertAdjacentHTML("afterbegin", '<span class="flip"></span>');
   const mark = $("#rampmark");
   mark.style.left = (flipAt / 11 * 100) + "%";
-  mark.textContent = "↑ bascule de polarité";
+  mark.textContent = "↑ polarity switch";
 }
 
-/* ── construction du signe ── */
+/* ── construction of the mark ── */
 const cst = $("#constr"), tog = $("#gridtog");
-tog.onclick = () => { const on = cst.classList.toggle("show"); tog.textContent = on ? "Masquer la grille" : "Afficher la grille"; };
+tog.onclick = () => { const on = cst.classList.toggle("show"); tog.textContent = on ? "Hide the grid" : "Show the grid"; };
 
-/* ── laboratoire ── */
+/* ── playground ── */
 const play = $("#play"), out = $("#css-out");
 const A = {w:["a-w","v-w"], f:["a-f","v-f"], s:["a-s","v-s"], z:["a-z","v-z"]};
 const g = k => $("#" + A[k][0]).value;
@@ -1012,17 +1018,17 @@ const apply = () => {
   const vs = `"wght" ${g("w")},"FLAR" ${g("f")},"slnt" ${g("s")}`;
   play.style.fontVariationSettings = vs;
   play.style.fontSize = g("z") + "px";
-  out.textContent = `font-family:"JT Flair";\nfont-variation-settings:${vs};\nfont-size:${g("z")}px;`;
+  out.textContent = `font-family:"GT Flaire";\nfont-variation-settings:${vs};\nfont-size:${g("z")}px;`;
   Object.keys(A).forEach(k => $("#" + A[k][1]).textContent = g(k));
 };
 Object.keys(A).forEach(k => $("#" + A[k][0]).addEventListener("input", apply));
 apply();
 $("#copycss").onclick = async e => {
-  try { await navigator.clipboard.writeText(out.textContent); e.target.textContent = "Copié ✓";
-    setTimeout(() => e.target.textContent = "Copier le CSS", 1400); } catch (_) {}
+  try { await navigator.clipboard.writeText(out.textContent); e.target.textContent = "Copied ✓";
+    setTimeout(() => e.target.textContent = "Copy the CSS", 1400); } catch (_) {}
 };
 
-/* ── jeu de glyphes ── */
+/* ── glyph set ── */
 const CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸŒœÆæßñ.,;:!?«»“”—–’()[]{}/&@#%‰€$£¥*+×÷=°|§†©®™½¼¾";
 $("#gset").innerHTML = [...CH].map(c => {
   const esc = c.replace(/[<>&]/g, m => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[m]));
@@ -1030,34 +1036,34 @@ $("#gset").innerHTML = [...CH].map(c => {
   return `<span style="font-variation-settings:'wght' ${w},'FLAR' ${f}">${esc}</span>`;
 }).join("");
 
-/* ── pictogrammes ── */
+/* ── pictograms ── */
 const PICTOS = [
-  ["faq","FAQ","Question, aide"],       ["gallery","Galerie","Série d'images"],
-  ["link","Lien","Renvoi, source"],     ["mentions","Mentions","Légal, crédits"],
-  ["menu","Menu","Navigation"],         ["playlist","Playlist","Séquence, sommaire"],
-  ["post","Post","Publication"],        ["reviews","Avis","Retour client"]];
+  ["faq","FAQ","Question, help"],       ["gallery","Gallery","Series of images"],
+  ["link","Link","Cross-reference, source"], ["mentions","Legal","Legal, credits"],
+  ["menu","Menu","Navigation"],         ["playlist","Playlist","Sequence, contents"],
+  ["post","Post","Publication"],        ["reviews","Reviews","Client feedback"]];
 $("#picoGrid").innerHTML = PICTOS.map(([f, label, usage]) => {
   const u = `url('picto/web/${f}.svg')`;
   return `<figure><div class="case"><div class="pico" style="-webkit-mask-image:${u};mask-image:${u}"></div></div>
     <figcaption><span class="nm2">${label}</span><span class="sub2">${usage}</span></figcaption></figure>`;
 }).join("");
 
-/* les pictos composés dans la phrase */
+/* the pictograms set inside the sentence */
 $$("[data-pic]").forEach(el => {
   const u = `url('picto/web/${el.dataset.pic}.svg')`;
   el.style.webkitMaskImage = u; el.style.maskImage = u;
 });
 
-/* le compte de chapitres se déduit du document */
+/* the chapter count is derived from the document */
 $$("[data-count]").forEach(e => e.textContent = secs.length - 1);
 
-/* ── copie des valeurs ── */
+/* ── copying the values ── */
 $$(".sw").forEach(sw => sw.onclick = async () => {
   try { await navigator.clipboard.writeText(sw.dataset.hex); } catch (_) {}
   sw.classList.add("cp"); setTimeout(() => sw.classList.remove("cp"), 1100);
 });
 
-/* ── mouvement réduit ── */
+/* ── reduced motion ── */
 })();
 </script>
 </body>
