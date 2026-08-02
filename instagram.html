@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trema studio — Instagram</title>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#141414">
+
+<style>
+@font-face{
+  font-family:"JT Flair";
+  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
+  font-weight:300 1000;font-display:block;
+}
+
+:root{
+  --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --bg:var(--papier); --fg:var(--encre);
+  --fd:"JT Flair","Helvetica Neue",Arial,sans-serif;
+  --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --fm:ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:clamp(14px,2vw,28px);
+  --pad:clamp(18px,4vw,72px);
+  --rule:1.4px solid currentColor;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;filter:grayscale(1)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+
+/* en-tête */
+#top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
+  border-bottom:var(--rule)}
+#top .mk{width:78px;height:19.5px;background:currentColor;flex:0 0 auto;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;mask:url("logotrema.svg") no-repeat left center/contain}
+#top nav{display:flex;gap:clamp(14px,2vw,30px);align-items:center;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
+#top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+
+section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
+section:first-of-type{border-top:0}
+.w{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.k{--bg:var(--noir);--fg:var(--blanc);background:var(--bg);color:var(--fg)}
+.l{--bg:var(--lait);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+
+.part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
+h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance;margin-bottom:.34em}
+h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;margin-bottom:.4em}
+h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  opacity:.55;margin-bottom:.9em}
+p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
+p + p{margin-top:.9em}
+.mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
+.dim{opacity:.55}
+.grid{display:grid;gap:var(--gut)}
+.c2{grid-template-columns:repeat(2,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){.c2,.c3{grid-template-columns:1fr}}
+.box{border:var(--rule);padding:clamp(14px,1.9vw,24px)}
+.sym{display:block;fill:currentColor}
+.wordmark{display:block;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:10.5px}
+th,td{border:var(--rule);padding:7px 10px;text-align:left;vertical-align:middle}
+th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;font-size:9px}
+.scrollx{overflow-x:auto}
+
+/* ══ LA GRILLE DE PROFIL ═══════════════════════════════════
+   Depuis 2025 la vignette de profil est cadrée en 4:5, plus en
+   carré : c'est ce rapport qu'on compose, pas le 1:1. */
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
+  border:var(--rule);max-width:760px}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--bg);color:var(--fg);padding:9%}
+.post img.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.post > *{position:relative;z-index:2}
+.post .n{position:absolute;top:5px;left:6px;z-index:5;font-family:var(--fm);font-size:7px;
+  letter-spacing:.12em;opacity:.45}
+.post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:clamp(14px,1.9vw,26px);line-height:1.02}
+.post .mn{font-family:var(--fm);font-size:clamp(6px,.68vw,8px);letter-spacing:.16em;text-transform:uppercase}
+.post .ctr{margin:auto;display:grid;place-items:center}
+.post .tilebg{position:absolute;inset:0;background:currentColor;
+  -webkit-mask:url("Logo.svg") repeat center/26px 30.3px;mask:url("Logo.svg") repeat center/26px 30.3px;z-index:1}
+.post .wm{width:58%;aspect-ratio:4}
+
+/* fiche technique sous chaque post */
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:var(--gut)}
+@media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.specs{grid-template-columns:1fr}}
+.spec{border-top:var(--rule);padding-top:11px}
+.spec b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 40;
+  font-size:clamp(14px,1.4vw,19px);font-weight:400;line-height:1.1}
+.spec .no{font-family:var(--fm);font-size:9px;opacity:.4;letter-spacing:.14em}
+.spec p{font-size:clamp(12.5px,1vw,14.5px);line-height:1.45;margin-top:.3em}
+.spec .dim{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;opacity:.55;margin-top:.5em;display:block}
+
+/* gabarits : la zone sûre dessinée */
+.tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
+.tpl .safe{position:absolute;border:1.4px dashed currentColor;opacity:.5}
+.tpl .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;border-top:var(--rule);
+  font-family:var(--fm);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;background:var(--blanc)}
+.tpl .rat{position:absolute;top:8px;left:9px;font-family:var(--fm);font-size:9px;opacity:.45}
+
+footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overflow:hidden}
+.wall{margin:0 calc(var(--pad) * -1) clamp(22px,3vw,44px)}
+.wall span{display:block;background:currentColor;aspect-ratio:4;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.wall .l1{width:116%;margin-left:-11%}
+.wall .l2{width:104%;margin-left:2%}
+.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <a href="index.html" class="mk" aria-label="trema studio"></a>
+  <nav>
+    <a href="index.html">Brand book</a>
+    <a href="instagram.html" class="on">Instagram</a>
+  </nav>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">BRUXELLES</span>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
+<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
+</symbol></svg>
+
+
+<!-- ═════ LA GRILLE ═════ -->
+<section class="w">
+  <div class="part">Communication</div>
+  <h1>Neuf posts,<br>une grille</h1>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Un bloc de neuf, c'est ce que voit quelqu'un qui arrive
+  sur le compte. Les six premiers sont la rotation de base — la marque, la promesse, le lieu, le travail,
+  l'information, la signature ; les trois derniers ouvrent le format. Les valeurs alternent en damier :
+  deux posts de même valeur ne se touchent jamais, ni côte à côte ni l'un au-dessus de l'autre.</p>
+
+  <div class="feed" id="feed"></div>
+
+  <div class="specs" id="specs"></div>
+</section>
+
+
+<!-- ═════ LES FORMATS ═════ -->
+<section class="l">
+  <h2>Les formats</h2>
+  <p style="margin-bottom:clamp(24px,3vw,44px)">On compose en 4:5. C'est le rapport de la vignette de
+  profil et celui qui occupe le plus de hauteur dans le fil — un carré s'y perd, un 9:16 s'y fait recadrer.
+  Le 1:1 ne sert plus qu'aux partenaires qui l'exigent.</p>
+
+  <div class="grid c3" style="margin-bottom:var(--gut)">
+    <figure>
+      <div class="tpl" style="aspect-ratio:4/5">
+        <span class="rat">4 : 5</span>
+        <div class="safe" style="inset:8% 6%"></div>
+        <div class="lbl">Fil &amp; grille de profil</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1080 × 1350 px · le format par défaut</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:1">
+        <span class="rat">1 : 1</span>
+        <div class="safe" style="inset:8%"></div>
+        <div class="lbl">Carré — sur demande</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1080 × 1080 px · partenaires, presse</p>
+    </figure>
+    <figure>
+      <div class="tpl" style="aspect-ratio:9/16">
+        <span class="rat">9 : 16</span>
+        <div class="safe" style="inset:14% 7%"></div>
+        <div class="lbl">Story &amp; reel</div>
+      </div>
+      <p class="mono dim" style="margin-top:9px">1080 × 1920 px · zone sûre 250 / 340</p>
+    </figure>
+  </div>
+
+  <div class="scrollx"><table>
+    <tr><th>Format</th><th>Export</th><th>Rapport</th><th>Zone sûre</th><th>Poids</th><th>Usage</th></tr>
+    <tr><td>Fil</td><td>1080 × 1350</td><td>4:5</td><td>marge 6 % · 8 % haut et bas</td><td>&lt; 2 Mo</td><td>Toutes les publications</td></tr>
+    <tr><td>Carré</td><td>1080 × 1080</td><td>1:1</td><td>marge 8 %</td><td>&lt; 2 Mo</td><td>Reprise partenaire</td></tr>
+    <tr><td>Story</td><td>1080 × 1920</td><td>9:16</td><td>250 px haut · 340 px bas</td><td>&lt; 4 Mo</td><td>Coulisses, renvoi</td></tr>
+    <tr><td>Reel — couverture</td><td>1080 × 1920</td><td>9:16</td><td>recadrée en 1:1 dans la grille</td><td>&lt; 4 Mo</td><td>Le sujet reste centré</td></tr>
+    <tr><td>Vignette de profil</td><td>—</td><td>4:5</td><td>rien d'utile dans les 6 % du bord</td><td>—</td><td>Recadrage automatique</td></tr>
+  </table></div>
+</section>
+
+
+<!-- ═════ LES RÈGLES ═════ -->
+<section>
+  <h2>Trois règles</h2>
+  <div class="grid c3">
+    <div class="box"><h4>Le damier</h4><p>Deux posts de même valeur ne se touchent jamais. Sur trois
+      colonnes : sombre / clair / sombre, puis clair / sombre / clair. On vérifie la grille avant de
+      publier, pas après.</p></div>
+    <div class="box"><h4>La règle du un</h4><p>Un seul principe graphique par post : soit la photo, soit
+      le motif, soit le display. Jamais deux ensemble, jamais plus de trois niveaux typographiques.</p></div>
+    <div class="box"><h4>Le logotype</h4><p>Il vient du fichier, jamais retapé. Posé en pied, centré ou
+      à gauche, jamais collé au bord ni sur la moitié chargée d'une photo.</p></div>
+  </div>
+</section>
+
+
+<footer class="k">
+  <div class="wall" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
+    <span class="mono dim">© <span data-year>2026</span> trema studio — document interne</span>
+    <span class="mono dim"><a href="index.html" style="text-decoration:underline">← Brand book</a></span>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+$$("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+
+/* Les neuf posts. `v` note la valeur — s sombre, c clair — pour
+   verifier le damier autrement qu'a l'oeil. */
+const POSTS = [
+  {v:"s", t:"La marque", d:"Le signe seul, blanc sur noir, centre. Post d'ancrage : il revient tous les six et sert de repere dans la grille.", x:"1080 × 1350 · signe a 46 % de la largeur",
+   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
+   s:`background:var(--noir);color:#fff`},
+  {v:"c", t:"La promesse", d:"Le manifeste en display, noir sur blanc, rien d'autre. Trois lignes maximum, drapeau a droite.", x:"1080 × 1350 · display 3 lignes max",
+   h:`<div class="big" style="margin:auto 0">Révéler,<br>jamais<br>recouvrir.</div>`,
+   s:`background:var(--blanc);color:var(--encre)`},
+  {v:"s", t:"Le lieu", d:"Photo pleine en noir et blanc, le logotype pose en pied. Jamais de texte sur la moitie chargee de l'image.", x:"1080 × 1350 · logotype a 58 % en pied",
+   h:`<img class="bgimg" src="image%20347.jpg" alt="" style="filter:grayscale(1) brightness(.62)">
+      <span class="wordmark wm" style="margin-top:auto"></span>`,
+   s:`color:#fff`},
+  {v:"c", t:"Le travail", d:"Le signe-fenetre : le projet remplit la forme. Le sujet occupe la partie large, jamais la pointe.", x:"1080 × 1350 · forme a 82 % de la hauteur",
+   h:`<div style="position:absolute;inset:9%;-webkit-mask:url('Logo.svg') no-repeat center/contain;
+        mask:url('Logo.svg') no-repeat center/contain;overflow:hidden">
+        <img src="image%20347.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>`,
+   s:`background:var(--papier);color:var(--encre);padding:0`},
+  {v:"s", t:"L'information", d:"Fiche sur aplat encre : mention, titre, caracteristiques. Trois niveaux typographiques, pas quatre.", x:"1080 × 1350 · marge 6 %",
+   h:`<div class="mn" style="opacity:.6;margin-top:6%">MENTION</div>
+      <div class="big" style="margin-top:auto">Titre du<br>projet</div>
+      <div class="mn" style="opacity:.6;margin-top:.6em">CATÉGORIE · ANNÉE</div>`,
+   s:`background:var(--encre);color:var(--papier)`},
+  {v:"c", t:"La signature", d:"Le motif tuile plein cadre. Post de respiration, sans texte : il fait exister le rythme entre deux contenus.", x:"1080 × 1350 · tuile 78 × 91 exacte",
+   h:`<div class="tilebg"></div>`,
+   s:`background:var(--blanc);color:var(--encre);padding:0`},
+  {v:"s", t:"La citation", d:"Une ligne de client ou d'atelier, en Light sur aplat graphite. Le seul endroit ou l'on compose en 300.", x:"1080 × 1350 · display Light 300",
+   h:`<div style="margin:auto 0;font-family:var(--fd);font-variation-settings:'wght' 300,'FLAR' 0;
+        font-size:clamp(13px,1.7vw,23px);line-height:1.1">«&nbsp;Une ligne<br>qui vient<br>d'ailleurs.&nbsp;»</div>
+      <div class="mn" style="opacity:.5">ATTRIBUTION</div>`,
+   s:`background:var(--graphite);color:#fff`},
+  {v:"c", t:"Le detail", d:"Gros plan sur une matiere ou un ecran. Cadrage serre, aucun texte : c'est la respiration du bloc.", x:"1080 × 1350 · aucun texte",
+   h:`<img class="bgimg" src="image%20347.jpg" alt="" style="filter:grayscale(1) contrast(1.12)">`,
+   s:`background:var(--lait);color:var(--encre);padding:0`},
+  {v:"s", t:"Le renvoi", d:"Fin de bloc : le signe et une adresse. C'est le seul post qui demande quelque chose au lecteur.", x:"1080 × 1350 · une seule ligne d'appel",
+   h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:30%;max-width:40px"><use href="#tm"/></svg></div>
+      <div class="mn" style="opacity:.7;text-align:center">TREMA.DESIGN</div>`,
+   s:`background:var(--noir);color:#fff`}
+];
+
+$("#feed").innerHTML = POSTS.map((p, i) =>
+  `<div class="post" style="${p.s}"><span class="n">${String(i+1).padStart(2,"0")}</span>${p.h}</div>`).join("");
+
+$("#specs").innerHTML = POSTS.map((p, i) =>
+  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span>
+    <b>${p.t}</b><p>${p.d}</p><span class="dim">${p.x}</span></div>`).join("");
+
+/* verification du damier : aucun voisin de meme valeur, en ligne
+   comme en colonne. Le resultat est ecrit dans la console — si la
+   grille casse un jour, on le sait sans le compter a la main. */
+const bad = [];
+POSTS.forEach((p, i) => {
+  const col = i % 3, row = (i / 3) | 0;
+  if (col < 2 && POSTS[i+1] && POSTS[i+1].v === p.v) bad.push(`${i+1}↔${i+2}`);
+  if (row < 2 && POSTS[i+3] && POSTS[i+3].v === p.v) bad.push(`${i+1}↕${i+4}`);
+});
+console.log(bad.length ? "Damier casse : " + bad.join(", ") : "Damier : aucun voisin de meme valeur ✓");
+})();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tréma — Brand Book</title>
+<title>trema studio — Brand Book</title>
 
 <!-- Favicon : le signe, en negatif dans un carre encre. Le SVG suit
      le theme du navigateur ; les PNG servent de repli. -->
@@ -319,20 +319,63 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .tote::before,.tote::after{content:"";position:absolute;top:-16%;width:9%;height:26%;border:var(--rule);border-bottom:0;border-radius:40px 40px 0 0}
 .tote::before{left:22%}.tote::after{right:22%}
 .tote .sym{width:26%}
-/* nombre de colonnes fixe : une rangée incomplète laisserait un filet dans le vide */
-.ico{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--rule);border-left:var(--rule)}
-@media(max-width:640px){.ico{grid-template-columns:repeat(2,1fr)}}
-.ico figure{border-right:var(--rule);border-bottom:var(--rule);padding:20px 12px;display:grid;place-items:center;
-  gap:13px;text-align:center}
-.ico figcaption{font-family:var(--fm);font-size:8px;letter-spacing:.13em;text-transform:uppercase;opacity:.6}
-.pico{width:clamp(34px,4vw,52px);aspect-ratio:1;background:currentColor;
+/* ══ EN-TÊTE ═══════════════════════════════════════════════ */
+#top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
+  border-bottom:var(--rule)}
+#top .mk{width:78px;height:19.5px;background:currentColor;flex:0 0 auto;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;mask:url("logotrema.svg") no-repeat left center/contain}
+#top nav{display:flex;gap:clamp(14px,2vw,30px);align-items:center;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
+#top nav a.on{border-bottom-color:currentColor}
+#top nav a:hover{border-bottom-color:currentColor}
+
+/* ══ PICTOGRAMMES ══════════════════════════════════════════ */
+/* composés dans la phrase, à la taille du texte qui les porte */
+.pin{display:inline-block;width:.84em;height:.84em;background:currentColor;vertical-align:-.02em;margin:0 .07em;
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
+/* display léger : les phrases longues se composent en Light, pas en Extra */
+.dlight{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:-.014em}
 
-footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
+/* présentation en cases aérées, légende dessous */
+.shop{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.2vw,34px)}
+@media(max-width:900px){.shop{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.shop{grid-template-columns:1fr}}
+.shop figure{margin:0}
+.shop .case{border:1.4px solid color-mix(in srgb,currentColor 24%,transparent);
+  border-radius:clamp(9px,1.2vw,18px);aspect-ratio:1.04;display:grid;place-items:center;padding:22%}
+.shop .pico{width:100%;aspect-ratio:1;background:currentColor;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain}
+/* la regle figcaption globale grise tout : on la neutralise ici */
+.shop figcaption{margin-top:clamp(9px,1.1vw,14px);opacity:1;font-family:var(--fs);
+  font-size:inherit;letter-spacing:0;line-height:1.3}
+.shop .nm2{display:block;font-family:var(--fd);font-variation-settings:"wght" 700,"FLAR" 0;
+  font-size:clamp(14px,1.4vw,19px);line-height:1.1}
+.shop .sub2{display:block;font-size:clamp(12px,1.05vw,14px);opacity:.42;margin-top:.14em}
+
+/* ══ PIED DE PAGE — le mur ═════════════════════════════════ */
+footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overflow:hidden}
+.wall{margin:0 calc(var(--pad) * -1) clamp(24px,3.2vw,50px)}
+.wall span{display:block;background:currentColor;aspect-ratio:4;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.wall .l1{width:114%;margin-left:-9%}
+.wall .l2{width:128%;margin-left:-21%}
+.wall .l3{width:107%;margin-left:1%}
 </style>
 </head>
 <body>
+
+<header id="top">
+  <a href="index.html" class="mk" aria-label="trema studio"></a>
+  <nav>
+    <a href="index.html" class="on">Brand book</a>
+    <a href="instagram.html">Instagram</a>
+  </nav>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">BRUXELLES</span>
+</header>
 
 <div id="prog"></div><nav id="rail"></nav>
 
@@ -345,7 +388,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 <section id="s0" data-t="Couverture" style="padding:0">
 <div id="cover">
   <div class="cov-top">
-    <div class="mono"><span class="tm" role="img" aria-label="trema"></span><br><span class="dim">Studio de design · Paris</span></div>
+    <div class="mono"><span class="tm" role="img" aria-label="trema"></span><br><span class="dim">studio · Bruxelles</span></div>
     <div class="mono" style="text-align:right">BRAND BOOK<br><span class="dim">v3.0 — <span data-date>—</span></span></div>
   </div>
   <svg class="cov-sym sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
@@ -355,7 +398,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     la communication. L'essentiel du système, en dix chapitres.</p>
   </div>
   <div class="cov-bot">
-    <div class="mono dim">↓ 10 chapitres</div>
+    <div class="mono dim">↓ <span data-count>—</span> chapitres</div>
     <div class="mono dim" style="text-align:right">JT FLAIR · wght 300–1000 · slnt 0–15<br>document interne</div>
   </div>
 </div>
@@ -462,7 +505,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     <div class="tile wide p-pap"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
-      <span class="sub">STUDIO DE DESIGN · PARIS</span></span></div>
+      <span class="sub">STUDIO · BRUXELLES</span></span></div>
       <span class="cap">C · Signature — papeterie, B2B</span></div>
 
     <div class="tile wide p-enc"><div class="lock">
@@ -476,7 +519,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
     <div class="tile wide p-enc"><div class="lock sig">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
       <span class="txt"><span class="wordmark" style="font-size:.74em" role="img" aria-label="trema"></span>
-      <span class="sub">STUDIO DE DESIGN · PARIS</span></span></div>
+      <span class="sub">STUDIO · BRUXELLES</span></span></div>
       <span class="cap">C · Inversé</span></div>
   </div>
 
@@ -603,7 +646,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   <div class="part">Typographie</div>
   <div class="spec-note"><span>JT FLAIR · SPÉCIMEN</span><span>MODULATION « CASCADE »</span>
     <span>wght 300–1000 / slnt 0–15</span></div>
-  <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identité, écrans, éditions — un studio de design à Paris.</div>
+  <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identité, écrans, éditions — trema studio, Bruxelles.</div>
   <p class="mono dim" style="margin-top:1.6em">Chaque signe porte sa propre graisse et sa propre inclinaison.
   Rien ne bouge : la variation est écrite dans la composition, pas jouée au survol.</p>
 </section>
@@ -682,14 +725,14 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   <div class="grid c2" style="margin-bottom:var(--gut)">
     <div class="box">
       <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
+        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Titre de section</div>
       <p>Le titre porte la marque, le paragraphe porte l'information : il reste neutre, lisible, sans caractère
       propre. C'est ce contraste qui fait tenir la page.</p>
       <div class="mono dim" style="margin-top:16px">✓ Couple correct</div>
     </div>
     <div class="box">
       <div style="font-family:var(--fd);font-size:clamp(30px,4.2vw,58px);line-height:1;
-        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Refonte Aria</div>
+        font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Titre de section</div>
       <p style="font-family:var(--fd);font-variation-settings:'wght' 400,'FLAR' 100">Le titre porte la marque,
       le paragraphe porte l'information : il reste neutre, lisible, sans caractère propre. C'est ce contraste
       qui fait tenir la page.</p>
@@ -776,78 +819,33 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
 </section>
 
 
-<!-- ═════ 10 · LES SIX POSTS ═════ -->
-<section id="s10" data-t="Les six posts" data-p="Communication" class="w">
+<!-- ═════ 10 · PICTOGRAMMES ═════ -->
+<section id="s10" data-t="Pictogrammes" data-p="Système" class="w">
   <div class="num">10</div>
-  <div class="hd"><div><div class="part">Communication</div><div class="tag">Chapitre 10</div>
-    <h2>Les six<br>posts</h2></div>
-  <p>Six publications, pas une de plus. Elles se lisent ensemble : quelqu'un qui arrive sur le compte
-  doit comprendre Tréma en un écran — la marque, le lieu, la promesse, le travail,
-  la signature graphique, l'information. Les valeurs alternent en damier pour que la grille tienne debout.</p></div>
+  <div class="part">Système</div><div class="tag">Chapitre 10</div>
 
-  <div class="feedwrap">
-    <div class="feed">
-      <!-- 01 · la marque — sombre -->
-      <div class="post" style="background:var(--noir);color:#fff">
-        <span class="n">01</span>
-        <div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:52px;max-width:46%"><use href="#tm"/></svg></div>
-      </div>
-      <!-- 02 · la promesse — clair -->
-      <div class="post" style="background:var(--blanc);color:var(--encre);justify-content:center">
-        <span class="n">02</span>
-        <div class="big">Révéler,<br>jamais<br>recouvrir.</div>
-      </div>
-      <!-- 03 · le lieu — sombre -->
-      <div class="post" style="color:#fff;justify-content:flex-end">
-        <span class="n" style="color:#fff">03</span>
-        <img class="bgimg" src="image%20347.jpg" alt="" style="filter:grayscale(1) brightness(.62)">
-        <span class="wordmark" style="width:clamp(56px,7.4vw,104px);height:auto;aspect-ratio:4" role="img" aria-label="trema"></span>
-      </div>
-      <!-- 04 · le produit — clair -->
-      <div class="post" style="background:var(--papier);color:var(--encre);padding:0">
-        <span class="n">04</span>
-        <div style="position:absolute;inset:9%;-webkit-mask:url('Logo.svg') no-repeat center/contain;
-          mask:url('Logo.svg') no-repeat center/contain;overflow:hidden">
-          <img src="image%20347.jpg" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
-      </div>
-      <!-- 05 · l'information — sombre -->
-      <div class="post" style="background:var(--encre);color:var(--papier);justify-content:space-between">
-        <span class="n" style="color:var(--papier)">05</span>
-        <div class="mn" style="opacity:.6;margin-top:8%">NOUVEAU PROJET</div>
-        <div class="big" style="margin-top:auto">Refonte<br>Aria</div>
-        <div class="mn" style="opacity:.6;margin-top:.6em">IDENTITÉ · SITE · ÉDITION</div>
-      </div>
-      <!-- 06 · la signature — clair -->
-      <div class="post" style="background:var(--blanc);color:var(--encre);padding:0">
-        <span class="n" style="z-index:5">06</span>
-        <div class="tilebg"></div>
-      </div>
-    </div>
+  <div class="dlight" style="font-size:clamp(28px,5.6vw,92px);margin-bottom:clamp(30px,4vw,64px)">trema studio
+  dessine des <span class="pin" data-pic="menu"></span>, des <span class="pin" data-pic="gallery"></span>
+  et des <span class="pin" data-pic="post"></span> pour des marques qui ont quelque chose à montrer.</div>
 
-    <div class="legend">
-      <div><b>01</b><p><span class="t">La marque</span>Le signe seul, blanc sur noir, centré. C'est le post
-        d'ancrage : il revient tous les six posts et sert de repère dans la grille.</p></div>
-      <div><b>02</b><p><span class="t">La promesse</span>Le manifeste en display, noir sur blanc, rien d'autre.
-        Trois lignes maximum, drapeau à droite.</p></div>
-      <div><b>03</b><p><span class="t">Le lieu</span>Photo pleine en noir et blanc, le mot en bas-de-casse
-        posé en pied. Jamais de texte sur la moitié chargée de l'image.</p></div>
-      <div><b>04</b><p><span class="t">Le travail</span>Le signe-fenêtre : le projet remplit la forme.
-        Le sujet occupe la partie large, jamais la pointe.</p></div>
-      <div><b>05</b><p><span class="t">L'information</span>Fiche origine sur aplat encre : mention, nom,
-        caractéristiques. Trois niveaux typographiques, pas quatre.</p></div>
-      <div><b>06</b><p><span class="t">La signature</span>Le motif tuilé plein cadre. Post de respiration,
-        sans texte — il fait exister le rythme entre deux contenus.</p></div>
-    </div>
+  <div class="grid c2" style="margin-bottom:clamp(28px,3.6vw,56px)">
+    <p>Les pictogrammes ne sont pas des illustrations : ce sont des <b>mots</b>. Ils se composent dans la
+    phrase, à la taille du texte qui les porte, et remplacent un nom — jamais un verbe, jamais une idée
+    abstraite. Trois au maximum par phrase, sinon on lit un rébus.</p>
+    <p>Ils sont dessinés sur la même grille que le signe et suivent la couleur du texte : un picto ne
+    porte jamais sa propre valeur. En display, on compose en <b>Light</b> — une phrase longue en Extra
+    devient un mur.</p>
   </div>
 
-  <div class="grid c3" style="margin-top:clamp(24px,3vw,44px)">
-    <div class="box"><h4>Le damier</h4><p class="mono">Deux posts de même valeur ne se touchent jamais,
-      ni côte à côte ni l'un au-dessus de l'autre. Sur trois colonnes :
-      sombre / clair / sombre, puis clair / sombre / clair.</p></div>
-    <div class="box"><h4>La règle du un</h4><p class="mono">Un seul principe graphique par post :
-      soit la photo, soit le motif, soit le display. Jamais deux ensemble.</p></div>
-    <div class="box"><h4>Formats</h4><p class="mono">1080 × 1350 (4:5) au fil · 1080 × 1920 (9:16) en story.
-      Zone sûre : 220 px en haut, 320 px en bas.</p></div>
+  <div class="shop" id="picoGrid"></div>
+
+  <div class="grid c3" style="margin-top:clamp(28px,3.6vw,56px)">
+    <div class="box"><h4>Taille</h4><p class="mono">Dans une phrase : 0,84 em, aligné sur la hauteur d'x.
+      Seul : jamais sous 24 px.</p></div>
+    <div class="box"><h4>Couleur</h4><p class="mono">Toujours celle du texte. Appelés en masque, jamais
+      en image : ils suivent la polarité du fond.</p></div>
+    <div class="box"><h4>Interdits</h4><p class="mono">Deux pictos collés, un picto dans un titre en Extra,
+      un picto à la place d'un verbe.</p></div>
   </div>
 </section>
 
@@ -875,7 +873,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
   <div class="grid c2" style="margin-bottom:var(--gut)">
     <div class="app" style="aspect-ratio:2"><div class="card" style="width:46%">
       <svg class="sym" viewBox="0 0 78 91"><use href="#tm"/></svg>
-      <div class="mono" style="font-size:8px">CAMILLE ROY<br><span style="opacity:.55">DIRECTRICE ARTISTIQUE</span></div></div>
+      <div class="mono" style="font-size:8px">PRÉNOM NOM<br><span style="opacity:.55">FONCTION</span></div></div>
       <div class="cap">Carte · positif</div></div>
     <div class="app" style="aspect-ratio:2;background:var(--encre);color:var(--papier)">
       <div class="lock" style="font-size:clamp(24px,3.4vw,46px)">
@@ -883,27 +881,31 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule)}
       <div class="cap">Véhicule, vitrine · négatif</div></div>
   </div>
 
-  <h4>Pictogrammes</h4>
-  <div class="ico" id="picoGrid"></div>
 </section>
 
 
 <footer class="k">
-  <div class="hd" style="margin-bottom:clamp(26px,3.5vw,50px)">
+  <div class="wall" aria-hidden="true">
+    <span class="l1"></span><span class="l2"></span><span class="l3"></span>
+  </div>
+
+  <div class="hd" style="margin-bottom:clamp(24px,3.2vw,46px)">
     <div>
-      <svg class="sym" viewBox="0 0 78 91" style="width:clamp(44px,6vw,80px);margin-bottom:20px"><use href="#tm"/></svg>
+      <svg class="sym" viewBox="0 0 78 91" style="width:clamp(40px,5vw,68px);margin-bottom:18px"><use href="#tm"/></svg>
       <h2>Révéler,<br>jamais recouvrir.</h2>
     </div>
     <div>
-      <p class="mono dim">Ce guide est vivant. Toute exception se documente ici plutôt que de se décider dans
-      un coin. Une question, un cas non couvert, une envie de casser une règle : on en parle avant, pas après.</p>
+      <p class="mono dim">Ce guide est vivant. Toute exception se documente ici plutôt que de se décider
+      dans un coin. Une question, un cas non couvert, une envie de casser une règle : on en parle avant,
+      pas après.</p>
       <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:7px">
-        <span class="pill">design@trema.fr</span><span class="pill">v2.0</span><span class="pill">MàJ <span data-date>—</span></span>
+        <span class="pill">Bruxelles</span><span class="pill">v3.0</span><span class="pill">MàJ <span data-date>—</span></span>
       </div>
     </div>
   </div>
+
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
-    <span class="mono dim">© <span data-year>2026</span> Tréma — document interne</span>
+    <span class="mono dim">© <span data-year>2026</span> trema studio — document interne</span>
     <span class="mono dim">Composé en JT Flair</span>
     <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Haut de page</button>
   </div>
@@ -1029,13 +1031,25 @@ $("#gset").innerHTML = [...CH].map(c => {
 }).join("");
 
 /* ── pictogrammes ── */
-const PICTOS = [["faq","FAQ"],["gallery","Galerie"],["link","Lien"],["mentions","Mentions"],
-  ["menu","Menu"],["playlist","Playlist"],["post","Post"],["reviews","Avis"]];
-$("#picoGrid").innerHTML = PICTOS.map(([f, label]) => {
+const PICTOS = [
+  ["faq","FAQ","Question, aide"],       ["gallery","Galerie","Série d'images"],
+  ["link","Lien","Renvoi, source"],     ["mentions","Mentions","Légal, crédits"],
+  ["menu","Menu","Navigation"],         ["playlist","Playlist","Séquence, sommaire"],
+  ["post","Post","Publication"],        ["reviews","Avis","Retour client"]];
+$("#picoGrid").innerHTML = PICTOS.map(([f, label, usage]) => {
   const u = `url('picto/web/${f}.svg')`;
-  return `<figure><div class="pico" style="-webkit-mask-image:${u};mask-image:${u}"></div>
-    <figcaption>${label}</figcaption></figure>`;
+  return `<figure><div class="case"><div class="pico" style="-webkit-mask-image:${u};mask-image:${u}"></div></div>
+    <figcaption><span class="nm2">${label}</span><span class="sub2">${usage}</span></figcaption></figure>`;
 }).join("");
+
+/* les pictos composés dans la phrase */
+$$("[data-pic]").forEach(el => {
+  const u = `url('picto/web/${el.dataset.pic}.svg')`;
+  el.style.webkitMaskImage = u; el.style.maskImage = u;
+});
+
+/* le compte de chapitres se déduit du document */
+$$("[data-count]").forEach(e => e.textContent = secs.length - 1);
 
 /* ── copie des valeurs ── */
 $$(".sw").forEach(sw => sw.onclick = async () => {
