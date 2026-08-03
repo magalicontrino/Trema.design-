@@ -113,7 +113,7 @@ window.TREMA_FEED = [
    c:"380+ tremas published, heading to 1,000+."},
 
   /* ── 8 · l'appel ── */
-  {p:"25-kitchen",        c:"A kitchen, mid-service. Ninety days of Pro, no card."},
+  {p:"77-comptoir-cafe",        c:"A kitchen, mid-service. Ninety days of Pro, no card."},
   {t:["Create","your","@mark"], s:"e",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
 ];
