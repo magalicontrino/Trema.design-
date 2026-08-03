@@ -317,10 +317,16 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 .seg{position:relative;z-index:1;
   -webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
 .seg.it{z-index:2}
-/* les segments se touchent, comme dans la reference : pas d'espace de
-   mot entre une capitale et l'italique qui la suit. Un cheveu de marge
-   seulement, pour que les jambages ne se percutent pas. */
-.seg + .seg{margin-left:.012em}
+/* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
+   Dans la reference l'italique recule sur le mot qui la precede — le
+   m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
+   IS. La marge est donc negative, et c'est le contour qui rend le
+   chevauchement lisible.
+   Elle est en em, donc relative au corps du segment qui recule : un
+   petit segment se rentre moins qu'un grand, ce qui est juste.
+   La mise a la mesure n'en souffre pas : on mesure la largeur rendue
+   de la ligne entiere, recouvrement compris. */
+.seg + .seg{margin-left:-.06em}
 /* le chevauchement : negatif, donc la ligne suivante remonte dans la
    precedente. C'est la mesure qui fait le bloc compact de la
    reference — sans lui, les lignes ne se croisent jamais. */
