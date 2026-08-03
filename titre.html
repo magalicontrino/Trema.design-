@@ -309,6 +309,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   width:8.5em;height:8.5em;display:grid;place-items:center;text-align:center;padding:0}
 
 .quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,60px)}
+.titnom{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;opacity:.45;margin:clamp(34px,5vw,70px) 0 6px}
+.titnom:first-child{margin-top:clamp(14px,2vw,26px)}
 .quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
 .quatre .note{display:none}
@@ -361,12 +364,35 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    plus grande qu'une capitale pour paraitre de la meme taille, sa
    hauteur d'x etant bien plus basse. */
 const IT = 1.24;
-const LIGNES = [
-  {w:1,   g:[ {t:"Everything", s:"up"} ]},
-  {w:.60, g:[ {t:"about", s:"it", r:IT} ]},
-  {w:1,   g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
-  {w:1,   g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
+
+/* Plusieurs titres, une seule methode. C'est le point : la composition
+   n'est pas dessinee a la main, elle est decrite. Pour en ajouter un,
+   il suffit d'ecrire ses lignes — coupe, alternance, part de mesure.
+
+   Les deux reperes qui font tenir une coupe :
+   1. une ligne courte devient enorme, puisqu'elle remplit la meme
+      mesure. On compte les signes avant de couper.
+   2. il faut une ligne qui s'arrete avant le bord, sinon le bloc est
+      un pave et il n'y a nulle part ou poser une mention. */
+const TITRES = [
+  {n:"L'accroche", l:[
+    {w:1,   g:[ {t:"Everything", s:"up"} ]},
+    {w:.60, g:[ {t:"about", s:"it", r:IT} ]},
+    {w:1,   g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
+    {w:1,   g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
+  ]},
+  {n:"Les habitues", l:[
+    {w:1,   g:[ {t:"From", s:"up"}, {t:"followers", s:"it", r:IT} ]},
+    {w:.52, g:[ {t:"to", s:"it", r:IT} ]},
+    {w:1,   g:[ {t:"Regulars.", s:"up"} ]},
+  ]},
+  {n:"La decouverte", l:[
+    {w:1,   g:[ {t:"Found", s:"up"}, {t:"by", s:"it", r:IT} ]},
+    {w:.72, g:[ {t:"Google", s:"up"} ]},
+    {w:1,   g:[ {t:"and", s:"it", r:IT}, {t:"AIs.", s:"up"} ]},
+  ]},
 ];
+const LIGNES = TITRES[0].l;
 const NOTES = [
   {t:"Not a website", c:"",  st:"top:-4%;right:6%;transform:rotate(-4deg)"},
   {t:"No algorithm decides", c:"b", st:"top:26%;right:9%;transform:rotate(3deg)"},
@@ -387,9 +413,9 @@ const un=document.querySelector("#un"), quatre=document.querySelector("#quatre")
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
   + `<button data-k="tout">Les deux</button>`;
 
-const dessine = (avecNotes) =>
+const dessine = (avecNotes, lignes=LIGNES) =>
   `<div class="titre">` +
-  LIGNES.map(l=>`<div class="ligne" data-w="${l.w}">` +
+  lignes.map(l=>`<div class="ligne" data-w="${l.w}">` +
     l.g.map(g=>`<span class="seg ${g.s}" data-r="${g.r||1}">${g.t}</span>`).join("") +
     `</div>`).join("") +
   (avecNotes ? NOTES.map(n=>`<div class="note ${n.c}" style="${n.st}">${n.t}</div>`).join("") : "") +
@@ -422,7 +448,9 @@ const charge = k => Promise.all([
 
 function fonte(k){
   quatre.hidden=true; quatre.innerHTML=""; un.hidden=false;
-  un.className="ft-"+k; un.innerHTML=dessine(true);
+  un.className="ft-"+k;
+  un.innerHTML = TITRES.map((t,i)=>
+    `<h4 class="titnom">${t.n}</h4>` + dessine(i===0, t.l)).join("");
   fnote.textContent=FONTES.find(f=>f.k===k).d;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
   charge(k).then(()=>fitTitre(un));
@@ -433,7 +461,9 @@ function cote(){
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
   fnote.textContent="Le meme titre, la meme composition, deux fontes. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
   quatre.innerHTML=FONTES.map(f=>
-    `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">${dessine(false)}</div></div>`).join("");
+    `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">`
+    + TITRES.map(t=>dessine(false, t.l)).join('<div style="height:clamp(24px,3vw,44px)"></div>')
+    + `</div></div>`).join("");
   Promise.all(FONTES.map(f=>charge(f.k)))
     .then(()=>FONTES.forEach(f=>fitTitre(document.querySelector(`#t-${f.k}`))));
 }
