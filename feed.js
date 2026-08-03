@@ -33,18 +33,18 @@ window.TREMA_FEED = [
      trois cadres. Sinon on enchaine les gros plans de nourriture et
      on oublie que trema s'adresse a des commercants. */
   {p:"37-journal-titre",  c:"Every place has an address."},
-  {t:["Every place","has an","address"], s:"k",
+  {t:["@mark","Is yours"], s:"k", it:1,
    c:"trema is yours online."},
   {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
-  {t:["@mark","is yours","online"], s:"w",
-   c:"Not a website. Your place's address online."},
+  {sgn:1, s:"k",
+   c:"Every place has an address. Not a website — the address itself."},
   {p:"33-espresso-ochre", c:"And what you serve in it."},
-  {t:["One","link"], s:"e", big:1,
-   c:"Everything about your place. One link."},
+  {t:["Why","vinyl","bars","love","@mark?"], s:"k", rag:1,
+   c:"Because a vinyl bar is a place, not a feed. Everything about it, one link."},
 
   /* ── 2 · ce qu'il y a dessus ── */
   {p:"21-cafe",           c:"A cafe."},
-  {t:["Your","menu"], s:"w", big:1,
+  {t:["Your","menu"], s:"w", big:1, n:"Your place",
    c:"Menu, services and pricing — a section of your own page."},
   {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
   {t:["Your","hours"], s:"l", big:1,
@@ -147,6 +147,9 @@ window.TREMA_LOOK = function (list) {
 
   list.forEach((o, i) => {
     const ph = !!o.p, tx = !!o.t && !o.car;
+    /* le cadre-signe porte deja le picto en propre : on le compte comme
+       un geste, sinon le creatif en poserait un second juste a cote. */
+    if (o.sgn) { dernier = i; return; }
     if (!ph && !tx) return;           /* le carousel et le cadre coin restent nus */
 
     /* on ne saute pas dans le cycle : on attend le cadre qui va
@@ -225,14 +228,28 @@ window.renderFeed = function (host, dir, small) {
       return `<div class="post car" data-n="${o.car.length}">${n}${slides}
         <span class="swipe">⧉ ${o.car.length}</span><span class="dots">${dots}</span></div>`;
     }
+    /* le cadre-signe : le picto sort du format des deux cotes, sans
+       un mot. Il ne depend d'aucun style, il est ecrit dans le feed —
+       on le veut dans les trois premieres rangees, partout. */
+    if (o.sgn) {
+      return `<div class="post tx sgn" style="${BG[o.s]}">${n}
+        <i class="edge"></i></div>`;
+    }
     if (o.corner) {
       return `<div class="post cn" style="${BG[o.s]}">${n}
         <b>${o.corner.w}</b><i>${o.corner.n.join("<br>")}</i></div>`;
     }
-    const lines = o.t.map(l => l === "@mark"
-      ? `<span class="wm-line"><i class="wordmark"></i></span>`
-      : `<span>${l}</span>`).join("");
-    const mod = (o.big ? " big" : "") + (o.slab ? " slab" : "");
+    /* INTERDIT de composer le nom en typo : des qu'une ligne tombe sur
+       la marque, on sort le dessin. La ponctuation qui suit est permise,
+       elle ne fait pas partie du logotype. */
+    const lines = o.t.map(l => {
+      const m = /^@mark([?!.]?)$/.exec(l);
+      return m
+        ? `<span class="wm-line"><i class="wordmark"></i>${m[1] ? `<em>${m[1]}</em>` : ""}</span>`
+        : `<span>${l}</span>`;
+    }).join("");
+    const mod = (o.big ? " big" : "") + (o.slab ? " slab" : "")
+              + (o.rag ? " rag" : "") + (o.it ? " it" : "");
 
     /* Le cadre "coin" est emis pour chaque texte mais masque : le
        style D le revele une fois sur deux. Emettre les deux plutot
@@ -248,7 +265,9 @@ window.renderFeed = function (host, dir, small) {
     const word = isMark
       ? `<i class="wordmark"></i><em>.</em>`
       : raw + ".";
-    const note = flat.join(" ").toUpperCase();
+    /* `n` permet d'ecrire la mention du coin a la main : elle ne dit
+       pas toujours la meme chose que le mot pose en bas. */
+    const note = (o.n || flat.join(" ")).toUpperCase();
 
     /* Couches decoratives emises pour chaque texte mais masquees :
        seul le style "creatif" les revele, en rotation. Emettre plutot
@@ -332,7 +351,38 @@ function fitAll(host) {
     }
     mesure(b, box);
   });
-  host.querySelectorAll(".post.tx .fit, .post.car .fit").forEach(fit => {
+  /* le drapeau : une seule taille pour le bloc entier. On mesure
+     chaque ligne a 10 px, la plus longue donne l'echelle. Le dessin
+     du logotype compte pour sa largeur reelle — quatre fois sa
+     hauteur — sinon il ne pese rien dans la comparaison. */
+  host.querySelectorAll(".post.tx.rag .fit").forEach(fit => {
+    const box = fit.clientWidth;
+    if (!box) return;
+    const lignes = [...fit.children];
+    const HAUT = 0.62;                 /* le dessin se cale sur la hauteur de capitale */
+    const pose = (sp, taille) => {
+      sp.style.fontSize = taille + "px";
+      const mark = sp.querySelector(".wordmark");
+      if (mark) { mark.style.width = (taille*HAUT*4) + "px";
+                  mark.style.height = (taille*HAUT) + "px"; }
+    };
+    let large = 0;
+    lignes.forEach(sp => { pose(sp, 10); large = Math.max(large, sp.scrollWidth); });
+    if (!large) return;
+    lignes.forEach(sp => pose(sp, 10 * box / large));
+
+    /* et il se cale aussi en hauteur : cinq lignes mises a la mesure de
+       la plus longue tombaient sous le bas du cadre. La largeur donne un
+       plafond, la hauteur en donne un autre, c'est le plus petit qui gagne. */
+    const cadre = fit.closest(".post");
+    const haut = cadre ? cadre.clientHeight * 0.82 : 0;
+    if (haut && fit.scrollHeight > haut) {
+      const k = haut / fit.scrollHeight;
+      lignes.forEach(sp => pose(sp, parseFloat(sp.style.fontSize) * k));
+    }
+  });
+
+  host.querySelectorAll(".post.tx:not(.rag) .fit, .post.car .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;
     fit.querySelectorAll("span").forEach(sp => {
