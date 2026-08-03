@@ -268,17 +268,38 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    corps, elle parait deux fois plus petite. Chaque segment porte
    donc son propre rapport, et c'est la ligne entiere qu'on met a
    la mesure — les rapports internes ne bougent pas. */
-.titre{margin:clamp(20px,3vw,44px) 0 0;position:relative}
-/* interligne tres ferme : dans la reference les lignes se touchent
-   presque, les jambages de l'une passant sous les capitales de la
-   suivante. C'est ce serrage qui fait le bloc. */
+/* La mesure de relecture n'est pas celle de l'affiche : a pleine
+   largeur les titres sont trop gros pour qu'on les compare. On les
+   ramene a une colonne etroite et on aere entre eux. La composition
+   ne change pas — tout est relatif a la mesure, seule l'echelle bouge. */
+.titre{position:relative;max-width:min(100%,660px);
+  margin:clamp(14px,2vw,22px) 0 clamp(48px,7vw,104px)}
+/* LE CONTOUR BLANC — c'est lui, le truc de la reference.
+   Les lignes ne se touchent pas : elles se CHEVAUCHENT. Les
+   ascendantes de l'italique montent dans la ligne du dessus, les
+   descendantes tombent dans celle du dessous. Sans rien, ca ferait
+   une bouillie de noir.
+
+   Chaque lettre porte donc un contour de la couleur du fond, peint
+   DERRIERE le remplissage — c'est ce que fait paint-order. Le dessin
+   de la lettre n'est pas touche, elle gagne juste un halo exterieur
+   qui la decolle de ce qu'il y a dessous. Et comme une ligne ecrite
+   plus bas est peinte par-dessus, l'ordre du chevauchement se lit
+   tout seul.
+
+   Le contour est en em : il suit le corps de chaque segment, sinon il
+   ecraserait les petits et disparaitrait sur les grands. */
 .ligne{display:flex;align-items:baseline;width:max-content;white-space:nowrap;
-  font-family:var(--fd);line-height:.74}
+  font-family:var(--fd);line-height:.72;position:relative}
+.seg{-webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
 /* les segments se touchent, comme dans la reference : pas d'espace de
    mot entre une capitale et l'italique qui la suit. Un cheveu de marge
    seulement, pour que les jambages ne se percutent pas. */
 .seg + .seg{margin-left:.012em}
-.ligne + .ligne{margin-top:.02em}
+/* le chevauchement : negatif, donc la ligne suivante remonte dans la
+   precedente. C'est la mesure qui fait le bloc compact de la
+   reference — sans lui, les lignes ne se croisent jamais. */
+.ligne + .ligne{margin-top:-.13em}
 .seg{display:block}
 /* Deux fontes, pas une. La reference ne compose pas ses capitales et
    ses bas-de-casse dans la meme famille : une grotesque noire d'un
@@ -308,10 +329,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .note.c{background:var(--blanc);border:1px solid var(--brume);border-radius:50%;
   width:8.5em;height:8.5em;display:grid;place-items:center;text-align:center;padding:0}
 
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,60px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,5vw,72px)}
+.quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
 .titnom{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:400;opacity:.45;margin:clamp(34px,5vw,70px) 0 6px}
-.titnom:first-child{margin-top:clamp(14px,2vw,26px)}
+  font-weight:400;opacity:.45;margin:0 0 6px;padding-bottom:6px;border-bottom:var(--rule);
+  max-width:min(100%,660px)}
+
 .quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
 .quatre .note{display:none}
@@ -386,6 +409,13 @@ const TITRES = [
     {w:.52, g:[ {t:"to", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"Regulars.", s:"up"} ]},
   ]},
+  {n:"Temoin — la reference, mot pour mot", l:[
+    {w:1,   g:[ {t:"Making", s:"up"} ]},
+    {w:.62, g:[ {t:"visual", s:"it", r:IT} ]},
+    {w:1,   g:[ {t:"Identity", s:"up"} ]},
+    {w:1,   g:[ {t:"For", s:"up"}, {t:"myself", s:"it", r:IT} ]},
+    {w:1,   g:[ {t:"Is", s:"up"}, {t:"so", s:"it", r:IT}, {t:"Hard", s:"up"} ]},
+  ]},
   {n:"La decouverte", l:[
     {w:1,   g:[ {t:"Found", s:"up"}, {t:"by", s:"it", r:IT} ]},
     {w:.72, g:[ {t:"Google", s:"up"} ]},
@@ -426,9 +456,12 @@ const dessine = (avecNotes, lignes=LIGNES) =>
    segment par segment ne marcherait pas — ce qui compte, c'est la somme,
    crenage compris. */
 function fitTitre(hote){
-  const mesure = hote.clientWidth;
+  /* la mesure est celle du bloc, pas celle de la page : c'est ce qui
+     permet de relire en colonne etroite sans rien changer d'autre. */
+  hote.querySelectorAll(".titre").forEach(bloc=>{
+  const mesure = bloc.clientWidth;
   if (!mesure) return;
-  hote.querySelectorAll(".ligne").forEach(ligne=>{
+  bloc.querySelectorAll(".ligne").forEach(ligne=>{
     const segs=[...ligne.children];
     const cible = mesure * (+ligne.dataset.w || 1);
     segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1))+"px");
@@ -436,6 +469,7 @@ function fitTitre(hote){
     if(!w) return;
     const k=cible/w;
     segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1)*k)+"px");
+  });
   });
 }
 
