@@ -335,6 +335,12 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    On resserre sa boite a elle, pas l'interligne general — dans une
    ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
 .seg.it{z-index:2;line-height:.66}
+/* Bricolage a une hauteur de capitale de 0.71 du corps contre 0.727
+   pour Inter : a corps egal ses capitales sont plus courtes, donc la
+   boite de l'italique pese relativement plus lourd et la ligne
+   d'italique seule creuse a nouveau. On la resserre pour ce couple
+   seulement — regler la valeur commune aurait tasse les deux autres. */
+.ft-bricolage .seg.it{line-height:.60}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
@@ -470,6 +476,12 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    On resserre sa boite a elle, pas l'interligne general — dans une
    ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
 .seg.it{z-index:2;line-height:.66}
+/* Bricolage a une hauteur de capitale de 0.71 du corps contre 0.727
+   pour Inter : a corps egal ses capitales sont plus courtes, donc la
+   boite de l'italique pese relativement plus lourd et la ligne
+   d'italique seule creuse a nouveau. On la resserre pour ce couple
+   seulement — regler la valeur commune aurait tasse les deux autres. */
+.ft-bricolage .seg.it{line-height:.60}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
@@ -604,10 +616,22 @@ const IT = 1.04;
    longueurs — le drapeau de droite vient tout seul. */
 const TITRES = [
   {n:"L'accroche", l:[
-    {w:1,   g:[ {t:"Everything", s:"up"} ]},
+    {w:1, g:[ {t:"Everything", s:"up"} ]},
     {w:1, g:[ {t:"about", s:"it", r:IT} ]},
-    {w:1,   g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
-    {w:1,   g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
+  ]},
+  /* La meme phrase, un mot par ligne, alternance stricte. Le corps
+     etant commun au bloc, c'est le mot le plus long qui le fixe —
+     ici "Your". Six lignes courtes donnent un bloc plus haut et plus
+     etroit : la meme methode, un tout autre objet. */
+  {n:"L'accroche, un mot par ligne", l:[
+    {w:1, g:[ {t:"All",    s:"up"} ]},
+    {w:1, g:[ {t:"about",  s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Your",   s:"up"} ]},
+    {w:1, g:[ {t:"place.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"One",    s:"up"} ]},
+    {w:1, g:[ {t:"link",   s:"it", r:IT} ]},
   ]},
   {n:"Les habitues", l:[
     {w:1,   g:[ {t:"From", s:"up"}, {t:"followers", s:"it", r:IT} ]},
