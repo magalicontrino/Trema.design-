@@ -338,6 +338,13 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 #top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
 #top nav a.on{border-bottom-color:currentColor}
 #top nav a:hover{border-bottom-color:currentColor}
+/* en dessous, la barre ne tient plus sur une ligne : le logotype et la
+   mention gardent la premiere, la navigation passe dessous et se replie */
+@media(max-width:940px){
+  #top{flex-wrap:wrap}
+  #top nav{order:3;flex:1 1 100%;flex-wrap:wrap;row-gap:7px}
+  #top nav a{white-space:nowrap}
+}
 
 /* ══ PICTOGRAMS ════════════════════════════════════════════ */
 /* set inside the sentence, at the size of the text carrying them */

@@ -43,6 +43,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;tex
   font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
 #top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
 #top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+/* en dessous, la barre ne tient plus sur une ligne : le logotype et la
+   mention gardent la premiere, la navigation passe dessous et se replie */
+@media(max-width:940px){
+  #top{flex-wrap:wrap}
+  #top nav{order:3;flex:1 1 100%;flex-wrap:wrap;row-gap:7px}
+  #top nav a{white-space:nowrap}
+}
 
 section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
 section:first-of-type{border-top:0}
@@ -547,6 +554,13 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
 .quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
+
+/* trois colonnes cote a cote n'ont pas de sens sur un ecran etroit :
+   les couples s'empilent, chacun a pleine mesure. La mise a la mesure
+   suit toute seule — fitTitre lit la largeur reelle au rendu. */
+@media(max-width:700px){
+  .quatre{grid-template-columns:1fr;gap:clamp(40px,10vw,64px)}
+}
 
 </style>
 </head>
