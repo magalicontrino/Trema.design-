@@ -39,8 +39,14 @@ window.TREMA_FEED = [
   {sgn:1, s:"k",
    c:"Every place has an address. Not a website — the address itself."},
   {p:"33-espresso-ochre", c:"And what you serve in it."},
-  {t:["Why","vinyl","bars","love","@mark?"], s:"k", rag:1,
-   c:"Because a vinyl bar is a place, not a feed. Everything about it, one link."},
+  /* La question et sa reponse : deux vues, on balaie. La reponse ne
+     s'ecrit pas, elle se montre — le mot "Because" et le picto du
+     menu derriere lui. */
+  {car:[
+     {t:["Why","vinyl","bars","love","@mark?"], rag:1},
+     {t:["Because"], rag:1, pic:"menu"},
+   ], s:"k",
+   c:"Because everything is already in the menu. One link, and it is there."},
 
   /* ── 2 · ce qu'il y a dessus ── */
   {p:"21-cafe",           c:"A cafe."},
@@ -138,15 +144,22 @@ window.renderFeed = function (host, dir, small) {
         <img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
     }
     if (o.car) {
+      /* chaque vue porte ses propres reglages : drapeau, picto de fond,
+         et le meme jeton @mark que les cadres de texte. */
       const slides = o.car.map((sl, k) => {
-        const ls = sl.t.map(l => l === "@mark"
-          ? `<span class="wm-line"><i class="wordmark"></i></span>`
-          : `<span>${l}</span>`).join("");
-        return `<div class="sl${k ? "" : " on"}"><div class="fit">${ls}</div>
-          <i class="sig"></i></div>`;
+        const ls = sl.t.map(l => {
+          const m = /^@mark([?!.]?)$/.exec(l);
+          return m
+            ? `<span class="wm-line"><i class="wordmark"></i>${m[1] ? `<em>${m[1]}</em>` : ""}</span>`
+            : `<span>${l}</span>`;
+        }).join("");
+        const fond = sl.pic
+          ? `<i class="carpic" style="--p:url('picto/web/${sl.pic}.svg')"></i>` : "";
+        return `<div class="sl${k ? "" : " on"}${sl.rag ? " rag" : ""}">${fond}
+          <div class="fit">${ls}</div><i class="sig"></i></div>`;
       }).join("");
       const dots = o.car.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("");
-      return `<div class="post car" data-n="${o.car.length}">${n}${slides}
+      return `<div class="post car" data-n="${o.car.length}" style="${BG[o.s] || ""}">${n}${slides}
         <span class="swipe">⧉ ${o.car.length}</span><span class="dots">${dots}</span></div>`;
     }
     /* le cadre-signe : le picto sort du format des deux cotes, sans
@@ -266,7 +279,7 @@ function fitAll(host) {
      chaque ligne a 10 px, la plus longue donne l'echelle. Le dessin
      du logotype compte pour sa largeur reelle — quatre fois sa
      hauteur — sinon il ne pese rien dans la comparaison. */
-  host.querySelectorAll(".post.tx.rag .fit").forEach(fit => {
+  host.querySelectorAll(".post.tx.rag .fit, .post.car .sl.rag .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;
     const lignes = [...fit.children];
@@ -293,7 +306,7 @@ function fitAll(host) {
     }
   });
 
-  host.querySelectorAll(".post.tx:not(.rag) .fit, .post.car .fit").forEach(fit => {
+  host.querySelectorAll(".post.tx:not(.rag) .fit, .post.car .sl:not(.rag) .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;
     fit.querySelectorAll("span").forEach(sp => {

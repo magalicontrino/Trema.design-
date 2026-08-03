@@ -196,11 +196,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    justifiee. Bas de casse, sans capitales forcees. */
 .post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
 .post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
-.post.tx.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
+.post.tx.rag .fit .wm-line .wordmark,
+.post.car .sl.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
   background:currentColor;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;
   mask:url("logotrema.svg") no-repeat center/contain}
-.post.tx.rag .fit .wm-line em{font-style:normal}
+.post.tx.rag .fit .wm-line em,.post.car .sl.rag .fit .wm-line em{font-style:normal}
 
 /* l'italique : l'axe slnt de la variable, pas une fausse oblique
    penchee par transformation. Le dessin du logotype, lui, ne
@@ -277,6 +278,27 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fontes button:hover{opacity:.75}
 .fontes button.on{opacity:1;border-bottom-color:currentColor}
 
+
+
+/* ── LA COMPOSITION DES TITRES, APPLIQUEE AU FEED ────────────
+   Meme regle que sur la page Titre : un seul corps par cadre, c'est
+   la ligne la plus longue qui le fixe, les autres s'arretent ou elles
+   s'arretent. Le feed etait justifie ligne a ligne — chaque ligne
+   remplissait la mesure, donc un mot court devenait enorme. */
+.fx-typo .post.tx .fit{line-height:.80}
+.fx-typo .post.tx .fit > span{-webkit-text-stroke:.05em var(--bg);paint-order:stroke fill}
+.fx-typo .post.tx.it .fit{line-height:.66}
+
+
+/* le picto en fond de vue, dans un carrousel : grand, discret, pose
+   derriere le mot. Il prend la couleur du texte, comme partout. */
+.post.car .sl .carpic{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:74%;aspect-ratio:1;z-index:0;opacity:.16;background:currentColor;
+  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
+.post.car .sl .fit{position:relative;z-index:1}
+/* une vue en drapeau : bas de casse, une seule taille, calee a gauche */
+.post.car .sl.rag .fit{text-transform:none;letter-spacing:0;line-height:.92}
+.post.car .sl.rag .fit > span{display:block;width:max-content;white-space:nowrap}
 
 /* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
@@ -458,6 +480,24 @@ bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">
    de secours et tous les corps tombent a cote. */
 /* on charge la capitale ET la Garamond du couple : sans elle, la
    ligne italique du 02 se mesurerait sur une police de secours. */
+
+/* Un seul corps par cadre, comme sur les titres. renderFeed a deja
+   mis chaque ligne a la mesure une par une ; on repasse derriere et
+   on ramene tout le bloc au corps de sa ligne la plus longue.
+   Le logotype est laisse de cote : il est pose en pixels, pas en
+   corps de texte. */
+function styleTitre(hote){
+  hote.querySelectorAll(".post.tx:not(.rag) .fit").forEach(fit=>{
+    const box = fit.clientWidth;
+    const lignes = [...fit.children].filter(x=>!x.querySelector(".wordmark"));
+    if (!box || !lignes.length) return;
+    lignes.forEach(x=>x.style.fontSize="100px");
+    const k = Math.min(...lignes.map(x=>x.scrollWidth ? box/x.scrollWidth : Infinity));
+    if (!isFinite(k)) return;
+    lignes.forEach(x=>x.style.fontSize=(100*k)+"px");
+  });
+}
+
 const charge = k => Promise.all([
   document.fonts.load(`900 40px ${FAMILLES[k]}`),
   document.fonts.load(`italic 600 40px ${FONTES.find(f=>f.k===k).i}`),
@@ -468,7 +508,7 @@ function fonte(k){
   feed.className = "feed fx-typo ft-" + k;
   fnote.textContent = FONTES.find(f=>f.k===k).d;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
-  charge(k).then(()=> renderFeed(feed, "pics/feed"));
+  charge(k).then(()=>{ renderFeed(feed, "pics/feed"); styleTitre(feed); });
 }
 
 /* les quatre cote a cote : chaque colonne est un feed complet. On attend
@@ -483,7 +523,10 @@ function cote(){
   quatre.innerHTML = FONTES.map(f =>
     `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
   Promise.all(FONTES.map(f=>charge(f.k)))
-    .then(()=> FONTES.forEach(f => renderFeed(document.querySelector(`#q-${f.k}`), "pics/feed")));
+    .then(()=> FONTES.forEach(f => {
+      const h = document.querySelector(`#q-${f.k}`);
+      renderFeed(h, "pics/feed"); styleTitre(h);
+    }));
 }
 
 bar.addEventListener("click", e => {

@@ -196,11 +196,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    justifiee. Bas de casse, sans capitales forcees. */
 .post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
 .post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
-.post.tx.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
+.post.tx.rag .fit .wm-line .wordmark,
+.post.car .sl.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
   background:currentColor;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;
   mask:url("logotrema.svg") no-repeat center/contain}
-.post.tx.rag .fit .wm-line em{font-style:normal}
+.post.tx.rag .fit .wm-line em,.post.car .sl.rag .fit .wm-line em{font-style:normal}
 
 /* l'italique : l'axe slnt de la variable, pas une fausse oblique
    penchee par transformation. Le dessin du logotype, lui, ne
@@ -221,6 +222,17 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
+
+
+/* le picto en fond de vue, dans un carrousel : grand, discret, pose
+   derriere le mot. Il prend la couleur du texte, comme partout. */
+.post.car .sl .carpic{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:74%;aspect-ratio:1;z-index:0;opacity:.16;background:currentColor;
+  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
+.post.car .sl .fit{position:relative;z-index:1}
+/* une vue en drapeau : bas de casse, une seule taille, calee a gauche */
+.post.car .sl.rag .fit{text-transform:none;letter-spacing:0;line-height:.92}
+.post.car .sl.rag .fit > span{display:block;width:max-content;white-space:nowrap}
 
 /* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
