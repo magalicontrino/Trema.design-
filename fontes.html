@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Fontes</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -13,17 +13,12 @@
 <meta name="theme-color" content="#141414">
 
 <style>
-@font-face{
-  font-family:"GT Flaire";
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
-  font-weight:300 1000;font-display:block;
-}
 
 :root{
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
   --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
   --bg:var(--papier); --fg:var(--encre);
-  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fd:"Inter","Helvetica Neue",Arial,sans-serif;
   --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   --fm:ui-monospace,"SF Mono",Menlo,monospace;
   --gut:clamp(14px,2vw,28px);
@@ -57,9 +52,9 @@ section:first-of-type{border-top:0}
 
 .part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
 h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
-  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance;margin-bottom:.34em}
+  font-variation-settings:"wght" 900;text-wrap:balance;margin-bottom:.34em}
 h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
-  font-variation-settings:"wght" 900,"FLAR" 100;margin-bottom:.4em}
+  font-variation-settings:"wght" 900;margin-bottom:.4em}
 h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
   opacity:.55;margin-bottom:.9em}
 p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
@@ -95,10 +90,11 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 /* les cadres de texte : la mesure est pleine, les lignes affleurent
    les deux bords. Les tailles sont calculees au chargement (feed.js)
-   parce que les chasses dependent de l'axe FLAR. */
+   parce que les chasses dependent de la fonte, et qu'on en essaie
+   plusieurs. */
 .post.tx{display:grid;place-items:center;padding:9%}
 .post.tx .fit{width:100%;font-family:var(--fd);line-height:.86;letter-spacing:.012em;
-  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 100}
+  text-transform:uppercase;font-variation-settings:"wght" 900}
 .post.tx.big .fit{line-height:.76}
 /* le bloc plein : les lignes touchent presque le bord, l'interligne
    se ferme, et c'est le mot le plus court qui fait le plus gros corps */
@@ -108,7 +104,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    en petit en haut a droite. Le mot deborde en bas, c'est voulu. */
 .post.cn{position:relative}
 .post.cn b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
-  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
+  font-variation-settings:"wght" 900;line-height:.8;white-space:nowrap;
   font-weight:400;letter-spacing:0}
 .post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
   font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
@@ -116,7 +112,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre "coin", emis partout mais montre seulement par le style D */
 .post .cnr{display:none;position:absolute;inset:0}
 .post .cnr b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
-  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
+  font-variation-settings:"wght" 900;line-height:.8;white-space:nowrap;
   font-weight:400;letter-spacing:0}
 
 /* le logotype dans le grand mot du coin : c'est le dessin, jamais
@@ -158,7 +154,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.car .sl{position:absolute;inset:0;display:none;align-content:center;padding:7%}
 .post.car .sl.on{display:grid}
 .post.car .fit{width:100%;font-family:var(--fd);line-height:.84;letter-spacing:0;
-  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 0}
+  text-transform:uppercase;font-variation-settings:"wght" 900}
 .post.car .fit span{display:block;white-space:nowrap}
 /* le logotype garde sa place dans la pile, sans deborder */
 .post.car .fit .wm-line{display:block;padding:.04em 0}
@@ -209,7 +205,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* l'italique : l'axe slnt de la variable, pas une fausse oblique
    penchee par transformation. Le dessin du logotype, lui, ne
    penche pas — ce n'est pas de la typo. */
-.post.tx.it .fit{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
+.post.tx.it .fit{font-variation-settings:"wght" 900,"slnt" 15}
 
 /* le picto plein cadre : il sort du format des deux cotes. Ecrit
    dans le feed et non pose par un style, c'est l'affiche du 04. */
@@ -231,19 +227,15 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    variable : memes cadres, meme regle de mise a la mesure, meme
    ordre. Seule la fonte bascule. Tout passe par --fd, donc il
    suffit de la redefinir et de re-mesurer. */
-.ft-flaire  {--fd:"GT Flaire","Helvetica Neue",Arial,sans-serif}
-.ft-fraunces {--fd:"Fraunces",Georgia,serif}
 .ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
 .ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
 
 /* chaque fonte a ses propres axes : on ne peut pas les regler une
    fois pour toutes, il faut parler la langue de chacune */
-.ft-fraunces .post.tx .fit,.ft-fraunces .post.car .fit,.ft-fraunces .cnr b{font-variation-settings:"opsz" 144,"wght" 900,"SOFT" 100,"WONK" 1}
 .ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
 .ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
 
 /* l'italique du 02, dans la langue de chacune */
-.ft-fraunces  .post.tx.it .fit{font-style:italic}
 .ft-inter     .post.tx.it .fit{font-style:italic}
 /* Bricolage n'a pas d'italique : on ne la simule pas en penchant
    les lettres, la ligne reste droite. C'est une vraie limite, pas
@@ -252,7 +244,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(4,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
@@ -303,7 +295,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    The word sits in the top bar, in viewBox units, so it stays
    locked to the shape at every size. */
 .post .poster{position:absolute;inset:7% 6% 9%;z-index:3;transform:rotate(-4deg)}
-.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 900;
   font-size:15px;fill:var(--noir);letter-spacing:-.02em}
 
 /* ── THE PAIR — the same drawing, filled and drawn ──────────*/
@@ -347,6 +339,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html" class="on">Fontes</a>
+    <a href="titre.html">Le titre</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -421,20 +414,17 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
    bascule, sinon on comparerait des chasses figees sur la fonte
    precedente et l'essai ne voudrait rien dire. */
 const FONTES = [
-  {k:"flaire",   t:"GT Flaire", d:"L'actuelle. Payante, et chere. Axes wght 300-1000, FLAR, italique."},
-  {k:"fraunces", t:"Fraunces",  d:"Libre, OFL. Axes opsz, wght 100-900, SOFT, WONK, vraie italique. Une serif assumee."},
   {k:"inter",    t:"Inter",     d:"Libre, OFL. Axes opsz, wght 100-900, italique. Neutre : elle n'raconte rien, elle informe."},
   {k:"bricolage",t:"Bricolage", d:"Libre, OFL. Axes opsz 12-96, wdth 75-100, wght 200-800. Pas d'italique dessinee : la ligne du 02 reste droite, on ne la penche pas."},
 ];
-const FAMILLES = {flaire:'"GT Flaire"', fraunces:'"Fraunces"',
-                  inter:'"Inter"', bricolage:'"Bricolage Grotesque"'};
+const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"'};
 const feed  = document.querySelector("#feed");
 const bar   = document.querySelector("#fontes");
 const fnote = document.querySelector("#fnote");
 const quatre= document.querySelector("#quatre");
 
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les quatre</button>`;
+  + `<button data-k="tout">Les deux</button>`;
 
 /* Google Fonts decoupe ses fichiers par plage de caracteres : une fonte
    n'est telechargee qu'au moment ou un de ses caracteres est rendu. On
@@ -460,7 +450,7 @@ function fonte(k){
 function cote(){
   feed.hidden = true; quatre.hidden = false;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent = "Les quatre feeds cote a cote, meme ordre, memes photos. "
+  fnote.textContent = "Les deux feeds cote a cote, meme ordre, memes photos. "
     + "Seule la fonte change d'une colonne a l'autre.";
   quatre.innerHTML = FONTES.map(f =>
     `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
@@ -472,7 +462,7 @@ bar.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   b.dataset.k === "tout" ? cote() : fonte(b.dataset.k);
 });
-fonte("flaire");
+fonte("inter");
 
 document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
   `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");

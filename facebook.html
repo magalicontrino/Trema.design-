@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Facebook</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -11,17 +13,12 @@
 <meta name="theme-color" content="#141414">
 
 <style>
-@font-face{
-  font-family:"GT Flaire";
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
-  font-weight:300 1000;font-display:block;
-}
 
 :root{
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
   --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
   --bg:var(--papier); --fg:var(--encre);
-  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fd:"Inter","Helvetica Neue",Arial,sans-serif;
   --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   --fm:ui-monospace,"SF Mono",Menlo,monospace;
   --gut:clamp(14px,2vw,28px);
@@ -55,9 +52,9 @@ section:first-of-type{border-top:0}
 
 .part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
 h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
-  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance;margin-bottom:.34em}
+  font-variation-settings:"wght" 900;text-wrap:balance;margin-bottom:.34em}
 h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
-  font-variation-settings:"wght" 900,"FLAR" 100;margin-bottom:.4em}
+  font-variation-settings:"wght" 900;margin-bottom:.4em}
 h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
   opacity:.55;margin-bottom:.9em}
 p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
@@ -96,7 +93,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post > *{position:relative;z-index:2}
 .post .n{position:absolute;top:5px;left:7px;z-index:5;font-family:var(--fm);font-size:7px;
   letter-spacing:.12em;opacity:.45}
-.post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+.post .big{font-family:var(--fd);font-variation-settings:"wght" 900;
   font-size:12cqw;line-height:1.02}
 .post .mn{font-family:var(--fm);font-size:3.4cqw;letter-spacing:.16em;text-transform:uppercase}
 .post .ctr{margin:auto;display:grid;place-items:center}
@@ -104,12 +101,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") repeat center/26px 30.3px;mask:url("Logo.svg") repeat center/26px 30.3px;z-index:1}
 .post .wm{width:42%;aspect-ratio:4}
 
-/* GT Flaire is set in capitals, always — see brand book ch. 08.
+/* The display face is set in capitals, always — see brand book ch. 08.
    The wordmark is exempt: it is a drawing, not type. */
 h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.flair{text-transform:uppercase}
 
 /* loud and quiet, in cqw so a crop survives every width */
-.huge{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+.huge{font-family:var(--fd);font-variation-settings:"wght" 900;
   line-height:.74;letter-spacing:-.035em}
 /* 200 cqw: at this size the glyph is wider and taller than the 4:5
    frame, so the format cuts it on all four sides. Below ~180 cqw it
@@ -117,9 +114,9 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.flair{text-transform:uppe
 .post .cut{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:200cqw;z-index:2}
 .wall2{font-family:var(--fd);line-height:.78;letter-spacing:-.04em;font-size:22cqw;margin:auto 0}
 .wall2 span{display:block}
-.slantbig{font-family:var(--fd);font-variation-settings:"wght" 900,"FLAR" 100,"slnt" 15;
+.slantbig{font-family:var(--fd);font-variation-settings:"wght" 900,"slnt" 15;
   font-size:24cqw;line-height:.82;letter-spacing:-.02em;margin:auto 0}
-.qbig{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
+.qbig{font-family:var(--fd);font-variation-settings:"wght" 300;
   font-size:11cqw;line-height:1;letter-spacing:-.022em;margin:auto 0}
 .tiny{font-family:var(--fm);font-size:3.2cqw;letter-spacing:.2em;text-transform:uppercase}
 .dots{display:flex;gap:5cqw;margin:auto}
@@ -136,7 +133,7 @@ h1,h2,.post .big,.spec b,.huge,.wall2,.slantbig,.qbig,.flair{text-transform:uppe
 .spec{background:var(--bg);padding:clamp(12px,1.5vw,18px);display:grid;
   grid-template-columns:30px 1fr;gap:12px;align-items:baseline}
 .spec .no{font-family:var(--fm);font-size:9px;opacity:.4;letter-spacing:.14em}
-.spec b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 40;
+.spec b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800;
   font-size:clamp(14px,1.4vw,19px);font-weight:400;line-height:1.1;margin-bottom:.2em}
 .spec p{font-size:clamp(12.5px,1vw,14.5px);line-height:1.45;max-width:none}
 .spec .fmt{font-family:var(--fm);font-size:9px;letter-spacing:.09em;opacity:.5;margin-top:.5em;display:block}
@@ -168,6 +165,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
     <a href="selection.html">Photos</a>
     <a href="facebook.html" class="on">Facebook</a>
     <a href="fontes.html">Fontes</a>
+    <a href="titre.html">Le titre</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -356,8 +354,8 @@ const POSTS = [
 
   {v:"s", r:"r191", t:"Wall of type", d:"MAXIMAL. One word repeated until it fills the card, each line a different weight. The variation is written, not animated — it exports identically every time.", x:"1200 × 630 · 1.91:1 · 22 cqw, two lines, leading 0.78",
    h:`<div class="wall2">
-        <span style="font-variation-settings:'wght' 300,'FLAR' 100">STUDIO</span>
-        <span style="font-variation-settings:'wght' 1000,'FLAR' 100">STUDIO</span>
+        <span style="font-variation-settings:'wght' 300">STUDIO</span>
+        <span style="font-variation-settings:'wght' 900">STUDIO</span>
       </div>`,
    s:`background:var(--encre);color:var(--papier)`},
 

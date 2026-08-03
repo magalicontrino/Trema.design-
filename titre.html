@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trema — Instagram</title>
+<title>trema — Le titre</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -222,76 +222,96 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
 
-/* les legendes — une ligne par post, dans l'ordre de publication */
-.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
-@media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.specs{grid-template-columns:1fr}}
-.spec{border-top:var(--rule);padding:10px 0 13px;display:grid;grid-template-columns:26px 1fr;gap:10px;
-  align-items:baseline}
-.spec .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
-.spec p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch}
+/* ── L'ESSAI DE FONTE ───────────────────────────────────────
+   Le seul moyen honnete de comparer, c'est de ne changer qu'une
+   variable : memes cadres, meme regle de mise a la mesure, meme
+   ordre. Seule la fonte bascule. Tout passe par --fd, donc il
+   suffit de la redefinir et de re-mesurer. */
+.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
+.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
 
-/* ── THE PICTURES CARRY THE COLOUR ─────────────────────────
-   The graphic system has none, so the photographs are allowed a
-   little more than they came with. Saturation is set once here;
-   each post only dials its own brightness through --br. Keep
-   --sat under 1.3 — past that the food goes plastic. */
-.post img.bgimg,.post .half img,.post .cutmask img,.post .kw .in img{
-  filter:saturate(var(--sat,1.18)) contrast(var(--ct,1.03)) brightness(var(--br,1))}
+/* chaque fonte a ses propres axes : on ne peut pas les regler une
+   fois pour toutes, il faut parler la langue de chacune */
+.ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
+.ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
 
-/* the window cut, applied to a photograph inside a post */
-.post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
-.post .cutmask img{width:100%;height:100%;object-fit:cover}
+/* l'italique du 02, dans la langue de chacune */
+.ft-inter     .post.tx.it .fit{font-style:italic}
+/* Bricolage n'a pas d'italique : on ne la simule pas en penchant
+   les lettres, la ligne reste droite. C'est une vraie limite, pas
+   un detail — le 02 repose dessus. */
 
-/* ── THE KEYLINE WINDOW ─────────────────────────────────────
-   The other way round from the cut-out: the photograph runs
-   right through the frame and the shape re-crops it, drawn as
-   a white keyline. Same image twice, two different scales. */
-.post .kw{position:absolute;inset:9% 8%;z-index:3}
-.post .kw .in{position:absolute;inset:0;overflow:hidden;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
-.post .kw .in img{position:absolute;left:-38%;top:-34%;width:176%;height:176%;max-width:none;object-fit:cover}
-.post .kw svg{position:absolute;inset:0;fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:round}
+/* les quatre d'un coup : chaque colonne est un feed complet avec sa
+   propre fonte. En petit, mais c'est la seule facon de voir lequel
+   tient a l'echelle ou on regarde vraiment un compte. */
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
+  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
+.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
+.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
+.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
+  color:inherit;opacity:.45}
+.fontes button:hover{opacity:.75}
+.fontes button.on{opacity:1;border-bottom-color:currentColor}
 
-/* ── THE POSTER — solid, offset, with a word inside ─────────
-   The black offset is not a drop shadow: it is a second copy of
-   the same drawing, moved. It never blurs and it never softens.
-   The word sits in the top bar, in viewBox units, so it stays
-   locked to the shape at every size. */
-.post .poster{position:absolute;inset:7% 6% 9%;z-index:3;transform:rotate(-4deg)}
-.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 900;
-  font-size:15px;fill:var(--noir);letter-spacing:-.02em}
 
-/* ── THE PAIR — the same drawing, filled and drawn ──────────*/
-.post .pair{margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9cqw;width:86%;align-items:center}
-.post .pair svg{width:100%;height:auto;fill:currentColor}
-.post .pair .out{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
 
-/* ── THE CODE — a real QR, the mark sitting in the middle ───
-   Error correction H, so the centre can be covered. The mark
-   carries its own white pad; without it the modules merge. */
-.qrplate{position:relative;background:#fff;display:grid;place-items:center;padding:2%}
-.qrplate img{width:100%;height:auto}
-.qrplate svg{position:absolute;width:19%;height:auto;fill:var(--noir);background:#fff;
-  padding:1.6%;box-sizing:content-box}
-.post .qr{position:absolute;left:7%;bottom:7%;width:31%;z-index:4}
+/* ── LE TITRE ─────────────────────────────────────────────────
+   Chaque ligne remplit exactement la mesure. Ce qui la remplit,
+   ce sont des segments qui alternent capitales grasses et
+   bas-de-casse italique, poses bord a bord sans espace de mot.
 
-/* gabarits : la zone sûre dessinée */
-.tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
-.tpl .safe{position:absolute;border:1.4px dashed currentColor;opacity:.5}
-.tpl .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;border-top:var(--rule);
-  font-family:var(--fm);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;background:var(--blanc)}
-.tpl .rat{position:absolute;top:8px;left:9px;font-family:var(--fm);font-size:9px;opacity:.45}
+   La subtilite est ailleurs : une italique bas-de-casse a une
+   hauteur d'x bien plus basse qu'une capitale. Composee au meme
+   corps, elle parait deux fois plus petite. Chaque segment porte
+   donc son propre rapport, et c'est la ligne entiere qu'on met a
+   la mesure — les rapports internes ne bougent pas. */
+.titre{margin:clamp(20px,3vw,44px) 0 0;position:relative}
+/* interligne tres ferme : dans la reference les lignes se touchent
+   presque, les jambages de l'une passant sous les capitales de la
+   suivante. C'est ce serrage qui fait le bloc. */
+.ligne{display:flex;align-items:baseline;width:max-content;white-space:nowrap;
+  font-family:var(--fd);line-height:.74}
+/* les segments se touchent, comme dans la reference : pas d'espace de
+   mot entre une capitale et l'italique qui la suit. Un cheveu de marge
+   seulement, pour que les jambages ne se percutent pas. */
+.seg + .seg{margin-left:.012em}
+.ligne + .ligne{margin-top:.02em}
+.seg{display:block}
+/* Deux fontes, pas une. La reference ne compose pas ses capitales et
+   ses bas-de-casse dans la meme famille : une grotesque noire d'un
+   cote, une Garamond italique de l'autre. C'est ce contraste qui fait
+   la composition, pas la fonte elle-meme.
+   L'interlettrage vient avec : -4% sur les capitales, -3% sur
+   l'italique. Il est negatif parce qu'a cette taille les lettres
+   doivent se toucher — jamais en dessous de 20 px de corps. */
+.seg.up{text-transform:uppercase;font-family:var(--fd-up);
+  font-variation-settings:var(--ax-up);letter-spacing:-.04em}
+.seg.it{font-family:"EB Garamond",Garamond,"Times New Roman",serif;font-style:italic;
+  font-weight:600;letter-spacing:-.03em}
 
-footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overflow:hidden}
-.wall{margin:0 calc(var(--pad) * -1) clamp(22px,3vw,44px)}
-.wall span{display:block;background:currentColor;aspect-ratio:4;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
-.wall .l1{width:116%;margin-left:-11%}
-.wall .l2{width:104%;margin-left:2%}
-.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
-  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
+/* Les trois candidates ne pilotent que les capitales : l'italique
+   reste la Garamond dans les trois cas, c'est elle le second texte. */
+.ft-inter    {--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900}
+.ft-bricolage{--fd-up:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+              --ax-up:"opsz" 96,"wdth" 100,"wght" 800}
+
+/* les mentions : dans la reference elles sont en aplats de couleur.
+   Le systeme trema n'a pas de couleur, et les aplats sont ecartes —
+   elles restent donc en gris, sur papier, juste posees de travers. */
+.note{position:absolute;z-index:3;font-family:var(--fm);font-size:clamp(8px,.72vw,10.5px);
+  line-height:1.45;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--lait);color:var(--graphite);padding:7px 10px;max-width:16ch}
+.note.b{background:var(--encre);color:var(--papier)}
+.note.c{background:var(--blanc);border:1px solid var(--brume);border-radius:50%;
+  width:8.5em;height:8.5em;display:grid;place-items:center;text-align:center;padding:0}
+
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,60px)}
+.quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
+.quatre .note{display:none}
 </style>
 </head>
 <body>
@@ -300,87 +320,130 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <a href="index.html" class="mk" aria-label="trema studio"></a>
   <nav>
     <a href="index.html">Brand book</a>
-    <a href="instagram.html" class="on">Instagram</a>
+    <a href="instagram.html">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html">Fontes</a>
-    <a href="titre.html">Le titre</a>
+    <a href="titre.html" class="on">Le titre</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
+<main class="wrap">
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
-<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
-</symbol></svg>
+  <p class="part">Communication</p>
+  <h1 class="h2" style="margin:0 0 .5em">Le titre</h1>
+  <p style="max-width:62ch;margin:0 0 clamp(18px,2.4vw,30px)">Une seule phrase, composee en lignes
+    qui remplissent toutes la meme mesure. A l'interieur d'une ligne, les capitales grasses et les
+    bas-de-casse italiques se touchent, sans espace de mot. Deux fontes : Inter Black a -4% pour les capitales, EB Garamond
+    italique a -3% pour les bas-de-casse. Le bouton ne change que la premiere.</p>
 
+  <div class="fontes" id="fontes"></div>
+  <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
 
-<!-- ═════ THE GRID ═════ -->
-<section class="w">
-  <div class="part">Communication</div>
-  <h1>Everything about<br>your place. One link.</h1>
-
-  <p>Forty-eight posts, sixteen rows: one photograph, one line, one photograph. The feed is built on the
-  message house and reads from the top — the roof, then the three pillars: everything about your place
-  always up to date, found everywhere, and followers turning into regulars.</p>
-  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
-  online address of a place, that it is already built from what they publish on Instagram and Google Maps,
-  and that it stays current on its own. Captions below, in the order they go out.</p>
-
-  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
-    alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
-    a droite. Les photos ne portent rien.</p>
-
-  <div class="feed fx-typo" id="feed"></div>
-
-  <div class="specs" id="specs"></div>
-</section>
-
-
-<!-- ═════ EXPORT ═════ -->
-<section class="l">
-  <h2>Export</h2>
-  <p style="margin-bottom:clamp(22px,2.8vw,38px)">Everything is composed 4:5 — the ratio of the profile
-  thumbnail and the one that takes the most height in the feed. The system behind these frames lives in
-  the <a href="index.html" style="text-decoration:underline">brand book</a>.</p>
-  <div class="scrollx"><table>
-    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th></tr>
-    <tr><td>Feed</td><td>1080 × 1350</td><td>4:5</td><td>6 % sides · 8 % top and bottom</td><td>&lt; 2 MB</td></tr>
-    <tr><td>Square</td><td>1080 × 1080</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td></tr>
-    <tr><td>Story / reel</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td></tr>
-    <tr><td>Profile grid</td><td>—</td><td>4:5</td><td>nothing useful in the outer 6 %</td><td>—</td></tr>
-  </table></div>
-</section>
-
-
-<footer class="k">
-  <div class="wall" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
-    <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
-    <span class="mono dim"><a href="index.html" style="text-decoration:underline">← Brand book</a></span>
-  </div>
-</footer>
-
-
-<script src="feed.js"></script>
+  <div id="un"></div>
+  <div class="quatre" id="quatre" hidden></div>
+</main>
 <script>
-(() => {
 "use strict";
-document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+(function(){
 
-/* Un seul feed. Le selecteur est parti avec les autres styles : on ne
-   choisit plus, on compose. La classe reste sur le conteneur, c'est
-   elle qui porte les regles des deux affiches. */
-const feed = document.querySelector("#feed");
-feed.className = "feed fx-typo";
-renderFeed(feed, "pics/feed");
+/* La phrase, ligne par ligne. `r` est le rapport de corps du segment :
+   une italique bas-de-casse doit etre composee bien plus grande qu'une
+   capitale pour paraitre de la meme taille — sa hauteur d'x est basse.
+   C'est ce reglage qui fait ou defait la composition. */
+/* La coupe compte autant que les fontes, et la reference a une regle
+   qu'on ne voit pas au premier regard : toutes ses lignes ne remplissent
+   PAS la mesure. "visual" s'arrete a mi-parcours, et c'est ce vide qui
+   accueille la pastille. Sans lui, la composition est un pave.
 
-document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
-  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");
+   `w` est donc la part de mesure que la ligne occupe, et `r` le rapport
+   de corps du segment — une italique bas-de-casse doit etre composee
+   plus grande qu'une capitale pour paraitre de la meme taille, sa
+   hauteur d'x etant bien plus basse. */
+const IT = 1.24;
+const LIGNES = [
+  {w:1,   g:[ {t:"Everything", s:"up"} ]},
+  {w:.60, g:[ {t:"about", s:"it", r:IT} ]},
+  {w:1,   g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
+  {w:1,   g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
+];
+const NOTES = [
+  {t:"Not a website", c:"",  st:"top:-4%;right:6%;transform:rotate(-4deg)"},
+  {t:"No algorithm decides", c:"b", st:"top:26%;right:9%;transform:rotate(3deg)"},
+  {t:"Already built", c:"c", st:"bottom:-13%;left:9%;transform:rotate(-8deg)"},
+];
+/* Ce qui change d'un bouton a l'autre, c'est le texte 1 seulement.
+   Le texte 2 — la Garamond italique a -3% — ne bouge pas : c'est la
+   constante de la composition. */
+const FONTES = [
+  {k:"inter",    t:"Inter Black", d:"Texte 1 : Inter Black, interlettrage -4%. Texte 2 : EB Garamond italique, -3%."},
+  {k:"bricolage",t:"Bricolage",   d:"Texte 1 : Bricolage 800, interlettrage -4%. Texte 2 inchange : EB Garamond italique, -3%."},
+];
+const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"'};
+const ITALIQUE = '"EB Garamond"';
 
-/* une photo, un texte : verifie plutot que suppose */
-const bad = TREMA_FEED.map((o, i) => (i % 2 === 0) === !!o.p ? null : i+1).filter(Boolean);
-console.log(bad.length ? "Alternance cassee aux posts " + bad.join(", ")
-                       : `Alternance : ${TREMA_FEED.length} posts, une photo puis un texte ✓`);
+const bar=document.querySelector("#fontes"), fnote=document.querySelector("#fnote");
+const un=document.querySelector("#un"), quatre=document.querySelector("#quatre");
+bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
+  + `<button data-k="tout">Les deux</button>`;
+
+const dessine = (avecNotes) =>
+  `<div class="titre">` +
+  LIGNES.map(l=>`<div class="ligne" data-w="${l.w}">` +
+    l.g.map(g=>`<span class="seg ${g.s}" data-r="${g.r||1}">${g.t}</span>`).join("") +
+    `</div>`).join("") +
+  (avecNotes ? NOTES.map(n=>`<div class="note ${n.c}" style="${n.st}">${n.t}</div>`).join("") : "") +
+  `</div>`;
+
+/* Mise a la mesure : on pose un corps de sonde, on lit la largeur reelle
+   de la ligne entiere, puis on met tout a l'echelle d'un coup. Mesurer
+   segment par segment ne marcherait pas — ce qui compte, c'est la somme,
+   crenage compris. */
+function fitTitre(hote){
+  const mesure = hote.clientWidth;
+  if (!mesure) return;
+  hote.querySelectorAll(".ligne").forEach(ligne=>{
+    const segs=[...ligne.children];
+    const cible = mesure * (+ligne.dataset.w || 1);
+    segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1))+"px");
+    const w=ligne.scrollWidth;
+    if(!w) return;
+    const k=cible/w;
+    segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1)*k)+"px");
+  });
+}
+
+/* on charge la capitale demandee ET la Garamond italique : sans elle,
+   la moitie de la composition se mesurerait sur une police de secours. */
+const charge = k => Promise.all([
+  document.fonts.load(`900 40px ${FAMILLES[k]}`),
+  document.fonts.load(`italic 600 40px ${ITALIQUE}`),
+]);
+
+function fonte(k){
+  quatre.hidden=true; quatre.innerHTML=""; un.hidden=false;
+  un.className="ft-"+k; un.innerHTML=dessine(true);
+  fnote.textContent=FONTES.find(f=>f.k===k).d;
+  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
+  charge(k).then(()=>fitTitre(un));
+}
+
+function cote(){
+  un.hidden=true; quatre.hidden=false;
+  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
+  fnote.textContent="Le meme titre, la meme composition, deux fontes. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
+  quatre.innerHTML=FONTES.map(f=>
+    `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">${dessine(false)}</div></div>`).join("");
+  Promise.all(FONTES.map(f=>charge(f.k)))
+    .then(()=>FONTES.forEach(f=>fitTitre(document.querySelector(`#t-${f.k}`))));
+}
+
+bar.addEventListener("click", e=>{const b=e.target.closest("button"); if(!b) return;
+  b.dataset.k==="tout" ? cote() : fonte(b.dataset.k);});
+addEventListener("resize", ()=>{ quatre.hidden ? fitTitre(un)
+  : FONTES.forEach(f=>fitTitre(document.querySelector(`#t-${f.k}`))); }, {passive:true});
+fonte("inter");
+
 })();
 </script>
 </body>

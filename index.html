@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema studio — Brand Book</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=block">
 
 <!-- Favicon: the mark, reversed inside an ink square. The SVG follows
      the browser theme; the PNGs are the fallback. -->
@@ -16,24 +18,11 @@
 /* ═══════════════════════════════════════════════════════════
    TRÉMA · BRAND BOOK
    One mark, one typeface, no colour.
-   Display + brand name: GT Flaire · Text: system grotesque
+   Display + brand name: Inter · Text: system grotesque
    ═══════════════════════════════════════════════════════════ */
 
-@font-face{
-  font-family:"GT Flaire";
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
-  font-weight:300 1000;font-display:block;
-}
-/* The two static families — the variable file's FLAR axis renders no
+/* The display face — the variable file renders no
    difference in the browser, so we call the statics (see ch. 07). */
-@font-face{font-family:"GT Flaire Basic";font-weight:300;font-display:swap;
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireBasic-Light.ttf") format("truetype")}
-@font-face{font-family:"GT Flaire Basic";font-weight:900;font-display:swap;
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireBasic-Black.ttf") format("truetype")}
-@font-face{font-family:"GT Flaire Extra";font-weight:300;font-display:swap;
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireExtra-Light.ttf") format("truetype")}
-@font-face{font-family:"GT Flaire Extra";font-weight:900;font-display:swap;
-  src:url("GT%20Flaire%202024-10-23%20(UKWN)/TTF/GTFlaireExtra-Black.ttf") format("truetype")}
 
 :root{
   /* value scale — the system's only "palette" */
@@ -42,7 +31,7 @@
 
   --bg:var(--papier); --fg:var(--encre);
 
-  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fd:"Inter","Helvetica Neue",Arial,sans-serif;
   --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   --fm:ui-monospace,"SF Mono",Menlo,monospace;
 
@@ -82,7 +71,7 @@ section.full{min-height:100svh;display:flex;flex-direction:column;justify-conten
 .w{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
 
 .num{position:absolute;top:clamp(6px,1.5vw,22px);right:var(--pad);font-family:var(--fd);
-  font-size:clamp(72px,16vw,240px);line-height:.72;font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:clamp(72px,16vw,240px);line-height:.72;font-variation-settings:"wght" 900;
   opacity:.06;pointer-events:none;user-select:none}
 .part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
 .tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
@@ -90,16 +79,16 @@ section.full{min-height:100svh;display:flex;flex-direction:column;justify-conten
 .tag::before{content:"";width:24px;height:1.4px;background:currentColor}
 
 h2{font-family:var(--fd);font-size:clamp(36px,7.4vw,116px);line-height:.98;
-  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance}
+  font-variation-settings:"wght" 900;text-wrap:balance}
 h3{font-family:var(--fd);font-size:clamp(18px,2.2vw,29px);line-height:1.02;
-  font-variation-settings:"wght" 700,"FLAR" 60;margin-bottom:.45em}
+  font-variation-settings:"wght" 700;margin-bottom:.45em}
 h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
   opacity:.55;margin-bottom:.9em}
 p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
 p + p{margin-top:.9em}
 .lead{font-size:clamp(17px,1.7vw,22px);line-height:1.38;letter-spacing:-.014em;max-width:46ch}
 .disp{font-family:var(--fd);font-size:clamp(20px,2.6vw,34px);line-height:1.02;
-  font-variation-settings:"wght" 800,"FLAR" 100;max-width:22ch}
+  font-variation-settings:"wght" 800;max-width:22ch}
 .mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
 .dim{opacity:.55}
 code{font-family:var(--fm);font-size:.88em;background:color-mix(in srgb,currentColor 12%,transparent);padding:.1em .35em;border-radius:3px}
@@ -286,7 +275,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .sws{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:var(--rule);border-left:var(--rule)}
 .sw{padding:clamp(12px,1.6vw,18px);min-height:clamp(140px,17vw,200px);display:flex;flex-direction:column;
   justify-content:space-between;cursor:pointer;position:relative;border-right:var(--rule);border-bottom:var(--rule)}
-.sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,21px);font-variation-settings:"wght" 800,"FLAR" 80}
+.sw .nm{font-family:var(--fd);font-size:clamp(15px,1.6vw,21px);font-variation-settings:"wght" 800}
 .sw .vl{font-family:var(--fm);font-size:9px;line-height:1.78;opacity:.85}
 .sw::after{content:"copied ✓";position:absolute;top:8px;right:10px;font-family:var(--fm);font-size:8.5px;
   letter-spacing:.14em;opacity:0;transition:opacity .3s}
@@ -302,7 +291,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 .post > *{position:relative;z-index:2}
 .post .n{position:absolute;top:5px;left:6px;z-index:5;font-family:var(--fm);font-size:7px;
   letter-spacing:.12em;opacity:.45}
-.post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+.post .big{font-family:var(--fd);font-variation-settings:"wght" 900;
   font-size:clamp(15px,2.2vw,30px);line-height:1.02;letter-spacing:0}
 .post .mn{font-family:var(--fm);font-size:clamp(6px,.72vw,8px);letter-spacing:.16em;text-transform:uppercase}
 .post .ctr{margin:auto;display:grid;place-items:center}
@@ -313,7 +302,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
   grid-template-columns:26px 1fr;gap:12px;align-items:baseline}
 .legend b{font-family:var(--fm);font-size:9px;font-weight:400;opacity:.45}
 .legend p{font-size:clamp(12.5px,.95vw,14.5px);line-height:1.42;max-width:none}
-.legend .t{font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 60;font-size:1.05em;
+.legend .t{font-family:var(--fd);font-variation-settings:"wght" 800;font-size:1.05em;
   display:block;margin-bottom:.18em}
 
 /* ══ APPLICATIONS ══════════════════════════════════════════ */
@@ -356,7 +345,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
 /* light display: long sentences are set in Light, not in Extra */
-.dlight{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:-.014em}
+.dlight{font-family:var(--fd);font-variation-settings:"wght" 300;line-height:1.06;letter-spacing:-.014em}
 
 /* shown in open cells, caption underneath */
 .shop{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.2vw,34px)}
@@ -371,7 +360,7 @@ figcaption{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.5;li
 /* the global figcaption rule greys everything out: neutralised here */
 .shop figcaption{margin-top:clamp(9px,1.1vw,14px);opacity:1;font-family:var(--fs);
   font-size:inherit;letter-spacing:0;line-height:1.3}
-.shop .nm2{display:block;font-family:var(--fd);font-variation-settings:"wght" 700,"FLAR" 0;
+.shop .nm2{display:block;font-family:var(--fd);font-variation-settings:"wght" 700;
   font-size:clamp(14px,1.4vw,19px);line-height:1.1}
 .shop .sub2{display:block;font-size:clamp(12px,1.05vw,14px);opacity:.42;margin-top:.14em}
 
@@ -395,6 +384,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html">Fontes</a>
+    <a href="titre.html">Le titre</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -560,7 +550,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
       <h4 style="opacity:.7">Non-negotiable rule</h4>
       <h3 style="margin-bottom:.5em">The wordmark is a drawing,<br>never typeset text</h3>
       <p>The brand name is written <b>trema</b>, lower case, no accent, and it always comes from
-      <code>logotrema.svg</code>. Never retype it in a system font, and never reset it in GT Flaire
+      <code>logotrema.svg</code>. Never retype it in a system font, and never reset it in the display face
       either: the drawing of the letters and their spacing are part of the brand.</p>
       <p>In running text, write "Tréma" like any other word, in the text face. The wordmark itself
       is never dropped into a sentence — it is placed.</p>
@@ -640,9 +630,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <div class="tag">Typography</div>
 
   <div class="typewall" role="img" aria-label="Reveal, never cover">
-    <span class="tw" style="font-size:27.5vw;margin-left:-6vw;font-variation-settings:'wght' 1000,'FLAR' 100">Reveal</span>
-    <span class="tw" style="font-size:32.6vw;margin-left:-9vw;font-variation-settings:'wght' 300,'FLAR' 100">Never</span>
-    <span class="tw" style="font-size:32.5vw;margin-left:-3vw;font-variation-settings:'wght' 1000,'FLAR' 100">Cover</span>
+    <span class="tw" style="font-size:27.5vw;margin-left:-6vw;font-variation-settings:'wght' 900;letter-spacing:-.04em">Reveal</span>
+    <span class="tw" style="font-size:32.6vw;margin-left:-9vw;font-variation-settings:'wght' 300;letter-spacing:-.04em">Never</span>
+    <span class="tw" style="font-size:32.5vw;margin-left:-3vw;font-variation-settings:'wght' 900;letter-spacing:-.04em">Cover</span>
   </div>
 
   <p class="mono dim" style="margin-top:clamp(20px,3vw,44px);max-width:52ch">Three lines, one typeface,
@@ -655,68 +645,67 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
 <!-- ═════ 06 · SPECIMEN ═════ -->
 <section id="s6" data-t="Specimen" data-p="Typography" class="w full">
   <div class="part">Typography</div>
-  <div class="spec-note"><span>GT FLAIRE · SPECIMEN</span><span>"CASCADE" MODULATION</span>
-    <span>wght 300–1000 / slnt 0–15</span></div>
+  <div class="spec-note"><span>INTER · SPECIMEN</span><span>"CASCADE" MODULATION</span>
+    <span>wght 100–900 / tracking 0 to −4%</span></div>
   <div class="mod" data-mod="cascade" style="font-size:clamp(34px,7.4vw,124px)">Identity, screens, print — trema studio, everywhere.</div>
   <p class="mono dim" style="margin-top:1.6em">Every character carries its own weight and its own slant.
   Nothing moves: the variation is written into the setting, not played on hover.</p>
 </section>
 
 
-<!-- ═════ 07 · THE THREE AXES ═════ -->
-<section id="s7" data-t="The three axes" data-p="Typography" class="k">
+<!-- ═════ 07 · THE AXES ═════ -->
+<section id="s7" data-t="The axes" data-p="Typography" class="k">
   <div class="num">07</div>
   <div class="hd"><div><div class="part">Typography</div><div class="tag">Chapter 07</div>
-    <h2>The three<br>axes</h2></div>
-  <p>One typeface, two families, three sliders. <code>wght</code> sets the weight,
-  <code>slnt</code> the slant, and <code>FLAR</code> — our signature — grows the flared
-  terminals. Raise the flare when you assert, lower it when you explain.</p></div>
+    <h2>Two axes,<br>one signature</h2></div>
+  <p>One typeface, two sliders. <code>wght</code> sets the weight from 100 to 900,
+  <code>opsz</code> adjusts the drawing for the size it is set at. Neither of them is the
+  signature. <b>The signature is the tracking:</b> display lines are set at &minus;4%, so the
+  letters touch and the line reads as one object rather than a row of words.</p></div>
 
   <div style="margin-bottom:clamp(24px,3vw,44px)">
-    <h4>FLAR — the signature axis · Basic 0 → Extra 100</h4>
-    <div class="axis-line" style="font-family:'GT Flaire Basic';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Reveal the form<span class="meta">FLAR 0 · Basic</span></div>
-    <div class="axis-line" style="font-family:'GT Flaire Extra';font-weight:900;font-size:clamp(24px,6vw,92px)">
-      Reveal the form<span class="meta">FLAR 100 · Extra</span></div>
-    <div class="axis-line" style="font-family:'GT Flaire Basic';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Reveal the form<span class="meta">FLAR 0 · Basic Light</span></div>
-    <div class="axis-line" style="font-family:'GT Flaire Extra';font-weight:300;font-size:clamp(24px,6vw,92px)">
-      Reveal the form<span class="meta">FLAR 100 · Extra Light</span></div>
+    <h4>The signature — tracking 0 → &minus;4%</h4>
+    <div class="axis-line" style="font-variation-settings:'wght' 900;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">0 · default</span></div>
+    <div class="axis-line" style="font-variation-settings:'wght' 900;letter-spacing:-.02em;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">&minus;2% · headings</span></div>
+    <div class="axis-line" style="font-variation-settings:'wght' 900;letter-spacing:-.04em;font-size:clamp(24px,6vw,92px)">
+      Reveal the form<span class="meta">&minus;4% · display</span></div>
     <div class="box" style="margin-top:var(--gut)">
-      <h4 style="opacity:.7">How the flare is called</h4>
-      <p>The four lines above come from the static families, not from the variable file:
-      <code>GTFlaireBasic-*</code> for FLAR 0 and <code>GTFlaireExtra-*</code> for FLAR 100. That is the
-      reliable route to the flare in a browser today, and it is what the whole system is built on.</p>
-      <p>So anything that has to carry the flare — brand headlines, packaging, posters — calls
-      <code>GT Flaire Extra</code> as a static. Weight and slant keep coming from
-      <code>GTFlaireVF.ttf</code>, which handles both axes continuously.</p>
+      <h4 style="opacity:.7">Why tracking and not a flare</h4>
+      <p>The system used to lean on a flare axis that belonged to one licensed typeface. It does
+      not any more: <code>Inter</code> is free, its licence is the SIL Open Font License, and it can
+      be installed anywhere without asking anyone. What carries the brand now is not a rare
+      letterform but a way of setting: <b>tight, in capitals, sized so the line fills its measure
+      exactly.</b> That travels — it survives a change of typeface, which the flare did not.</p>
+      <p>Display sizes take &minus;4%, headings &minus;2%, and running text stays at 0 — below
+      about 20&nbsp;px, negative tracking closes the counters and the text stops being readable.</p>
     </div>
   </div>
 
   <div class="grid c2" style="margin-bottom:clamp(24px,3vw,44px)">
     <div>
-      <h4>wght — weight · 300 → 1000</h4>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 300,'FLAR' 0">Trema<span class="meta">300 · Light</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 500,'FLAR' 0">Trema<span class="meta">500 · Medium</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 700,'FLAR' 0">Trema<span class="meta">700 · Bold</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 0">Trema<span class="meta">900 · Black</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 1000,'FLAR' 0">Trema<span class="meta">1000 · Extra</span></div>
+      <h4>wght — weight · 100 → 900</h4>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 300">Trema<span class="meta">300 · Light</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 500">Trema<span class="meta">500 · Medium</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 700">Trema<span class="meta">700 · Bold</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900">Trema<span class="meta">900 · Black</span></div>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900;letter-spacing:-.04em">Trema<span class="meta">900 · &minus;4%</span></div>
     </div>
     <div>
-      <h4>slnt — slant · 0 → 15</h4>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 0">In motion<span class="meta">slnt 0</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 5">In motion<span class="meta">slnt 5</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 10">In motion<span class="meta">slnt 10</span></div>
-      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900,'FLAR' 100,'slnt' 15">In motion<span class="meta">slnt 15 · max</span></div>
-      <p class="mono dim" style="margin-top:12px">A mechanical slant, not a drawn italic.
-      Single words only — never a whole paragraph.</p>
+      <h4>The italic is a second typeface</h4>
+      <div class="axis-line" style="font-size:clamp(20px,3vw,44px);font-variation-settings:'wght' 900;letter-spacing:-.04em">In motion<span class="meta">Inter Black</span></div>
+      <div class="axis-line" style="font-family:'EB Garamond',Garamond,serif;font-style:italic;font-weight:600;letter-spacing:-.03em;font-size:clamp(24px,3.8vw,56px)">in motion<span class="meta">Garamond italic</span></div>
+      <p class="mono dim" style="margin-top:12px">A drawn italic from another family, not a slant
+      applied to this one. Lower case against capitals, tracked at &minus;3%. Single words inside a
+      display line — never a paragraph.</p>
     </div>
   </div>
 
   <div class="grid c3">
-    <div class="box"><h4>FLAR 0</h4><p class="mono">Body text, interface, data, legal notices.</p></div>
-    <div class="box"><h4>FLAR 40–60</h4><p class="mono">Running headings, subheads, navigation, labels.</p></div>
-    <div class="box fill"><h4 style="opacity:.7">FLAR 100</h4><p class="mono">Brand, packaging, poster, signage.
+    <div class="box"><h4>0%</h4><p class="mono">Body text, interface, data, legal notices.</p></div>
+    <div class="box"><h4>&minus;2%</h4><p class="mono">Running headings, subheads, navigation, labels.</p></div>
+    <div class="box fill"><h4 style="opacity:.7">&minus;4%</h4><p class="mono">Brand, packaging, poster, signage.
     Once per composition, no more.</p></div>
   </div>
 </section>
@@ -727,24 +716,24 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <div class="num">08</div>
   <div class="hd"><div><div class="part">Typography</div><div class="tag">Chapter 08</div>
     <h2>Headings &amp;<br>body text</h2></div>
-  <p>Pairing rule: <b>headings in GT Flaire, body text in a neutral grotesque.</b>
-  Never set a long block in Flair — the flare tires the eye beyond three lines. One exception:
+  <p>Pairing rule: <b>headings in Inter Black, body text in the same family at 400.</b>
+  Never set a long block at −4% — tight tracking tires the eye beyond three lines. One exception:
   the wordmark, which is not typography but a drawing.</p></div>
 
   <div class="box" style="margin-bottom:var(--gut)">
     <div class="flair" style="font-family:var(--fd);font-size:clamp(34px,5.6vw,76px);line-height:1;
-      font-variation-settings:'wght' 1000,'FLAR' 100;margin-bottom:.5em">Section heading</div>
+      font-variation-settings:'wght' 900;letter-spacing:-.04em;margin-bottom:.5em">Section heading</div>
     <p>The heading carries the brand, the paragraph carries the information: it stays neutral, legible,
     with no character of its own. That contrast is what holds the page together.</p>
-    <div class="mono dim" style="margin-top:16px">GT Flaire 1000 · Extra — grotesque 400</div>
+    <div class="mono dim" style="margin-top:16px">Inter 900, tracking -4% — text 400</div>
   </div>
 
   <div class="box fill" style="margin-bottom:var(--gut)">
     <h4 style="opacity:.7">Second non-negotiable rule</h4>
-    <h3 style="margin-bottom:.5em">GT Flaire is set<br>in capitals, always</h3>
+    <h3 style="margin-bottom:.5em">Inter Black is set<br>in capitals, always</h3>
     <p>The flare is drawn on the capitals. In lower case the flared terminals and the descenders fight
     each other, and the line loses the flat top edge that makes the display sit square in a frame. So
-    everything set in Flaire — display, headings, posts, packaging — is uppercase.</p>
+    everything set in the display face — display, headings, posts, packaging — is uppercase.</p>
     <p>Two exceptions, both of them deliberate. The character set in this chapter shows both cases,
     because it is an inventory rather than a setting. And the wordmark stays lower case: it is a
     drawing, not type, and the rule does not apply to it.</p>
@@ -776,9 +765,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <h4>Scale — 1.25 ratio · 16 px base · 8 px grid</h4>
   <div class="scrollx" style="margin-bottom:var(--gut)"><table>
     <tr><th>Role</th><th>Typeface</th><th>Desktop</th><th>Mobile</th><th>Line height</th><th>wght / family</th></tr>
-    <tr><td>Display</td><td>GT Flaire</td><td>132 px</td><td>44 px</td><td>0.85</td><td>1000 · Extra</td></tr>
-    <tr><td>Heading 1</td><td>GT Flaire</td><td>62 px</td><td>34 px</td><td>0.92</td><td>900 · Extra</td></tr>
-    <tr><td>Heading 2</td><td>GT Flaire</td><td>38 px</td><td>26 px</td><td>1.02</td><td>800 · Extra</td></tr>
+    <tr><td>Display</td><td>Inter</td><td>132 px</td><td>44 px</td><td>0.85</td><td>900 · -4%</td></tr>
+    <tr><td>Heading 1</td><td>Inter</td><td>62 px</td><td>34 px</td><td>0.92</td><td>900 · -3%</td></tr>
+    <tr><td>Heading 2</td><td>Inter</td><td>38 px</td><td>26 px</td><td>1.02</td><td>800 · -2%</td></tr>
     <tr><td>Standfirst</td><td>Grotesque</td><td>21 px</td><td>18 px</td><td>1.38</td><td>400 / —</td></tr>
     <tr><td>Body</td><td>Grotesque</td><td>16.5 px</td><td>16 px</td><td>1.58</td><td>400 / —</td></tr>
     <tr><td>Label</td><td>Mono</td><td>10 px</td><td>10 px</td><td>1.7</td><td>400 · CAPS</td></tr>
@@ -788,9 +777,9 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
   <div class="lab" style="margin-bottom:var(--gut)">
     <div id="play" contenteditable="true" spellcheck="false">Tréma reveals</div>
     <div>
-      <div class="sl"><label><span>wght</span><b id="v-w">700</b></label><input type="range" id="a-w" min="300" max="1000" value="700"></div>
-      <div class="sl"><label><span>FLAR</span><b id="v-f">60</b></label><input type="range" id="a-f" min="0" max="100" value="60"></div>
-      <div class="sl"><label><span>slnt</span><b id="v-s">0</b></label><input type="range" id="a-s" min="0" max="15" value="0"></div>
+      <div class="sl"><label><span>wght</span><b id="v-w">700</b></label><input type="range" id="a-w" min="100" max="900" value="700"></div>
+      <div class="sl"><label><span>tracking %</span><b id="v-f">-2</b></label><input type="range" id="a-f" min="-6" max="4" value="-2"></div>
+      <div class="sl"><label><span>opsz</span><b id="v-s">32</b></label><input type="range" id="a-s" min="14" max="32" value="32"></div>
       <div class="sl"><label><span>size</span><b id="v-z">120</b></label><input type="range" id="a-z" min="30" max="200" value="120"></div>
       <p class="mono" id="css-out" style="margin-top:12px;word-break:break-all;opacity:.75"></p>
       <button class="btn" id="copycss" style="margin-top:10px">Copy the CSS</button>
@@ -916,7 +905,7 @@ footer{padding:clamp(44px,6vw,90px) var(--pad) 32px;border-top:var(--rule);overf
 
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
     <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
-    <span class="mono dim">Set in GT Flaire</span>
+    <span class="mono dim">Set in Inter</span>
     <button class="mono dim" onclick="scrollTo({top:0,behavior:'smooth'})" style="text-decoration:underline">↑ Back to top</button>
   </div>
 </footer>
@@ -1019,10 +1008,14 @@ const play = $("#play"), out = $("#css-out");
 const A = {w:["a-w","v-w"], f:["a-f","v-f"], s:["a-s","v-s"], z:["a-z","v-z"]};
 const g = k => $("#" + A[k][0]).value;
 const apply = () => {
-  const vs = `"wght" ${g("w")},"FLAR" ${g("f")},"slnt" ${g("s")}`;
+  /* l'interlettrage n'est pas un axe de la fonte : c'est un reglage de
+     composition. Il sort donc du bloc font-variation-settings. */
+  const vs = `"wght" ${g("w")},"opsz" ${g("s")}`;
+  const ls = (g("f") / 100) + "em";
   play.style.fontVariationSettings = vs;
+  play.style.letterSpacing = ls;
   play.style.fontSize = g("z") + "px";
-  out.textContent = `font-family:"GT Flaire";\nfont-variation-settings:${vs};\nfont-size:${g("z")}px;`;
+  out.textContent = `font-family:"Inter";\nfont-variation-settings:${vs};\nletter-spacing:${ls};\nfont-size:${g("z")}px;`;
   Object.keys(A).forEach(k => $("#" + A[k][1]).textContent = g(k));
 };
 Object.keys(A).forEach(k => $("#" + A[k][0]).addEventListener("input", apply));
@@ -1036,8 +1029,8 @@ $("#copycss").onclick = async e => {
 const CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸŒœÆæßñ.,;:!?«»“”—–’()[]{}/&@#%‰€$£¥*+×÷=°|§†©®™½¼¾";
 $("#gset").innerHTML = [...CH].map(c => {
   const esc = c.replace(/[<>&]/g, m => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[m]));
-  const w = 300 + rnd(8) * 100, f = rnd(2) * 100;
-  return `<span style="font-variation-settings:'wght' ${w},'FLAR' ${f}">${esc}</span>`;
+  const w = 100 + rnd(9) * 100, t = -rnd(5) / 100;
+  return `<span style="font-variation-settings:'wght' ${w};letter-spacing:${t}em">${esc}</span>`;
 }).join("");
 
 /* ── pictograms ── */
