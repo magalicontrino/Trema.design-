@@ -1,161 +1,114 @@
 /* ═══════════════════════════════════════════════════════════
-   LE FEED — defini une seule fois, lu par les deux pages
+   LE FEED — defini une seule fois, lu par la page Instagram
    ═══════════════════════════════════════════════════════════
-   instagram.html l'affiche en grand avec ses legendes,
-   selection.html l'affiche sous la banque d'images. Les deux
-   lisent ce fichier, donc ils ne peuvent plus diverger.
+   Une photo, un texte, une photo, un texte.
 
-   Une photo, un texte, une photo, un texte. Vingt-quatre vues
-   choisies, vingt-quatre lignes de la message house, seize
-   rangees pleines.
+   LES PHOTOS SONT CELLES QUE TU AS VALIDEES, ET RIEN D'AUTRE :
+   1, 4, 5, 6, 9, 11, 20, 21, 22, 24, 25, 27, 28, 31, 32, 33,
+   34, 35, 36, 37 — plus la 48, qui est la 30 avec le filet de
+   cafe que tu avais demande a la place du fil de the.
+   Vingt et une vues, vingt et une lignes, quatorze rangees.
+
+   Deux validees sont mises de cote pour garder des rangees
+   pleines, et parce qu'elles font doublon de sujet : la 13
+   (bar beton, deja dit par la 1) et la 15 (brique sans couleur,
+   deja dit par la 6). Donne-en une de plus et on passe a 48.
 
    L'ordre n'est pas decoratif : il est ecrit pour qu'un seul
    scroll suffise. Ce que c'est, ce qu'il y a dessus, d'ou ca
    vient, ou on le trouve, ce que ca change, ce que ce n'est
-   pas, la preuve, l'appel. Huit blocs de six.
+   pas, la preuve, l'appel.
 
    `p` photo · `t` lignes de texte · `s` fond (k noir, e encre,
    w blanc, l lait) · `big` une ligne unique tres grande ·
-   `c` la legende qui part avec le post.
+   `slab` les lignes touchent les bords · `c` la legende.
 
    La chaine "@mark" dans `t` appelle le vrai logotype, jamais
    une police : le nom de la marque est un dessin (ch. 03).
    ═══════════════════════════════════════════════════════════ */
 
 window.TREMA_FEED = [
-  /* ── 1 · ce que c'est ── */
+  /* ── 1 · ce que c'est ──
+     Les lieux et les objets alternent : un lieu tous les deux ou
+     trois cadres. Sinon on enchaine les gros plans de nourriture et
+     on oublie que trema s'adresse a des commercants. */
   {p:"37-journal-titre",  c:"Every place has an address."},
   {t:["Every place","has an","address"], s:"k",
    c:"trema is yours online."},
-  {p:"01-bar-pro",        c:"Purpose-built for physical places."},
+  {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
   {t:["@mark","is yours","online"], s:"w",
    c:"Not a website. Your place's address online."},
-  {p:"33-espresso-ochre", c:"One link that holds everything."},
+  {p:"33-espresso-ochre", c:"And what you serve in it."},
   {t:["One","link"], s:"e", big:1,
    c:"Everything about your place. One link."},
 
   /* ── 2 · ce qu'il y a dessus ── */
-  {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
+  {p:"21-cafe",           c:"A cafe."},
   {t:["Your","menu"], s:"w", big:1,
    c:"Menu, services and pricing — a section of your own page."},
-  {p:"32-bread-terrazzo", c:"Your hours, without anyone having to call."},
+  {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
   {t:["Your","hours"], s:"l", big:1,
    c:"Open, closed, and the exception this week."},
-  {p:"04-cuisine",        c:"Your photos, pulled from what you already post."},
+  {p:"06-brick-yellow",   c:"A dining room, at opening time."},
   {t:["Your","photos"], s:"k", big:1,
    c:"Gallery: uploads and Instagram, in one place."},
-  {p:"48-cup-coffee",    c:"Your reviews, the ones you choose."},
+  {p:"32-bread-terrazzo", c:"Your photos, pulled from what you already post."},
   {t:["Your","reviews"], s:"w", big:1,
    c:"Your best ones, not the ones an algorithm picked."},
-  {p:"28-tomme-oak",      c:"And your community, on the same page."},
-  /* `slab` : les lignes touchent presque les bords, interligne
-     serre, graisse au maximum. Un seul post pour l'instant. */
+  {p:"04-cuisine",        c:"And your community, on the same page."},
   {t:["All of it","behind","one link"], s:"e", slab:1,
    c:"Your menu, photos, news, reviews and community — behind one link."},
 
   /* ── 3 · d'ou ca vient ── */
-  {p:"02-florist-pro",    c:"Nothing to build."},
+  {p:"24-gallery",        c:"A gallery. Nothing to build."},
   {t:["Built from","what you","already","publish"], s:"w",
    c:"Born from what you already publish on Instagram and Google Maps."},
-  {p:"21-cafe",           c:"Two sources, no configuration."},
+  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
   {t:["Instagram","+ Google","Maps"], s:"k",
    c:"Connected to both, and kept current from the same sources."},
-  {p:"22-plate",          c:"It does not go stale."},
+  {p:"28-tomme-oak",      c:"It does not go stale."},
   {t:["Always","up to","date"], s:"l",
    c:"Publish an event, an offer, a new menu — in minutes."},
-  {p:"36-lattice-shadow", c:"No project, no maintenance."},
+  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
   {t:["Nothing","to build.","Nothing to","maintain."], s:"e",
    c:"Nothing to build, nothing to maintain."},
 
   /* ── 4 · ou on le trouve ── */
-  {p:"52-red-panel",      c:"Found where people actually look."},
+  {p:"11-florist-std",    c:"A florist. Found where people actually look."},
   {t:["Found by","Google","and AIs"], s:"w",
    c:"Built for search engines — and AI engines — by design."},
-  {p:"24-gallery",        c:"Structured data on every trema, nothing to configure."},
-  {t:["Ask an AI","where to go","tonight"], s:"k",
-   c:"When someone asks an AI where to go tonight…"},
-  {p:"05-cocktail",       c:"…your place has an answer."},
+  {p:"22-plate",          c:"Ask an AI where to go tonight."},
   {t:["Your place","has an","answer"], s:"l",
    c:"Google, Maps and AI assistants read your place."},
 
   /* ── 5 · ce que ca change ── */
-  {p:"06-brick-yellow",   c:"Reach is not the same as regulars."},
+  {p:"36-lattice-shadow", c:"Reach is not the same as regulars."},
   {t:["From","followers","to regulars"], s:"e",
    c:"Instagram gives you reach. Your trema gives you regulars."},
-  {p:"09-terracotta",     c:"Members, points, tiers."},
+  {p:"05-cocktail",       c:"Members, points, tiers."},
   {t:["A Join button","on your","own page"], s:"w",
    c:"Your regulars, not an algorithm's audience."},
-  {p:"20-magazines",      c:"Connect direct to your customers."},
+  {p:"09-terracotta",     c:"Connect direct to your customers."},
   {t:["No algorithm","decides who","sees your","menu"], s:"k",
    c:"No algorithm decides who sees your menu."},
 
   /* ── 6 · ce que ce n'est pas ── */
-  {p:"34-blue-door",      c:"A website is a project."},
+  {p:"34-blue-door",      c:"A door. A website is a project."},
   {t:["Not a","website"], s:"l", big:1,
    c:"A website is a project. Your trema is already there."},
-  {p:"13-bar-concrete",   c:"A bio link lists your links."},
-  {t:["A bio link","lists links"], s:"e",
-   c:"Designed for creators, not for places."},
-  {p:"35-wine-terrazzo",  c:"Yours is somewhere to arrive."},
-  /* `corner` : un seul mot enorme cale en bas a gauche, la mention
-     en petit en haut a droite. Le mot deborde volontairement en bas. */
+  {p:"20-magazines",      c:"Yours is somewhere to arrive."},
   {corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
    c:"A bio link lists your links. Your trema is the destination."},
 
   /* ── 7 · la preuve ── */
-  {p:"31-teak-room",      c:"Already published, and growing."},
+  {p:"35-wine-terrazzo",  c:"Already published, and growing."},
   {t:["380+","tremas"], s:"k", big:1,
    c:"380+ tremas published, heading to 1,000+."},
-  {p:"15-brick-plain",    c:"Yours is probably one of them."},
-  {t:["@mark","already","exists"], s:"l",
-   c:"Start free. Your trema already exists."},
 
-  /* ── 8 · pour qui ── */
-  {p:"70-creole-turquoise", c:"Restaurants."},
-  {t:["For places","with a door"], s:"w",
-   c:"Purpose-built for physical places."},
-  {p:"75-tomates-bocal",  c:"Delis, grocers, bakers."},
-  {t:["A menu that","changes","every week"], s:"k",
-   c:"Publish it as a page of your place, in minutes."},
-  {p:"61-rings-risers",   c:"Shops and studios."},
-  {t:["Not only","restaurants"], s:"l", big:1,
-   c:"Anywhere someone can walk in."},
-  {p:"63-flower-bucket",  c:"Florists."},
-  {t:["Anywhere","with an","address"], s:"e",
-   c:"Every place has an address. trema is yours online."},
-
-  /* ── 9 · la vitesse ── */
-  {p:"46-cocktail-2",     c:"Opened from a bio, a DM, a story, a QR code."},
-  {t:["Social","and mobile","first"], s:"w",
-   c:"Short, scannable, made for a thumb."},
-  {p:"49-beet-soup",      c:"Built to open instantly on a phone."},
-  {t:["3×","faster"], s:"k", big:1,
-   c:"3× faster loading than a traditional website."},
-  {p:"03-chair-pro",      c:"Nobody waits for it to load."},
-  {t:["60% less","bounce"], s:"l",
-   c:"60% less bounce rate."},
-  {p:"62-pea-soup",       c:"Measured against traditional websites."},
-  {t:["40% better","conversion"], s:"e",
-   c:"Converts 40% better than traditional websites."},
-
-  /* ── 10 · l'offre ── */
-  {p:"73-ombre-rideau",   c:"Ten templates, signed by designers."},
-  {t:["Ten","templates"], s:"w", big:1,
-   c:"Pick one and it is done."},
-  {p:"59-necklace",       c:"Yours to claim, in one click."},
-  {t:["Claim it","in one","click"], s:"k",
-   c:"Your trema already exists. Claim it, free."},
-  {p:"44-journal-plateau2", c:"Ninety days of Pro, no card."},
-  {t:["Ninety days","of Pro.","No card."], s:"l",
-   c:"Ninety days of Pro, no card required."},
-  {p:"47-conceptstore-2", c:"Nothing to lose."},
-  {t:["Start","free"], s:"e", big:1,
-   c:"Start free. Your trema already exists."},
-
-  /* ── 11 · l'appel ── */
-  {p:"25-kitchen",        c:"Ninety days of Pro, no card."},
+  /* ── 8 · l'appel ── */
+  {p:"25-kitchen",        c:"A kitchen, mid-service. Ninety days of Pro, no card."},
   {t:["Create","your","@mark"], s:"e",
-   c:"Create and customize your trema in minutes."},
+   c:"Create and customize your trema in minutes. Start free — your trema already exists."},
 ];
 
 /* ── rendu ────────────────────────────────────────────────────
@@ -211,7 +164,7 @@ function fitAll(host) {
      il doit etre entier, pas rogne par le bord */
   host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
     const cell = b.closest(".post");
-    const box = cell ? cell.clientWidth * 0.9 : 0;
+    const box = cell ? cell.clientWidth * 0.92 : 0;
     if (!box) return;
     b.style.fontSize = "10px";
     const w = b.scrollWidth;

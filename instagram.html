@@ -105,17 +105,17 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre "coin" : un mot enorme cale en bas a gauche, la mention
    en petit en haut a droite. Le mot deborde en bas, c'est voulu. */
 .post.cn{position:relative}
-.post.cn b{position:absolute;left:5%;right:5%;bottom:5%;font-family:var(--fd);
+.post.cn b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
   font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
-  font-weight:400;letter-spacing:-.03em}
+  font-weight:400;letter-spacing:0}
 .post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
   font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
 
 /* le cadre "coin", emis partout mais montre seulement par le style D */
 .post .cnr{display:none;position:absolute;inset:0}
-.post .cnr b{position:absolute;left:5%;right:5%;bottom:5%;font-family:var(--fd);
+.post .cnr b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
   font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
-  font-weight:400;letter-spacing:-.035em}
+  font-weight:400;letter-spacing:0}
 .post .cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
   font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
   max-width:46%}
@@ -138,10 +138,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   padding:4px 0;opacity:.4;border-bottom:1.4px solid transparent;cursor:pointer}
 .tabs button:hover{opacity:.75}
 .tabs button.on{opacity:1;border-bottom-color:currentColor}
-
-/* B · le bloc — capitales pleines, blanc sur noir, bord a bord */
-.fx-bloc .post.tx{background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-bloc .post.tx .fit{line-height:.8;letter-spacing:0}
 
 /* C · l'editorial — Light, beaucoup d'air, le texte ne crie pas */
 .fx-edito .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
@@ -300,7 +296,6 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
 const STYLES = [
   {k:"typo",    t:"Typo",        d:"Deux affiches en alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut a droite."},
   {k:"a",       t:"Message",     d:"GT Flaire en capitales, chaque ligne mise a la mesure exacte de la case. Encre et papier."},
-  {k:"bloc",    t:"Le bloc",     d:"Capitales pleines, blanc sur noir, les lignes touchent les bords. Aucun repos."},
   {k:"edito",   t:"L'editorial", d:"Light 300, beaucoup d'air. Ce sont les photos qui portent, les mots legendent."},
 ];
 const feed = document.querySelector("#feed");
