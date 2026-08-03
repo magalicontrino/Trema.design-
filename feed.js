@@ -68,7 +68,7 @@ window.TREMA_FEED = [
    c:"Nothing to build, nothing to maintain."},
 
   /* ── 4 · ou on le trouve ── */
-  {p:"29-green-door",     c:"Found where people actually look."},
+  {p:"52-red-panel",      c:"Found where people actually look."},
   {t:["Found by","Google","and AIs"], s:"w",
    c:"Built for search engines — and AI engines — by design."},
   {p:"24-gallery",        c:"Structured data on every trema, nothing to configure."},
@@ -110,7 +110,49 @@ window.TREMA_FEED = [
   {t:["@mark","already","exists"], s:"l",
    c:"Start free. Your trema already exists."},
 
-  /* ── 8 · l'appel ── */
+  /* ── 8 · pour qui ── */
+  {p:"70-creole-turquoise", c:"Restaurants."},
+  {t:["For places","with a door"], s:"w",
+   c:"Purpose-built for physical places."},
+  {p:"75-tomates-bocal",  c:"Delis, grocers, bakers."},
+  {t:["A menu that","changes","every week"], s:"k",
+   c:"Publish it as a page of your place, in minutes."},
+  {p:"61-rings-risers",   c:"Shops and studios."},
+  {t:["Not only","restaurants"], s:"l", big:1,
+   c:"Anywhere someone can walk in."},
+  {p:"63-flower-bucket",  c:"Florists."},
+  {t:["Anywhere","with an","address"], s:"e",
+   c:"Every place has an address. trema is yours online."},
+
+  /* ── 9 · la vitesse ── */
+  {p:"46-cocktail-2",     c:"Opened from a bio, a DM, a story, a QR code."},
+  {t:["Social","and mobile","first"], s:"w",
+   c:"Short, scannable, made for a thumb."},
+  {p:"49-beet-soup",      c:"Built to open instantly on a phone."},
+  {t:["3×","faster"], s:"k", big:1,
+   c:"3× faster loading than a traditional website."},
+  {p:"03-chair-pro",      c:"Nobody waits for it to load."},
+  {t:["60% less","bounce"], s:"l",
+   c:"60% less bounce rate."},
+  {p:"62-pea-soup",       c:"Measured against traditional websites."},
+  {t:["40% better","conversion"], s:"e",
+   c:"Converts 40% better than traditional websites."},
+
+  /* ── 10 · l'offre ── */
+  {p:"73-ombre-rideau",   c:"Ten templates, signed by designers."},
+  {t:["Ten","templates"], s:"w", big:1,
+   c:"Pick one and it is done."},
+  {p:"59-necklace",       c:"Yours to claim, in one click."},
+  {t:["Claim it","in one","click"], s:"k",
+   c:"Your trema already exists. Claim it, free."},
+  {p:"44-journal-plateau2", c:"Ninety days of Pro, no card."},
+  {t:["Ninety days","of Pro.","No card."], s:"l",
+   c:"Ninety days of Pro, no card required."},
+  {p:"47-conceptstore-2", c:"Nothing to lose."},
+  {t:["Start","free"], s:"e", big:1,
+   c:"Start free. Your trema already exists."},
+
+  /* ── 11 · l'appel ── */
   {p:"25-kitchen",        c:"Ninety days of Pro, no card."},
   {t:["Create","your","@mark"], s:"e",
    c:"Create and customize your trema in minutes."},
@@ -143,7 +185,8 @@ window.renderFeed = function (host, dir, small) {
        style D le revele une fois sur deux. Emettre les deux plutot
        que de re-rendre evite de dupliquer la source du message. */
     const flat = o.t.filter(l => l !== "@mark");
-    const word = (flat[0] || "trema").split(" ")[0].toLowerCase() + ".";
+    const last = flat[flat.length - 1] || "trema";
+    const word = last.split(" ").pop().toLowerCase().replace(/[.,]$/, "") + ".";
     const note = flat.join(" ").toUpperCase();
 
     return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
@@ -164,6 +207,16 @@ window.renderFeed = function (host, dir, small) {
    chasses dependent de l'axe FLAR, que le canvas ne sait pas
    mesurer — deux tentatives d'ecriture en dur ont deborde. */
 function fitAll(host) {
+  /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
+     il doit etre entier, pas rogne par le bord */
+  host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
+    const cell = b.closest(".post");
+    const box = cell ? cell.clientWidth * 0.9 : 0;
+    if (!box) return;
+    b.style.fontSize = "10px";
+    const w = b.scrollWidth;
+    if (w) b.style.fontSize = (10 * box / w) + "px";
+  });
   host.querySelectorAll(".post.tx .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;

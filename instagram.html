@@ -105,16 +105,16 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre "coin" : un mot enorme cale en bas a gauche, la mention
    en petit en haut a droite. Le mot deborde en bas, c'est voulu. */
 .post.cn{position:relative}
-.post.cn b{position:absolute;left:5%;bottom:-6%;font-family:var(--fd);
-  font-variation-settings:"wght" 1000,"FLAR" 0;font-size:41cqw;line-height:.78;
+.post.cn b{position:absolute;left:5%;right:5%;bottom:5%;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
   font-weight:400;letter-spacing:-.03em}
 .post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
   font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
 
 /* le cadre "coin", emis partout mais montre seulement par le style D */
-.post .cnr{display:none}
-.post .cnr b{position:absolute;left:5%;bottom:-7%;font-family:var(--fd);
-  font-variation-settings:"wght" 1000,"FLAR" 0;font-size:40cqw;line-height:.78;
+.post .cnr{display:none;position:absolute;inset:0}
+.post .cnr b{position:absolute;left:5%;right:5%;bottom:5%;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
   font-weight:400;letter-spacing:-.035em}
 .post .cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
   font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
@@ -140,20 +140,20 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .tabs button.on{opacity:1;border-bottom-color:currentColor}
 
 /* B · le bloc — capitales pleines, blanc sur noir, bord a bord */
-.fx-b .post.tx{background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-b .post.tx .fit{line-height:.8;letter-spacing:0}
+.fx-bloc .post.tx{background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-bloc .post.tx .fit{line-height:.8;letter-spacing:0}
 
 /* C · l'editorial — Light, beaucoup d'air, le texte ne crie pas */
-.fx-c .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
-.fx-c .post.tx .fit{font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:.02em}
+.fx-edito .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
+.fx-edito .post.tx .fit{font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:.02em}
 
 /* D · typo — les deux affiches en alternance : le bloc de capitales,
    puis le mot cale en bas a gauche avec sa mention en haut a droite */
-.fx-d .post.tx:nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-d .post.tx:nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
-.fx-d .post.tx:nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
-.fx-d .post.tx:nth-of-type(4n+4) .fit{display:none}
-.fx-d .post.tx:nth-of-type(4n+4) .cnr{display:block}
+.fx-typo .post.tx:nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-typo .post.tx:nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+.fx-typo .post.tx:nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
+.fx-typo .post.tx:nth-of-type(4n+4) .fit{display:none}
+.fx-typo .post.tx:nth-of-type(4n+4) .cnr{display:block}
 
 /* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
@@ -260,7 +260,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <div class="tabs" id="tabs"></div>
   <p class="mono dim" id="tabnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch"></p>
 
-  <div class="feed fx-a" id="feed"></div>
+  <div class="feed fx-typo" id="feed"></div>
 
   <div class="specs" id="specs"></div>
 </section>
@@ -298,10 +298,10 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
 
 const STYLES = [
-  {k:"a", t:"A · Message",     d:"GT Flaire en capitales, chaque ligne mise a la mesure exacte de la case. Encre et papier."},
-  {k:"b", t:"B · Le bloc",     d:"Capitales pleines, blanc sur noir, les lignes touchent les bords. Aucun repos."},
-  {k:"c", t:"C · L'editorial", d:"Light 300, beaucoup d'air. Ce sont les photos qui portent, les mots legendent."},
-  {k:"d", t:"D · Typo",        d:"Deux affiches en alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut a droite."},
+  {k:"typo",    t:"Typo",        d:"Deux affiches en alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut a droite."},
+  {k:"a",       t:"Message",     d:"GT Flaire en capitales, chaque ligne mise a la mesure exacte de la case. Encre et papier."},
+  {k:"bloc",    t:"Le bloc",     d:"Capitales pleines, blanc sur noir, les lignes touchent les bords. Aucun repos."},
+  {k:"edito",   t:"L'editorial", d:"Light 300, beaucoup d'air. Ce sont les photos qui portent, les mots legendent."},
 ];
 const feed = document.querySelector("#feed");
 const tabs = document.querySelector("#tabs");
@@ -314,7 +314,7 @@ function show(k) {
   renderFeed(feed, "pics/feed");
 }
 tabs.addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.k); });
-show("a");
+show("typo");
 
 document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
   `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");
