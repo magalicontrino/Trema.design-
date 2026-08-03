@@ -139,7 +139,11 @@ window.TREMA_LOOK = function (list) {
                  "p-cut", "t-pat1", "p-mark", "t-giant", "p-edge", "t-pat2"];
   const ECART = 5;                    /* cases minimum entre deux gestes */
   const look  = list.map(() => "");
-  let c = 0, dernier = -99, ligne = -99;
+  /* dernier = 0 et non -99 : la photo d'ouverture reste nue. C'est
+     elle qui doit se lire d'un coup, sans avoir a etre dechiffree —
+     le premier geste attend donc le cinquieme cadre suivant, et
+     meme la ligne posee sur l'image la laisse tranquille. */
+  let c = 0, dernier = 0, ligne = 0;
 
   list.forEach((o, i) => {
     const ph = !!o.p, tx = !!o.t && !o.car;
