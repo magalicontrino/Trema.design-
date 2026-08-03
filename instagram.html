@@ -183,8 +183,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 /* quand le signe occupe deja tout le cadre, la signature s'efface */
-.fx-creatif .post.tx:nth-of-type(8n+4) .sig,
-.fx-creatif .post.tx:nth-of-type(8n+8) .sig{display:none}
+.fx-creatif .post:nth-child(12n+2) .sig,
+.fx-creatif .post:nth-child(48n+6) .sig,
+.fx-creatif .post:nth-child(48n+18) .sig{display:none}
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
 .fx-typo .post.tx:nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
@@ -193,6 +194,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    decoupe geante. Le texte passe dessus ou disparait. Quatre
    traitements en rotation pour qu'aucun ne s'use. */
 .post .pat,.post .bleed,.post .giant{display:none}
+.post.ph .pat,.post.ph .bleed,.post.ph .giant{display:none!important}
 
 /* la tuile : le signe repete, exactement 78 x 91, sans espace */
 .post .pat{position:absolute;inset:0;z-index:1;background:currentColor;
@@ -211,20 +213,35 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   width:150%;height:auto;fill:currentColor;opacity:.16}
 
 .fx-creatif .post.tx{padding:8%}
-/* 1 · la tuile, le texte par-dessus en reserve */
-.fx-creatif .post.tx:nth-of-type(8n+2){background:var(--papier)!important;color:var(--encre)!important}
-.fx-creatif .post.tx:nth-of-type(8n+2) .pat{display:block;opacity:.14}
-/* 2 · le logotype qui deborde des deux cotes */
-.fx-creatif .post.tx:nth-of-type(8n+4){background:var(--noir)!important;color:#fff!important}
-.fx-creatif .post.tx:nth-of-type(8n+4) .bleed{display:block}
-.fx-creatif .post.tx:nth-of-type(8n+4) .fit{display:none}
-/* 3 · le signe geant en filigrane, le texte dessus */
-.fx-creatif .post.tx:nth-of-type(8n+6){background:var(--encre)!important;color:var(--papier)!important}
-.fx-creatif .post.tx:nth-of-type(8n+6) .giant{display:block}
-/* 4 · tuile pleine, aucun texte : une respiration */
-.fx-creatif .post.tx:nth-of-type(8n+8){background:var(--blanc)!important;color:var(--encre)!important;padding:0}
-.fx-creatif .post.tx:nth-of-type(8n+8) .pat{display:block}
-.fx-creatif .post.tx:nth-of-type(8n+8) .fit{display:none}
+
+/* nth-child et non nth-of-type : les photos sont aussi des div, donc
+   nth-of-type les comptait et une regle sur deux tombait a cote.
+   Les cadres de texte occupent tous les rangs pairs. */
+
+/* 1 · le logotype qui deborde du cadre, a gauche et a droite */
+.fx-creatif .post:nth-child(12n+2){background:var(--noir)!important;color:#fff!important}
+.fx-creatif .post:nth-child(12n+2) .bleed{display:block}
+.fx-creatif .post:nth-child(12n+2) .fit{display:none}
+
+/* 2 · le signe geant coupe par le format, le texte par-dessus */
+.fx-creatif .post:nth-child(12n+8){background:var(--encre)!important;color:var(--papier)!important}
+.fx-creatif .post:nth-child(12n+8) .giant{display:block}
+
+/* 3 · la tuile pleine, sans texte — la respiration.
+   Deux fois dans tout le feed, et jamais a la meme echelle : une
+   serree en noir sur blanc, une deux fois plus grande en inverse.
+   Repetee a l'identique, elle devient un papier peint. */
+.fx-creatif .post:nth-child(48n+6),
+.fx-creatif .post:nth-child(48n+18){padding:0}
+.fx-creatif .post:nth-child(48n+6) .fit,
+.fx-creatif .post:nth-child(48n+18) .fit{display:none}
+.fx-creatif .post:nth-child(48n+6){background:var(--blanc)!important;color:var(--encre)!important}
+.fx-creatif .post:nth-child(48n+6) .pat{display:block;
+  -webkit-mask-size:20px 23.3px;mask-size:20px 23.3px}
+.fx-creatif .post:nth-child(48n+18){background:var(--encre)!important;color:var(--papier)!important}
+.fx-creatif .post:nth-child(48n+18) .pat{display:block;
+  -webkit-mask-size:58px 67.7px;mask-size:58px 67.7px}
+
 
 /* C · l'editorial — Light, beaucoup d'air, le texte ne crie pas */
 .fx-edito .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
