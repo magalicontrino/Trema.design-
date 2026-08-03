@@ -186,7 +186,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
 /* le cadre-signe : le picto seul, coupe par le format, dans tous
@@ -224,11 +224,36 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 /* D · typo — les deux affiches en alternance : le bloc de capitales,
    puis le mot cale en bas a gauche avec sa mention en haut a droite */
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
-.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .fit{display:none}
+.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .cnr{display:block}
+
+/* ── LE TITRE, POSE DANS LE FEED ────────────────────────────
+   La composition de la page Titre, telle quelle : des segments qui
+   alternent capitales grasses et italique bas-de-casse, bord a bord,
+   sans espace de mot. Un seul corps pour le bloc (feed.js), et un
+   contour couleur du fond sur chaque segment — il ne se voit qu'aux
+   chevauchements, c'est lui qui les rend lisibles. Ce cadre est une
+   troisieme affiche : il ne passe pas par l'alternance du fx-typo.
+   Les capitales suivent la grotesque du couple (--fd), l'italique la
+   Garamond du couple (--fd-it) — chaque feed montre donc SON titre. */
+.post.tx.ti .titre{width:100%}
+.post.tx.ti .ligne{display:flex;align-items:baseline;width:max-content;white-space:nowrap;
+  font-family:var(--fd);line-height:.80}
+.post.tx.ti .ligne + .ligne{margin-top:.02em}
+.post.tx.ti .seg{position:relative;z-index:1;display:block;
+  -webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
+.post.tx.ti .seg + .seg{margin-left:-.06em}
+.post.tx.ti .seg.up{text-transform:uppercase;letter-spacing:-.04em;
+  font-variation-settings:"wght" 900}
+.post.tx.ti .seg.it{z-index:2;line-height:.66;font-family:var(--fd-it);
+  font-style:italic;font-weight:600;letter-spacing:-.03em}
+/* Bricolage parle sa langue a elle : ses axes, et une italique
+   resserree — sa hauteur de capitale est plus courte (cf. page Titre) */
+.ft-bricolage .post.tx.ti .seg.up{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
+.ft-bricolage .post.tx.ti .seg.it{line-height:.60}
 
 /* ── L'ESSAI DE FONTE ───────────────────────────────────────
    Le seul moyen honnete de comparer, c'est de ne changer qu'une
@@ -419,7 +444,8 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
   <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
     alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
-    a droite. Les photos ne portent rien.</p>
+    a droite. Les titres de la page Titre gardent leur propre cadre, composes avec le couple
+    du feed. Les photos ne portent rien.</p>
 
   <div class="feed fx-typo" id="feed"></div>
 

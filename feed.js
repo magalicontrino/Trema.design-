@@ -81,7 +81,12 @@ window.TREMA_FEED = [
 
   /* ── 4 · ou on le trouve ── */
   {p:"11-florist-std",    c:"A florist. Found where people actually look."},
-  {t:["Found by","Google","and AIs"], s:"w",
+  /* "La decouverte", posee telle quelle depuis la page Titre : les
+     segments alternent capitales grasses et italique bas-de-casse.
+     `ti` decrit les lignes, `s:"up"/"it"` le style de chaque segment. */
+  {ti:[ [{t:"Found",s:"up"},{t:"by",s:"it"}],
+        [{t:"Google",s:"up"}],
+        [{t:"and",s:"it"},{t:"AIs.",s:"up"}] ], s:"w",
    c:"Built for search engines — and AI engines — by design."},
   {p:"22-plate",          c:"Ask an AI where to go tonight."},
   {t:["Your place","has an","answer"], s:"l",
@@ -89,7 +94,10 @@ window.TREMA_FEED = [
 
   /* ── 5 · ce que ca change ── */
   {p:"36-lattice-shadow", c:"Reach is not the same as regulars."},
-  {t:["From","followers","to regulars"], s:"e",
+  /* "Les habitues", le titre de la page Titre, dans le feed. */
+  {ti:[ [{t:"From",s:"up"}],
+        [{t:"followers to",s:"it"}],
+        [{t:"Regulars.",s:"up"}] ], s:"e",
    c:"Instagram gives you reach. Your trema gives you regulars."},
   {p:"05-cocktail",       c:"Members, points, tiers."},
   {t:["A Join button","on your","own page"], s:"w",
@@ -132,6 +140,13 @@ window.renderFeed = function (host, dir, small) {
               e:"background:var(--encre);color:var(--papier)",
               w:"background:var(--blanc);color:var(--encre)",
               l:"background:var(--lait);color:var(--encre)"};
+  /* les titres passent par les variables et non par background/color :
+     le contour des segments est peint couleur du fond (var(--bg)), il
+     doit donc suivre le fond du cadre, pas celui de la section. */
+  const VARS = {k:"--bg:var(--noir);--fg:#fff",
+                e:"--bg:var(--encre);--fg:var(--papier)",
+                w:"--bg:var(--blanc);--fg:var(--encre)",
+                l:"--bg:var(--lait);--fg:var(--encre)"};
 
   host.innerHTML = window.TREMA_FEED.map((o, i) => {
     const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`;
@@ -161,6 +176,18 @@ window.renderFeed = function (host, dir, small) {
       const dots = o.car.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("");
       return `<div class="post car" data-n="${o.car.length}" style="${BG[o.s] || ""}">${n}${slides}
         <span class="swipe">⧉ ${o.car.length}</span><span class="dots">${dots}</span></div>`;
+    }
+    /* le titre compose, tel quel depuis la page Titre : des lignes de
+       segments qui alternent capitales grasses et italique bas-de-casse,
+       bord a bord. `r` est le rapport de corps de l'italique — sa
+       hauteur d'x est basse, composee au meme corps elle paraitrait
+       deux fois plus petite. La mise a la mesure est dans fitAll. */
+    if (o.ti) {
+      const lignes = o.ti.map(l => `<div class="ligne">` +
+        l.map(g => `<span class="seg ${g.s}" data-r="${g.s === "it" ? 1.04 : 1}">${g.t}</span>`).join("") +
+        `</div>`).join("");
+      return `<div class="post tx ti" style="${VARS[o.s] || ""}">${n}
+        <div class="titre">${lignes}</div><i class="sig"></i></div>`;
     }
     /* le cadre-signe : le picto sort du format des deux cotes, sans
        un mot. Il ne depend d'aucun style, il est ecrit dans le feed —
@@ -223,6 +250,9 @@ window.renderFeed = function (host, dir, small) {
   });
 
   fitAll(host);
+  /* une seconde passe quand les fontes sont vraiment la : la premiere
+     a pu mesurer une police de secours, et les chasses different. */
+  document.fonts.ready.then(() => fitAll(host));
   addEventListener("resize", () => fitAll(host), {passive:true});
 };
 
@@ -249,6 +279,25 @@ function mesure(sp, box) {
 }
 
 function fitAll(host) {
+  /* le titre compose : la regle de la page Titre, un seul corps pour
+     tout le bloc. On pose un corps de sonde, on lit la largeur reelle
+     de chaque ligne — recouvrements compris — et c'est la plus longue
+     qui fixe l'echelle ; les autres s'arretent ou elles s'arretent. */
+  host.querySelectorAll(".post.ti .titre").forEach(bloc => {
+    const box = bloc.clientWidth;
+    if (!box) return;
+    const lignes = [...bloc.querySelectorAll(".ligne")];
+    const k = lignes.map(l => {
+      [...l.children].forEach(x => x.style.fontSize = (100 * (+x.dataset.r || 1)) + "px");
+      const w = l.scrollWidth;
+      return w ? box / w : 0;
+    }).filter(x => x > 0);
+    if (!k.length) return;
+    const kf = Math.min(...k);
+    lignes.forEach(l => [...l.children].forEach(x =>
+      x.style.fontSize = (100 * (+x.dataset.r || 1) * kf) + "px"));
+  });
+
   /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
      il doit etre entier, pas rogne par le bord */
   host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
