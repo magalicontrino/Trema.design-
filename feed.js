@@ -89,8 +89,15 @@ window.TREMA_FEED = [
   {t:["A Join button","on your","own page"], s:"w",
    c:"Your regulars, not an algorithm's audience."},
   {p:"09-terracotta",     c:"Connect direct to your customers."},
-  {t:["No algorithm","decides who","sees your","menu"], s:"k",
-   c:"No algorithm decides who sees your menu."},
+  /* CARROUSEL — l'accroche, puis la reponse au swipe. Le format
+     temoignage : on nomme le lieu, on pose la question, on repond.
+     Clique le cadre pour faire defiler. */
+  {car:[
+     {t:["Why","the Vinyl Bar","likes","@mark"], s:"k"},
+     {t:["No algorithm","decides who","sees their","menu"], s:"w"},
+     {t:["Their regulars","find them","direct"], s:"e"},
+   ],
+   c:"Why the Vinyl Bar likes trema → no algorithm decides who sees their menu, and their regulars find them direct. Swipe."},
 
   /* ── 6 · ce que ce n'est pas ── */
   {p:"34-blue-door",      c:"A door. A website is a project."},
@@ -125,6 +132,18 @@ window.renderFeed = function (host, dir, small) {
     if (o.p) {
       return `<div class="post ph">${n}<img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
     }
+    if (o.car) {
+      const slides = o.car.map((sl, k) => {
+        const ls = sl.t.map(l => l === "@mark"
+          ? `<span class="wm-line"><i class="wordmark"></i></span>`
+          : `<span>${l}</span>`).join("");
+        return `<div class="sl${k ? "" : " on"}" style="${BG[sl.s]}"><div class="fit">${ls}</div>
+          <i class="sig"></i></div>`;
+      }).join("");
+      const dots = o.car.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("");
+      return `<div class="post car" data-n="${o.car.length}">${n}${slides}
+        <span class="swipe">⧉ ${o.car.length}</span><span class="dots">${dots}</span></div>`;
+    }
     if (o.corner) {
       return `<div class="post cn" style="${BG[o.s]}">${n}
         <b>${o.corner.w}</b><i>${o.corner.n.join("<br>")}</i></div>`;
@@ -138,14 +157,39 @@ window.renderFeed = function (host, dir, small) {
        style D le revele une fois sur deux. Emettre les deux plutot
        que de re-rendre evite de dupliquer la source du message. */
     const flat = o.t.filter(l => l !== "@mark");
+    /* INTERDIT : composer le nom de la marque en typo, et a plus
+       forte raison au pluriel. Des que le mot tombe sur "trema" ou
+       "tremas", on sort le fichier logotrema.svg. Le point derriere
+       est permis, il ne fait pas partie du dessin. */
     const last = flat[flat.length - 1] || "trema";
-    const word = last.split(" ").pop().toLowerCase().replace(/[.,]$/, "") + ".";
+    const raw = last.split(" ").pop().toLowerCase().replace(/[.,]$/, "");
+    const isMark = /^tremas?$/.test(raw);
+    const word = isMark
+      ? `<i class="wordmark"></i><em>.</em>`
+      : raw + ".";
     const note = flat.join(" ").toUpperCase();
 
+    /* Couches decoratives emises pour chaque texte mais masquees :
+       seul le style "creatif" les revele, en rotation. Emettre plutot
+       que re-rendre garde une seule source pour le message. */
     return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
+      <div class="pat"></div>
+      <div class="bleed"><i class="wordmark"></i></div>
+      <div class="giant"><svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>
       <div class="fit">${lines}</div>
-      <div class="cnr"><b>${word}</b><i>${note}</i></div></div>`;
+      <div class="cnr"><b>${word}</b><i>${note}</i></div>
+      <i class="sig"></i></div>`;
   }).join("");
+
+  host.querySelectorAll(".post.car").forEach(car => {
+    car.addEventListener("click", () => {
+      const sl = [...car.querySelectorAll(".sl")], dt = [...car.querySelectorAll(".dots i")];
+      const i = sl.findIndex(s => s.classList.contains("on"));
+      const j = (i + 1) % sl.length;
+      sl[i].classList.remove("on"); sl[j].classList.add("on");
+      dt[i].classList.remove("on"); dt[j].classList.add("on");
+    });
+  });
 
   fitAll(host);
   addEventListener("resize", () => fitAll(host), {passive:true});
@@ -170,7 +214,7 @@ function fitAll(host) {
     const w = b.scrollWidth;
     if (w) b.style.fontSize = (10 * box / w) + "px";
   });
-  host.querySelectorAll(".post.tx .fit").forEach(fit => {
+  host.querySelectorAll(".post.tx .fit, .post.car .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;
     fit.querySelectorAll("span").forEach(sp => {
