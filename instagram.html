@@ -124,8 +124,6 @@ h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
    Only the validated set of numbers is ever set this large. */
 .bignum{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
   font-size:36cqw;line-height:.84;letter-spacing:-.035em;margin:auto 0}
-.idx{font-family:var(--fm);font-size:4.6cqw;line-height:2.1;margin:auto 0;opacity:.85}
-.idx b{font-weight:400;opacity:.45;margin-right:1.2em}
 
 /* ── THE SECTIONS — the product's own vocabulary ────────────
    The eight section types of a trema page, each with the icon
@@ -215,7 +213,6 @@ h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
 .qrplate svg{position:absolute;width:19%;height:auto;fill:var(--noir);background:#fff;
   padding:1.6%;box-sizing:content-box}
 .post .qr{position:absolute;left:7%;bottom:7%;width:31%;z-index:4}
-.post .qrbig{width:62%;margin:auto}
 
 /* gabarits : la zone sûre dessinée */
 .tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
@@ -255,9 +252,10 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 <section class="w">
   <div class="part">Communication</div>
   <h1>Everything about<br>your place. One link.</h1>
-  <p>Twenty-seven posts, nine rows. The feed is built on the message house and reads from the top: the
+
+  <p>Twenty-four posts, eight rows. The feed is built on the message house and reads from the top: the
   roof, then the three pillars — everything about your place always up to date, found everywhere, and
-  followers turning into regulars — then the proof, then the call.</p>
+  followers turning into regulars.</p>
   <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
   online address of a place, that it is already built from what they publish on Instagram and Google Maps,
   and that it stays current on its own. Captions below, in the order they go out.</p>
@@ -437,30 +435,13 @@ const POSTS = [
       </div>`,
    s:`color:#fff;padding:0`,
    c:`Start free. Your trema already exists.`},
-  {v:"c", h:`<div class="idx">
-        <div><b>40%</b>better conversion</div><div><b>60%</b>less bounce</div>
-        <div><b>3×</b>faster loading</div><div><b>2.5×</b>more engagement</div></div>
-      <div class="tiny" style="opacity:.5">MEASURED AGAINST TRADITIONAL WEBSITES</div>`,
-   s:`background:var(--lait);color:var(--encre)`,
-   c:`Converts 40% better than traditional websites. 60% less bounce. 3× faster. 2.5× more engagement.`},
-
-  /* ── row 9 · the call ── */
-  {v:"s", h:`<div class="ctr"><div class="qrbig qrplate"><img src="qr-trema.png" alt="QR code to trema.design">
-        <svg viewBox="0 0 78 91"><use href="#tm"/></svg></div></div>
-      <div class="tiny" style="text-align:center;opacity:.6;margin-top:5cqw">SCAN · TRE.MA</div>`,
-   s:`background:var(--encre);color:var(--papier)`,
-   c:`Scan it. It opens instantly on a phone.`},
-  {v:"c", h:`<div class="fit">
-        <span style="font-size:22.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">Create</span>
-        <span style="font-size:30.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">your</span>
-        <span style="font-size:22.6cqw;font-variation-settings:'wght' 1000,'FLAR' 100">trema</span>
-      </div>
-      <div class="tiny" style="opacity:.55">90 DAYS OF PRO · NO CARD</div>`,
+  /* ── row 8 · the close ──
+     Le sign-off passe en clair : sans les trois posts retires, il
+     tombe a cote de la photo de brique, et deux valeurs sombres ne
+     se touchent jamais. */
+  {v:"c", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:36cqw"><use href="#tm"/></svg>
+      <div class="tiny" style="opacity:.6;text-align:center;margin-top:1.5em">TRE.MA</div></div>`,
    s:`background:var(--blanc);color:var(--encre)`,
-   c:`Create and customize your trema in minutes.`},
-  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:36cqw"><use href="#tm"/></svg>
-      <div class="tiny" style="opacity:.7;text-align:center;margin-top:1.5em">TRE.MA</div></div>`,
-   s:`background:var(--noir);color:#fff`,
    c:`tre.ma`}
 ];
 
