@@ -13,6 +13,15 @@
 <meta name="theme-color" content="#141414">
 
 <style>
+/* Apple Garamond n'est ni installee ici ni distribuable : c'est une
+   coupe propriétaire d'Apple — une ITC Garamond Light resserree —
+   qui n'a jamais ete vendue. Adobe Garamond Pro, elle, est sur cette
+   machine. On l'appelle par local() : elle ne voyage pas avec le
+   site, elle sert a juger le dessin sur un poste qui l'a. Ailleurs,
+   la pile retombe sur EB Garamond. */
+@font-face{font-family:"Garamond locale";font-style:italic;font-weight:400;
+  src:local("AGaramondPro-Italic"),local("Adobe Garamond Pro Italic"),
+      local("AGaramondPro-SemiboldItalic"),local("Apple Garamond Italic");}
 
 :root{
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
@@ -244,7 +253,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
@@ -339,6 +348,8 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    regarder si c'est vraiment ce dessin-la que tu veux. */
 .ft-cormorant{--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
               --fd-it:"Cormorant Garamond",Garamond,serif; --po-it:600}
+.ft-adobe    {--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
+              --fd-it:"Garamond locale","EB Garamond",Garamond,serif; --po-it:400}
 .ft-bricolage{--fd-up:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
               --ax-up:"opsz" 96,"wdth" 100,"wght" 800;
               --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
@@ -353,7 +364,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 .note.c{background:var(--blanc);border:1px solid var(--brume);border-radius:50%;
   width:8.5em;height:8.5em;display:grid;place-items:center;text-align:center;padding:0}
 
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,5vw,72px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,5vw,72px)}
 .quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
 .titnom{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;opacity:.45;margin:0 0 6px;padding-bottom:6px;border-bottom:var(--rule);
@@ -470,15 +481,17 @@ const FONTES = [
    d:"Texte 1 : Bricolage 800, -4%. Texte 2 : EB Garamond italique, -3%."},
   {k:"cormorant", t:"Inter + Cormorant", i:'"Cormorant Garamond"',
    d:"Texte 1 : Inter Black, -4%. Texte 2 : Cormorant Garamond italique, -3% — plus legere et plus etroite qu'EB Garamond, c'est la plus proche d'Apple Garamond parmi les libres."},
+  {k:"adobe", t:"Inter + Adobe Garamond", i:'"Garamond locale"',
+   d:"Texte 2 : Adobe Garamond Pro italique, lue depuis ce poste ou elle est installee. Elle n'est PAS servie par le site : ailleurs l'affichage retombe sur EB Garamond. Elle n'est pas libre non plus — elle vient avec l'abonnement Creative Cloud, et le web passe par un kit Adobe Fonts, pas par le fichier. Abonnement arrete, fonte arretee. Apple Garamond, elle, n'a jamais ete vendue : c'est une coupe interne d'Apple."},
 ];
 const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"',
-                  cormorant:'"Inter"'};
+                  cormorant:'"Inter"', adobe:'"Inter"'};
 
 
 const bar=document.querySelector("#fontes"), fnote=document.querySelector("#fnote");
 const un=document.querySelector("#un"), quatre=document.querySelector("#quatre");
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les trois</button>`;
+  + `<button data-k="tout">Les quatre</button>`;
 
 const dessine = (avecNotes, lignes=LIGNES) =>
   `<div class="titre">` +
@@ -532,7 +545,7 @@ function fonte(k){
 function cote(){
   un.hidden=true; quatre.hidden=false;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent="Le meme titre, la meme composition, trois couples. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
+  fnote.textContent="Le meme titre, la meme composition, quatre couples. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
   quatre.innerHTML=FONTES.map(f=>
     `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">`
     + TITRES.map(t=>dessine(false, t.l)).join('<div style="height:clamp(24px,3vw,44px)"></div>')
