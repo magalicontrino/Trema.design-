@@ -124,7 +124,10 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;
   mask:url("logotrema.svg") no-repeat center/contain}
 .post .cnr b em{font-style:normal}
-.post .cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
+/* enfant direct, et pas n'importe quel i : le logotype du grand mot
+   est un <i> lui aussi, il heritait du position:absolute de la
+   mention et de son plafond a 46% — le dessin tombait a 9 px. */
+.post .cnr > i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
   font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
   max-width:46%}
 
@@ -183,9 +186,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 /* quand le signe occupe deja tout le cadre, la signature s'efface */
-.fx-creatif .post:nth-child(12n+2) .sig,
-.fx-creatif .post:nth-child(48n+6) .sig,
-.fx-creatif .post:nth-child(48n+18) .sig{display:none}
+/* le petit signe de pied s'efface la ou le grand a deja parle */
+.fx-creatif .post.t-edge .sig,.fx-creatif .post.t-bleed .sig,
+.fx-creatif .post.t-pat1 .sig,.fx-creatif .post.t-pat2 .sig{display:none}
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
 .fx-typo .post.tx:nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
@@ -195,34 +198,54 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    l'image, parfois le signe, parfois le logotype qui la traverse,
    et le plus souvent rien du tout. C'est l'alternance qui fait
    que chaque intervention garde sa force. */
-.post .shade,.post .ovl,.post .omark,.post .obleed{display:none}
+.post .cut,.post .shade,.post .ovl,.post .omark,.post .oedge{display:none}
+
+/* la decoupe : le signe devient une fenetre. Derriere, la meme
+   photo floutee et devitalisee ; dedans, elle est nette. L'ombre
+   portee est franche, sans flou — c'est un decoupage, pas un relief. */
+.post .cut{position:absolute;inset:0;z-index:3}
+.post .cut i{position:absolute;inset:0;display:block;
+  -webkit-mask:url("Logo.svg") no-repeat center/auto 74%;
+  mask:url("Logo.svg") no-repeat center/auto 74%}
+.post .cut .sh{background:rgba(0,0,0,.55);transform:translate(2.6cqw,3.2cqw)}
+.post .cut .sharp{background-position:center;background-size:cover}
+.fx-creatif .post.p-cut .cut{display:block}
+/* on agrandit le fond avant de le flouter : sinon le flou laisse un
+   liser transparent le long des quatre bords du cadre */
+.fx-creatif .post.p-cut > img{filter:blur(11px) saturate(.28) brightness(1.06);
+  transform:scale(1.14)}
+
+/* le signe pose en coin. C'est son ombre qui le detache — sur une
+   photo claire comme sur une sombre, le decalage suffit a le lire. */
+.post .omark{position:absolute;left:8%;top:8%;z-index:3;width:26cqw;
+  aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
+  filter:drop-shadow(2.2cqw 2.7cqw 0 rgba(0,0,0,.5))}
+.fx-creatif .post.p-mark .omark{display:block}
+
+/* le signe qui sort du cadre par la gauche */
+.post .oedge{position:absolute;left:-13%;top:50%;transform:translateY(-50%);z-index:3;
+  height:98%;aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
+  filter:drop-shadow(2.4cqw 3cqw 0 rgba(0,0,0,.45))}
+.fx-creatif .post.p-edge .oedge{display:block}
+
+/* une ligne posee sur l'image, sur un degrade qui tient le blanc */
 .post .shade{position:absolute;inset:0;z-index:2;
   background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.12) 55%,transparent)}
 .post .ovl{position:absolute;left:8%;right:8%;bottom:8%;z-index:3;color:#fff}
 .post .ovl span{display:block;white-space:nowrap;font-family:var(--fd);
   font-variation-settings:"wght" 1000,"FLAR" 100;line-height:.9;text-transform:uppercase;
   letter-spacing:.01em}
-.post .omark{position:absolute;left:8%;top:8%;z-index:3;width:26cqw;
-  aspect-ratio:78/91;background:#fff;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
-.post .obleed{position:absolute;left:-12%;right:-12%;top:50%;transform:translateY(-50%);z-index:3}
-.post .obleed .wordmark{display:block;width:100%;aspect-ratio:4;background:#fff;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-
-/* rotation sur les rangs impairs, qui sont toujours des photos */
-.fx-creatif .post:nth-child(12n+3) .shade,
-.fx-creatif .post:nth-child(12n+3) .ovl{display:block}
-.fx-creatif .post:nth-child(12n+9) .omark{display:block}
-.fx-creatif .post:nth-child(20n+5) .shade,
-.fx-creatif .post:nth-child(20n+5) .obleed{display:block}
+.fx-creatif .post.p-line .shade,
+.fx-creatif .post.p-line .ovl{display:block}
 
 /* ══ CREATIF ═══════════════════════════════════════════════
    Le signe prend le pouvoir : en tuile, en debordement, en
    decoupe geante. Le texte passe dessus ou disparait. Quatre
    traitements en rotation pour qu'aucun ne s'use. */
 .post .pat,.post .bleed,.post .giant{display:none}
-.post.ph .pat,.post.ph .bleed,.post.ph .giant{display:none!important}
+.post.ph .pat,.post.ph .bleed,.post.ph .giant,.post.ph .edge{display:none!important}
 
 /* la tuile : le signe repete, exactement 78 x 91, sans espace */
 .post .pat{position:absolute;inset:0;z-index:1;background:currentColor;
@@ -242,32 +265,41 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 .fx-creatif .post.tx{padding:8%}
 
-/* nth-child et non nth-of-type : les photos sont aussi des div, donc
-   nth-of-type les comptait et une regle sur deux tombait a cote.
-   Les cadres de texte occupent tous les rangs pairs. */
+/* Les gestes ne sont plus poses par nth-child : les series modulo
+   se croisaient et deux signes finissaient colles. C'est feed.js
+   qui les attribue, avec cinq cases au moins entre deux — le
+   voisin du dessous compris. La classe arrive avec le cadre. */
 
-/* 1 · le logotype qui deborde du cadre, a gauche et a droite */
-.fx-creatif .post:nth-child(12n+2){background:var(--noir)!important;color:#fff!important}
-.fx-creatif .post:nth-child(12n+2) .bleed{display:block}
-.fx-creatif .post:nth-child(12n+2) .fit{display:none}
+/* 1 · le picto qui sort du cadre. C'est le signe qui deborde, pas
+   le logotype : le nom garde sa rarete, le dessin se reconnait. */
+.fx-creatif .post.t-edge{background:var(--noir)!important;color:#fff!important;padding:0}
+.fx-creatif .post.t-edge .fit{display:none}
+.fx-creatif .post.t-edge .edge{display:block}
+.post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
+  height:104%;aspect-ratio:78/91;z-index:2;background:currentColor;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
+  filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
 
 /* 2 · le signe geant coupe par le format, le texte par-dessus */
-.fx-creatif .post:nth-child(12n+8){background:var(--encre)!important;color:var(--papier)!important}
-.fx-creatif .post:nth-child(12n+8) .giant{display:block}
+.fx-creatif .post.t-giant{background:var(--encre)!important;color:var(--papier)!important}
+.fx-creatif .post.t-giant .giant{display:block}
 
-/* 3 · la tuile pleine, sans texte — la respiration.
-   Deux fois dans tout le feed, et jamais a la meme echelle : une
-   serree en noir sur blanc, une deux fois plus grande en inverse.
-   Repetee a l'identique, elle devient un papier peint. */
-.fx-creatif .post:nth-child(48n+6),
-.fx-creatif .post:nth-child(48n+18){padding:0}
-.fx-creatif .post:nth-child(48n+6) .fit,
-.fx-creatif .post:nth-child(48n+18) .fit{display:none}
-.fx-creatif .post:nth-child(48n+6){background:var(--blanc)!important;color:var(--encre)!important}
-.fx-creatif .post:nth-child(48n+6) .pat{display:block;
+/* 3 · le logotype entier qui deborde des deux cotes — une seule
+   fois par tour de douze, et sans texte */
+.fx-creatif .post.t-bleed{background:var(--noir)!important;color:#fff!important}
+.fx-creatif .post.t-bleed .bleed{display:block}
+.fx-creatif .post.t-bleed .fit{display:none}
+
+/* 4 · la tuile pleine, sans texte — la respiration. Jamais a la
+   meme echelle : une serree en noir sur blanc, une bien plus
+   grande en inverse. Repetee a l'identique, elle fait papier peint. */
+.fx-creatif .post.t-pat1,.fx-creatif .post.t-pat2{padding:0}
+.fx-creatif .post.t-pat1 .fit,.fx-creatif .post.t-pat2 .fit{display:none}
+.fx-creatif .post.t-pat1{background:var(--blanc)!important;color:var(--encre)!important}
+.fx-creatif .post.t-pat1 .pat{display:block;
   -webkit-mask-size:20px 23.3px;mask-size:20px 23.3px}
-.fx-creatif .post:nth-child(48n+18){background:var(--encre)!important;color:var(--papier)!important}
-.fx-creatif .post:nth-child(48n+18) .pat{display:block;
+.fx-creatif .post.t-pat2{background:var(--encre)!important;color:var(--papier)!important}
+.fx-creatif .post.t-pat2 .pat{display:block;
   -webkit-mask-size:58px 67.7px;mask-size:58px 67.7px}
 
 

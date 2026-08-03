@@ -118,6 +118,65 @@ window.TREMA_FEED = [
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
 ];
 
+/* ── la rotation du style creatif ─────────────────────────────
+   Les gestes ne sont plus poses par nth-child. Les series modulo
+   se croisaient sans le savoir et deux signes se retrouvaient
+   colles : 25 contre 26, puis 2 juste au-dessus de 5 — dans une
+   grille a trois colonnes, le voisin du dessous est a +3, pas
+   seulement celui de droite a +1.
+
+   Ils sont donc attribues ici, en marchant le feed, avec une
+   seule regle absolue : quatre cases au moins entre deux gestes
+   charges. Ca couvre le voisin de droite comme celui du dessous,
+   quelle que soit la colonne. Un geste isole porte ; deux gestes
+   cote a cote s'annulent.
+
+   Le picto domine : c'est lui qui deborde du cadre, qui decoupe
+   l'image, qui se pose en coin. Le logotype entier ne sort qu'une
+   fois par tour — sinon le nom se banalise a force d'etre ecrit. */
+window.TREMA_LOOK = function (list) {
+  const CYCLE = ["p-cut", "t-edge", "p-mark", "t-giant", "p-edge", "t-bleed",
+                 "p-cut", "t-pat1", "p-mark", "t-giant", "p-edge", "t-pat2"];
+  const ECART = 5;                    /* cases minimum entre deux gestes */
+  const look  = list.map(() => "");
+  let c = 0, dernier = -99, ligne = -99;
+
+  list.forEach((o, i) => {
+    const ph = !!o.p, tx = !!o.t && !o.car;
+    if (!ph && !tx) return;           /* le carousel et le cadre coin restent nus */
+
+    /* on ne saute pas dans le cycle : on attend le cadre qui va
+       avec le geste en tete. A pas fixe on retombait toujours sur
+       un rang impair, et pas un seul cadre de texte n'etait servi. */
+    if (i - dernier >= ECART) {
+      const g = CYCLE[c % CYCLE.length];
+      if (g[0] === "p" ? ph : tx) { look[i] = g; c++; dernier = i; return; }
+    }
+    /* pas de geste ici : une ligne posee sur l'image de temps en
+       temps, pour que les photos ne soient pas toutes muettes */
+    if (ph && i - ligne >= 7) { look[i] = "p-line"; ligne = i; }
+  });
+  return look;
+};
+
+/* ── la ligne posee sur une image ─────────────────────────────
+   Cassee en lignes courtes et d'egale longueur, puis chacune mise
+   a la mesure : d'un seul jet, une phrase longue devient un ruban
+   de trois pixels de haut a cote d'un "A BAR" qui claque. Toutes
+   les lignes affleurent les deux bords, c'est la regle de la maison. */
+function casseLigne(txt) {
+  const mots = txt.split(" ");
+  const n = Math.min(4, Math.max(1, Math.round(txt.length / 13)));
+  const cible = txt.length / n;
+  const out = [""];
+  mots.forEach(m => {
+    const cur = out[out.length - 1];
+    if (cur && cur.length + m.length + 1 > cible * 1.2 && out.length < n) out.push(m);
+    else out[out.length - 1] = cur ? cur + " " + m : m;
+  });
+  return out.filter(Boolean);
+}
+
 /* ── rendu ────────────────────────────────────────────────────
    Une seule fonction pour les deux pages. `dir` est le dossier
    des photos, `small` reduit les marges pour l'apercu. */
@@ -127,20 +186,28 @@ window.renderFeed = function (host, dir, small) {
               w:"background:var(--blanc);color:var(--encre)",
               l:"background:var(--lait);color:var(--encre)"};
 
+  const look = window.TREMA_LOOK(window.TREMA_FEED);
+
   host.innerHTML = window.TREMA_FEED.map((o, i) => {
     const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`;
+    const k = look[i] ? " " + look[i] : "";
     if (o.p) {
       /* Couches emises pour chaque photo mais masquees : seul le
          style creatif les revele, en rotation. Le texte pose sur
          l'image est la premiere proposition de la legende, coupee
          au premier point — au-dela ca ne se lit plus sur une photo. */
       const line = (o.c || "").split(".")[0].trim();
-      return `<div class="post ph">${n}
-        <img src="${dir}/${o.p}.jpg" alt="" loading="lazy">
+      const src  = `${dir}/${o.p}.jpg`;
+      /* la decoupe reprend la meme image en fond de couche : nette
+         dans le signe, tandis que celle du dessous part au flou */
+      return `<div class="post ph${k}">${n}
+        <img src="${src}" alt="" loading="lazy">
+        <div class="cut"><i class="sh"></i>
+          <i class="sharp" style="background-image:url('${src}')"></i></div>
         <div class="shade"></div>
-        <div class="ovl"><span>${line}</span></div>
+        <div class="ovl">${casseLigne(line).map(l => `<span>${l}</span>`).join("")}</div>
         <i class="omark"></i>
-        <div class="obleed"><i class="wordmark"></i></div></div>`;
+        <i class="oedge"></i></div>`;
     }
     if (o.car) {
       const slides = o.car.map((sl, k) => {
@@ -182,10 +249,11 @@ window.renderFeed = function (host, dir, small) {
     /* Couches decoratives emises pour chaque texte mais masquees :
        seul le style "creatif" les revele, en rotation. Emettre plutot
        que re-rendre garde une seule source pour le message. */
-    return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
+    return `<div class="post tx${mod}${k}" style="${BG[o.s]}">${n}
       <div class="pat"></div>
       <div class="bleed"><i class="wordmark"></i></div>
       <div class="giant"><svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>
+      <i class="edge"></i>
       <div class="fit">${lines}</div>
       <div class="cnr"><b>${word}</b><i>${note}</i></div>
       <i class="sig"></i></div>`;
@@ -213,26 +281,52 @@ window.renderFeed = function (host, dir, small) {
    Calcule au chargement plutot qu'ecrit en dur parce que les
    chasses dependent de l'axe FLAR, que le canvas ne sait pas
    mesurer — deux tentatives d'ecriture en dur ont deborde. */
+/* Mesure la chasse reelle d'une ligne, puis la met a la mesure de
+   sa colonne. Le detour par max-content n'est pas cosmetique : un
+   span en display:block est etire par sa boite, scrollWidth renvoie
+   alors la largeur de la boite et le calcul tourne en rond — toute
+   la typo du feed etait restee bloquee a 10px. */
+function mesure(sp, box) {
+  if (!box) return;
+  sp.style.fontSize = "10px";
+  sp.style.width = "max-content";
+  const w = sp.scrollWidth;
+  sp.style.width = "";
+  if (w) sp.style.fontSize = (10 * box / w) + "px";
+}
+
 function fitAll(host) {
   /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
      il doit etre entier, pas rogne par le bord */
   /* le texte pose sur une photo se cale sur la largeur, comme le reste */
   host.querySelectorAll(".post .ovl span").forEach(sp => {
     const cell = sp.closest(".post");
-    const box = cell ? cell.clientWidth * 0.84 : 0;
-    if (!box) return;
-    sp.style.fontSize = "10px";
-    const w = sp.scrollWidth;
-    if (w) sp.style.fontSize = (10 * box / w) + "px";
+    mesure(sp, cell ? cell.clientWidth * 0.84 : 0);
   });
 
   host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
     const cell = b.closest(".post");
     const box = cell ? cell.clientWidth * 0.92 : 0;
     if (!box) return;
-    b.style.fontSize = "10px";
-    const w = b.scrollWidth;
-    if (w) b.style.fontSize = (10 * box / w) + "px";
+    /* Quand le nom est le logotype, il n'y a plus de texte a mesurer :
+       il ne reste que le point. Mesure dessus, il montait a 690px et
+       devorait le cadre pendant que le dessin tombait a 25 x 6 px.
+       On calcule donc le corps pour que le logotype, large de 2.9em,
+       remplisse la mesure. Le point est compose dans le meme em :
+       juste par construction, sans rien mesurer. */
+    const dessin = b.querySelector(".wordmark");
+    if (dessin) {
+      /* en em, la largeur du logotype se resout sur le corps du
+         dessin lui-meme et non sur celui du mot : il tombait a 9px.
+         On le pose en pixels, et le corps du point suit sa hauteur
+         pour garder la proportion voulue par la feuille de style. */
+      const w = box * 0.86;
+      dessin.style.width  = w + "px";
+      dessin.style.height = (w / 4) + "px";
+      b.style.fontSize = (w / 4 / 0.72) + "px";
+      return;
+    }
+    mesure(b, box);
   });
   host.querySelectorAll(".post.tx .fit, .post.car .fit").forEach(fit => {
     const box = fit.clientWidth;
@@ -240,9 +334,7 @@ function fitAll(host) {
     fit.querySelectorAll("span").forEach(sp => {
       const mark = sp.querySelector(".wordmark");
       if (mark) { mark.style.width = box + "px"; mark.style.height = (box/4) + "px"; return; }
-      sp.style.fontSize = "10px";
-      const w = sp.scrollWidth;
-      if (w) sp.style.fontSize = (10 * box / w) + "px";
+      mesure(sp, box);
     });
   });
 }
