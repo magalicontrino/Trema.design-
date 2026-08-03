@@ -255,6 +255,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .compo .nom b{font-family:var(--fd);font-variation-settings:"wght" 800;
   font-size:clamp(15px,1.15vw,19px);letter-spacing:-.02em}
 .compo .nom span{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.4}
+/* l'etat, comme sur la banque de photos : c'est ce qui permet de
+   valider a voix haute, par numero. Seules les validees entrent dans
+   le feed. */
+.compo .etat{margin-left:auto;font-family:var(--fm);font-size:8.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 7px;border:1px solid currentColor;opacity:.35}
+.compo .etat.in{background:var(--encre);color:var(--papier);border-color:var(--encre);opacity:1}
 .compo .usage{font-family:var(--fm);font-size:10px;line-height:1.5;opacity:.55;
   margin-top:9px;max-width:34ch}
 
@@ -369,8 +375,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   texte, nommees. Le feed alterne une photographie et une composition : ce sont celles-ci. Chacune
   est rendue au format du profil avec de la vraie copie — une composition ne se juge qu'avec les
   mots qu'elle portera.</p>
-  <p class="mono dim" style="max-width:56ch;margin:0 0 clamp(18px,2.4vw,30px)">Le nom est ce qui
-  compte : c'est lui qui devient le vocabulaire. « Prends un Bloc, puis un Coin, puis un Drapeau. »</p>
+  <p class="mono dim" style="max-width:60ch;margin:0 0 clamp(18px,2.4vw,30px)">Le nom est ce qui
+  compte : c'est lui qui devient le vocabulaire. « Prends un Bloc, puis un Coin, puis un Drapeau. »
+  Chaque composition porte son etat — seules les validees entrent dans le feed.</p>
 
   <div class="compos" id="compos"></div>
 </main>
@@ -382,46 +389,46 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    Pour le titre compose, une ligne est une suite de segments qui
    alternent capitales et italique — c'est la seule qui en ait besoin. */
 const COMPOS = [
-  {nom:"Le bloc", k:"k", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
+  {nom:"Le bloc", k:"k", s:"", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
    t:["Every place","has an","address"]},
 
-  {nom:"Le bloc clair", k:"w", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
+  {nom:"Le bloc clair", k:"w", s:"", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
    t:["Nothing","to build.","Nothing to","maintain."]},
 
-  {nom:"Le mot seul", k:"e big", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
+  {nom:"Le mot seul", k:"e big", s:"", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
    t:["One","link"], wm:true},
 
   /* Cinq lignes, la structure exacte de la reference : capitale seule,
      italique seule, capitale seule, puis des lignes mixtes ou les deux
      se touchent. C'est cette alternance qui fait le bloc, pas le
      nombre de mots. */
-  {nom:"Le titre compose", k:"w ti", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
+  {nom:"Le titre compose", k:"w ti", s:"", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
    ti:[[["Everything","up"]],[["about","it"]],[["Your","up"]],
        [["place.","up"],["one","it"]],[["link.","up"]]]},
 
-  {nom:"Le drapeau", k:"k rag", d:"Capitales, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
+  {nom:"Le drapeau", k:"k rag", s:"", d:"Capitales, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
    t:["Why","vinyl","bars","love ?"]},
 
-  {nom:"Le coin", k:"w coin", d:"Le mot pose en bas a gauche, sa mention en haut a droite. Le vide au milieu fait tout le travail. Rare, sinon il s'use.",
+  {nom:"Le coin", k:"w coin", s:"", d:"Le mot pose en bas a gauche, sa mention en haut a droite. Le vide au milieu fait tout le travail. Rare, sinon il s'use.",
    mot:"Yours.", note:"A BIO LINK LISTS LINKS. YOURS IS THE DESTINATION"},
 
-  {nom:"Le signe", k:"k sgn", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
+  {nom:"Le signe", k:"k sgn", s:"", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
    t:[]},
 
-  {nom:"Le chiffre", k:"k num", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
+  {nom:"Le chiffre", k:"k num", s:"", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
    t:["380+"], wm:true},
 
-  {nom:"Checklist", k:"w liste", d:"Elle coche toutes les cases, au sens propre. Des cases nues et petites, sur papier : c'est la liste qui parle. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
+  {nom:"Checklist", k:"w liste", s:"", d:"Elle coche toutes les cases, au sens propre. Des cases nues et petites, sur papier : c'est la liste qui parle. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
    coches:["Menu","Hours","Photos","Reviews","News","Community"]},
 
   /* La meme liste, mais chaque rubrique porte son propre picto. La
      Checklist dit "tout est coche" ; celle-ci dit "voila quoi". */
-  {nom:"Le sommaire", k:"k liste pic",
+  {nom:"Le sommaire", k:"k liste pic", s:"",
    d:"La meme liste, chaque rubrique avec son picto. La Checklist dit que tout est coche ; le sommaire dit ce qu'il y a. Les pictos prennent la couleur du texte, jamais la leur.",
    pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Post"],["link","Link"]]},
 
-  {nom:"La signature", k:"e sign", d:"Le logotype seul, centre, avec une mention discrete. Pour fermer une serie, ou ouvrir un compte.",
+  {nom:"La signature", k:"e sign", s:"", d:"Le logotype seul, centre, avec une mention discrete. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true, sous:"Nowhere & everywhere"},
 ];
 
@@ -452,7 +459,8 @@ hote.innerHTML = COMPOS.map((c,i)=>{
       + (c.wm ? `<span class="wm"></span>` : "") + `</div>`;
   }
   return `<div class="compo">
-    <div class="nom"><b>${esc(c.nom)}</b><span>${String(i+1).padStart(2,"0")}</span></div>
+    <div class="nom"><b>${esc(c.nom)}</b><span>${String(i+1).padStart(2,"0")}</span>
+      <span class="etat ${c.s}">${c.s === "in" ? "Validee" : "A valider"}</span></div>
     <div class="cadre ${c.k}">${dedans}</div>
     <p class="usage">${esc(c.d)}</p>
   </div>`;
