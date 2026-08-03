@@ -87,6 +87,18 @@ p + p{margin-top:.9em}
 .key b{font-weight:400;border-bottom:2px solid currentColor;padding-bottom:1px}
 
 footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule)}
+
+/* le telechargement : un .jpg servi par GitHub Pages s'ouvre dans le
+   navigateur, l'attribut download force l'enregistrement. Le bouton
+   ne parait qu'au survol pour ne pas encombrer la planche. */
+.card figure{position:relative}
+.dl{position:absolute;left:8px;bottom:8px;z-index:3;font-family:var(--fm);font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border-radius:2px;
+  background:var(--encre);color:var(--papier);text-decoration:none;
+  opacity:0;transition:opacity .14s}
+.card:hover .dl{opacity:.92}
+.dl:hover{opacity:1}
+.dl.off{background:transparent;color:var(--brume);border:1px solid currentColor}
 </style>
 </head>
 <body>
@@ -203,12 +215,19 @@ const BANK = [
 
 const LABEL = {in:"In the feed", out:"Set aside", "":"Free"};
 
+/* Les vues qui ont un master 2K. Les autres n'existent qu'en 720 :
+   les agrandir ne creerait pas de detail, ca ne ferait que du flou. */
+const HD = new Set(["01-bar-pro", "02-florist-pro", "03-chair-pro", "04-cuisine", "05-cocktail", "27-tomme-shadow", "28-tomme-oak", "31-teak-room", "32-bread-terrazzo", "33-espresso-ochre", "34-blue-door", "35-wine-terrazzo", "36-lattice-shadow", "37-journal-titre", "46-cocktail-2", "47-conceptstore-2", "48-cup-coffee", "49-beet-soup", "50-green-pasta", "52-red-panel", "53-cobalt-latte", "70-creole-turquoise", "71-creole-vermillon", "75-tomates-bocal", "76-tomates-plateau", "77-comptoir-cafe", "78-devanture", "79-fleuriste-mur", "80-salle-restaurant", "81-etagere-vins", "84-ombre-beton", "85-piece-picto"]);
+
 $("#bank").innerHTML = BANK.map((b, i) => `
   <div class="card">
     <figure>
       <span class="n">${String(i+1).padStart(2,"0")}</span>
       <img src="pics/bank/${b.f}.jpg" alt="${b.t}" loading="lazy">
       <span class="tag${b.s === "out" ? " out" : ""}">${LABEL[b.s]}</span>
+      ${HD.has(b.f)
+        ? `<a class="dl" href="pics/hd/${b.f}.jpg" download="trema-${String(i+1).padStart(2,"0")}-${b.f}.jpg">1440 &times; 1800 &darr;</a>`
+        : `<span class="dl off">720 only</span>`}
     </figure>
     <div class="cap">${b.t}<span class="src">${b.d} · ${b.k}</span></div>
   </div>`).join("");
