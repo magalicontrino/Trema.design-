@@ -633,10 +633,14 @@ const TITRES = [
     {w:1, g:[ {t:"One",    s:"up"} ]},
     {w:1, g:[ {t:"link",   s:"it", r:IT} ]},
   ]},
+  /* "to" seul sur une ligne ne remplissait que 12 % de la mesure : le
+     trou horizontal se lisait comme un trou d'interligne, alors que
+     l'interligne etait le meme que partout. On l'accroche donc a
+     "followers", et les trois lignes se remplissent. */
   {n:"Les habitues", l:[
-    {w:1,   g:[ {t:"From", s:"up"}, {t:"followers", s:"it", r:IT} ]},
-    {w:1, g:[ {t:"to", s:"it", r:IT} ]},
-    {w:1,   g:[ {t:"Regulars.", s:"up"} ]},
+    {w:1, g:[ {t:"From", s:"up"} ]},
+    {w:1, g:[ {t:"followers to", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Regulars.", s:"up"} ]},
   ]},
   {n:"Temoin — la reference, mot pour mot", l:[
     {w:1,   g:[ {t:"Making", s:"up"} ]},

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Fontes</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -205,7 +205,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* l'italique : l'axe slnt de la variable, pas une fausse oblique
    penchee par transformation. Le dessin du logotype, lui, ne
    penche pas — ce n'est pas de la typo. */
-.post.tx.it .fit{font-variation-settings:"wght" 900,"slnt" 15}
+
 
 /* le picto plein cadre : il sort du format des deux cotes. Ecrit
    dans le feed et non pose par un style, c'est l'affiche du 04. */
@@ -227,16 +227,37 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    variable : memes cadres, meme regle de mise a la mesure, meme
    ordre. Seule la fonte bascule. Tout passe par --fd, donc il
    suffit de la redefinir et de re-mesurer. */
-.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
-.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
+/* Les trois couples de la page Titre, appliques au feed : une
+   grotesque pour les capitales, une Garamond italique pour les
+   bas-de-casse. Dans un feed l'italique ne parait qu'au post 02,
+   mais c'est justement la qu'on veut la voir en situation. */
+.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif;
+              --fd-it:"EB Garamond",Garamond,serif}
+.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+              --fd-it:"EB Garamond",Garamond,serif}
+.ft-cormorant{--fd:"Inter","Helvetica Neue",Arial,sans-serif;
+              --fd-it:"Cormorant Garamond",Garamond,serif}
 
 /* chaque fonte a ses propres axes : on ne peut pas les regler une
    fois pour toutes, il faut parler la langue de chacune */
-.ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
+/* L'interlettrage est pose sur les LIGNES, pas sur le bloc. En em sur
+   .fit — qui reste a 16 px — il se calcule la-bas puis se transmet en
+   valeur absolue : -0.64 px, sur des lettres de 100 px. Autant dire
+   rien. Sur la ligne, il se calcule sur le corps de la ligne. */
+.ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b,
+.ft-cormorant .post.tx .fit,.ft-cormorant .post.car .fit,.ft-cormorant .cnr b{font-variation-settings:"wght" 900}
+.ft-inter .post.tx .fit > span,.ft-inter .cnr b,
+.ft-cormorant .post.tx .fit > span,.ft-cormorant .cnr b{letter-spacing:-.04em}
 .ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
+.ft-bricolage .post.tx .fit > span,.ft-bricolage .cnr b{letter-spacing:-.04em}
 
 /* l'italique du 02, dans la langue de chacune */
-.ft-inter     .post.tx.it .fit{font-style:italic}
+/* le texte 2 du couple : la Garamond italique, a -3%, sur la ligne
+   italique du post 02. Elle n'a pas les axes de la grotesque, on ne
+   lui en impose donc aucun. */
+.post.tx.it .fit{font-family:var(--fd-it);font-style:italic;font-weight:600;
+  font-variation-settings:normal}
+.post.tx.it .fit > span{letter-spacing:-.03em}
 /* Bricolage n'a pas d'italique : on ne la simule pas en penchant
    les lettres, la ligne reste droite. C'est une vraie limite, pas
    un detail — le 02 repose dessus. */
@@ -244,7 +265,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
@@ -414,25 +435,32 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
    bascule, sinon on comparerait des chasses figees sur la fonte
    precedente et l'essai ne voudrait rien dire. */
 const FONTES = [
-  {k:"inter",    t:"Inter",     d:"Libre, OFL. Axes opsz, wght 100-900, italique. Neutre : elle n'raconte rien, elle informe."},
-  {k:"bricolage",t:"Bricolage", d:"Libre, OFL. Axes opsz 12-96, wdth 75-100, wght 200-800. Pas d'italique dessinee : la ligne du 02 reste droite, on ne la penche pas."},
+  {k:"inter",     t:"Inter + EB Garamond",     i:'"EB Garamond"',
+   d:"Capitales : Inter Black, interlettrage -4%. Bas-de-casse : EB Garamond italique, -3%."},
+  {k:"bricolage", t:"Bricolage + EB Garamond", i:'"EB Garamond"',
+   d:"Capitales : Bricolage 800, -4%. Bas-de-casse : EB Garamond italique, -3%."},
+  {k:"cormorant", t:"Inter + Cormorant",       i:'"Cormorant Garamond"',
+   d:"Capitales : Inter Black, -4%. Bas-de-casse : Cormorant Garamond italique, -3% — plus legere et plus etroite."},
 ];
-const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"'};
+const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"',
+                  cormorant:'"Inter"'};
 const feed  = document.querySelector("#feed");
 const bar   = document.querySelector("#fontes");
 const fnote = document.querySelector("#fnote");
 const quatre= document.querySelector("#quatre");
 
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les deux</button>`;
+  + `<button data-k="tout">Les trois</button>`;
 
 /* Google Fonts decoupe ses fichiers par plage de caracteres : une fonte
    n'est telechargee qu'au moment ou un de ses caracteres est rendu. On
    la force donc a charger AVANT de mesurer, sinon on mesure la police
    de secours et tous les corps tombent a cote. */
+/* on charge la capitale ET la Garamond du couple : sans elle, la
+   ligne italique du 02 se mesurerait sur une police de secours. */
 const charge = k => Promise.all([
   document.fonts.load(`900 40px ${FAMILLES[k]}`),
-  document.fonts.load(`italic 900 40px ${FAMILLES[k]}`),
+  document.fonts.load(`italic 600 40px ${FONTES.find(f=>f.k===k).i}`),
 ]);
 
 function fonte(k){
@@ -450,7 +478,7 @@ function fonte(k){
 function cote(){
   feed.hidden = true; quatre.hidden = false;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent = "Les deux feeds cote a cote, meme ordre, memes photos. "
+  fnote.textContent = "Les trois feeds cote a cote, meme ordre, memes photos. "
     + "Seule la fonte change d'une colonne a l'autre.";
   quatre.innerHTML = FONTES.map(f =>
     `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
