@@ -174,6 +174,56 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.tx.sgn{padding:0;overflow:hidden}
 .post.tx.sgn .edge{display:block}
 
+/* ── LES CINQ VARIATIONS DU SIGNE ────────────────────────────
+   Reprises telles quelles de la page Compositions. Le dessin ne
+   change jamais : ce qui change, c'est sa taille et ce qu'on met
+   a cote. C'est tout le sujet — un signe se regle, il ne se
+   redessine pas. */
+.post.tx.sgn u{position:absolute;right:7%;bottom:6%;z-index:3;text-decoration:none;
+  font-family:var(--fd);font-variation-settings:"wght" 900;font-size:9.5cqw;
+  letter-spacing:-.02em;color:#fff;mix-blend-mode:difference}
+
+/* entier : contenu au lieu de deborder. Il remonte a 44 % — centre
+   geometriquement il parait tomber, sa masse est en haut et sa courbe
+   s'evide dessous. L'adresse repasse au centre : le coin bas-droit
+   n'est calme que lorsque le signe deborde du format. */
+.post.tx.sgn.ent .edge{height:70%;top:44%;filter:none}
+.post.tx.sgn.ent u{left:0;right:0;bottom:7%;text-align:center;font-size:7cqw}
+
+/* centre : petit, le nom dessous en monospace tres espace. Le signe ne
+   remplit plus rien, il signe. Le text-indent rattrape l'interlettrage,
+   qui sinon pousse le mot vers la gauche. */
+.post.tx.sgn.ctr .edge{height:19%;top:41%;filter:none}
+.post.tx.sgn.ctr u{left:0;right:0;top:56%;bottom:auto;text-align:center;
+  font-family:var(--fm);font-variation-settings:normal;font-weight:400;
+  font-size:6.2cqw;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;
+  color:currentColor;mix-blend-mode:normal;opacity:.72}
+
+/* le signe et le logotype : les deux sont des DESSINS. Aucune typo
+   dans cette carte — le nom de la marque ne se compose jamais. */
+.post.tx.sgn.duo .edge{height:27%;top:39%;filter:none}
+.post.tx.sgn.duo .wm{position:absolute;left:50%;top:62%;transform:translateX(-50%);z-index:3;
+  width:42%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.post.tx.sgn.duo u{display:none}
+
+/* le masque : le signe plein, la phrase en travers, en difference. Elle
+   se creuse en noir sur le signe et ressort en blanc sur le fond, en
+   changeant au milieu d'un mot. Le texte n'est pas ecrit sur le signe,
+   il est evide dedans — d'ou le signe enorme. */
+.post.tx.sgn.fil .edge{height:172%;filter:none}
+.post.tx.sgn.fil u{left:9%;right:9%;top:50%;bottom:auto;transform:translateY(-50%);
+  text-align:left;white-space:normal;font-size:14cqw;line-height:.86;letter-spacing:-.03em}
+
+/* repete : le masque est carrele. Le dessin devient une matiere. Pour
+   un fond, jamais pour signer — un signe qu'on repete cesse d'en etre
+   un. Pas d'adresse dessus : elle ne se lirait nulle part. */
+.post.tx.sgn.rep .edge{left:0;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;
+  filter:none;-webkit-mask:url("Logo.svg") repeat center/11% auto;
+  mask:url("Logo.svg") repeat center/11% auto}
+.post.tx.sgn.rep u{display:none}
+
 /* ── le drapeau ────────────────────────────────────────────
    Une seule taille pour tout le bloc : c'est la ligne la plus
    longue qui la fixe, les autres tombent ou elles tombent.

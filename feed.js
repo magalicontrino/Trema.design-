@@ -28,145 +28,116 @@
    ═══════════════════════════════════════════════════════════ */
 
 window.TREMA_FEED = [
-  /* ── 1 · ce que c'est ──
-     Les lieux et les objets alternent : un lieu tous les deux ou
-     trois cadres. Sinon on enchaine les gros plans de nourriture et
-     on oublie que trema s'adresse a des commercants. */
-  {p:"37-journal-titre",  c:"Every place has an address."},
-  /* LE TITRE COMPOSE, clair sur noir, avec ses mots a lui — la coupe
-     de la page Compositions, telle quelle. Il ouvre le feed parce que
-     sa phrase EST l'accroche : tout ce qu'il y a a dire tient dedans,
-     et la coupe apres le point fait le reste. */
-  {ti:[[{t:"All", s:"up"}],
-       [{t:"about", s:"it"}],
+  /* Le feed est bati sur le vocabulaire, et sur rien d'autre. Chaque
+     cadre de texte EST une composition de la page Compositions, avec
+     ses mots a elle — si on la reecrit a chaque emploi, ce n'est plus
+     un vocabulaire, c'est une mise en page refaite chaque fois.
+     Entre deux compositions, une photographie. Toujours.
+
+     Les photos alternent strictement un lieu, un objet : sans cette
+     regle on enchaine les gros plans de nourriture et on oublie que
+     trema s'adresse a des commercants.
+
+     Trois compositions occupent une place de photo, parce que la
+     photographie EST leur sujet : le picto qui la signe, le signe qui
+     la decoupe, et la carte de lieu. */
+
+  /* ── 01 · le bloc ── */
+  {p:"37-journal-titre",  c:"A front page, held out of the sea."},
+  {t:["Every place","has an","address"], s:"k",
+   c:"Every place has an address. trema is yours online."},
+
+  /* ── 02 · le bloc clair ── */
+  {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
+  {t:["Nothing","to build.","Nothing to","maintain."], s:"w",
+   c:"Nothing to build, nothing to maintain."},
+
+  /* ── 03 · le titre compose, un mot par ligne ── */
+  {p:"33-espresso-ochre", c:"And what you serve in it."},
+  {ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}], [{t:"Your", s:"up"}],
+       [{t:"place.", s:"it"}], [{t:"One", s:"up"}], [{t:"link", s:"it"}]], s:"w",
+   c:"All about your place. One link."},
+
+  /* ── 04 · le meme, retourne et coupe en quatre ── */
+  {p:"21-cafe",           c:"A cafe."},
+  {ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}],
        [{t:"Your", s:"up"}, {t:"place.", s:"it"}],
        [{t:"One", s:"up"}, {t:"link", s:"it"}]], s:"k",
-   c:"All about your place. One link — trema is yours online."},
-  {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
-  {sgn:1, s:"k",
-   c:"Every place has an address. Not a website — the address itself."},
-  {p:"33-espresso-ochre", c:"And what you serve in it."},
-  /* La question et sa reponse : deux vues, on balaie. La reponse ne
-     s'ecrit pas, elle se montre — le mot "Because" et le picto du
-     menu derriere lui. */
-  {car:[
-     {t:["Why","vinyl","bars","love","@mark?"], rag:1},
-     {t:["Because"], rag:1, pic:"menu"},
-   ], s:"k",
-   c:"Because everything is already in the menu. One link, and it is there."},
+   c:"The same words, cut in four. It is the cut that lets it breathe."},
 
-  /* ── 2 · ce qu'il y a dessus ── */
-  {p:"21-cafe",           c:"A cafe."},
-  {t:["Your","menu"], s:"w", big:1, n:"Your place",
-   c:"Menu, services and pricing — a section of your own page."},
+  /* ── 05 · le mot seul ── */
   {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
-  {t:["Your","hours"], s:"w", big:1,
-   c:"Open, closed, and the exception this week."},
+  {t:["One","link"], s:"k", big:1,
+   c:"Everything about your place. One link."},
+
+  /* ── 06 · le drapeau ── */
   {p:"06-brick-yellow",   c:"A dining room, at opening time."},
-  {t:["Your","photos"], s:"k", big:1,
-   c:"Gallery: uploads and Instagram, in one place."},
-  {p:"32-bread-terrazzo", c:"Your photos, pulled from what you already post."},
-  {t:["Your","reviews"], s:"w", big:1,
-   c:"Your best ones, not the ones an algorithm picked."},
-  {p:"04-cuisine",        c:"And your community, on the same page."},
-  /* LE SOMMAIRE. La section vient d'enumerer les rubriques une par une,
-     en quatre cadres ; celui-ci les montre toutes ensemble. C'est
-     exactement ce que la composition sait faire, et c'est pour ca
-     qu'elle ferme la section plutot que de l'ouvrir. */
+  {t:["Why","vinyl","bars","love ?"], s:"k", rag:1,
+   c:"Why do vinyl bars love trema? Because everything is already in the menu."},
+
+  /* ── 07 · le coin ── */
+  {p:"32-bread-terrazzo", c:"Sourdough, and one hard morning diagonal."},
+  {corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
+   c:"A bio link lists your links. Your trema is the destination."},
+
+  /* ── 08 · le signe ── */
+  {p:"24-gallery",        c:"A gallery. Nothing to build."},
+  {sgn:1, adr:"tre.ma/", s:"k",
+   c:"Not a website. The address itself."},
+
+  /* ── 09 · le signe entier ── */
+  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
+  {sgn:"ent", adr:"tre.ma", s:"k",
+   c:"tre.ma — the whole mark, this time."},
+
+  /* ── 10 · le signe centre ── */
+  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
+  {sgn:"ctr", adr:"trema.design", s:"k",
+   c:"trema.design"},
+
+  /* ── 11 · le signe et le logotype ── */
+  {p:"28-tomme-oak",      c:"It does not go stale."},
+  {sgn:"duo", s:"k",
+   c:"The mark and the name. Both drawn, neither typed."},
+
+  /* ── 12 · le masque ── */
+  {p:"11-florist-std",    c:"A florist. Found where people actually look."},
+  {sgn:"fil", adr:"Every place has an address", s:"k",
+   c:"Every place has an address — cut into the mark itself."},
+
+  /* ── 13 · le signe repete, et la photo decoupee avant lui ── */
+  {p:"22-plate", dec:1,   c:"A plate, cut into the mark."},
+  {sgn:"rep", s:"k",
+   c:"Repeat a sign and it stops being one. It becomes a material."},
+
+  /* ── 14 · le chiffre ── */
+  {p:"36-lattice-shadow", c:"A timber screen, and its grid on raw concrete."},
+  {t:["380+","@mark"], s:"k", big:1,
+   c:"380+ tremas published, heading to 1,000+."},
+
+  /* ── 15 · la checklist ── */
+  {p:"05-cocktail",       c:"Dappled sun on a coupe."},
+  {coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
+   c:"Menu, hours, photos, reviews, news and community. It is all there."},
+
+  /* ── 16 · le sommaire ── */
+  {p:"34-blue-door",      c:"A door. A website is a project."},
   {pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Page"],["link","Link"]], s:"w",
    c:"Your menu, photos, news, reviews and community — behind one link."},
 
-  /* ── 3 · d'ou ca vient ── */
-  {p:"24-gallery",        c:"A gallery. Nothing to build."},
-  {t:["Built from","what you","already","publish"], s:"w",
-   c:"Born from what you already publish on Instagram and Google Maps."},
-  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
-  {t:["Instagram","+ Google","Maps"], s:"k",
-   c:"Connected to both, and kept current from the same sources."},
-  {p:"28-tomme-oak",      c:"It does not go stale."},
-  {t:["Always","up to","date"], s:"w",
-   c:"Publish an event, an offer, a new menu — in minutes."},
-  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
-  {t:["Nothing","to build.","Nothing to","maintain."], s:"k",
-   c:"Nothing to build, nothing to maintain."},
+  /* ── 17 · le picto sur la photo, puis la signature ── */
+  {p:"20-magazines", phc:1, c:"Signed, not decorated."},
+  {sign:1, s:"k",
+   c:"trema."},
 
-  /* ── 4 · ou on le trouve ── */
-  {p:"11-florist-std",    c:"A florist. Found where people actually look."},
-  /* "La decouverte", posee telle quelle depuis la page Titre : les
-     segments alternent capitales grasses et italique bas-de-casse.
-     `ti` decrit les lignes, `s:"up"/"it"` le style de chaque segment. */
-  /* Le titre compose n'est pas valide : les deux piliers passent au
-     drapeau, qui l'est. Capitales, un seul corps, bord droit libre. */
-  {t:["Found by","Google","and AIs."], s:"w", rag:1,
-   c:"Built for search engines — and AI engines — by design."},
-  {p:"22-plate",          c:"Ask an AI where to go tonight."},
-  {t:["Your place","has an","answer"], s:"w",
-   c:"Google, Maps and AI assistants read your place."},
-
-  /* ── 5 · ce que ca change ── */
-  {p:"36-lattice-shadow", c:"Reach is not the same as regulars."},
-  /* "Les habitues", le titre de la page Titre, dans le feed. */
-  {t:["From","followers to","Regulars."], s:"k", rag:1,
-   c:"Instagram gives you reach. Your trema gives you regulars."},
-  {p:"05-cocktail",       c:"Members, points, tiers."},
-  /* LA CHECKLIST, avec ses mots a elle — ceux de la page Compositions,
-     tels quels. Une composition arrive ici entiere, texte compris : si
-     on la reecrit a chaque emploi, ce n'est plus un vocabulaire, c'est
-     une mise en page qu'on refait a chaque fois. */
-  {coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
-   c:"Everything on your page, and it is all there."},
-  {p:"09-terracotta",     c:"Connect direct to your customers."},
-  /* CARROUSEL — l'accroche, puis la reponse au swipe. Le format
-     temoignage : on nomme le lieu, on pose la question, on repond.
-     Clique le cadre pour faire defiler. */
-  {car:[
-     {t:["Why","the Vinyl Bar","likes","@mark"]},
-     {t:["No","algorithm","decides","who sees","their menu."]},
-     {t:["Their","regulars","find them","direct."]},
-   ],
-   c:"Why the Vinyl Bar likes trema → no algorithm decides who sees their menu, and their regulars find them direct. Swipe."},
-
-  /* ── 6 · ce que ce n'est pas ── */
-  {p:"34-blue-door",      c:"A door. A website is a project."},
-  {t:["Not a","website"], s:"w", big:1,
-   c:"A website is a project. Your trema is already there."},
-  {p:"20-magazines",      c:"Yours is somewhere to arrive."},
-  {corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
-   c:"A bio link lists your links. Your trema is the destination."},
-
-  /* ── 7 · la preuve ── */
-  {p:"35-wine-terrazzo",  c:"Already published, and growing."},
-  /* le nom au pluriel reste le dessin : "380+" au-dessus du logotype.
-     Le compter en typo composerait la marque en police — interdit. */
-  {t:["380+","@mark"], s:"k", big:1,
-   c:"380+ tremas published, heading to 1,000+."},
-
-  /* ── 8 · l'appel ── */
-  {p:"77-comptoir-cafe",        c:"A kitchen, mid-service. Ninety days of Pro, no card."},
+  /* ── 18 · la carte de lieu, et l'appel ── */
+  {p:"80-salle-restaurant", mot:"lagaleriedesarts",
+   c:"La Galerie des Arts. Every place has an address — here is theirs."},
   {t:["Create","your","@mark"], s:"k",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
-
-  /* La fermeture. Le seuil carrele dit la phrase a notre place, et il
-     la dit depuis cent ans : c'est la seule image du feed ou le message
-     etait deja la avant nous. La signature ferme derriere, sans un mot
-     — un logotype seul, et rien d'autre.
-     Les deux vont par paire : le feed alterne une photo, un texte, et
-     on n'ajoute donc jamais un cadre tout seul. */
-  {p:"86-seuil-noir", phc:1,
-   c:"It's yours. Someone laid that in the floor a hundred years ago."},
-  {sign:1, s:"k",
-   c:"trema. Every place has an address."},
-
-  /* LA CARTE DE LIEU, tout a la fin. Le feed a parle de trema pendant
-     quarante-quatre cadres ; le dernier parle d'un lieu, et la marque
-     y passe sous son nom. C'est la seule carte ou trema n'est pas le
-     sujet, et c'est pour ca qu'elle ferme.
-     Elle remplit aussi la derniere rangee : le profil affiche trois
-     colonnes, et une rangee incomplete se voit tout de suite. */
-  {p:"80-salle-restaurant", mot:"lagaleriedesarts",
-   c:"La Galerie des Arts — tre.ma/lagaleriedesarts. Every place has an address."},
 ];
+
 
 /* ── rendu ────────────────────────────────────────────────────
    Une seule fonction pour les deux pages. `dir` est le dossier
@@ -234,9 +205,16 @@ window.renderFeed = function (host, dir, small) {
     /* le cadre-signe : le picto sort du format des deux cotes, sans
        un mot. Il ne depend d'aucun style, il est ecrit dans le feed —
        on le veut dans les trois premieres rangees, partout. */
+    /* le cadre-signe et ses cinq variations. `sgn` porte le nom de la
+       variation — entier, centre, logotype, masque, repete — et `adr`
+       le texte qui l'accompagne. Sans variation, c'est le signe qui
+       sort du format des deux cotes. */
     if (o.sgn) {
-      return `<div class="post tx sgn" style="${BG[o.s]}">${n}
-        <i class="edge"></i></div>`;
+      const v = typeof o.sgn === "string" ? " " + o.sgn : "";
+      const wm = o.sgn === "duo" ? `<i class="wm"></i>` : "";
+      const adr = o.adr ? `<u>${o.adr}</u>` : "";
+      return `<div class="post tx sgn${v}" style="${BG[o.s]}">${n}
+        <i class="edge"></i>${wm}${adr}</div>`;
     }
     /* la checklist : les cases sont cochees d'un V trace au filet, et
        le corps se pose sur la LIGNE, jamais sur la case. */
