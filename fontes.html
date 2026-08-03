@@ -1,65 +1,414 @@
-<!doctype html><meta charset=utf-8><title>Trois fontes</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trema — Instagram</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Recursive:CASL,CRSV,MONO,slnt,wght@0..1,0..1,0..1,-15..0,300..1000&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#141414">
+
 <style>
-@font-face{font-family:"GT Flaire";src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");font-weight:300 1000}
-:root{--papier:#F2F1EF;--encre:#141414}
-body{margin:0;background:var(--papier);color:var(--encre);font-family:ui-monospace,Menlo,monospace}
-.row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px}
-h3{font:400 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
-   margin:22px 0 6px 4px;opacity:.5}
-.post{position:relative;aspect-ratio:4/5;overflow:hidden;display:grid;place-items:center;padding:9%}
-.k{background:#000;color:#fff}.w{background:#F2F1EF;color:#1E1E1E;padding:0}
-.fit{width:100%}
-.fit span{display:block;white-space:nowrap;text-transform:uppercase;line-height:.86;letter-spacing:.012em}
-.rag .fit span{text-transform:none;line-height:.92;letter-spacing:0;width:max-content}
-.cnr b{position:absolute;left:4%;bottom:4%;width:max-content;line-height:.8;white-space:nowrap;font-weight:400}
-.cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:-apple-system,Helvetica,sans-serif;
-  font-size:3.8cqw;font-weight:700;letter-spacing:.02em}
-.post{container-type:inline-size}
-.f0 .fit,.f0 .cnr b{font-family:"GT Flaire";font-variation-settings:"wght" 1000,"FLAR" 100}
-.f1 .fit,.f1 .cnr b{font-family:"Fraunces";font-variation-settings:"opsz" 144,"wght" 900,"SOFT" 100,"WONK" 1}
-.f2 .fit,.f2 .cnr b{font-family:"Recursive";font-variation-settings:"CASL" 1,"wght" 1000,"slnt" 0,"CRSV" 0}
-.ital .fit span:last-child{font-style:italic}
-.f0.ital .fit span:last-child{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
-.f2.ital .fit span:last-child{font-variation-settings:"CASL" 1,"wght" 1000,"slnt" -15,"CRSV" 1}
+@font-face{
+  font-family:"GT Flaire";
+  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
+  font-weight:300 1000;font-display:block;
+}
+
+:root{
+  --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --bg:var(--papier); --fg:var(--encre);
+  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --fm:ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:clamp(14px,2vw,28px);
+  --pad:clamp(18px,4vw,72px);
+  --rule:1.4px solid currentColor;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+
+/* header */
+#top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
+  border-bottom:var(--rule)}
+#top .mk{width:78px;height:19.5px;background:currentColor;flex:0 0 auto;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;mask:url("logotrema.svg") no-repeat left center/contain}
+#top nav{display:flex;gap:clamp(14px,2vw,30px);align-items:center;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
+#top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+
+section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
+section:first-of-type{border-top:0}
+.w{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.k{--bg:var(--noir);--fg:var(--blanc);background:var(--bg);color:var(--fg)}
+.l{--bg:var(--lait);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+
+.part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
+h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-wrap:balance;margin-bottom:.34em}
+h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;margin-bottom:.4em}
+h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  opacity:.55;margin-bottom:.9em}
+p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
+p + p{margin-top:.9em}
+.mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
+.dim{opacity:.55}
+.grid{display:grid;gap:var(--gut)}
+.c2{grid-template-columns:repeat(2,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){.c2,.c3{grid-template-columns:1fr}}
+.box{border:var(--rule);padding:clamp(14px,1.9vw,24px)}
+.sym{display:block;fill:currentColor}
+.wordmark{display:block;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:10.5px}
+th,td{border:var(--rule);padding:7px 10px;text-align:left;vertical-align:middle}
+th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;font-size:9px}
+.scrollx{overflow-x:auto}
+
+/* ══ THE PROFILE GRID ══════════════════════════════════════
+   Since 2025 the profile thumbnail is cropped 4:5, no longer
+   square: that is the ratio we compose to, not 1:1.
+   Une photo, un texte, une photo, un texte — le damier est
+   garanti par la construction, pas par une verification. */
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
+  border:var(--rule);max-width:760px}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg);color:var(--fg);
+  container-type:inline-size}
+.post img{width:100%;height:100%;object-fit:cover;
+  filter:saturate(var(--sat,1.08)) contrast(1.02) brightness(var(--br,1))}
+.post .n{position:absolute;top:5px;left:6px;z-index:5;font-family:var(--fm);font-size:7px;
+  letter-spacing:.12em;opacity:.45;mix-blend-mode:difference;color:#fff}
+
+/* les cadres de texte : la mesure est pleine, les lignes affleurent
+   les deux bords. Les tailles sont calculees au chargement (feed.js)
+   parce que les chasses dependent de l'axe FLAR. */
+.post.tx{display:grid;place-items:center;padding:9%}
+.post.tx .fit{width:100%;font-family:var(--fd);line-height:.86;letter-spacing:.012em;
+  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 100}
+.post.tx.big .fit{line-height:.76}
+/* le bloc plein : les lignes touchent presque le bord, l'interligne
+   se ferme, et c'est le mot le plus court qui fait le plus gros corps */
+.post.tx.slab{padding:4.5%}
+.post.tx.slab .fit{line-height:.8;letter-spacing:0}
+/* le cadre "coin" : un mot enorme cale en bas a gauche, la mention
+   en petit en haut a droite. Le mot deborde en bas, c'est voulu. */
+.post.cn{position:relative}
+.post.cn b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
+  font-weight:400;letter-spacing:0}
+.post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
+  font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
+
+/* le cadre "coin", emis partout mais montre seulement par le style D */
+.post .cnr{display:none;position:absolute;inset:0}
+.post .cnr b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;line-height:.8;white-space:nowrap;
+  font-weight:400;letter-spacing:0}
+
+/* le logotype dans le grand mot du coin : c'est le dessin, jamais
+   des lettres — et jamais de S. Le point, lui, est compose. */
+.post .cnr b .wordmark{display:inline-block;vertical-align:baseline;background:currentColor;
+  width:2.9em;height:.72em;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.post .cnr b em{font-style:normal}
+/* enfant direct, et pas n'importe quel i : le logotype du grand mot
+   est un <i> lui aussi, il heritait du position:absolute de la
+   mention et de son plafond a 46% — le dessin tombait a 9 px. */
+.post .cnr > i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
+  font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
+  max-width:46%}
+
+.post.tx .fit span{display:block;white-space:nowrap}
+/* le nom de la marque est un dessin, jamais une police (ch. 03) */
+.post.tx .fit .wm-line{display:block;padding:.06em 0}
+.post.tx .fit .wordmark{display:block;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+
+
+/* ── QUATRE MISES EN PAGE ───────────────────────────────────
+   Memes photos, memes phrases, meme ordre. Seule la mise en page
+   des textes change : c'est donc bien elle qu'on compare.
+   Les boutons restent discrets — ce sont des reglages, pas une
+   navigation. */
+
+
+
+
+/* ══ CARROUSEL ═════════════════════════════════════════════
+   Capitales noires sur blanc, lignes empilees, chacune a la
+   mesure exacte — l'affiche "work hard dream big".
+   Une seule diapo affichee, le clic fait defiler. */
+.post.car{background:#fff;color:#111}
+.post.car .sl{position:absolute;inset:0;display:none;align-content:center;padding:7%}
+.post.car .sl.on{display:grid}
+.post.car .fit{width:100%;font-family:var(--fd);line-height:.84;letter-spacing:0;
+  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 0}
+.post.car .fit span{display:block;white-space:nowrap}
+/* le logotype garde sa place dans la pile, sans deborder */
+.post.car .fit .wm-line{display:block;padding:.04em 0}
+.post.car .fit .wordmark{display:block;width:100%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;
+  mask:url("logotrema.svg") no-repeat left center/contain}
+/* l'indicateur de carrousel, comme sur la plateforme */
+.post.car .swipe{position:absolute;top:6px;right:7px;z-index:7;font-family:var(--fm);
+  font-size:8px;letter-spacing:.1em;opacity:.5}
+.post.car .dots{position:absolute;left:0;right:0;bottom:5%;z-index:7;display:flex;
+  gap:4px;justify-content:center}
+.post.car .dots i{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.25}
+.post.car .dots i.on{opacity:.9}
+.post.car .sig{opacity:.35}
+
+/* ── LE SIGNE EST TOUJOURS LA ───────────────────────────────
+   Discret par defaut, en bas a droite, a la taille d'une
+   signature. Les styles qui le veulent imposant le reprennent
+   plus bas. Il n'y a aucun cadre de texte sans lui. */
+.post .sig{position:absolute;right:6%;bottom:6%;z-index:6;display:block;
+  width:7.5cqw;aspect-ratio:78/91;background:currentColor;opacity:.5;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+/* le cadre "coin" porte deja le logotype : signature en haut a gauche */
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
+
+
+/* le picto plein cadre : il sort du format des deux cotes. Ecrit
+   dans le feed et non pose par un style, c'est l'affiche du 04. */
+.post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
+  height:104%;aspect-ratio:78/91;z-index:2;background:currentColor;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
+  filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
+
+/* D · typo — les deux affiches en alternance : le bloc de capitales,
+   puis le mot cale en bas a gauche avec sa mention en haut a droite */
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
+
+
+/* ── L'ESSAI DE FONTE ───────────────────────────────────────
+   Le seul moyen honnete de comparer, c'est de ne changer qu'une
+   variable : memes cadres, meme regle de mise a la mesure, meme
+   ordre. Seule la fonte bascule. Tout passe par --fd, donc il
+   suffit de la redefinir et de re-mesurer. */
+.ft-flaire  {--fd:"GT Flaire","Helvetica Neue",Arial,sans-serif}
+.ft-fraunces {--fd:"Fraunces",Georgia,serif}
+.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
+
+/* chaque fonte a ses propres axes : on ne peut pas les regler une
+   fois pour toutes, il faut parler la langue de chacune */
+.ft-fraunces  .fit,.ft-fraunces  .cnr b{font-variation-settings:"opsz" 144,"wght" 900,"SOFT" 100,"WONK" 1}
+.ft-inter     .fit,.ft-inter     .cnr b{font-variation-settings:"wght" 900}
+
+/* l'italique du 02, dans la langue de chacune */
+.ft-fraunces  .post.tx.it .fit{font-style:italic}
+.ft-inter     .post.tx.it .fit{font-style:italic}
+
+.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
+.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
+  color:inherit;opacity:.45}
+.fontes button:hover{opacity:.75}
+.fontes button.on{opacity:1;border-bottom-color:currentColor}
+
+/* les legendes — une ligne par post, dans l'ordre de publication */
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
+@media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.specs{grid-template-columns:1fr}}
+.spec{border-top:var(--rule);padding:10px 0 13px;display:grid;grid-template-columns:26px 1fr;gap:10px;
+  align-items:baseline}
+.spec .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
+.spec p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch}
+
+/* ── THE PICTURES CARRY THE COLOUR ─────────────────────────
+   The graphic system has none, so the photographs are allowed a
+   little more than they came with. Saturation is set once here;
+   each post only dials its own brightness through --br. Keep
+   --sat under 1.3 — past that the food goes plastic. */
+.post img.bgimg,.post .half img,.post .cutmask img,.post .kw .in img{
+  filter:saturate(var(--sat,1.18)) contrast(var(--ct,1.03)) brightness(var(--br,1))}
+
+/* the window cut, applied to a photograph inside a post */
+.post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post .cutmask img{width:100%;height:100%;object-fit:cover}
+
+/* ── THE KEYLINE WINDOW ─────────────────────────────────────
+   The other way round from the cut-out: the photograph runs
+   right through the frame and the shape re-crops it, drawn as
+   a white keyline. Same image twice, two different scales. */
+.post .kw{position:absolute;inset:9% 8%;z-index:3}
+.post .kw .in{position:absolute;inset:0;overflow:hidden;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post .kw .in img{position:absolute;left:-38%;top:-34%;width:176%;height:176%;max-width:none;object-fit:cover}
+.post .kw svg{position:absolute;inset:0;fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:round}
+
+/* ── THE POSTER — solid, offset, with a word inside ─────────
+   The black offset is not a drop shadow: it is a second copy of
+   the same drawing, moved. It never blurs and it never softens.
+   The word sits in the top bar, in viewBox units, so it stays
+   locked to the shape at every size. */
+.post .poster{position:absolute;inset:7% 6% 9%;z-index:3;transform:rotate(-4deg)}
+.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:15px;fill:var(--noir);letter-spacing:-.02em}
+
+/* ── THE PAIR — the same drawing, filled and drawn ──────────*/
+.post .pair{margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9cqw;width:86%;align-items:center}
+.post .pair svg{width:100%;height:auto;fill:currentColor}
+.post .pair .out{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
+
+/* ── THE CODE — a real QR, the mark sitting in the middle ───
+   Error correction H, so the centre can be covered. The mark
+   carries its own white pad; without it the modules merge. */
+.qrplate{position:relative;background:#fff;display:grid;place-items:center;padding:2%}
+.qrplate img{width:100%;height:auto}
+.qrplate svg{position:absolute;width:19%;height:auto;fill:var(--noir);background:#fff;
+  padding:1.6%;box-sizing:content-box}
+.post .qr{position:absolute;left:7%;bottom:7%;width:31%;z-index:4}
+
+/* gabarits : la zone sûre dessinée */
+.tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
+.tpl .safe{position:absolute;border:1.4px dashed currentColor;opacity:.5}
+.tpl .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;border-top:var(--rule);
+  font-family:var(--fm);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;background:var(--blanc)}
+.tpl .rat{position:absolute;top:8px;left:9px;font-family:var(--fm);font-size:9px;opacity:.45}
+
+footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overflow:hidden}
+.wall{margin:0 calc(var(--pad) * -1) clamp(22px,3vw,44px)}
+.wall span{display:block;background:currentColor;aspect-ratio:4;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.wall .l1{width:116%;margin-left:-11%}
+.wall .l2{width:104%;margin-left:2%}
+.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
+  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
 </style>
-<h3>Remplacer GT Flaire</h3>
-<p style="font:400 12px/1.6 -apple-system,Helvetica,sans-serif;max-width:64ch;margin:0 0 18px 4px">
-Meme composition, meme regle de mise a la mesure, trois fontes.
-<b>Colonne 1</b> GT Flaire, l'actuelle, payante et chere.
-<b>Colonne 2</b> Fraunces, libre (OFL) : axes opsz, wght, SOFT et WONK, vraie italique.
-<b>Colonne 3</b> Recursive, libre (OFL) : axes wght 300-1000, CASL, slnt et CRSV — c'est CASL qui
-joue le role de l'axe FLAR, et CRSV donne une vraie cursive, pas une oblique penchee.
-Les trois sont bien chargees : chasses mesurees 1810, 1556 et 1688 px pour la meme chaine,
-contre 1396 pour la police de secours. Aucune substitution silencieuse.</p>
-<div class="row" id="r"></div>
+</head>
+<body>
+
+<header id="top">
+  <a href="index.html" class="mk" aria-label="trema studio"></a>
+  <nav>
+    <a href="index.html">Brand book</a>
+    <a href="instagram.html" class="on">Instagram</a>
+    <a href="selection.html">Photos</a>
+    <a href="facebook.html">Facebook</a>
+  </nav>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
+<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
+</symbol></svg>
+
+
+<!-- ═════ THE GRID ═════ -->
+<section class="w">
+  <div class="part">Communication</div>
+  <h1>Everything about<br>your place. One link.</h1>
+
+  <p>Forty-eight posts, sixteen rows: one photograph, one line, one photograph. The feed is built on the
+  message house and reads from the top — the roof, then the three pillars: everything about your place
+  always up to date, found everywhere, and followers turning into regulars.</p>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
+  online address of a place, that it is already built from what they publish on Instagram and Google Maps,
+  and that it stays current on its own. Captions below, in the order they go out.</p>
+
+  <div class="fontes" id="fontes"></div>
+  <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
+  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
+    alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
+    a droite. Les photos ne portent rien.</p>
+
+  <div class="feed fx-typo" id="feed"></div>
+
+  <div class="specs" id="specs"></div>
+</section>
+
+
+<!-- ═════ EXPORT ═════ -->
+<section class="l">
+  <h2>Export</h2>
+  <p style="margin-bottom:clamp(22px,2.8vw,38px)">Everything is composed 4:5 — the ratio of the profile
+  thumbnail and the one that takes the most height in the feed. The system behind these frames lives in
+  the <a href="index.html" style="text-decoration:underline">brand book</a>.</p>
+  <div class="scrollx"><table>
+    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th></tr>
+    <tr><td>Feed</td><td>1080 × 1350</td><td>4:5</td><td>6 % sides · 8 % top and bottom</td><td>&lt; 2 MB</td></tr>
+    <tr><td>Square</td><td>1080 × 1080</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td></tr>
+    <tr><td>Story / reel</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td></tr>
+    <tr><td>Profile grid</td><td>—</td><td>4:5</td><td>nothing useful in the outer 6 %</td><td>—</td></tr>
+  </table></div>
+</section>
+
+
+<footer class="k">
+  <div class="wall" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
+    <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
+    <span class="mono dim"><a href="index.html" style="text-decoration:underline">← Brand book</a></span>
+  </div>
+</footer>
+
+
+<script src="feed.js"></script>
 <script>
-const CADRES=[
- {c:"k", l:["Every place","has an","address"]},
- {c:"k rag", l:["Why","vinyl","bars","love","trema?"]},
- {c:"w cnr", mot:"menu.", note:"YOUR PLACE"},
+(() => {
+"use strict";
+document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+
+/* Un seul feed. Le selecteur est parti avec les autres styles : on ne
+   choisit plus, on compose. La classe reste sur le conteneur, c'est
+   elle qui porte les regles des deux affiches. */
+/* Le meme feed, quatre fontes. On ne change que --fd et les reglages
+   d'axes, puis on remesure : les corps sont recalcules a chaque
+   bascule, sinon on comparerait des chasses figees sur la fonte
+   precedente et l'essai ne voudrait rien dire. */
+const FONTES = [
+  {k:"flaire",   t:"GT Flaire",  d:"L'actuelle. Payante, et chere. Axes wght 300-1000, FLAR, italique."},
+  {k:"fraunces", t:"Fraunces",   d:"Libre, OFL. Axes opsz, wght 100-900, SOFT, WONK, vraie italique. Une serif assumee."},
+  {k:"inter",    t:"Inter",      d:"Libre, OFL. Axes opsz, wght 100-900, italique. Neutre : elle ne raconte rien, elle informe."},
 ];
-let out="";
-CADRES.forEach(cd=>{ for(let f=0;f<3;f++){
-  const cls=`post f${f} ${cd.c}`;
-  out += cd.mot
-   ? `<div class="${cls}"><div class="cnr"><b>${cd.mot}</b><i>${cd.note}</i></div></div>`
-   : `<div class="${cls}"><div class="fit">${cd.l.map(x=>`<span>${x}</span>`).join("")}</div></div>`;
-}});
-document.querySelector("#r").innerHTML=out;
-document.fonts.ready.then(()=>{
-  document.querySelectorAll(".fit").forEach(fit=>{
-    const box=fit.clientWidth, rag=fit.closest(".rag");
-    const sp=[...fit.children];
-    if(rag){let mx=0;sp.forEach(s=>{s.style.fontSize="10px";mx=Math.max(mx,s.scrollWidth)});
-      const fs=Math.min(10*box/mx, fit.closest(".post").clientHeight*.82/(sp.length*.92));
-      sp.forEach(s=>s.style.fontSize=fs+"px");}
-    else sp.forEach(s=>{s.style.fontSize="10px";s.style.width="max-content";
-      const w=s.scrollWidth;s.style.width="";if(w)s.style.fontSize=(10*box/w)+"px";});});
-  document.querySelectorAll(".cnr b").forEach(b=>{
-    const box=b.closest(".post").clientWidth*.92;
-    b.style.fontSize="10px";const w=b.scrollWidth;if(w)b.style.fontSize=(10*box/w)+"px";});
-});
+const feed = document.querySelector("#feed");
+const bar  = document.querySelector("#fontes");
+const fnote= document.querySelector("#fnote");
+bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("");
+function fonte(k){
+  feed.className = "feed fx-typo ft-" + k;
+  fnote.textContent = FONTES.find(f=>f.k===k).d;
+  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
+  const FAM = {flaire:'"GT Flaire"', fraunces:'"Fraunces"', inter:'"Inter"'};
+  Promise.all([
+    document.fonts.load(`900 40px ${FAM[k]}`),
+    document.fonts.load(`italic 900 40px ${FAM[k]}`),
+  ]).then(()=> renderFeed(feed, "pics/feed"));
+}
+bar.addEventListener("click", e => { const b=e.target.closest("button"); if(b) fonte(b.dataset.k); });
+fonte("flaire");
+
+document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
+  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");
+
+/* une photo, un texte : verifie plutot que suppose */
+const bad = TREMA_FEED.map((o, i) => (i % 2 === 0) === !!o.p ? null : i+1).filter(Boolean);
+console.log(bad.length ? "Alternance cassee aux posts " + bad.join(", ")
+                       : `Alternance : ${TREMA_FEED.length} posts, une photo puis un texte ✓`);
+})();
 </script>
+</body>
+</html>
