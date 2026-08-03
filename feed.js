@@ -33,8 +33,15 @@ window.TREMA_FEED = [
      trois cadres. Sinon on enchaine les gros plans de nourriture et
      on oublie que trema s'adresse a des commercants. */
   {p:"37-journal-titre",  c:"Every place has an address."},
-  {t:["@mark","Is yours"], s:"k", it:1,
-   c:"trema is yours online."},
+  /* LE TITRE COMPOSE, clair sur noir, avec ses mots a lui — la coupe
+     de la page Compositions, telle quelle. Il ouvre le feed parce que
+     sa phrase EST l'accroche : tout ce qu'il y a a dire tient dedans,
+     et la coupe apres le point fait le reste. */
+  {ti:[[{t:"All", s:"up"}],
+       [{t:"about", s:"it"}],
+       [{t:"Your", s:"up"}, {t:"place.", s:"it"}],
+       [{t:"One", s:"up"}, {t:"link", s:"it"}]], s:"k",
+   c:"All about your place. One link — trema is yours online."},
   {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
   {sgn:1, s:"k",
    c:"Every place has an address. Not a website — the address itself."},
@@ -53,7 +60,7 @@ window.TREMA_FEED = [
   {t:["Your","menu"], s:"w", big:1, n:"Your place",
    c:"Menu, services and pricing — a section of your own page."},
   {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
-  {t:["Your","hours"], s:"l", big:1,
+  {t:["Your","hours"], s:"w", big:1,
    c:"Open, closed, and the exception this week."},
   {p:"06-brick-yellow",   c:"A dining room, at opening time."},
   {t:["Your","photos"], s:"k", big:1,
@@ -62,7 +69,12 @@ window.TREMA_FEED = [
   {t:["Your","reviews"], s:"w", big:1,
    c:"Your best ones, not the ones an algorithm picked."},
   {p:"04-cuisine",        c:"And your community, on the same page."},
-  {t:["All of it","behind","one link"], s:"e", slab:1,
+  /* LE SOMMAIRE. La section vient d'enumerer les rubriques une par une,
+     en quatre cadres ; celui-ci les montre toutes ensemble. C'est
+     exactement ce que la composition sait faire, et c'est pour ca
+     qu'elle ferme la section plutot que de l'ouvrir. */
+  {pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
+           ["playlist","Playlist"],["post","Page"],["link","Link"]], s:"w",
    c:"Your menu, photos, news, reviews and community — behind one link."},
 
   /* ── 3 · d'ou ca vient ── */
@@ -73,10 +85,10 @@ window.TREMA_FEED = [
   {t:["Instagram","+ Google","Maps"], s:"k",
    c:"Connected to both, and kept current from the same sources."},
   {p:"28-tomme-oak",      c:"It does not go stale."},
-  {t:["Always","up to","date"], s:"l",
+  {t:["Always","up to","date"], s:"w",
    c:"Publish an event, an offer, a new menu — in minutes."},
   {p:"31-teak-room",      c:"A room. No project, no maintenance."},
-  {t:["Nothing","to build.","Nothing to","maintain."], s:"e",
+  {t:["Nothing","to build.","Nothing to","maintain."], s:"k",
    c:"Nothing to build, nothing to maintain."},
 
   /* ── 4 · ou on le trouve ── */
@@ -89,17 +101,21 @@ window.TREMA_FEED = [
   {t:["Found by","Google","and AIs."], s:"w", rag:1,
    c:"Built for search engines — and AI engines — by design."},
   {p:"22-plate",          c:"Ask an AI where to go tonight."},
-  {t:["Your place","has an","answer"], s:"l",
+  {t:["Your place","has an","answer"], s:"w",
    c:"Google, Maps and AI assistants read your place."},
 
   /* ── 5 · ce que ca change ── */
   {p:"36-lattice-shadow", c:"Reach is not the same as regulars."},
   /* "Les habitues", le titre de la page Titre, dans le feed. */
-  {t:["From","followers to","Regulars."], s:"e", rag:1,
+  {t:["From","followers to","Regulars."], s:"k", rag:1,
    c:"Instagram gives you reach. Your trema gives you regulars."},
   {p:"05-cocktail",       c:"Members, points, tiers."},
-  {t:["A Join button","on your","own page"], s:"w",
-   c:"Your regulars, not an algorithm's audience."},
+  /* LA CHECKLIST, avec ses mots a elle — ceux de la page Compositions,
+     tels quels. Une composition arrive ici entiere, texte compris : si
+     on la reecrit a chaque emploi, ce n'est plus un vocabulaire, c'est
+     une mise en page qu'on refait a chaque fois. */
+  {coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
+   c:"Everything on your page, and it is all there."},
   {p:"09-terracotta",     c:"Connect direct to your customers."},
   /* CARROUSEL — l'accroche, puis la reponse au swipe. Le format
      temoignage : on nomme le lieu, on pose la question, on repond.
@@ -113,7 +129,7 @@ window.TREMA_FEED = [
 
   /* ── 6 · ce que ce n'est pas ── */
   {p:"34-blue-door",      c:"A door. A website is a project."},
-  {t:["Not a","website"], s:"l", big:1,
+  {t:["Not a","website"], s:"w", big:1,
    c:"A website is a project. Your trema is already there."},
   {p:"20-magazines",      c:"Yours is somewhere to arrive."},
   {corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
@@ -128,8 +144,19 @@ window.TREMA_FEED = [
 
   /* ── 8 · l'appel ── */
   {p:"77-comptoir-cafe",        c:"A kitchen, mid-service. Ninety days of Pro, no card."},
-  {t:["Create","your","@mark"], s:"e",
+  {t:["Create","your","@mark"], s:"k",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
+
+  /* La fermeture. Le seuil carrele dit la phrase a notre place, et il
+     la dit depuis cent ans : c'est la seule image du feed ou le message
+     etait deja la avant nous. La signature ferme derriere, sans un mot
+     — un logotype seul, et rien d'autre.
+     Les deux vont par paire : le feed alterne une photo, un texte, et
+     on n'ajoute donc jamais un cadre tout seul. */
+  {p:"86-seuil-noir", phc:1,
+   c:"It's yours. Someone laid that in the floor a hundred years ago."},
+  {sign:1, s:"k",
+   c:"trema. Every place has an address."},
 ];
 
 /* ── rendu ────────────────────────────────────────────────────
@@ -155,7 +182,11 @@ window.renderFeed = function (host, dir, small) {
          style creatif les revele, en rotation. Le texte pose sur
          l'image est la premiere proposition de la legende, coupee
          au premier point — au-dela ca ne se lit plus sur une photo. */
-      return `<div class="post ph">${n}
+      /* `phc` signe la photo du picto en coin, `dec` la decoupe dans
+         le dessin. Sans l'un ni l'autre, la photo reste nue — c'est le
+         cas le plus frequent, et il doit le rester. */
+      const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "");
+      return `<div class="post ph${mode}">${n}
         <img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
     }
     if (o.car) {
@@ -195,6 +226,28 @@ window.renderFeed = function (host, dir, small) {
     if (o.sgn) {
       return `<div class="post tx sgn" style="${BG[o.s]}">${n}
         <i class="edge"></i></div>`;
+    }
+    /* la checklist : les cases sont cochees d'un V trace au filet, et
+       le corps se pose sur la LIGNE, jamais sur la case. */
+    if (o.coches) {
+      const lignes = o.coches.map(l =>
+        `<span class="on"><i class="bx"></i>${l}</span>`).join("");
+      return `<div class="post tx liste" style="${BG[o.s]}">${n}
+        <div class="fit">${lignes}</div><i class="sig"></i></div>`;
+    }
+    /* le sommaire : la carte divisee en six, un picto et un mot par
+       case. Il ne passe pas par la mise a la mesure — son corps est
+       declare en cqw et doit rester petit. */
+    if (o.pictos) {
+      const cases = o.pictos.map(([p, l]) =>
+        `<span class="cel"><i style="--p:url('picto/web/${p}.svg')"></i><em>${l}</em></span>`).join("");
+      return `<div class="post tx som" style="${BG[o.s]}">${n}
+        <div class="grid">${cases}</div></div>`;
+    }
+    /* la signature : le logotype seul, centre. Un dessin, pas un mot. */
+    if (o.sign) {
+      return `<div class="post tx sign" style="${BG[o.s]}">${n}
+        <i class="wm"></i></div>`;
     }
     if (o.corner) {
       return `<div class="post cn" style="${BG[o.s]}">${n}
@@ -336,7 +389,26 @@ function fitAll(host) {
     }
   });
 
-  host.querySelectorAll(".post.tx:not(.rag) .fit, .post.car .sl:not(.rag) .fit").forEach(fit => {
+  /* la checklist : un seul corps pour toutes les lignes, cale a 62 % de
+     la mesure — une liste ne remplit pas la case, et c'est ce retrait
+     qui la fait lire comme une liste. Le corps se pose sur la ligne :
+     pose sur la case, elle devenait enorme pendant que le mot restait
+     petit, et les six cases se soudaient en une barre noire. */
+  host.querySelectorAll(".post.tx.liste .fit").forEach(fit => {
+    const box = fit.clientWidth;
+    if (!box) return;
+    const lignes = [...fit.children];
+    const pose = t => lignes.forEach(l => l.style.fontSize = t + "px");
+    pose(100);
+    const k = Math.min(...lignes.map(l => l.scrollWidth ? box * 0.62 / l.scrollWidth : Infinity));
+    if (!isFinite(k)) return;
+    pose(100 * k);
+    const cadre = fit.closest(".post");
+    const haut = cadre ? cadre.clientHeight * 0.82 : 0;
+    if (haut && fit.scrollHeight > haut) pose(100 * k * haut / fit.scrollHeight);
+  });
+
+  host.querySelectorAll(".post.tx:not(.rag):not(.liste) .fit, .post.car .sl:not(.rag) .fit").forEach(fit => {
     const box = fit.clientWidth;
     if (!box) return;
     fit.querySelectorAll("span").forEach(sp => {

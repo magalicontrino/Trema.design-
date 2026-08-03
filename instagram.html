@@ -201,14 +201,58 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
   filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
 
-/* D · typo — DEUX types de titres, pas plus : le bloc de capitales
-   (un cadre sur deux passe au noir pour le rythme), et le titre
-   compose de la page Titre. Le mot cale en coin n'est plus une
-   rotation : il ne reste que la ou il est le message — "Yours.",
-   ecrit dans le feed. Neuf coins sur quarante-deux cadres, c'etait
-   l'effet qui mangeait les titres. */
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+/* ── TOUT LE VOCABULAIRE ─────────────────────────────────────
+   Le feed n'invente plus de mise en page : chaque cadre est l'une
+   des compositions nommees, et il declare laquelle. L'alternance
+   automatique qui passait un cadre sur deux au noir a disparu — un
+   fond qui tombe par calcul n'est pas une composition, et elle
+   ecrasait celles qui portent le leur. */
+
+/* La checklist : cases cerclees, le V trace au filet dedans. */
+.post.tx.liste .fit{line-height:1.5;text-transform:none;
+  font-variation-settings:"wght" 700;letter-spacing:-.01em}
+.post.tx.liste .fit span{width:max-content;display:flex;align-items:center;gap:.45em}
+.post.tx.liste .bx{position:relative;flex:none;width:.56em;height:.56em;
+  border:.05em solid currentColor}
+.post.tx.liste span.on .bx::after{content:"";position:absolute;left:50%;top:44%;
+  width:.17em;height:.32em;transform:translate(-50%,-50%) rotate(45deg);
+  border:solid currentColor;border-width:0 .07em .07em 0}
+
+/* Le sommaire : la carte divisee en six, marquee par deux croix.
+   Aucun filet : chaque case dessinait son bord et le trait se
+   decalait d'une rangee a l'autre. Les intersections suffisent. */
+.post.tx.som{padding:11%;place-items:stretch}
+.post.tx.som .grid{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);
+  width:100%;height:100%}
+.post.tx.som .cel{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3.6cqw;padding:3cqw}
+.post.tx.som .cel i{flex:none;width:19cqw;height:19cqw;background:currentColor;
+  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
+.post.tx.som .cel em{font-family:var(--fm);font-style:normal;font-weight:400;
+  font-size:2.9cqw;line-height:1;letter-spacing:.16em;text-transform:uppercase;opacity:.55}
+.post.tx.som .grid::before,.post.tx.som .grid::after{content:"";position:absolute;left:50%;z-index:1;
+  width:4.4cqw;height:4.4cqw;transform:translate(-50%,-50%);pointer-events:none;
+  background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,
+             linear-gradient(currentColor,currentColor) center/1px 100% no-repeat}
+.post.tx.som .grid::before{top:33.333%}
+.post.tx.som .grid::after{top:66.667%}
+
+/* La signature : le logotype seul, centre, et rien d'autre. */
+.post.tx.sign .wm{display:block;width:64%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+
+/* Les deux cartes ou la photographie est la composition. Le picto en
+   coin la signe — toujours au meme endroit, c'est la repetition qui en
+   fait une signature. La decoupe, elle, ne la signe pas : elle la
+   taille dans le dessin, et le papier traverse le reste. */
+.post.ph.phc::after{content:"";position:absolute;left:7%;top:6%;z-index:2;
+  width:19%;aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post.ph.dec{background:var(--papier)}
+.post.ph.dec img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:88%;height:auto;aspect-ratio:78/91;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
 
 /* ── LE TITRE, POSE DANS LE FEED ────────────────────────────
    La composition de la page Titre, telle quelle : des segments qui

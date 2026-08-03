@@ -374,6 +374,55 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    ne se lirait nulle part. */
 .cadre.sgn.rep u{display:none}
 
+/* 13 le picto sur la photo. La photo n'est pas decoree, elle est
+   signee : le picto en blanc, petit, cale en haut a gauche. Toujours
+   au meme endroit et a la meme taille — c'est la repetition qui en
+   fait une signature. S'il se promene d'une image a l'autre, ce n'est
+   plus qu'un element de plus dans le cadre. Blanc en dur et non
+   currentColor : le signe doit tenir sur une photo, pas sur un fond. */
+.cadre.phc{padding:0;place-items:stretch}
+.cadre.phc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cadre.phc i{position:absolute;left:7%;top:6%;z-index:2;width:19%;aspect-ratio:78/91;
+  background:#fff;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+
+/* 14 la photo decoupee. Le signe ne se pose plus sur l'image, il la
+   decoupe : la photographie n'existe que dans la silhouette du dessin,
+   et le fond de la page traverse tout le reste. C'est le geste le plus
+   fort de la serie, donc le plus rare — une fois par sequence. Le
+   dessin doit etre grand : plus petit, l'image se perd dans ses deux
+   morceaux et on ne reconnait ni la photo ni le signe. */
+.cadre.dec{padding:0;place-items:stretch;background:var(--papier)}
+.cadre.dec img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:88%;aspect-ratio:78/91;object-fit:cover;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+
+/* 15 la carte de lieu. C'est la seule composition qui ne parle pas de
+   trema mais d'un client : son nom en grand, et dessous le logotype
+   suivi de son adresse. La marque n'est pas au-dessus du lieu, elle est
+   sous lui — c'est tout le propos, et c'est pour ca que le nom est deux
+   fois plus gros que le reste.
+
+   Le nom est compose, l'adresse est composee, mais le logotype entre
+   les deux reste un dessin. On le pose donc en pixels, cale sur la
+   hauteur de l'adresse, jamais en em d'une police.
+
+   Encre sur la photo et non blanc : les vues de la banque choisies pour
+   ca ont toutes une grande surface claire et calme, et un texte sombre
+   y tient sans qu'on ait besoin de voiler l'image. */
+.cadre.cli{padding:0;place-items:stretch}
+.cadre.cli img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cadre.cli .ov{position:absolute;left:8%;right:8%;top:8%;z-index:2;color:var(--encre)}
+.cadre.cli b{display:block;font-family:var(--fd);font-variation-settings:"wght" 900;
+  font-size:12.5cqw;line-height:.92;letter-spacing:-.035em}
+.cadre.cli .lo{display:flex;align-items:center;gap:2.4cqw;margin-top:5cqw}
+.cadre.cli .lo i{flex:none;display:block;width:19cqw;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.cadre.cli .lo em{font-style:normal;font-family:var(--fm);font-size:4.2cqw;
+  letter-spacing:.12em;opacity:.75}
+
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
 .cadre.coin{padding:0}
 .cadre.coin b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
@@ -408,8 +457,8 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    corps est fixe et petit, et ce sont les six cartes qui tiennent la
    page. Le picto reste un masque : il prend la couleur du texte, un
    picto ne porte jamais la sienne. */
-.cadre.som{padding:0}
-.cadre.som .grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);
+.cadre.som{padding:11%}
+.cadre.som .grid{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);
   width:100%;height:100%}
 .cadre.som .cel{display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:3.6cqw;padding:3cqw}
@@ -420,19 +469,19 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    Elles disent la meme division, en disent moins, et ne peuvent pas se
    desaligner puisqu'elles sont posees sur le cadre et non sur les
    cases. */
-.cadre.som::before,.cadre.som::after{content:"";position:absolute;left:50%;z-index:1;
+.cadre.som .grid::before,.cadre.som .grid::after{content:"";position:absolute;left:50%;z-index:1;
   width:4.4cqw;height:4.4cqw;transform:translate(-50%,-50%);pointer-events:none;
   background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,
              linear-gradient(currentColor,currentColor) center/1px 100% no-repeat}
-.cadre.som::before{top:33.333%}
-.cadre.som::after{top:66.667%}
-.cadre.som .cel i{flex:none;width:14.5cqw;height:14.5cqw;background:currentColor;
+.cadre.som .grid::before{top:33.333%}
+.cadre.som .grid::after{top:66.667%}
+.cadre.som .cel i{flex:none;width:19cqw;height:19cqw;background:currentColor;
   -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
 /* le picto porte, le mot nomme : c'est pour ca que le mot est maigre et
    petit. Deux noirs de meme force dans une case de cette taille se
    disputent, et on ne lit plus le picto. */
-.cadre.som .cel em{font-family:var(--fd);font-variation-settings:"wght" 450;font-style:normal;
-  font-size:4cqw;line-height:1;letter-spacing:.02em;text-transform:uppercase}
+.cadre.som .cel em{font-family:var(--fm);font-style:normal;font-weight:400;
+  font-size:2.9cqw;line-height:1;letter-spacing:.16em;text-transform:uppercase;opacity:.55}
 
 /* 10 la signature : le logotype seul, centre */
 .cadre.sign{place-items:center}
@@ -507,7 +556,7 @@ const COMPOS = [
      irregulier. Le 1.04 est le rapport de corps de l'italique, repris
      de la page Le titre — sans lui l'italique parait deux fois trop
      petite, sa hauteur d'x etant bien plus basse. */
-  {nom:"Le titre compose", k:"w ti", s:"", d:"Capitales grasses et bas-de-casse italique, un mot par ligne, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
+  {nom:"Le titre compose", k:"w ti", s:"in", d:"Capitales grasses et bas-de-casse italique, un mot par ligne, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
    ti:[[["All","up"]],[["about","it",1.04]],[["Your","up"]],
        [["place.","it",1.04]],[["One","up"]],[["link","it",1.04]]]},
 
@@ -540,7 +589,7 @@ const COMPOS = [
      l'adresse est une adresse, elle se termine donc comme une URL. Ici
      le signe est presente entier : c'est une carte de marque, pas un
      lien, et la barre y fait un petit trait qui pend. */
-  {nom:"Le signe entier", k:"k sgn ent", s:"",
+  {nom:"Le signe entier", k:"k sgn ent", s:"in",
    d:"Le meme, contenu au lieu de deborder : on le voit en entier. Plus lisible, moins brutal. Quand la carte doit presenter le signe plutot que l'utiliser.",
    adr:"tre.ma", t:[]},
 
@@ -548,15 +597,15 @@ const COMPOS = [
    d:"Petit, cale au milieu, le nom dessous en monospace tres espace. Le signe ne remplit plus rien, il signe. Pour fermer, ou pour une carte de visite.",
    adr:"trema.design", t:[]},
 
-  {nom:"Le signe et le logotype", k:"k sgn duo", s:"",
+  {nom:"Le signe et le logotype", k:"k sgn duo", s:"in",
    d:"Le picto au-dessus, le nom dessous, et les deux sont des dessins. Aucune typographie dans cette carte : le nom de la marque ne se compose jamais. Celle d'avant ecrit l'adresse, celle-ci pose la marque.",
    wm:true, t:[]},
 
-  {nom:"Le masque", k:"k sgn fil", s:"",
+  {nom:"Le masque", k:"k sgn fil", s:"in",
    d:"Le signe en blanc, plein, et la phrase posee en travers, en difference. Elle se creuse en noir sur le signe et ressort en blanc sur le fond, en changeant au milieu d'un mot. Le texte n'est pas ecrit sur le signe, il est evide dedans.",
    adr:"Every place has an address", t:[]},
 
-  {nom:"Le signe repete", k:"k sgn rep", s:"",
+  {nom:"Le signe repete", k:"k sgn rep", s:"in",
    d:"Le dessin carrele jusqu'au bord : il devient une matiere. Pour un fond, une doublure, un intercalaire — jamais pour signer, un signe qu'on repete cesse d'etre un signe.",
    t:[]},
 
@@ -571,10 +620,30 @@ const COMPOS = [
      ligne etait mise a la mesure du cadre et le mot devenait enorme ;
      ici le corps est fixe et petit, et c'est la division qui tient la
      page. */
-  {nom:"Le sommaire", k:"k som", s:"",
+  {nom:"Le sommaire", k:"w som", s:"in",
    d:"La carte divisee en six : un filet au centre, deux en travers, et dans chaque case un picto et son mot. La Checklist dit que tout est coche ; le sommaire dit ce qu'il y a. Les pictos prennent la couleur du texte, jamais la leur.",
    pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Page"],["link","Link"]]},
+
+  /* Deux cartes ou la photographie EST la composition. Il y aura
+     toujours des images dans le feed ; ce qui en fait des cartes de la
+     marque, c'est ce qu'on fait du signe dessus. */
+  {nom:"Le picto sur la photo", k:"phc", s:"",
+   d:"La photo n'est pas decoree, elle est signee : le picto en blanc, petit, toujours au meme coin et a la meme taille. C'est la repetition qui en fait une signature.",
+   ph:"20-magazines"},
+
+  /* La seule carte qui ne parle pas de trema mais d'un client. Le mur
+     vide de cette vue n'est pas un defaut de cadrage : c'est la surface
+     qui accueille le nom, et c'est pour ca que la photo a ete gardee.
+     Le nom du lieu est deux fois plus gros que l'adresse, et la marque
+     passe dessous — elle porte le lieu, elle ne se pose pas sur lui. */
+  {nom:"La carte de lieu", k:"cli", s:"",
+   d:"Le nom du lieu en grand sur son propre mur, et dessous le logotype suivi de son adresse. La marque n'est pas au-dessus du lieu, elle est sous lui.",
+   ph:"80-salle-restaurant", mot:"La Galerie des Arts", note:"tre.ma/lagaleriedesarts"},
+
+  {nom:"La photo decoupee", k:"dec", s:"",
+   d:"Le signe ne se pose plus sur l'image, il la decoupe : la photo n'existe que dans la silhouette du dessin, le papier traverse le reste. Le geste le plus fort de la serie, donc le plus rare.",
+   ph:"46-cocktail-2"},
 
   {nom:"La signature", k:"e sign", s:"in", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true},
@@ -594,6 +663,13 @@ hote.innerHTML = COMPOS.map((c,i)=>{
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.wmSeul) {
     dedans = `<i class="wm"></i>`;
+  } else if (c.ph) {
+    /* la photo est la composition : selon la classe, le signe la signe
+       en coin, il la decoupe, ou le nom du lieu se pose dessus. */
+    dedans = `<img src="pics/bank/${c.ph}.jpg" alt="">`
+           + (c.k.includes("phc") ? `<i></i>` : "")
+           + (c.mot ? `<div class="ov"><b>${esc(c.mot)}</b>
+               <span class="lo"><i></i><em>${esc(c.note)}</em></span></div>` : "");
   } else if (c.k.includes("sgn")) {
     dedans = `<i></i>` + (c.wm ? `<span class="wm"></span>` : "")
       + `<u>${esc(c.adr || "tre.ma/")}</u>`;
