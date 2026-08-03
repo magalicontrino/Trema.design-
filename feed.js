@@ -30,113 +30,102 @@
 window.TREMA_FEED = [
   /* Le feed est bati sur le vocabulaire, et sur rien d'autre. Chaque
      cadre de texte EST une composition de la page Compositions, avec
-     ses mots a elle. Une composition reecrite a chaque emploi n'est
-     plus un vocabulaire, c'est une mise en page refaite chaque fois.
+     ses mots a elle. UNE PHOTO ENTRE CHAQUE COMPOSITION, sans
+     exception : les quatre compositions qui portent deja une image
+     comptent comme des photos et occupent une place de photo.
 
-     UNE PHOTO ENTRE CHAQUE COMPOSITION, sans exception. Les trois
-     compositions qui portent deja une image comptent comme des photos
-     — le picto qui la signe, le signe qui la decoupe, la carte de
-     lieu — et occupent donc une place de photo, jamais de texte.
+     Vingt-sept cadres, neuf rangees pleines. Le compte n'est pas
+     libre : le profil affiche trois colonnes, et une rangee entamee se
+     voit tout de suite. Quatorze compositions, treize photos — le feed
+     ouvre et ferme donc sur une composition, la premiere disant ce que
+     c'est, la derniere appelant a le faire.
 
-     L'ORDRE N'EST PAS CELUI DE LA PAGE COMPOSITIONS. Range dans
-     l'ordre du vocabulaire, le feed enchainait les six variations du
-     signe : on scrollait a travers six pictos d'affilee et le message
-     disparaissait derriere la marque. Elles sont donc reparties une
-     tous les trois cadres de texte, et entre elles passent les blocs,
-     les titres composes, les listes. Un picto se voit d'autant mieux
-     qu'il est seul de sa rangee.
+     TROIS ALTERNANCES, et elles font tout le rythme.
 
-     Les photos alternent strictement un lieu, un objet : sans cette
-     regle on enchaine les gros plans de nourriture et on oublie que
-     trema s'adresse a des commercants. */
+     Les fonds : un noir, un blanc, un noir, un blanc. Le feed etait aux
+     deux tiers noir et s'assombrissait en descendant. Le fond d'une
+     composition est libre — la meme se pose sur l'un ou sur l'autre —
+     donc rien n'obligeait a ce noir continu. Seul Le masque est fixe :
+     son signe est blanc, il lui faut le noir.
 
-  /* ── ce que c'est ── */
-  {p:"37-journal-titre",  c:"A front page, held out of the sea."},
+     Les photos : un lieu, un objet. Sans cette regle on enchaine les
+     gros plans de nourriture et on oublie que trema s'adresse a des
+     commercants.
+
+     Les variations du signe : une tous les trois ou quatre cadres de
+     texte. Rangees dans l'ordre du vocabulaire elles s'enchainaient,
+     et on scrollait a travers plusieurs pictos d'affilee.
+
+     QUATRE COMPOSITIONS RESTENT HORS DU FEED, et c'est voulu : le
+     sommaire, le signe repete, le signe centre et la signature. Elles
+     restent au vocabulaire — une composition n'a pas a etre postee
+     pour exister. Le sommaire est une carte a lire, pas a survoler ;
+     le signe repete est une matiere, un fond ; le signe centre et la
+     signature ferment un document, et un feed ne se ferme pas. */
+
   {nom:"Le bloc", t:["Every place","has an","address"], s:"k",
    c:"Every place has an address. trema is yours online."},
-
-  /* La carte de lieu en troisieme position, des la premiere rangee.
-     C'est la seule carte qui montre un vrai client : elle doit tomber
-     avant qu'on ait fini d'expliquer ce que trema est, pas apres.
-     Les deux vues echangees sont toutes les deux des lieux, donc
-     l'alternance lieu / objet des photos tient toujours. */
   {p:"80-salle-restaurant", mot:"lagaleriedesarts", nom:"La carte de lieu",
    c:"La Galerie des Arts. Every place has an address — here is theirs."},
-  {nom:"Le signe", sgn:1, adr:"tre.ma/", s:"k",
-   c:"Not a website. The address itself."},
 
-  {p:"33-espresso-ochre", c:"And what you serve in it."},
+  {nom:"Le signe", sgn:1, adr:"tre.ma/", s:"w",
+   c:"Not a website. The address itself."},
+  {p:"37-journal-titre",  c:"A front page, held out of the sea."},
+
+  {nom:"Le chiffre", t:["380+","@mark"], s:"k", big:1,
+   c:"380+ tremas published, heading to 1,000+."},
+  {p:"21-cafe",           c:"A cafe."},
+
   {nom:"Le titre compose", ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}], [{t:"Your", s:"up"}],
        [{t:"place.", s:"it"}], [{t:"One", s:"up"}], [{t:"link", s:"it"}]], s:"w",
    c:"All about your place. One link."},
+  {p:"71-creole-vermillon", c:"Mango, mint, rocket, red onion. Vermilion table, striped light."},
 
-  {p:"21-cafe",           c:"A cafe."},
-  {nom:"Le chiffre", t:["380+","@mark"], s:"k", big:1,
-   c:"380+ tremas published, heading to 1,000+."},
-
-  /* le masque : premiere des six variations du signe, et la suivante
-     ne viendra que trois cadres plus loin. */
-  {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
   {nom:"Le masque", sgn:"fil", adr:"Every place has an address", s:"k",
    c:"Every place has an address — cut into the mark itself."},
+  {p:"36-lattice-shadow", sph:1, nom:"Le signe sur la photo",
+   c:"The mark laid whole over the frame — the inverse of the cut-out."},
 
-  {p:"06-brick-yellow",   c:"A dining room, at opening time."},
   {nom:"Le bloc clair", t:["Nothing","to build.","Nothing to","maintain."], s:"w",
    c:"Nothing to build, nothing to maintain."},
+  {p:"52-red-panel",      c:"Perforated red wood, one brass bar."},
 
-  {p:"32-bread-terrazzo", c:"Sourdough, and one hard morning diagonal."},
   {nom:"Le drapeau", t:["Why","vinyl","bars","love ?"], s:"k", rag:1,
    c:"Why do vinyl bars love trema? Because everything is already in the menu."},
-
   {p:"24-gallery",        c:"A gallery. Nothing to build."},
-  {nom:"Le signe et le logotype", sgn:"duo", s:"k",
+
+  {nom:"Le signe et le logotype", sgn:"duo", s:"w",
    c:"The mark and the name. Both drawn, neither typed."},
+  {p:"76-tomates-plateau", c:"Straight out of the oven, steel tray on concrete."},
 
-  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
-  {nom:"Checklist", coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
+  {nom:"Checklist", coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"k",
    c:"Menu, hours, photos, reviews, news and community. It is all there."},
-
   {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
+
+  {nom:"Le mot seul", t:["One","link"], s:"w", big:1,
+   c:"Everything about your place. One link."},
+  {p:"20-magazines", phc:1, nom:"Le picto sur la photo", c:"Signed, not decorated."},
+
   {nom:"Le titre compose, clair sur noir", ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}],
        [{t:"Your", s:"up"}, {t:"place.", s:"it"}],
        [{t:"One", s:"up"}, {t:"link", s:"it"}]], s:"k",
    c:"The same words, cut in four. It is the cut that lets it breathe."},
-
-  {p:"20-magazines", phc:1, nom:"Le picto sur la photo", c:"Signed, not decorated."},
-  {nom:"Le signe repete", sgn:"rep", s:"k",
-   c:"Repeat a sign and it stops being one. It becomes a material."},
-
   {p:"11-florist-std",    c:"A florist. Found where people actually look."},
-  {nom:"Le mot seul", t:["One","link"], s:"k", big:1,
-   c:"Everything about your place. One link."},
 
-  {p:"22-plate", dec:1, nom:"La photo decoupee",   c:"A plate, cut into the mark."},
-  {nom:"Le sommaire", pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
-           ["playlist","Playlist"],["post","Page"],["link","Link"]], s:"w",
-   c:"Your menu, photos, news, reviews and community — behind one link."},
-
-  {p:"36-lattice-shadow", sph:1, nom:"Le signe sur la photo",
-   c:"The mark laid whole over the frame — the inverse of the cut-out."},
-  {nom:"Le signe entier", sgn:"ent", adr:"tre.ma", s:"k",
+  {nom:"Le signe entier", sgn:"ent", adr:"tre.ma", s:"w",
    c:"tre.ma — the whole mark, this time."},
+  {p:"22-plate", dec:1, nom:"La photo decoupee", c:"A plate, cut into the mark."},
 
-  {p:"05-cocktail",       c:"Dappled sun on a coupe."},
-  {nom:"Le coin", corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
+  {nom:"Le coin", corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"k",
    c:"A bio link lists your links. Your trema is the destination."},
-
   {p:"34-blue-door",      c:"A door. A website is a project."},
-  {nom:"Le signe centre", sgn:"ctr", adr:"trema.design", s:"k",
-   c:"trema.design"},
 
-  /* ── l'appel, et la signature pour fermer ── */
-  {p:"35-wine-terrazzo",  c:"Amber glass, and a long caustic shadow."},
-  {nom:"Le bloc", t:["Create","your","@mark"], s:"k",
+  {nom:"Le bloc", t:["Create","your","@mark"], s:"w",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
-
-  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
-  {nom:"La signature", sign:1, s:"k",
-   c:"trema."},
 ];
+
+
+
 
 
 
