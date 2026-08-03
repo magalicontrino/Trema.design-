@@ -43,6 +43,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;tex
   font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
 #top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
 #top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+/* en dessous, la barre ne tient plus sur une ligne : le logotype et la
+   mention gardent la premiere, la navigation passe dessous et se replie */
+@media(max-width:940px){
+  #top{flex-wrap:wrap}
+  #top nav{order:3;flex:1 1 100%;flex-wrap:wrap;row-gap:7px}
+  #top nav a{white-space:nowrap}
+}
 
 section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
 section:first-of-type{border-top:0}
@@ -267,6 +274,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
 .quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+/* sur un ecran etroit, trois feeds de front font des cadres de 100 px :
+   illisible. Ils s'empilent, chacun a pleine mesure. */
+@media(max-width:700px){.quatre{grid-template-columns:1fr;gap:clamp(30px,8vw,48px) 0}}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
