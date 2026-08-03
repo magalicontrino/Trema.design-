@@ -189,6 +189,34 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
 .fx-typo .post.tx:nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
+
+/* ── LES PHOTOS PARTICIPENT AUSSI ───────────────────────────
+   Dans le style creatif seulement : parfois une ligne posee sur
+   l'image, parfois le signe, parfois le logotype qui la traverse,
+   et le plus souvent rien du tout. C'est l'alternance qui fait
+   que chaque intervention garde sa force. */
+.post .shade,.post .ovl,.post .omark,.post .obleed{display:none}
+.post .shade{position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.12) 55%,transparent)}
+.post .ovl{position:absolute;left:8%;right:8%;bottom:8%;z-index:3;color:#fff}
+.post .ovl span{display:block;white-space:nowrap;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 100;line-height:.9;text-transform:uppercase;
+  letter-spacing:.01em}
+.post .omark{position:absolute;left:8%;top:8%;z-index:3;width:26cqw;
+  aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+.post .obleed{position:absolute;left:-12%;right:-12%;top:50%;transform:translateY(-50%);z-index:3}
+.post .obleed .wordmark{display:block;width:100%;aspect-ratio:4;background:#fff;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+
+/* rotation sur les rangs impairs, qui sont toujours des photos */
+.fx-creatif .post:nth-child(12n+3) .shade,
+.fx-creatif .post:nth-child(12n+3) .ovl{display:block}
+.fx-creatif .post:nth-child(12n+9) .omark{display:block}
+.fx-creatif .post:nth-child(20n+5) .shade,
+.fx-creatif .post:nth-child(20n+5) .obleed{display:block}
+
 /* ══ CREATIF ═══════════════════════════════════════════════
    Le signe prend le pouvoir : en tuile, en debordement, en
    decoupe geante. Le texte passe dessus ou disparait. Quatre

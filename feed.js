@@ -130,7 +130,17 @@ window.renderFeed = function (host, dir, small) {
   host.innerHTML = window.TREMA_FEED.map((o, i) => {
     const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`;
     if (o.p) {
-      return `<div class="post ph">${n}<img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
+      /* Couches emises pour chaque photo mais masquees : seul le
+         style creatif les revele, en rotation. Le texte pose sur
+         l'image est la premiere proposition de la legende, coupee
+         au premier point — au-dela ca ne se lit plus sur une photo. */
+      const line = (o.c || "").split(".")[0].trim();
+      return `<div class="post ph">${n}
+        <img src="${dir}/${o.p}.jpg" alt="" loading="lazy">
+        <div class="shade"></div>
+        <div class="ovl"><span>${line}</span></div>
+        <i class="omark"></i>
+        <div class="obleed"><i class="wordmark"></i></div></div>`;
     }
     if (o.car) {
       const slides = o.car.map((sl, k) => {
@@ -206,6 +216,16 @@ window.renderFeed = function (host, dir, small) {
 function fitAll(host) {
   /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
      il doit etre entier, pas rogne par le bord */
+  /* le texte pose sur une photo se cale sur la largeur, comme le reste */
+  host.querySelectorAll(".post .ovl span").forEach(sp => {
+    const cell = sp.closest(".post");
+    const box = cell ? cell.clientWidth * 0.84 : 0;
+    if (!box) return;
+    sp.style.fontSize = "10px";
+    const w = sp.scrollWidth;
+    if (w) sp.style.fontSize = (10 * box / w) + "px";
+  });
+
   host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
     const cell = b.closest(".post");
     const box = cell ? cell.clientWidth * 0.92 : 0;
