@@ -250,7 +250,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
 .quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
 .fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
-.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
   background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
   color:inherit;opacity:.45}
 .fontes button:hover{opacity:.75}
@@ -294,8 +294,15 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
    Le contour est en em : il suit le corps de chaque segment, sinon il
    ecraserait les petits et disparaitrait sur les grands. */
+/* L'INTERLIGNE, mesure sur la reference.
+   J'avais serre au jugé, a 0.70 fois le corps : les capitales se
+   touchaient presque. Sur ton image, deux lignes de capitales sont
+   distantes de 1.5 fois leur hauteur de capitale — soit environ 1.09
+   fois le corps. Il reste donc une demi-capitale de blanc entre
+   elles, et c'est ce blanc qui laisse passer les ascendantes et les
+   descendantes de l'italique sans que tout se soude. */
 .ligne{display:flex;align-items:baseline;width:max-content;white-space:nowrap;
-  font-family:var(--fd);line-height:.72}
+  font-family:var(--fd);line-height:1.06}
 /* Le contour n'est QUE sur l'italique, et c'est elle qui passe devant.
    Les capitales n'ont rien a se detacher : elles sont posees sur le
    fond. C'est l'italique qui traverse, donc c'est elle qui a besoin
@@ -327,10 +334,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    La mise a la mesure n'en souffre pas : on mesure la largeur rendue
    de la ligne entiere, recouvrement compris. */
 .seg + .seg{margin-left:-.06em}
-/* le chevauchement : negatif, donc la ligne suivante remonte dans la
-   precedente. C'est la mesure qui fait le bloc compact de la
-   reference — sans lui, les lignes ne se croisent jamais. */
-.ligne + .ligne{margin-top:-.13em}
+.ligne + .ligne{margin-top:.02em}
 .seg{display:block}
 /* Deux fontes, pas une. La reference ne compose pas ses capitales et
    ses bas-de-casse dans la meme famille : une grotesque noire d'un
@@ -357,23 +361,34 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
               --ax-up:"opsz" 96,"wdth" 100,"wght" 800;
               --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
 
-/* les mentions : dans la reference elles sont en aplats de couleur.
-   Le systeme trema n'a pas de couleur, et les aplats sont ecartes —
-   elles restent donc en gris, sur papier, juste posees de travers. */
-.note{position:absolute;z-index:3;font-family:var(--fm);font-size:clamp(8px,.72vw,10.5px);
-  line-height:1.45;letter-spacing:.06em;text-transform:uppercase;
-  background:var(--lait);color:var(--graphite);padding:7px 10px;max-width:16ch}
-.note.b{background:var(--encre);color:var(--papier)}
-.note.c{background:var(--blanc);border:1px solid var(--brume);border-radius:50%;
-  width:8.5em;height:8.5em;display:grid;place-items:center;text-align:center;padding:0}
+/* Les mentions prennent la couleur, comme dans la reference. C'est le
+   seul endroit du systeme qui en porte : la typographie reste noire,
+   les photos gardent la leur, et ces trois pastilles font la
+   respiration. Trois formes differentes aussi — hexagone, rectangle,
+   rond — parce que trois rectangles se liraient comme un tableau.
+   Le texte reste a l'encre sur les trois : sur ces aplats clairs, du
+   blanc ne passerait pas le contraste. */
+.note{position:absolute;z-index:4;font-family:var(--fm);font-size:clamp(8px,.72vw,10.5px);
+  line-height:1.3;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--encre);padding:11px 14px;display:grid;justify-items:center;gap:7px;text-align:center}
+/* Le picto est pose en masque, donc il prend la couleur du texte —
+   c'est la regle du brand book, un picto ne porte jamais sa propre
+   couleur. Ici il est a l'encre sur l'aplat, comme le nom dessous. */
+.note .pic{display:block;width:2.6em;height:2.6em;background:currentColor;
+  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
+.note.a{background:#F2C744;
+  clip-path:polygon(11% 0,89% 0,100% 50%,89% 100%,11% 100%,0 50%);padding:11px 24px}
+.note.b{background:#B9C6F2}
+.note.c{background:#E8734A;border-radius:50%;
+  width:9.4em;height:9.4em;place-content:center;padding:0}
 
 .quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,5vw,72px)}
 .quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
-.titnom{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+.titnom{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:400;opacity:.45;margin:0 0 6px;padding-bottom:6px;border-bottom:var(--rule);
   max-width:min(100%,660px)}
 
-.quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+.quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
 .quatre .note{display:none}
 </style>
@@ -438,41 +453,43 @@ const IT = 1.04;
    n'est pas dessinee a la main, elle est decrite. Pour en ajouter un,
    il suffit d'ecrire ses lignes — coupe, alternance, part de mesure.
 
-   Les deux reperes qui font tenir une coupe :
-   1. une ligne courte devient enorme, puisqu'elle remplit la meme
-      mesure. On compte les signes avant de couper.
-   2. il faut une ligne qui s'arrete avant le bord, sinon le bloc est
-      un pave et il n'y a nulle part ou poser une mention. */
+   Le corps est commun a tout le bloc : c'est la ligne la plus longue
+   qui le fixe, les autres s'arretent ou elles s'arretent. On coupe
+   donc pour le sens et pour le rythme, pas pour egaliser des
+   longueurs — le drapeau de droite vient tout seul. */
 const TITRES = [
   {n:"L'accroche", l:[
     {w:1,   g:[ {t:"Everything", s:"up"} ]},
-    {w:.60, g:[ {t:"about", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"about", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"Your", s:"up"}, {t:"place.", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"One", s:"up"}, {t:"link.", s:"it", r:IT} ]},
   ]},
   {n:"Les habitues", l:[
     {w:1,   g:[ {t:"From", s:"up"}, {t:"followers", s:"it", r:IT} ]},
-    {w:.52, g:[ {t:"to", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"to", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"Regulars.", s:"up"} ]},
   ]},
   {n:"Temoin — la reference, mot pour mot", l:[
     {w:1,   g:[ {t:"Making", s:"up"} ]},
-    {w:.62, g:[ {t:"visual", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"visual", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"Identity", s:"up"} ]},
     {w:1,   g:[ {t:"For", s:"up"}, {t:"myself", s:"it", r:IT} ]},
     {w:1,   g:[ {t:"Is", s:"up"}, {t:"so", s:"it", r:IT}, {t:"Hard", s:"up"} ]},
   ]},
   {n:"La decouverte", l:[
     {w:1,   g:[ {t:"Found", s:"up"}, {t:"by", s:"it", r:IT} ]},
-    {w:.72, g:[ {t:"Google", s:"up"} ]},
+    {w:1, g:[ {t:"Google", s:"up"} ]},
     {w:1,   g:[ {t:"and", s:"it", r:IT}, {t:"AIs.", s:"up"} ]},
   ]},
 ];
 const LIGNES = TITRES[0].l;
+/* Les pictos de la maison en decoration, chacun avec son nom dessous.
+   Trois formes differentes — hexagone, rectangle, rond — parce que
+   trois rectangles se liraient comme un tableau. */
 const NOTES = [
-  {t:"Not a website", c:"",  st:"top:-4%;right:6%;transform:rotate(-4deg)"},
-  {t:"No algorithm decides", c:"b", st:"top:26%;right:9%;transform:rotate(3deg)"},
-  {t:"Already built", c:"c", st:"bottom:-13%;left:9%;transform:rotate(-8deg)"},
+  {p:"menu",    t:"Menu",    c:"a", st:"top:-5%;right:5%;transform:rotate(-4deg)"},
+  {p:"gallery", t:"Gallery", c:"b", st:"top:27%;right:10%;transform:rotate(3deg)"},
+  {p:"reviews", t:"Reviews", c:"c", st:"bottom:-14%;left:8%;transform:rotate(-8deg)"},
 ];
 /* Ce qui change d'un bouton a l'autre, c'est le texte 1 seulement.
    Le texte 2 — la Garamond italique a -3% — ne bouge pas : c'est la
@@ -499,7 +516,9 @@ const dessine = (avecNotes, lignes=LIGNES) =>
   lignes.map(l=>`<div class="ligne" data-w="${l.w}">` +
     l.g.map(g=>`<span class="seg ${g.s}" data-r="${g.r||1}">${g.t}</span>`).join("") +
     `</div>`).join("") +
-  (avecNotes ? NOTES.map(n=>`<div class="note ${n.c}" style="${n.st}">${n.t}</div>`).join("") : "") +
+  (avecNotes ? NOTES.map(n=>
+    `<div class="note ${n.c}" style="${n.st};--p:url('picto/web/${n.p}.svg')">`
+    + `<i class="pic"></i><span>${n.t}</span></div>`).join("") : "") +
   `</div>`;
 
 /* Mise a la mesure : on pose un corps de sonde, on lit la largeur reelle
@@ -507,27 +526,42 @@ const dessine = (avecNotes, lignes=LIGNES) =>
    segment par segment ne marcherait pas — ce qui compte, c'est la somme,
    crenage compris. */
 function fitTitre(hote){
-  /* la mesure est celle du bloc, pas celle de la page : c'est ce qui
-     permet de relire en colonne etroite sans rien changer d'autre. */
+  /* UN SEUL CORPS POUR TOUT LE BLOC.
+     J'avais compris l'inverse : je mettais chaque ligne a la mesure,
+     donc une ligne de trois signes devenait enorme a cote d'une ligne
+     de dix. En mesurant la reference, les capitales y ont toutes le
+     meme corps — MAKING fait 680 px de large, IDENTITY 760, FOR
+     myself 780. Le bloc n'est pas justifie : il est cale a gauche, et
+     le bord droit est irregulier.
+
+     La regle est donc : on cherche le corps qui fait tenir la ligne
+     la plus longue dans la mesure, et on l'applique a toutes. Le
+     drapeau de droite se dessine tout seul, et c'est lui qui donne au
+     bloc son air compose plutot que fabrique.
+
+     `w` reste disponible pour rentrer une ligne a la main quand on
+     veut ouvrir un vide — mais ce n'est plus la mecanique, c'est une
+     exception. */
   hote.querySelectorAll(".titre").forEach(bloc=>{
-  const mesure = bloc.clientWidth;
-  if (!mesure) return;
-  bloc.querySelectorAll(".ligne").forEach(ligne=>{
-    const segs=[...ligne.children];
-    const cible = mesure * (+ligne.dataset.w || 1);
-    segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1))+"px");
-    const w=ligne.scrollWidth;
-    if(!w) return;
-    const k=cible/w;
-    segs.forEach(s=>s.style.fontSize=(100*(+s.dataset.r||1)*k)+"px");
-  });
+    const mesure = bloc.clientWidth;
+    if (!mesure) return;
+    const lignes = [...bloc.querySelectorAll(".ligne")];
+
+    const k = lignes.map(ligne=>{
+      const segs = [...ligne.children];
+      segs.forEach(x=>x.style.fontSize=(100*(+x.dataset.r||1))+"px");
+      const w = ligne.scrollWidth;
+      return w ? (mesure * (+ligne.dataset.w || 1)) / w : 0;
+    });
+
+    /* le plus petit facteur gagne : c'est la ligne la plus longue qui
+       commande, sinon elle deborderait. */
+    const kf = Math.min(...k.filter(x=>x>0));
+    lignes.forEach(ligne=>[...ligne.children]
+      .forEach(x=>x.style.fontSize=(100*(+x.dataset.r||1)*kf)+"px"));
   });
 }
 
-/* on charge la capitale demandee ET la Garamond italique : sans elle,
-   la moitie de la composition se mesurerait sur une police de secours. */
-/* on charge la capitale ET l'italique du couple demande : sans elle,
-   la moitie de la composition se mesurerait sur une police de secours. */
 const charge = k => Promise.all([
   document.fonts.load(`900 40px ${FAMILLES[k]}`),
   document.fonts.load(`italic 600 40px ${FONTES.find(f=>f.k===k).i}`),
