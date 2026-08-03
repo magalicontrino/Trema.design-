@@ -329,7 +329,12 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    document — une ligne ecrite plus bas passe sur celle du dessus. */
 .seg{position:relative;z-index:1;
   -webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
-.seg.it{z-index:2}
+/* La boite de l'italique est plus haute que celle des capitales : elle
+   porte des ascendantes ET des descendantes, et son corps est deja
+   4 % plus grand. Une ligne d'italique seule ouvrait donc un trou.
+   On resserre sa boite a elle, pas l'interligne general — dans une
+   ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
+.seg.it{z-index:2;line-height:.66}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
@@ -459,7 +464,12 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    document — une ligne ecrite plus bas passe sur celle du dessus. */
 .seg{position:relative;z-index:1;
   -webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
-.seg.it{z-index:2}
+/* La boite de l'italique est plus haute que celle des capitales : elle
+   porte des ascendantes ET des descendantes, et son corps est deja
+   4 % plus grand. Une ligne d'italique seule ouvrait donc un trou.
+   On resserre sa boite a elle, pas l'interligne general — dans une
+   ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
+.seg.it{z-index:2;line-height:.66}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
