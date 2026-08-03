@@ -116,26 +116,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
   font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
 
-/* le cadre "coin", emis partout mais montre seulement par le style D */
-.post .cnr{display:none;position:absolute;inset:0}
-.post .cnr b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
-  font-variation-settings:"wght" 900;line-height:.8;white-space:nowrap;
-  font-weight:400;letter-spacing:0}
-
-/* le logotype dans le grand mot du coin : c'est le dessin, jamais
-   des lettres — et jamais de S. Le point, lui, est compose. */
-.post .cnr b .wordmark{display:inline-block;vertical-align:baseline;background:currentColor;
-  width:2.9em;height:.72em;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-.post .cnr b em{font-style:normal}
-/* enfant direct, et pas n'importe quel i : le logotype du grand mot
-   est un <i> lui aussi, il heritait du position:absolute de la
-   mention et de son plafond a 46% — le dessin tombait a 9 px. */
-.post .cnr > i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
-  font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
-  max-width:46%}
-
 .post.tx .fit span{display:block;white-space:nowrap}
 /* le nom de la marque est un dessin, jamais une police (ch. 03) */
 .post.tx .fit .wm-line{display:block;padding:.06em 0}
@@ -185,8 +165,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   width:7.5cqw;aspect-ratio:78/91;background:currentColor;opacity:.5;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
-/* le cadre "coin" porte deja le logotype : signature en haut a gauche */
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
 /* le cadre-signe : le picto seul, coupe par le format, dans tous
@@ -222,13 +200,14 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
   filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
 
-/* D · typo — les deux affiches en alternance : le bloc de capitales,
-   puis le mot cale en bas a gauche avec sa mention en haut a droite */
+/* D · typo — DEUX types de titres, pas plus : le bloc de capitales
+   (un cadre sur deux passe au noir pour le rythme), et le titre
+   compose de la page Titre. Le mot cale en coin n'est plus une
+   rotation : il ne reste que la ou il est le message — "Yours.",
+   ecrit dans le feed. Neuf coins sur quarante-deux cadres, c'etait
+   l'effet qui mangeait les titres. */
 .fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
 .fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .fit{display:none}
-.fx-typo .post.tx:not(.sgn):not(.ti):nth-of-type(4n+4) .cnr{display:block}
 
 /* ── LE TITRE, POSE DANS LE FEED ────────────────────────────
    La composition de la page Titre, telle quelle : des segments qui
@@ -442,10 +421,10 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <div class="fontes" id="fontes"></div>
   <div class="quatre" id="quatre" hidden></div>
   <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
-  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
-    alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
-    a droite. Les titres de la page Titre gardent leur propre cadre, composes avec le couple
-    du feed. Les photos ne portent rien.</p>
+  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux types de titres,
+    pas plus : le bloc de capitales, en alternance noir sur blanc, et les titres de la page
+    Titre, composes avec le couple du feed. Une seule affiche en coin, la ou elle est le
+    message. Les photos ne portent rien.</p>
 
   <div class="feed fx-typo" id="feed"></div>
 
