@@ -79,87 +79,83 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 /* ══ THE PROFILE GRID ══════════════════════════════════════
    Since 2025 the profile thumbnail is cropped 4:5, no longer
-   square: that is the ratio we compose to, not 1:1. */
+   square: that is the ratio we compose to, not 1:1.
+   Une photo, un texte, une photo, un texte — le damier est
+   garanti par la construction, pas par une verification. */
 .feed{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
   border:var(--rule);max-width:760px}
-.post{position:relative;aspect-ratio:4/5;overflow:hidden;display:flex;flex-direction:column;
-  background:var(--bg);color:var(--fg);padding:9%}
-.post img.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.post > *{position:relative;z-index:2}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg);color:var(--fg);
+  container-type:inline-size}
+.post img{width:100%;height:100%;object-fit:cover;
+  filter:saturate(var(--sat,1.08)) contrast(1.02) brightness(var(--br,1))}
 .post .n{position:absolute;top:5px;left:6px;z-index:5;font-family:var(--fm);font-size:7px;
-  letter-spacing:.12em;opacity:.45}
-.post .big{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:clamp(14px,1.9vw,26px);line-height:1.02}
-.post .mn{font-family:var(--fm);font-size:clamp(6px,.68vw,8px);letter-spacing:.16em;text-transform:uppercase}
-.post .ctr{margin:auto;display:grid;place-items:center}
-.post .tilebg{position:absolute;inset:0;background:currentColor;
-  -webkit-mask:url("Logo.svg") repeat center/26px 30.3px;mask:url("Logo.svg") repeat center/26px 30.3px;z-index:1}
-.post .wm{width:58%;aspect-ratio:4}
+  letter-spacing:.12em;opacity:.45;mix-blend-mode:difference;color:#fff}
 
-/* ══ THE RANGE — loud and quiet in the same grid ════════════
-   Display sizes are written in cqw, not px: a letter cropped
-   by the frame stays cropped the same way at every width. */
-/* GT Flaire is set in capitals, always — see brand book ch. 08.
-   The wordmark is exempt: it is a drawing, not type. */
-h1,h2,.post .big,.huge,.wall2,.defn,.bignum,.flair{text-transform:uppercase}
+/* les cadres de texte : la mesure est pleine, les lignes affleurent
+   les deux bords. Les tailles sont calculees au chargement (feed.js)
+   parce que les chasses dependent de l'axe FLAR. */
+.post.tx{display:grid;place-items:center;padding:9%}
+.post.tx .fit{width:100%;font-family:var(--fd);line-height:.86;letter-spacing:.012em;
+  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 100}
+.post.tx.big .fit{line-height:.76}
+/* le bloc plein : les lignes touchent presque le bord, l'interligne
+   se ferme, et c'est le mot le plus court qui fait le plus gros corps */
+.post.tx.slab{padding:4.5%}
+.post.tx.slab .fit{line-height:.8;letter-spacing:0}
+/* le cadre "coin" : un mot enorme cale en bas a gauche, la mention
+   en petit en haut a droite. Le mot deborde en bas, c'est voulu. */
+.post.cn{position:relative}
+.post.cn b{position:absolute;left:5%;bottom:-6%;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;font-size:41cqw;line-height:.78;
+  font-weight:400;letter-spacing:-.03em}
+.post.cn i{position:absolute;right:6%;top:16%;font-style:normal;font-family:var(--fs);
+  font-size:4cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right}
 
-.post{container-type:inline-size}
-.huge{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  line-height:.74;letter-spacing:-.035em}
-/* 200 cqw: at this size the glyph is wider and taller than the 4:5
-   frame, so the format cuts it on all four sides. Below ~180 cqw it
-   merely fills the frame — which is not the same picture. */
-.post .cut{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:200cqw;z-index:2}
-.wall2{font-family:var(--fd);line-height:.76;letter-spacing:-.04em;font-size:27cqw;margin:auto 0}
-.wall2 span{display:block}
-.tiny{font-family:var(--fm);font-size:4.4cqw;letter-spacing:.2em;text-transform:uppercase}
-.post .half{position:absolute;inset:0 0 46% 0;overflow:hidden;z-index:1}
-.post .half img{width:100%;height:100%;object-fit:cover}
+/* le cadre "coin", emis partout mais montre seulement par le style D */
+.post .cnr{display:none}
+.post .cnr b{position:absolute;left:5%;bottom:-7%;font-family:var(--fd);
+  font-variation-settings:"wght" 1000,"FLAR" 0;font-size:40cqw;line-height:.78;
+  font-weight:400;letter-spacing:-.035em}
+.post .cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
+  font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;
+  max-width:46%}
 
-/* the tréma itself: two dots, nothing else — the name, drawn */
-.dots{display:flex;gap:7cqw;margin:auto}
-.dots i{display:block;width:5.6cqw;height:5.6cqw;border-radius:50%;background:currentColor}
+.post.tx .fit span{display:block;white-space:nowrap}
+/* le nom de la marque est un dessin, jamais une police (ch. 03) */
+.post.tx .fit .wm-line{display:block;padding:.06em 0}
+.post.tx .fit .wordmark{display:block;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
 
-/* ── THE PROOF — a figure, then the words that qualify it ───
-   Only the validated set of numbers is ever set this large. */
-.bignum{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:36cqw;line-height:.84;letter-spacing:-.035em;margin:auto 0}
 
-/* ── THE SECTIONS — the product's own vocabulary ────────────
-   The eight section types of a trema page, each with the icon
-   it carries in the editor. Icons are called as masks, so they
-   follow the polarity of the frame like every other picto. */
-.post .sections{display:grid;grid-template-columns:repeat(2,1fr);gap:5.5cqw 7cqw;margin:auto;width:86%}
-.post .sections div{display:grid;grid-template-columns:auto 1fr;gap:4cqw;align-items:center}
-.post .sections i{display:block;width:9cqw;aspect-ratio:1;background:currentColor;
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
-  -webkit-mask-size:contain;mask-size:contain}
-.post .sections b{font-family:var(--fm);font-size:3.8cqw;font-weight:400;letter-spacing:.13em;
-  text-transform:uppercase}
+/* ── QUATRE MISES EN PAGE ───────────────────────────────────
+   Memes photos, memes phrases, meme ordre. Seule la mise en page
+   des textes change : c'est donc bien elle qu'on compare.
+   Les boutons restent discrets — ce sont des reglages, pas une
+   navigation. */
+.tabs{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
+.tabs button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 0;opacity:.4;border-bottom:1.4px solid transparent;cursor:pointer}
+.tabs button:hover{opacity:.75}
+.tabs button.on{opacity:1;border-bottom-color:currentColor}
 
-/* ── THE BUTTON — the one interface element we show ────────*/
-.post .joinbtn{margin:auto;border:1.6px solid currentColor;border-radius:999px;
-  padding:3.6cqw 11cqw;font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:15cqw;line-height:1;text-transform:uppercase}
+/* B · le bloc — capitales pleines, blanc sur noir, bord a bord */
+.fx-b .post.tx{background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-b .post.tx .fit{line-height:.8;letter-spacing:0}
 
-/* ── FLUSH BOTH SIDES — the size is solved, not chosen ──────
-   Each line's font-size is the measure divided by that word's
-   advance in ems, so words of different lengths come out flush
-   on both edges. The sizes look arbitrary; they are the answer
-   to a division. Nothing can overflow the frame — which is the
-   whole point of setting it this way rather than guessing.
-   Measure is 82 cqw in flow (the 9% padding box) and 84 cqw for
-   the .abs variant. Re-measure if a word changes. */
-.fit{font-family:var(--fd);line-height:.78;letter-spacing:-.035em;
-  text-transform:uppercase;margin:auto 0}
-.fit span{display:block;white-space:nowrap}
-.post .fit.abs{position:absolute;left:8%;right:8%;margin:0;z-index:3}
+/* C · l'editorial — Light, beaucoup d'air, le texte ne crie pas */
+.fx-c .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
+.fx-c .post.tx .fit{font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:.02em}
 
-/* display set in Light: the long message lines carry the page */
-.defn{font-family:var(--fd);font-variation-settings:"wght" 300,"FLAR" 0;
-  line-height:1.04;letter-spacing:-.02em;margin:auto 0}
+/* D · typo — les deux affiches en alternance : le bloc de capitales,
+   puis le mot cale en bas a gauche avec sa mention en haut a droite */
+.fx-d .post.tx:nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-d .post.tx:nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+.fx-d .post.tx:nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
+.fx-d .post.tx:nth-of-type(4n+4) .fit{display:none}
+.fx-d .post.tx:nth-of-type(4n+4) .cnr{display:block}
 
-/* the captions — one line per post, the way they actually go out */
+/* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
 @media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.specs{grid-template-columns:1fr}}
@@ -254,14 +250,17 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <div class="part">Communication</div>
   <h1>Everything about<br>your place. One link.</h1>
 
-  <p>Twenty-four posts, eight rows. The feed is built on the message house and reads from the top: the
-  roof, then the three pillars — everything about your place always up to date, found everywhere, and
-  followers turning into regulars.</p>
+  <p>Forty-eight posts, sixteen rows: one photograph, one line, one photograph. The feed is built on the
+  message house and reads from the top — the roof, then the three pillars: everything about your place
+  always up to date, found everywhere, and followers turning into regulars.</p>
   <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
   online address of a place, that it is already built from what they publish on Instagram and Google Maps,
   and that it stays current on its own. Captions below, in the order they go out.</p>
 
-  <div class="feed" id="feed"></div>
+  <div class="tabs" id="tabs"></div>
+  <p class="mono dim" id="tabnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch"></p>
+
+  <div class="feed fx-a" id="feed"></div>
 
   <div class="specs" id="specs"></div>
 </section>
@@ -292,177 +291,38 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 </footer>
 
 
+<script src="feed.js"></script>
 <script>
 (() => {
 "use strict";
-const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-$$("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
 
-/* Twenty-seven posts — nine complete rows, built on the message
-   house: the roof, then the three pillars, then the proof, then
-   the call. `v` records the value, s dark and c light, so the
-   checkerboard can be checked by something other than the eye.
-   `c` is the caption that ships with the post. */
-const POSTS = [
-  /* ── row 1 · the roof ── */
-  {v:"s", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:44%;max-width:60px"><use href="#tm"/></svg></div>`,
-   s:`background:var(--noir);color:#fff`,
-   c:`Everything about your place. One link.`},
-  {v:"c", h:`<div class="fit">
-        <span style="font-size:12.6cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Everything</span>
-        <span style="font-size:12.3cqw;font-variation-settings:'wght' 1000,'FLAR' 100">about your</span>
-        <span style="font-size:23.7cqw;font-variation-settings:'wght' 1000,'FLAR' 100">place.</span>
-        <span style="font-size:17cqw;font-variation-settings:'wght' 1000,'FLAR' 100">One link.</span>
-      </div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`Every place has an address. trema is yours online.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="--br:.66">
-      <span class="wordmark wm" style="margin-top:auto"></span>`,
-   s:`color:#fff`,
-   c:`Purpose-built for physical places.`},
-
-  /* ── row 2 · pillar 1 · everything about your place ── */
-  {v:"c", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="--br:1.02;--sat:.82">
-      <div class="kw">
-        <div class="in"><img src="pics/image%20347-4.png" alt=""></div>
-        <svg viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet"><use href="#tm"/></svg>
-      </div>`,
-   s:`color:#fff;padding:0`,
-   c:`Your menu, photos, news, reviews and community — behind one link.`},
-  {v:"s", h:`<img class="bgimg" src="pics/cuisine.jpg" alt="" style="--br:.94;--sat:1.05">
-      <svg class="sym" viewBox="0 0 78 91" style="width:13%;margin-top:auto;opacity:.85"><use href="#tm"/></svg>`,
-   s:`color:#fff`,
-   c:`Made for places with a door, a kitchen and an opening time.`},
-  {v:"c", h:`<div class="sections">
-        <div><i style="-webkit-mask-image:url('picto/web/link.svg');mask-image:url('picto/web/link.svg')"></i><b>Link</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/post.svg');mask-image:url('picto/web/post.svg')"></i><b>Page</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/menu.svg');mask-image:url('picto/web/menu.svg')"></i><b>Menu</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/faq.svg');mask-image:url('picto/web/faq.svg')"></i><b>FAQ</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/gallery.svg');mask-image:url('picto/web/gallery.svg')"></i><b>Gallery</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/playlist.svg');mask-image:url('picto/web/playlist.svg')"></i><b>Playlist</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/reviews.svg');mask-image:url('picto/web/reviews.svg')"></i><b>Reviews</b></div>
-        <div><i style="-webkit-mask-image:url('picto/web/mentions.svg');mask-image:url('picto/web/mentions.svg')"></i><b>Mentions</b></div>
-      </div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`Link, Page, Menu, FAQ, Gallery, Playlist, Reviews, Mentions. Add the sections your place needs — menu and pricing, offers and events, photos from Instagram, your best reviews, the creators who talked about you, and the playlist that sets the mood.`},
-
-  /* ── row 3 · pillar 1 · always up to date ── */
-  {v:"s", h:`<div class="wall2">
-        <span style="font-variation-settings:'wght' 300,'FLAR' 100">TREMA</span>
-        <span style="font-variation-settings:'wght' 700,'FLAR' 100">TREMA</span>
-        <span style="font-variation-settings:'wght' 1000,'FLAR' 100">TREMA</span>
-      </div>`,
-   s:`background:var(--encre);color:var(--papier)`,
-   c:`trema, like your insta. Lowercase, and yours.`},
-  {v:"c", h:`<img class="bgimg" src="pics/still-life.png" alt="" style="--br:1.02">`,
-   s:`background:var(--lait);color:var(--encre);padding:0`,
-   c:`Born from what you already publish on Instagram and Google Maps.`},
-  {v:"s", h:`<div class="defn" style="font-size:15cqw;font-variation-settings:'wght' 1000,'FLAR' 100">Always<br>up to<br>date</div>
-      <div class="tiny" style="opacity:.6">INSTAGRAM + GOOGLE MAPS</div>`,
-   s:`background:var(--encre);color:var(--papier)`,
-   c:`Connected to Instagram and Google Maps — and kept current from the same sources.`},
-
-  /* ── row 4 · the page itself ── */
-  {v:"c", h:`<img src="pics/Union.png" alt="" style="position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;z-index:2">`,
-   s:`background:var(--papier);color:var(--encre);padding:0`,
-   c:`A page of your place, not a list of links.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-1.png" alt="" style="--br:.74">
-      <img src="pics/Pastor%20Benjamin..png" alt="Pastor Benjamin" style="width:64%;margin-top:auto;filter:invert(1)">
-      <div class="tiny" style="opacity:.7;margin-top:.9em">MENU · HOURS · PHOTOS · REVIEWS</div>`,
-   s:`color:#fff`,
-   c:`Pastor Benjamin. Everything about the place, on one link.`},
-  {v:"c", h:`<div class="dots"><i></i><i></i></div>
-      <div class="tiny" style="text-align:center;opacity:.4">TWO DOTS · THAT IS THE WHOLE IDEA</div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`Two dots over a letter change the way it is read. That is the whole idea, and the name.`},
-
-  /* ── row 5 · pillar 2 · found everywhere ── */
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347-4.png" alt="" style="--br:.72;--sat:.78">
-      <svg class="poster" viewBox="0 0 78 91" preserveAspectRatio="xMidYMid meet">
-        <use href="#tm" x="3.4" y="3.4" fill="#000"/><use href="#tm" fill="#fff"/>
-        <text class="pw" x="72" y="27" text-anchor="end">OPEN</text></svg>
-      <div class="qr qrplate"><img src="qr-trema.png" alt="QR code to trema.design">
-        <svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>`,
-   s:`color:#fff;padding:0`,
-   c:`News, an event, a special offer: publish it as a page of your place, in minutes.`},
-  {v:"c", h:`<div class="fit">
-        <span style="font-size:16.9cqw;font-variation-settings:'wght' 300,'FLAR' 0">Found by</span>
-        <span style="font-size:20.4cqw;font-variation-settings:'wght' 300,'FLAR' 0">Google</span>
-        <span style="font-size:22.2cqw;font-variation-settings:'wght' 300,'FLAR' 0">and AIs</span>
-      </div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`Built for search engines — and AI engines — by design.`},
-  {v:"s", h:`<img class="bgimg" src="pics/cocktail.jpg" alt="" style="--br:1;--sat:1.05">
-      <svg class="sym" viewBox="0 0 78 91" style="width:13%;margin-top:auto;opacity:.85"><use href="#tm"/></svg>`,
-   s:`color:#fff`,
-   c:`When someone asks an AI where to go tonight, your place has an answer.`},
-
-  /* ── row 6 · pillar 3 · from followers to regulars ── */
-  {v:"c", h:`<div class="fit">
-        <span style="font-size:29.3cqw;font-variation-settings:'wght' 300,'FLAR' 0">From</span>
-        <span style="font-size:14.1cqw;font-variation-settings:'wght' 300,'FLAR' 0">followers</span>
-        <span style="font-size:12.6cqw;font-variation-settings:'wght' 300,'FLAR' 0">to regulars</span>
-      </div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`From followers to regulars.`},
-  {v:"s", h:`<img class="bgimg" src="pics/image%20347.png" alt="" style="--br:.8;object-position:70% 40%">`,
-   s:`color:#fff;padding:0`,
-   c:`Instagram gives you reach. Your trema gives you regulars.`},
-  {v:"c", h:`<div class="joinbtn">Join</div>
-      <div class="tiny" style="text-align:center;opacity:.55">MEMBERS · POINTS · TIERS</div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`A Join button on your own page. Members, points, tiers.`},
-
-  /* ── row 7 · what it is not ── */
-  {v:"s", h:`<div class="cutmask"><img src="pics/image%20347-3.png" alt=""></div>`,
-   s:`background:var(--encre);color:var(--papier);padding:0`,
-   c:`No algorithm decides who sees your menu.`},
-  {v:"c", h:`<div class="defn" style="font-size:10cqw">A bio link<br>lists your<br>links.<br>Your trema<br>is the<br>destination.</div>`,
-   s:`background:var(--lait);color:var(--encre)`,
-   c:`A bio link lists your links. Your trema is the destination.`},
-  {v:"s", h:`<div class="defn" style="font-size:11cqw;font-variation-settings:'wght' 1000,'FLAR' 100">A website<br>is a project.<br>Your trema<br>is already<br>there.</div>`,
-   s:`background:var(--encre);color:var(--papier)`,
-   c:`A website is a project. Your trema is already there.`},
-
-  /* ── row 8 · the proof ── */
-  {v:"c", h:`<div class="bignum">380+</div>
-      <div class="tiny" style="opacity:.55">TREMAS PUBLISHED · HEADING TO 1,000+</div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`380+ tremas published, heading to 1,000+. Ten templates, signed by designers.`},
-  {v:"s", h:`<img class="bgimg" src="pics/brick-corner.png" alt="" style="--br:.6">
-      <div class="fit abs" style="top:9%">
-        <span style="font-size:19.2cqw;font-variation-settings:'wght' 300,'FLAR' 100">Already</span>
-        <span style="font-size:25cqw;font-variation-settings:'wght' 1000,'FLAR' 100">there</span>
-      </div>`,
-   s:`color:#fff;padding:0`,
-   c:`Start free. Your trema already exists.`},
-  /* ── row 8 · the close ──
-     Le sign-off passe en clair : sans les trois posts retires, il
-     tombe a cote de la photo de brique, et deux valeurs sombres ne
-     se touchent jamais. */
-  {v:"c", h:`<div class="ctr"><svg class="sym" viewBox="0 0 78 91" style="width:36cqw"><use href="#tm"/></svg>
-      <div class="tiny" style="opacity:.6;text-align:center;margin-top:1.5em">TRE.MA</div></div>`,
-   s:`background:var(--blanc);color:var(--encre)`,
-   c:`tre.ma`}
+const STYLES = [
+  {k:"a", t:"A · Message",     d:"GT Flaire en capitales, chaque ligne mise a la mesure exacte de la case. Encre et papier."},
+  {k:"b", t:"B · Le bloc",     d:"Capitales pleines, blanc sur noir, les lignes touchent les bords. Aucun repos."},
+  {k:"c", t:"C · L'editorial", d:"Light 300, beaucoup d'air. Ce sont les photos qui portent, les mots legendent."},
+  {k:"d", t:"D · Typo",        d:"Deux affiches en alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut a droite."},
 ];
+const feed = document.querySelector("#feed");
+const tabs = document.querySelector("#tabs");
+const note = document.querySelector("#tabnote");
+tabs.innerHTML = STYLES.map((s, i) => `<button data-k="${s.k}" class="${i ? "" : "on"}">${s.t}</button>`).join("");
+function show(k) {
+  feed.className = "feed fx-" + k;
+  note.textContent = STYLES.find(s => s.k === k).d;
+  tabs.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === k));
+  renderFeed(feed, "pics/feed");
+}
+tabs.addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.k); });
+show("a");
 
-$("#feed").innerHTML = POSTS.map((p, i) =>
-  `<div class="post" style="${p.s}"><span class="n">${String(i+1).padStart(2,"0")}</span>${p.h}</div>`).join("");
+document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
+  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");
 
-/* the captions, in the order they go out */
-$("#specs").innerHTML = POSTS.map((p, i) =>
-  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${p.c}</p></div>`).join("");
-
-/* checkerboard check: no neighbour of the same value, in the row or
-   in the column. Written to the console — if the grid ever breaks we
-   know about it without counting by hand. */
-const bad = [];
-POSTS.forEach((p, i) => {
-  const col = i % 3;
-  if (col < 2 && POSTS[i+1] && POSTS[i+1].v === p.v) bad.push(`${i+1}↔${i+2}`);
-  if (POSTS[i+3] && POSTS[i+3].v === p.v) bad.push(`${i+1}↕${i+4}`);
-});
-console.log(bad.length ? "Checkerboard broken: " + bad.join(", ") : "Checkerboard: no neighbour shares a value ✓");
+/* une photo, un texte : verifie plutot que suppose */
+const bad = TREMA_FEED.map((o, i) => (i % 2 === 0) === !!o.p ? null : i+1).filter(Boolean);
+console.log(bad.length ? "Alternance cassee aux posts " + bad.join(", ")
+                       : `Alternance : ${TREMA_FEED.length} posts, une photo puis un texte ✓`);
 })();
 </script>
 </body>

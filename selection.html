@@ -86,16 +86,6 @@ p + p{margin-top:.9em}
   font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
 .key b{font-weight:400;border-bottom:2px solid currentColor;padding-bottom:1px}
 
-/* ══ THE ALTERNATION ═══════════════════════════════════════ */
-.alt{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
-  border:var(--rule);max-width:470px}
-.cell{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg);container-type:inline-size}
-.cell img{width:100%;height:100%;object-fit:cover;filter:saturate(1.08)}
-.cell.txt{background:var(--encre);color:var(--papier);display:grid;place-items:center;padding:9%}
-.cell.txt.pap{background:var(--blanc);color:var(--encre)}
-.cell.txt span{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
-  font-size:13cqw;line-height:.88;text-transform:uppercase;letter-spacing:-.03em;text-align:center}
-
 footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule)}
 </style>
 </head>
@@ -133,17 +123,6 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule)}
 </section>
 
 
-<!-- ═════ THE ALTERNATION ═════ -->
-<section class="l">
-  <h2>Photo, text, photo</h2>
-  <p style="margin-bottom:clamp(24px,3vw,44px)">Once the picks are settled, this is how they merge into
-  the feed: one photograph, one line, one photograph. The pictures carry the place, the texts carry the
-  message, and neither has to do the other's job. Twelve of each make twenty-four — eight complete rows,
-  the length the feed is already at.</p>
-  <div class="alt" id="alt"></div>
-  <p class="mono dim" style="margin-top:14px">Shown with the first six picks. Change the picks and this
-  changes with them.</p>
-</section>
 
 
 <footer>
@@ -205,6 +184,35 @@ const BANK = [
   {f:"36-lattice-shadow",t:"The lattice",        k:"Pro 2K",   s:"",    d:"A timber screen throwing its grid across raw concrete. Light only."},
   {f:"37-journal-titre", t:"The front page",     k:"Pro 2K",   s:"",    d:"The roof line held out of the sea. The headline is rendered, not composited."},
   {f:"38-journal-vierge",t:"Front page, blank",  k:"Pro 2K",   s:"",    d:"Same frame, empty newsprint — to set our own headline in GT Flaire."},
+
+  /* ── ajouts suivants ── */
+  {f:"39-journal-trema",      t:"The front page, TREMA", k:"Pro 2K",    s:"out",   d:"Le titre est compose en typo, pas au logotype. Remplace par la 43."},
+  {f:"42-bar-palette",        t:"Bar, pale wood",        k:"Pro 2K",    s:"",      d:"Chevrons en bois de palette clair, meuble coule en beton. Remplace la 14."},
+  {f:"43-journal-logo",       t:"The front page, logo",  k:"Composite", s:"",      d:"Journal vierge + notre vrai logotype, deforme en perspective."},
+  {f:"44-journal-plateau2",   t:"Front page, tray",      k:"Pro 2K",    s:"",      d:"Plateau rond blanc, expresso, lumiere de fin de journee."},
+  {f:"46-cocktail-2",         t:"Cocktail, two glasses", k:"Pro 2K",    s:"",      d:"Highball et rocks sous les taches de soleil. Remplace la 8."},
+  {f:"47-conceptstore-2",     t:"Concept store, raw",    k:"Pro 2K",    s:"",      d:"Repris moins lisse : main levee, flou, bazar laisse en place."},
+  {f:"48-cup-coffee",         t:"The cup, coffee",       k:"Pro 2K",    s:"in",    d:"Filet de cafe au lieu du fil de the. Feed post 13."},
+  {f:"49-beet-soup",          t:"Beetroot, magenta",     k:"Pro 2K",    s:"",      d:"Vue du dessus, spirale de creme, table a lattes blanches."},
+  {f:"50-green-pasta",        t:"Green pasta",           k:"Pro 2K",    s:"",      d:"Assiette bleue a motif sur lames de bois peintes."},
+  {f:"51-daisies",            t:"Daisies, steel",        k:"Pro 2K",    s:"",      d:"Bocal de paquerettes sur inox, eau autour."},
+  {f:"52-red-panel",          t:"Red panel",             k:"Pro 2K",    s:"",      d:"Bois rouge perfore, barre de laiton."},
+  {f:"53-cobalt-latte",       t:"Latte, cobalt",         k:"Pro 2K",    s:"",      d:"Vue du dessus sur carrelage bleu."},
+  {f:"54-ring-yellow",        t:"Ring, yellow",          k:"Pro 2K",    s:"",      d:"Chevaliere dans un bloc d'acrylique citron."},
+  {f:"55-earrings-pink",      t:"Earrings, pink",        k:"Pro 2K",    s:"",      d:"Boucles suspendues a une plaque de plexi rose."},
+  {f:"56-plate-stack",        t:"Plate stack",           k:"Pro 2K",    s:"",      d:"Pile d'assiettes en couleurs melangees."},
+  {f:"57-citrus",             t:"Citrus, turquoise",     k:"Pro 2K",    s:"",      d:"Agrumes en eventail sur turquoise."},
+  {f:"58-espresso-red",       t:"Espresso, chrome",      k:"Pro 2K",    s:"",      d:"Chrome et mur vermillon."},
+  {f:"59-necklace",           t:"Necklace, cobalt",      k:"Pro 2K",    s:"",      d:"Chaine sur demi-cylindre de terre cuite."},
+  {f:"60-sorbet",             t:"Sorbet",                k:"Pro 2K",    s:"",      d:"Trois boules dans un plat inox sur lilas."},
+  {f:"61-rings-risers",       t:"Rings, risers",         k:"Pro 2K",    s:"",      d:"Bagues sur presentoirs acryliques colores."},
+  {f:"62-pea-soup",           t:"Pea soup",              k:"Pro 2K",    s:"",      d:"Vert vif sur aplat orange."},
+  {f:"63-flower-bucket",      t:"Flower bucket",         k:"Pro 2K",    s:"",      d:"Tulipes sur trottoir gris."},
+  {f:"70-creole-turquoise",   t:"Creole, turquoise",     k:"Pro 2K",    s:"",      d:"Mangue, menthe, roquette, oignon rouge. Table turquoise, lumiere rayee."},
+  {f:"71-creole-vermillon",   t:"Creole, vermilion",     k:"Pro 2K",    s:"",      d:"La meme sur table vermillon, pour comparer."},
+  {f:"73-ombre-rideau",       t:"The shadow",            k:"Composite", s:"",      d:"L'enseigne qui n'existe que par son ombre. Vrai logotype projete."},
+  {f:"75-tomates-bocal",      t:"Tomatoes, jar",         k:"Pro 2K",    s:"",      d:"Tomates confites en bocal sur beton, vue du dessus."},
+  {f:"76-tomates-plateau",    t:"Tomatoes, tray",        k:"Pro 2K",    s:"",      d:"Sortie du four, plaque inox sur beton."},
 ];
 
 const LABEL = {in:"In the feed", out:"Set aside", "":"Free"};
@@ -219,15 +227,6 @@ $("#bank").innerHTML = BANK.map((b, i) => `
     <div class="cap">${b.t}<span class="src">${b.d} · ${b.k}</span></div>
   </div>`).join("");
 
-/* L'alternance, montee sur les six premieres. Les lignes viennent
-   de la message house — ce sont celles qui portent deja le feed. */
-const PICKS = [0, 1, 2, 3, 4, 5];
-const LINES = ["One link", "Always up to date", "Found everywhere",
-               "From followers to regulars", "No algorithm", "tre.ma"];
-
-$("#alt").innerHTML = PICKS.map((p, i) =>
-  `<div class="cell"><img src="pics/bank/${BANK[p].f}.jpg" alt="" loading="lazy"></div>
-   <div class="cell txt${i % 2 ? " pap" : ""}"><span>${LINES[i]}</span></div>`).join("");
 })();
 </script>
 </body>
