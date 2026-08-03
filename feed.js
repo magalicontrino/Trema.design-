@@ -84,9 +84,9 @@ window.TREMA_FEED = [
   /* "La decouverte", posee telle quelle depuis la page Titre : les
      segments alternent capitales grasses et italique bas-de-casse.
      `ti` decrit les lignes, `s:"up"/"it"` le style de chaque segment. */
-  {ti:[ [{t:"Found",s:"up"},{t:"by",s:"it"}],
-        [{t:"Google",s:"up"}],
-        [{t:"and",s:"it"},{t:"AIs.",s:"up"}] ], s:"w",
+  /* Le titre compose n'est pas valide : les deux piliers passent au
+     drapeau, qui l'est. Capitales, un seul corps, bord droit libre. */
+  {t:["Found by","Google","and AIs."], s:"w", rag:1,
    c:"Built for search engines — and AI engines — by design."},
   {p:"22-plate",          c:"Ask an AI where to go tonight."},
   {t:["Your place","has an","answer"], s:"l",
@@ -95,9 +95,7 @@ window.TREMA_FEED = [
   /* ── 5 · ce que ca change ── */
   {p:"36-lattice-shadow", c:"Reach is not the same as regulars."},
   /* "Les habitues", le titre de la page Titre, dans le feed. */
-  {ti:[ [{t:"From",s:"up"}],
-        [{t:"followers to",s:"it"}],
-        [{t:"Regulars.",s:"up"}] ], s:"e",
+  {t:["From","followers to","Regulars."], s:"e", rag:1,
    c:"Instagram gives you reach. Your trema gives you regulars."},
   {p:"05-cocktail",       c:"Members, points, tiers."},
   {t:["A Join button","on your","own page"], s:"w",

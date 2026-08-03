@@ -390,13 +390,13 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    Pour le titre compose, une ligne est une suite de segments qui
    alternent capitales et italique — c'est la seule qui en ait besoin. */
 const COMPOS = [
-  {nom:"Le bloc", k:"k", s:"", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
+  {nom:"Le bloc", k:"k", s:"in", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
    t:["Every place","has an","address"]},
 
   {nom:"Le bloc clair", k:"w", s:"", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
    t:["Nothing","to build.","Nothing to","maintain."]},
 
-  {nom:"Le mot seul", k:"e big", s:"", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
+  {nom:"Le mot seul", k:"e big", s:"in", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
    t:["One","link"], wm:true},
 
   /* Cinq lignes, la structure exacte de la reference : capitale seule,
@@ -413,10 +413,10 @@ const COMPOS = [
   {nom:"Le coin", k:"w coin", s:"in", d:"Le mot pose en bas a gauche, sa mention en haut a droite. Le vide au milieu fait tout le travail. Rare, sinon il s'use.",
    mot:"Yours.", note:"A BIO LINK LISTS LINKS. YOURS IS THE DESTINATION"},
 
-  {nom:"Le signe", k:"k sgn", s:"", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
+  {nom:"Le signe", k:"k sgn", s:"in", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
    t:[]},
 
-  {nom:"Le chiffre", k:"k num", s:"", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
+  {nom:"Le chiffre", k:"k num", s:"in", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
    t:["380+"], wm:true},
 
   {nom:"Checklist", k:"w liste", s:"", d:"Elle coche toutes les cases, au sens propre. Des cases nues et petites, sur papier : c'est la liste qui parle. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
@@ -429,7 +429,7 @@ const COMPOS = [
    pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Post"],["link","Link"]]},
 
-  {nom:"La signature", k:"e sign", s:"", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
+  {nom:"La signature", k:"e sign", s:"in", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true},
 ];
 
