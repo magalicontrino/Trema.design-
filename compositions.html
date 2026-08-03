@@ -249,6 +249,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
    Le nom est au-dessus, l'usage en dessous. C'est le nom qui compte :
    c'est lui qui devient le vocabulaire. */
+main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
 .compos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:clamp(26px,3.4vw,52px) var(--gut);margin-top:clamp(24px,3vw,44px)}
 .compo .nom{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
@@ -428,8 +429,8 @@ const COMPOS = [
    pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Post"],["link","Link"]]},
 
-  {nom:"La signature", k:"e sign", s:"", d:"Le logotype seul, centre, avec une mention discrete. Pour fermer une serie, ou ouvrir un compte.",
-   wmSeul:true, sous:"Nowhere & everywhere"},
+  {nom:"La signature", k:"e sign", s:"", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
+   wmSeul:true},
 ];
 
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -444,7 +445,7 @@ hote.innerHTML = COMPOS.map((c,i)=>{
   } else if (c.mot) {
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.wmSeul) {
-    dedans = `<i class="wm"></i><em>${esc(c.sous)}</em>`;
+    dedans = `<i class="wm"></i>`;
   } else if (c.k.includes("sgn")) {
     dedans = `<i></i><u>tre.ma/</u>`;
   } else if (c.pictos) {
