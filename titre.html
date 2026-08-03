@@ -374,6 +374,136 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    rond — parce que trois rectangles se liraient comme un tableau.
    Le texte reste a l'encre sur les trois : sur ces aplats clairs, du
    blanc ne passerait pas le contraste. */
+.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
+  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
+.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
+.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
+.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
+  color:inherit;opacity:.45}
+.fontes button:hover{opacity:.75}
+.fontes button.on{opacity:1;border-bottom-color:currentColor}
+
+
+
+/* ── LE TITRE ─────────────────────────────────────────────────
+   Chaque ligne remplit exactement la mesure. Ce qui la remplit,
+   ce sont des segments qui alternent capitales grasses et
+   bas-de-casse italique, poses bord a bord sans espace de mot.
+
+   La subtilite est ailleurs : une italique bas-de-casse a une
+   hauteur d'x bien plus basse qu'une capitale. Composee au meme
+   corps, elle parait deux fois plus petite. Chaque segment porte
+   donc son propre rapport, et c'est la ligne entiere qu'on met a
+   la mesure — les rapports internes ne bougent pas. */
+/* La mesure de relecture n'est pas celle de l'affiche : a pleine
+   largeur les titres sont trop gros pour qu'on les compare. On les
+   ramene a une colonne etroite et on aere entre eux. La composition
+   ne change pas — tout est relatif a la mesure, seule l'echelle bouge. */
+/* Le blanc autour compte autant que la composition : dans la
+   reference le bloc occupe a peine la moitie du cadre. On le pose en
+   marges et en gouttiere, jamais en padding sur .titre — clientWidth
+   inclut le padding, et la mesure des lignes deborderait dedans. */
+main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
+.titre{position:relative;max-width:min(100%,620px);
+  margin:clamp(26px,3.5vw,44px) 0 clamp(76px,10vw,150px)}
+/* LE CONTOUR BLANC — c'est lui, le truc de la reference.
+   Les lignes ne se touchent pas : elles se CHEVAUCHENT. Les
+   ascendantes de l'italique montent dans la ligne du dessus, les
+   descendantes tombent dans celle du dessous. Sans rien, ca ferait
+   une bouillie de noir.
+
+   Chaque lettre porte donc un contour de la couleur du fond, peint
+   DERRIERE le remplissage — c'est ce que fait paint-order. Le dessin
+   de la lettre n'est pas touche, elle gagne juste un halo exterieur
+   qui la decolle de ce qu'il y a dessous. Et comme une ligne ecrite
+   plus bas est peinte par-dessus, l'ordre du chevauchement se lit
+   tout seul.
+
+   Le contour est en em : il suit le corps de chaque segment, sinon il
+   ecraserait les petits et disparaitrait sur les grands. */
+/* L'INTERLIGNE, mesure sur la reference.
+   Trois essais avant de tomber juste. A 0.70 les capitales se
+   touchaient. A 1.06 — la valeur lue sur la reference — le bloc
+   s'ouvrait en trous : parce que la reference a des lignes de
+   longueur voisine, alors que la notre alterne "EVERYTHING" et
+   "about", et qu'a corps egal la ligne courte laisse beaucoup de
+   blanc autour d'elle.
+   0.80 apres reglage a l'oeil : la hauteur de capitale vaut 0.727 du
+   corps, il ne reste donc que 0.07 de blanc entre deux lignes de
+   capitales. Elles se frolent sans se toucher, et les ascendantes de
+   l'italique passent par-dessus — c'est le contour blanc qui les
+   rend lisibles a cet endroit. En dessous de 0.75 les capitales se
+   soudent et le contour ne suffit plus. */
+.ligne{display:flex;align-items:baseline;width:max-content;white-space:nowrap;
+  font-family:var(--fd);line-height:.80}
+/* Le contour n'est QUE sur l'italique, et c'est elle qui passe devant.
+   Les capitales n'ont rien a se detacher : elles sont posees sur le
+   fond. C'est l'italique qui traverse, donc c'est elle qui a besoin
+   d'un halo pour ne pas se souder au noir qu'elle croise.
+
+   L'ordre de peinture ne peut pas venir de l'ordre du document : une
+   ligne ecrite plus bas passerait par-dessus l'italique de la ligne
+   precedente. On le pose donc explicitement. Ni .ligne ni .titre ne
+   fixent de z-index, sinon ils creeraient un contexte d'empilement et
+   les segments ne se compareraient plus qu'entre voisins de la meme
+   ligne. */
+/* Le contour est sur TOUS les segments, pas seulement l'italique : deux
+   lignes de capitales qui se croisent se soudent aussi. Il ne se voit
+   que la ou il y a collision — ailleurs il ne change rien, puisqu'il
+   est de la couleur du fond.
+   Ce qui reste specifique a l'italique, c'est le plan : elle passe
+   au-dessus. Les capitales, entre elles, s'empilent dans l'ordre du
+   document — une ligne ecrite plus bas passe sur celle du dessus. */
+.seg{position:relative;z-index:1;
+  -webkit-text-stroke:.055em var(--bg);paint-order:stroke fill}
+.seg.it{z-index:2}
+/* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
+   Dans la reference l'italique recule sur le mot qui la precede — le
+   m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
+   IS. La marge est donc negative, et c'est le contour qui rend le
+   chevauchement lisible.
+   Elle est en em, donc relative au corps du segment qui recule : un
+   petit segment se rentre moins qu'un grand, ce qui est juste.
+   La mise a la mesure n'en souffre pas : on mesure la largeur rendue
+   de la ligne entiere, recouvrement compris. */
+.seg + .seg{margin-left:-.06em}
+.ligne + .ligne{margin-top:.02em}
+.seg{display:block}
+/* Deux fontes, pas une. La reference ne compose pas ses capitales et
+   ses bas-de-casse dans la meme famille : une grotesque noire d'un
+   cote, une Garamond italique de l'autre. C'est ce contraste qui fait
+   la composition, pas la fonte elle-meme.
+   L'interlettrage vient avec : -4% sur les capitales, -3% sur
+   l'italique. Il est negatif parce qu'a cette taille les lettres
+   doivent se toucher — jamais en dessous de 20 px de corps. */
+.seg.up{text-transform:uppercase;font-family:var(--fd-up);
+  font-variation-settings:var(--ax-up);letter-spacing:-.04em}
+.seg.it{font-family:var(--fd-it);font-style:italic;
+  font-weight:var(--po-it,600);letter-spacing:-.03em}
+
+/* Les trois candidates ne pilotent que les capitales : l'italique
+   reste la Garamond dans les trois cas, c'est elle le second texte. */
+.ft-inter    {--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
+              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
+/* Apple Garamond est plus legere et plus etroite qu'EB Garamond.
+   Cormorant en est le plus proche des libres — c'est la variante a
+   regarder si c'est vraiment ce dessin-la que tu veux. */
+.ft-cormorant{--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
+              --fd-it:"Cormorant Garamond",Garamond,serif; --po-it:600}
+.ft-bricolage{--fd-up:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+              --ax-up:"opsz" 96,"wdth" 100,"wght" 800;
+              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
+
+/* Les mentions prennent la couleur, comme dans la reference. C'est le
+   seul endroit du systeme qui en porte : la typographie reste noire,
+   les photos gardent la leur, et ces trois pastilles font la
+   respiration. Trois formes differentes aussi — hexagone, rectangle,
+   rond — parce que trois rectangles se liraient comme un tableau.
+   Le texte reste a l'encre sur les trois : sur ces aplats clairs, du
+   blanc ne passerait pas le contraste. */
 /* Plus de pastille : le picto seul, en grand et en couleur pop, pose
    directement sur le papier.
 
@@ -386,15 +516,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
    Le nom reste dessous, petit et a l'encre : a 9 px il lui faut 4.5
    de contraste, il est a 11.4. */
-.note{position:absolute;z-index:4;display:grid;justify-items:center;gap:9px;
-  font-family:var(--fm);font-size:clamp(8px,.68vw,10px);line-height:1.3;
-  letter-spacing:.05em;text-transform:uppercase;color:var(--encre)}
-.note .pic{display:block;width:clamp(64px,8.6vw,124px);height:clamp(64px,8.6vw,124px);
-  background:var(--pc);
-  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
-.note.a{--pc:#E8590C}
-.note.b{--pc:#1B44E0}
-.note.c{--pc:#D6246E}
 
 .quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,5vw,72px)}
 .quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
@@ -404,7 +525,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
 .quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
-.quatre .note{display:none}
+
 </style>
 </head>
 <body>
@@ -497,14 +618,6 @@ const TITRES = [
   ]},
 ];
 const LIGNES = TITRES[0].l;
-/* Les pictos de la maison en decoration, chacun avec son nom dessous.
-   Trois formes differentes — hexagone, rectangle, rond — parce que
-   trois rectangles se liraient comme un tableau. */
-const NOTES = [
-  {p:"menu",    t:"Menu",    c:"a", st:"top:-9%;right:4%;transform:rotate(-5deg)"},
-  {p:"gallery", t:"Gallery", c:"b", st:"top:29%;right:8%;transform:rotate(4deg)"},
-  {p:"reviews", t:"Reviews", c:"c", st:"bottom:-17%;left:6%;transform:rotate(-7deg)"},
-];
 /* Ce qui change d'un bouton a l'autre, c'est le texte 1 seulement.
    Le texte 2 — la Garamond italique a -3% — ne bouge pas : c'est la
    constante de la composition. */
@@ -525,14 +638,14 @@ const un=document.querySelector("#un"), quatre=document.querySelector("#quatre")
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
   + `<button data-k="tout">Les trois</button>`;
 
+/* La composition seule. Les mentions decoratives sont retirees : le
+   bloc se tient tout seul, et c'est plus juste — la reference les
+   utilise pour meubler un carre, nous avons une page. */
 const dessine = (avecNotes, lignes=LIGNES) =>
   `<div class="titre">` +
   lignes.map(l=>`<div class="ligne" data-w="${l.w}">` +
     l.g.map(g=>`<span class="seg ${g.s}" data-r="${g.r||1}">${g.t}</span>`).join("") +
     `</div>`).join("") +
-  (avecNotes ? NOTES.map(n=>
-    `<div class="note ${n.c}" style="${n.st};--p:url('picto/web/${n.p}.svg')">`
-    + `<i class="pic"></i><span>${n.t}</span></div>`).join("") : "") +
   `</div>`;
 
 /* Mise a la mesure : on pose un corps de sonde, on lit la largeur reelle
@@ -584,8 +697,8 @@ const charge = k => Promise.all([
 function fonte(k){
   quatre.hidden=true; quatre.innerHTML=""; un.hidden=false;
   un.className="ft-"+k;
-  un.innerHTML = TITRES.map((t,i)=>
-    `<h4 class="titnom">${t.n}</h4>` + dessine(i===0, t.l)).join("");
+  un.innerHTML = TITRES.map(t=>
+    `<h4 class="titnom">${t.n}</h4>` + dessine(false, t.l)).join("");
   fnote.textContent=FONTES.find(f=>f.k===k).d;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
   charge(k).then(()=>fitTitre(un));
