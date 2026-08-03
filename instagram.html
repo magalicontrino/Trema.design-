@@ -190,7 +190,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-creatif .post.t-edge .sig,.fx-creatif .post.t-bleed .sig,
 .fx-creatif .post.t-pat1 .sig,.fx-creatif .post.t-pat2 .sig{display:none}
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
-.fx-typo .post.tx:nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
 /* ── LES PHOTOS PARTICIPENT AUSSI ───────────────────────────
@@ -244,8 +244,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre-signe : le picto seul, coupe par le format, dans tous
    les styles. Il ne passe pas par la rotation du creatif — il est
    ecrit dans le feed, donc il tient aussi en Typo. */
-.post.tx.sgn{padding:0;overflow:hidden}
-.post.tx.sgn .edge{display:block}
+.feed .post.tx.sgn{padding:0!important;overflow:hidden;
+  background:var(--noir)!important;color:#fff!important}
+/* il sort du cadre des deux cotes : le signe fait 111 % de la largeur,
+   on le centre pour qu'il morde a gauche comme a droite plutot que de
+   laisser un liser d'un seul cote. */
+.feed .post.tx.sgn .edge{display:block;left:-6%}
 
 /* ── le drapeau ────────────────────────────────────────────
    Une seule taille pour tout le bloc : c'est la ligne la plus
@@ -335,11 +339,11 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 /* D · typo — les deux affiches en alternance : le bloc de capitales,
    puis le mot cale en bas a gauche avec sa mention en haut a droite */
-.fx-typo .post.tx:nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
-.fx-typo .post.tx:nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
-.fx-typo .post.tx:nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
-.fx-typo .post.tx:nth-of-type(4n+4) .fit{display:none}
-.fx-typo .post.tx:nth-of-type(4n+4) .cnr{display:block}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2){background:var(--noir)!important;color:#fff!important;padding:4.5%}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+2) .fit{line-height:.8;letter-spacing:0}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4){background:#F2F1EF!important;color:#1E1E1E!important;padding:0}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
+.fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
 
 /* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
