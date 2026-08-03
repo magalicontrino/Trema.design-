@@ -416,7 +416,7 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    ait a voiler l'image. */
 .cadre.cli{padding:0;place-items:stretch}
 .cadre.cli img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cadre.cli .ov{position:absolute;left:7%;right:7%;top:7%;z-index:2;color:var(--encre)}
+.cadre.cli .ov{position:absolute;left:9%;right:9%;top:9%;z-index:2;color:var(--encre)}
 /* Le nom de la marque est un DESSIN, jamais une police — la regle du
    chapitre 03 vaut aussi dans une adresse. On compose donc
    « [logotype] / handle » : le logotype pose en em du meme corps que le
@@ -425,11 +425,16 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    carte, et c'est lui qui separe la marque du lieu. */
 .cadre.cli b{display:block;width:max-content;white-space:nowrap;font-family:var(--fd);
   font-variation-settings:"wght" 900;line-height:.95;letter-spacing:-.035em}
-.cadre.cli b .wordmark{display:inline-block;vertical-align:baseline;width:2.9em;height:.72em;
-  background:currentColor;-webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-.cadre.cli b .bar{display:inline-block;vertical-align:baseline;width:.42em;height:.86em;
-  margin:0 .12em -.02em;text-decoration:none;background:#fff;
+/* Le PICTO, pas le logotype. Le mot dessine ressemblait a de la typo a
+   cette taille, et on lisait « trema » comme un mot de plus dans
+   l'adresse ; le signe, lui, ne peut pas etre confondu avec du texte.
+   Son rapport est 78 x 91, plus haut que large : c'est la hauteur qui
+   commande et la largeur qui suit, sinon il s'ecrase. */
+.cadre.cli b .pic{display:inline-block;vertical-align:baseline;height:.84em;aspect-ratio:78/91;
+  background:currentColor;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+.cadre.cli b .bar{display:inline-block;vertical-align:baseline;width:.34em;height:.86em;
+  margin:0 .16em -.02em;text-decoration:none;background:#fff;
   clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
 .cadre.cli b em{font-style:normal}
 
@@ -679,7 +684,7 @@ hote.innerHTML = COMPOS.map((c,i)=>{
        en coin, il la decoupe, ou le nom du lieu se pose dessus. */
     dedans = `<img src="pics/bank/${c.ph}.jpg" alt="">`
            + (c.k.includes("phc") ? `<i></i>` : "")
-           + (c.mot ? `<div class="ov"><b><i class="wordmark"></i><u class="bar"></u><em>${esc(c.mot)}</em></b></div>` : "");
+           + (c.mot ? `<div class="ov"><b><i class="pic"></i><u class="bar"></u><em>${esc(c.mot)}</em></b></div>` : "");
   } else if (c.mot) {
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.k.includes("sgn")) {
@@ -767,7 +772,10 @@ function ajuste(){
        non celle du texte, et le corps retomberait a rien. */
     const b = cadre.querySelector("b");
     if (b) {
-      const box = cadre.clientWidth*0.92;
+      /* La carte de lieu ne remplit pas la mesure comme le Coin : elle
+         s'arrete a 80 %, et c'est cet air a droite qui la fait lire
+         comme une adresse posee plutot que comme un titre coince. */
+      const box = cadre.clientWidth * (cadre.classList.contains("cli") ? 0.80 : 0.92);
       b.style.fontSize="10px";
       const w=b.scrollWidth;
       if (w) b.style.fontSize=(10*box/w)+"px";

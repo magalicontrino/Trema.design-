@@ -252,14 +252,19 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* La carte de lieu : l'adresse du client, seule, composee comme un
    titre. Le nom et le logotype en sont sortis — poses en petit sur une
    photo ils ne se voyaient pas. C'est l'adresse le produit. */
-.post.ph.cli .ov{position:absolute;left:7%;right:7%;top:7%;z-index:2;color:var(--encre)}
+.post.ph.cli .ov{position:absolute;left:9%;right:9%;top:9%;z-index:2;color:var(--encre)}
 .post.ph.cli b{display:block;width:max-content;white-space:nowrap;font-family:var(--fd);
   font-variation-settings:"wght" 900;line-height:.95;letter-spacing:-.035em}
-.post.ph.cli b .wordmark{display:inline-block;vertical-align:baseline;width:2.9em;height:.72em;
-  background:currentColor;-webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-.post.ph.cli b .bar{display:inline-block;vertical-align:baseline;width:.42em;height:.86em;
-  margin:0 .12em -.02em;text-decoration:none;background:#fff;
+/* Le PICTO, pas le logotype. Le mot dessine ressemblait a de la typo a
+   cette taille, et on lisait « trema » comme un mot de plus dans
+   l'adresse ; le signe, lui, ne peut pas etre confondu avec du texte.
+   Son rapport est 78 x 91, plus haut que large : c'est la hauteur qui
+   commande et la largeur qui suit, sinon il s'ecrase. */
+.post.ph.cli b .pic{display:inline-block;vertical-align:baseline;height:.84em;aspect-ratio:78/91;
+  background:currentColor;-webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+.post.ph.cli b .bar{display:inline-block;vertical-align:baseline;width:.34em;height:.86em;
+  margin:0 .16em -.02em;text-decoration:none;background:#fff;
   clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
 .post.ph.cli b em{font-style:normal}
 

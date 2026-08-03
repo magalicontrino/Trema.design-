@@ -196,7 +196,7 @@ window.renderFeed = function (host, dir, small) {
          cas le plus frequent, et il doit le rester. */
       const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "") + (o.mot ? " cli" : "");
       const nom = o.mot
-        ? `<div class="ov"><b><i class="wordmark"></i><u class="bar"></u><em>${o.mot}</em></b></div>` : "";
+        ? `<div class="ov"><b><i class="pic"></i><u class="bar"></u><em>${o.mot}</em></b></div>` : "";
       return `<div class="post ph${mode}">${n}
         <img src="${dir}/${o.p}.jpg" alt="" loading="lazy">${nom}</div>`;
     }
@@ -374,7 +374,7 @@ function fitAll(host) {
      change a chaque lieu, et c'est elle qui doit remplir la ligne. */
   host.querySelectorAll(".post.ph.cli b").forEach(b => {
     const cell = b.closest(".post");
-    const box = cell ? cell.clientWidth * 0.86 : 0;
+    const box = cell ? cell.clientWidth * 0.78 : 0;
     if (box) mesure(b, box);
   });
 
