@@ -16,7 +16,7 @@
 
 :root{
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
-  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#141414;
   --bg:var(--papier); --fg:var(--encre);
   --fd:"Inter","Helvetica Neue",Arial,sans-serif;
   --fd-it:"EB Garamond",Garamond,serif;
@@ -289,8 +289,12 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
 .cadre.ti .bloc .seg + .seg{margin-left:-.06em}
 .cadre.ti .bloc .seg.up{text-transform:uppercase;font-variation-settings:"wght" 900;
   letter-spacing:-.04em}
+/* L'italique est composee plus grande que la capitale pour paraitre de
+   la meme taille, et son interligne doit donc etre repris a la baisse :
+   sinon elle ouvre un blanc que la capitale n'ouvre pas, et le bloc
+   respire par a-coups. */
 .cadre.ti .bloc .seg.it{z-index:2;font-family:"Cormorant Garamond",Garamond,serif;font-style:italic;
-  font-weight:600;letter-spacing:-.03em;text-transform:none;line-height:.66}
+  font-weight:600;letter-spacing:-.03em;text-transform:none;line-height:.58}
 
 /* 05 le drapeau : capitales, un seul corps, cale a gauche, le bord
    droit irregulier. */
@@ -316,6 +320,60 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
   height:132%;aspect-ratio:78/91;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
 
+/* ── Quatre variations sur le signe. Le dessin ne change jamais : ce
+   qui change, c'est sa taille et ce qu'on met a cote. C'est tout le
+   sujet — un signe se regle, il ne se redessine pas. ── */
+
+/* 08b entier : le meme dessin, mais contenu. On le voit en entier, il
+   ne mord plus le format. Plus lisible, moins brutal. */
+.cadre.sgn.ent i{height:76%}
+.cadre.sgn.ent u{font-size:7cqw}
+
+/* 08c centre : petit, cale au milieu, le nom dessous en monospace tres
+   espace. Le signe ne remplit plus rien, il signe. Le nom est en
+   retrait : il nomme, il ne crie pas. Le text-indent rattrape
+   l'interlettrage, qui sinon pousse le mot vers la gauche. */
+.cadre.sgn.ctr i{left:50%;top:41%;transform:translate(-50%,-50%);height:19%}
+.cadre.sgn.ctr u{left:0;right:0;top:56%;bottom:auto;text-align:center;
+  font-family:var(--fm);font-variation-settings:normal;font-weight:400;
+  font-size:6.2cqw;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;
+  color:currentColor;mix-blend-mode:normal;opacity:.72}
+
+/* 08c-bis le signe et le logotype : le picto au-dessus, le nom dessous,
+   et les deux sont des DESSINS — le nom de la marque ne se compose
+   jamais, meme en monospace tres espace. C'est la difference avec la
+   carte precedente : celle-la ecrivait l'adresse, celle-ci pose la
+   marque. */
+.cadre.sgn.duo i{left:50%;top:39%;transform:translate(-50%,-50%);height:27%}
+.cadre.sgn.duo .wm{position:absolute;left:50%;top:62%;transform:translateX(-50%);
+  width:42%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.cadre.sgn.duo u{display:none}
+
+/* 08d le masque : le signe en blanc, plein, sur le noir — et la phrase
+   posee en travers, en difference. Elle ne porte donc aucune couleur a
+   elle : sur le signe elle se creuse en noir, sur le fond elle ressort
+   en blanc, et elle change au milieu d'un mot. Le texte n'est pas ecrit
+   sur le signe, il est evide dedans.
+
+   C'est pour ca qu'il faut un signe enorme : sous 170 % le trait passe
+   trop peu souvent sous la phrase, et l'inversion ne se lit plus comme
+   un effet mais comme un defaut. */
+.cadre.sgn.fil i{height:172%;opacity:1}
+.cadre.sgn.fil u{left:9%;right:9%;top:50%;bottom:auto;transform:translateY(-50%);z-index:3;
+  text-align:left;white-space:normal;font-size:14cqw;line-height:.86;
+  letter-spacing:-.03em;color:#fff;mix-blend-mode:difference}
+
+/* 08e repete : le masque est carrele au lieu d'etre pose une fois. Le
+   dessin devient une matiere. Pour un fond, jamais pour une signature —
+   un signe qu'on repete cesse d'etre un signe. */
+.cadre.sgn.rep i{left:0;top:0;transform:none;width:100%;height:100%;aspect-ratio:auto;
+  -webkit-mask:url("Logo.svg") repeat center/11% auto;mask:url("Logo.svg") repeat center/11% auto}
+/* pas d'adresse sur la matiere : elle se poserait sur un fond agite et
+   ne se lirait nulle part. */
+.cadre.sgn.rep u{display:none}
+
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
 .cadre.coin{padding:0}
 .cadre.coin b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
@@ -330,20 +388,51 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
 .cadre.big .bloc .wm,.cadre.num .bloc .wm{display:block;background:currentColor;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
 
-/* 09 la liste : un inventaire coche. Des cases nues, petites — le
-   signe dedans faisait un pave noir a chaque ligne et on ne lisait
-   plus que lui. Ici c'est la liste qui parle, pas la coche. */
+/* 09 la liste : un inventaire coche. Des cases cerclees, petites, avec
+   leur signe dedans. La case pleine faisait un pave noir a chaque
+   ligne ; le V est trace au filet, il coche sans peser. */
 .cadre.liste .bloc{line-height:1.5}
-.cadre.liste .bloc span{width:max-content;display:flex;align-items:center;gap:.5em;
+.cadre.liste .bloc span{width:max-content;display:flex;align-items:center;gap:.45em;
   font-variation-settings:"wght" 700;letter-spacing:-.01em;text-transform:none}
-.cadre.liste .bx{position:relative;flex:none;width:.34em;height:.34em;
-  border:.055em solid currentColor}
-.cadre.liste span.on .bx{background:currentColor}
-/* le sommaire : le picto remplace la case, a la meme place et au meme
-   role de reperage. Il est pose en masque, donc il suit la couleur du
-   texte — un picto ne porte jamais la sienne. */
-.cadre.pic .bx{border:0;width:1.05em;height:1.05em;background:currentColor;
+.cadre.liste .bx{position:relative;flex:none;width:.56em;height:.56em;
+  border:.05em solid currentColor}
+/* le V : deux filets d'un meme coin, tournes d'un quart de tour. Il
+   monte un peu plus haut que la case, comme un vrai trait de stylo qui
+   deborde. */
+.cadre.liste span.on .bx::after{content:"";position:absolute;left:50%;top:44%;
+  width:.17em;height:.32em;transform:translate(-50%,-50%) rotate(45deg);
+  border:solid currentColor;border-width:0 .07em .07em 0}
+
+/* 10 le sommaire : plus une liste, une grille. En liste, chaque ligne
+   etait mise a la mesure du cadre et le mot devenait enorme ; ici le
+   corps est fixe et petit, et ce sont les six cartes qui tiennent la
+   page. Le picto reste un masque : il prend la couleur du texte, un
+   picto ne porte jamais la sienne. */
+.cadre.som{padding:0}
+.cadre.som .grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);
+  width:100%;height:100%}
+.cadre.som .cel{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3.6cqw;padding:3cqw}
+/* Les filets ne tombaient jamais juste : chaque case dessinait son
+   propre bord, et d'une rangee a l'autre le trait se decalait d'un
+   pixel. On ne trace donc plus les lignes, seulement leurs
+   intersections — deux petites croix, comme des reperes de coupe.
+   Elles disent la meme division, en disent moins, et ne peuvent pas se
+   desaligner puisqu'elles sont posees sur le cadre et non sur les
+   cases. */
+.cadre.som::before,.cadre.som::after{content:"";position:absolute;left:50%;z-index:1;
+  width:4.4cqw;height:4.4cqw;transform:translate(-50%,-50%);pointer-events:none;
+  background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,
+             linear-gradient(currentColor,currentColor) center/1px 100% no-repeat}
+.cadre.som::before{top:33.333%}
+.cadre.som::after{top:66.667%}
+.cadre.som .cel i{flex:none;width:14.5cqw;height:14.5cqw;background:currentColor;
   -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
+/* le picto porte, le mot nomme : c'est pour ca que le mot est maigre et
+   petit. Deux noirs de meme force dans une case de cette taille se
+   disputent, et on ne lit plus le picto. */
+.cadre.som .cel em{font-family:var(--fd);font-variation-settings:"wght" 450;font-style:normal;
+  font-size:4cqw;line-height:1;letter-spacing:.02em;text-transform:uppercase}
 
 /* 10 la signature : le logotype seul, centre */
 .cadre.sign{place-items:center}
@@ -362,7 +451,6 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
     <a href="instagram.html">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
-    <a href="fontes.html">Fontes</a>
     <a href="titre.html">Le titre</a>
     <a href="compositions.html" class="on">Compositions</a>
   </nav>
@@ -393,19 +481,49 @@ const COMPOS = [
   {nom:"Le bloc", k:"k", s:"in", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
    t:["Every place","has an","address"]},
 
-  {nom:"Le bloc clair", k:"w", s:"", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
+  {nom:"Le bloc clair", k:"w", s:"in", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
    t:["Nothing","to build.","Nothing to","maintain."]},
+
+  /* L'ordre de cette liste est celui de la grille : deux par rangee.
+     Les deux titres composes se font donc face — meme phrase, deux
+     coupes, deux fonds — et Le mot seul tombe en face du Drapeau, deux
+     facons de faire tenir trois mots. On compare en regardant, sans
+     faire defiler. */
+
+  /* La reference etait montee ici mot pour mot, comme temoin. Elle en
+     est sortie : on ne met pas la phrase de quelqu'un d'autre dans son
+     propre vocabulaire, meme pour comparer. Ce qu'on garde d'elle est
+     la structure, et elle n'appartient a personne — capitale seule,
+     italique seule, capitale seule, puis des lignes ou les deux se
+     touchent. C'est cette alternance qui fait le bloc, pas les mots.
+
+     Les mots sont les notres, et la coupe est la plus dure possible :
+     un mot par ligne, alternance stricte. C'est le corps du mot le plus
+     long qui fixe tout le bloc — ici "about" — et les autres s'arretent
+     ou ils s'arretent. Six lignes courtes donnent un bloc haut et
+     etroit ; la meme phrase coupee en quatre donne un tout autre objet,
+     c'est la composition suivante.
+
+     Un seul corps pour tout le bloc, cale a gauche, bord droit
+     irregulier. Le 1.04 est le rapport de corps de l'italique, repris
+     de la page Le titre — sans lui l'italique parait deux fois trop
+     petite, sa hauteur d'x etant bien plus basse. */
+  {nom:"Le titre compose", k:"w ti", s:"", d:"Capitales grasses et bas-de-casse italique, un mot par ligne, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
+   ti:[[["All","up"]],[["about","it",1.04]],[["Your","up"]],
+       [["place.","it",1.04]],[["One","up"]],[["link","it",1.04]]]},
+
+  /* Le meme titre compose, mais avec nos mots et retourne : clair sur
+     noir. Quatre lignes au lieu de cinq, et la coupe est imposee — la
+     phrase casse apres "place.", donc "One link" tient sa ligne. C'est
+     la coupe qui fait la respiration, pas l'interligne. */
+  {nom:"Le titre compose, clair sur noir", k:"k ti", s:"in",
+   d:"Le meme, retourne et avec nos mots. La phrase casse au point : One link garde sa ligne entiere, et c'est cette coupe qui la detache. Le contour prend la couleur du fond, ici le noir.",
+   ti:[[["All","up"]],[["about","it",1.04]],
+       [["Your","up"],["place.","it",1.04]],
+       [["One","up"],["link","it",1.04]]]},
 
   {nom:"Le mot seul", k:"e big", s:"in", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
    t:["One","link"], wm:true},
-
-  /* Cinq lignes, la structure exacte de la reference : capitale seule,
-     italique seule, capitale seule, puis des lignes mixtes ou les deux
-     se touchent. C'est cette alternance qui fait le bloc, pas le
-     nombre de mots. */
-  {nom:"Le titre compose", k:"w ti", s:"", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
-   ti:[[["Everything","up"]],[["about","it"]],[["Your","up"]],
-       [["place.","up"],["one","it"]],[["link.","up"]]]},
 
   {nom:"Le drapeau", k:"k rag", s:"in", d:"Capitales, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
    t:["Why","vinyl","bars","love ?"]},
@@ -416,18 +534,48 @@ const COMPOS = [
   {nom:"Le signe", k:"k sgn", s:"in", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
    t:[]},
 
+  /* Quatre variations sur le meme dessin. Elles ne changent que deux
+     choses, sa taille et ce qui l'accompagne — et ces deux reglages
+     suffisent a passer d'une marque a une matiere. */
+  /* Sans la barre finale ici. Sur la carte 08 le signe deborde et
+     l'adresse est une adresse, elle se termine donc comme une URL. Ici
+     le signe est presente entier : c'est une carte de marque, pas un
+     lien, et la barre y fait un petit trait qui pend. */
+  {nom:"Le signe entier", k:"k sgn ent", s:"",
+   d:"Le meme, contenu au lieu de deborder : on le voit en entier. Plus lisible, moins brutal. Quand la carte doit presenter le signe plutot que l'utiliser.",
+   adr:"tre.ma", t:[]},
+
+  {nom:"Le signe centre", k:"k sgn ctr", s:"",
+   d:"Petit, cale au milieu, le nom dessous en monospace tres espace. Le signe ne remplit plus rien, il signe. Pour fermer, ou pour une carte de visite.",
+   adr:"trema.design", t:[]},
+
+  {nom:"Le signe et le logotype", k:"k sgn duo", s:"",
+   d:"Le picto au-dessus, le nom dessous, et les deux sont des dessins. Aucune typographie dans cette carte : le nom de la marque ne se compose jamais. Celle d'avant ecrit l'adresse, celle-ci pose la marque.",
+   wm:true, t:[]},
+
+  {nom:"Le masque", k:"k sgn fil", s:"",
+   d:"Le signe en blanc, plein, et la phrase posee en travers, en difference. Elle se creuse en noir sur le signe et ressort en blanc sur le fond, en changeant au milieu d'un mot. Le texte n'est pas ecrit sur le signe, il est evide dedans.",
+   adr:"Every place has an address", t:[]},
+
+  {nom:"Le signe repete", k:"k sgn rep", s:"",
+   d:"Le dessin carrele jusqu'au bord : il devient une matiere. Pour un fond, une doublure, un intercalaire — jamais pour signer, un signe qu'on repete cesse d'etre un signe.",
+   t:[]},
+
   {nom:"Le chiffre", k:"k num", s:"in", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
    t:["380+"], wm:true},
 
-  {nom:"Checklist", k:"w liste", s:"", d:"Elle coche toutes les cases, au sens propre. Des cases nues et petites, sur papier : c'est la liste qui parle. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
+  {nom:"Checklist", k:"w liste", s:"in", d:"Elle coche toutes les cases, au sens propre. Des cases petites, cerclees, avec leur V trace au filet : la coche se voit sans faire un pave. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
    coches:["Menu","Hours","Photos","Reviews","News","Community"]},
 
-  /* La meme liste, mais chaque rubrique porte son propre picto. La
-     Checklist dit "tout est coche" ; celle-ci dit "voila quoi". */
-  {nom:"Le sommaire", k:"k liste pic", s:"",
-   d:"La meme liste, chaque rubrique avec son picto. La Checklist dit que tout est coche ; le sommaire dit ce qu'il y a. Les pictos prennent la couleur du texte, jamais la leur.",
+  /* Les memes rubriques que la Checklist, mais la carte est divisee :
+     un filet au centre, deux en travers, six cases. En liste, chaque
+     ligne etait mise a la mesure du cadre et le mot devenait enorme ;
+     ici le corps est fixe et petit, et c'est la division qui tient la
+     page. */
+  {nom:"Le sommaire", k:"k som", s:"",
+   d:"La carte divisee en six : un filet au centre, deux en travers, et dans chaque case un picto et son mot. La Checklist dit que tout est coche ; le sommaire dit ce qu'il y a. Les pictos prennent la couleur du texte, jamais la leur.",
    pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
-           ["playlist","Playlist"],["post","Post"],["link","Link"]]},
+           ["playlist","Playlist"],["post","Page"],["link","Link"]]},
 
   {nom:"La signature", k:"e sign", s:"in", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true},
@@ -440,17 +588,21 @@ hote.innerHTML = COMPOS.map((c,i)=>{
   let dedans = "";
   if (c.ti) {
     dedans = `<div class="bloc">` + c.ti.map(l =>
-      `<div class="ln">` + l.map(([t,s])=>`<span class="seg ${s}">${esc(t)}</span>`).join("") + `</div>`
+      `<div class="ln">` + l.map(([t,s,r])=>
+        `<span class="seg ${s}" data-r="${r||1}">${esc(t)}</span>`).join("") + `</div>`
     ).join("") + `</div>`;
   } else if (c.mot) {
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.wmSeul) {
     dedans = `<i class="wm"></i>`;
   } else if (c.k.includes("sgn")) {
-    dedans = `<i></i><u>tre.ma/</u>`;
+    dedans = `<i></i>` + (c.wm ? `<span class="wm"></span>` : "")
+      + `<u>${esc(c.adr || "tre.ma/")}</u>`;
   } else if (c.pictos) {
-    dedans = `<div class="bloc">` + c.pictos.map(([p,l])=>
-      `<span><i class="bx" style="--p:url('picto/web/${p}.svg')"></i>${esc(l)}</span>`).join("")
+    /* pas de `.bloc` ici : la grille ne passe pas par la mise a la
+       mesure, son corps est declare en cqw et reste petit. */
+    dedans = `<div class="grid">` + c.pictos.map(([p,l])=>
+      `<span class="cel"><i style="--p:url('picto/web/${p}.svg')"></i><em>${esc(l)}</em></span>`).join("")
       + `</div>`;
   } else if (c.coches) {
     dedans = `<div class="bloc">` + c.coches.map(l=>
@@ -487,8 +639,19 @@ function ajuste(){
       if (box) {
         const lignes = [...bloc.children];
         if (unCorps) {
-          const pose = t => lignes.forEach(l=>[...(l.children.length?l.children:[l])]
-            .forEach(x=>x.style.fontSize=t+"px"));
+          /* Sur quoi on pose le corps. Pour le titre compose, la ligne
+             est un conteneur et ce sont ses segments qu'il faut regler.
+             Pour la liste, la ligne EST le texte : elle ne porte qu'un
+             enfant, la case, et poser le corps dessus donnait une case
+             enorme a cote d'un mot reste petit — six cases collees, un
+             pave noir. C'est la ligne qu'on regle, la case suit en em.
+
+             `data-r` est le rapport de corps du segment : une italique
+             bas-de-casse se compose plus grande qu'une capitale pour
+             paraitre de la meme taille, sa hauteur d'x etant plus basse. */
+          const pose = t => lignes.forEach(l=>
+            ((!liste && l.children.length) ? [...l.children] : [l])
+            .forEach(x=>x.style.fontSize=(t*(+x.dataset.r||1))+"px"));
           pose(100);
           let k = Math.min(...lignes.map(l=>l.scrollWidth ? box*part/l.scrollWidth : Infinity));
           if (!isFinite(k)) return;
@@ -521,8 +684,30 @@ function ajuste(){
     }
   });
 }
-document.fonts.ready.then(ajuste);
-addEventListener("resize", ajuste, {passive:true});
+/* QUAND mesurer, et c'est tout le sujet. Mesurer avant que les fontes
+   soient la, c'est mesurer une police de secours : le corps calcule est
+   alors faux et le bloc sort du cadre par la droite — c'est exactement
+   ce qui arrivait. document.fonts.ready ne suffit pas, il se resout
+   pour la passe en cours, parfois avant meme que la fonte d'affichage
+   ait ete demandee. On charge donc explicitement les faces utilisees,
+   on mesure, puis on remesure une fois tout pose. */
+const charge = () => Promise.all([
+  '900 40px "Inter"', '800 40px "Inter"', '400 40px "Inter"',
+  'italic 600 40px "EB Garamond"', 'italic 600 40px "Cormorant Garamond"',
+].map(f => document.fonts.load(f).catch(()=>null)));
+
+charge().then(ajuste).then(()=>document.fonts.ready).then(ajuste);
+
+/* Et un ResizeObserver plutot que l'evenement resize : la grille change
+   de nombre de colonnes toute seule, au zoom comme au redimensionnement,
+   et l'evenement window ne dit rien de la largeur reelle d'une carte.
+   On ne remesure que si la largeur a bouge — la hauteur, elle, bouge
+   parce qu'on vient de remesurer, et on rentrerait en boucle. */
+let derniere = 0;
+new ResizeObserver(es => {
+  const l = Math.round(es[0].contentRect.width);
+  if (l && l !== derniere) { derniere = l; ajuste(); }
+}).observe(hote);
 
 })();
 </script>

@@ -16,7 +16,7 @@
 
 :root{
   --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
-  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#141414;
   --bg:var(--papier); --fg:var(--encre);
   --fd:"Inter","Helvetica Neue",Arial,sans-serif;
   --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
@@ -507,6 +507,30 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
   .quatre{grid-template-columns:1fr;gap:clamp(40px,10vw,64px)}
 }
 
+/* LE FEED DE TITRES. Les memes compositions, mais au format du profil.
+   C'est la seule facon de juger une composition : un titre qui se tient
+   sur une page large peut se retrouver a l'etroit dans un 4:5, et c'est
+   dans le 4:5 qu'il sera publie. Ce feed-la ne contient que du texte —
+   aucune photographie, on ne regarde que les titres. */
+.feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
+  gap:clamp(12px,1.6vw,24px);margin-top:clamp(24px,3vw,40px)}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;display:grid;place-items:center;
+  padding:9%;background:var(--bg);color:var(--fg)}
+/* --bg n'est pas decoratif ici : c'est lui que le contour des segments
+   va chercher, et c'est ce contour qui detache les lignes quand elles
+   se chevauchent. Un fond pose sans lui souderait le bloc. */
+.post.k{--bg:var(--noir);--fg:#fff}
+.post.e{--bg:var(--encre);--fg:var(--papier)}
+.post.w{--bg:var(--blanc);--fg:var(--encre)}
+.post.l{--bg:var(--lait);--fg:var(--encre)}
+.post .titre{width:100%}
+/* La lettre de cle d'abord, en pleine encre, le nom derriere en
+   retrait : on cherche la lettre, on lit le nom ensuite. */
+.feednom{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:400;opacity:.45;margin:8px 0 0;display:flex;align-items:baseline;gap:8px}
+.feednom b{flex:none;font-weight:400;letter-spacing:.1em;opacity:1;color:var(--encre);
+  border:1px solid currentColor;padding:2px 6px;line-height:1}
+
 </style>
 </head>
 <body>
@@ -518,7 +542,6 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
     <a href="instagram.html">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
-    <a href="fontes.html">Fontes</a>
     <a href="titre.html" class="on">Le titre</a>
     <a href="compositions.html">Compositions</a>
   </nav>
@@ -528,10 +551,13 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
 
   <p class="part">Communication</p>
   <h1 class="h2" style="margin:0 0 .5em">Le titre</h1>
-  <p style="max-width:62ch;margin:0 0 clamp(18px,2.4vw,30px)">Une seule phrase, composee en lignes
-    qui remplissent toutes la meme mesure. A l'interieur d'une ligne, les capitales grasses et les
-    bas-de-casse italiques se touchent, sans espace de mot. Deux fontes : Inter Black a -4% pour les capitales, EB Garamond
-    italique a -3% pour les bas-de-casse. Le bouton ne change que la premiere.</p>
+  <p style="max-width:62ch;margin:0 0 clamp(10px,1.4vw,18px)">Une phrase, coupee en lignes qui
+    partagent toutes le meme corps. A l'interieur d'une ligne, les capitales grasses et les
+    bas-de-casse italiques se touchent, sans espace de mot. Deux fontes : Inter Black a -4% pour
+    les capitales, EB Garamond italique a -3% pour les bas-de-casse.</p>
+  <p class="mono dim" style="max-width:60ch;margin:0 0 clamp(18px,2.4vw,30px)">Tout est montre au
+    format du profil, parce qu'une composition ne se juge qu'a l'endroit ou elle sera publiee.
+    Chaque carte porte son numero : c'est par lui qu'on valide, « on garde le 04 ».</p>
 
 
   <div id="un"></div>
@@ -611,6 +637,78 @@ const TITRES = [
     {w:1, g:[ {t:"Google", s:"up"} ]},
     {w:1,   g:[ {t:"and", s:"it", r:IT}, {t:"AIs.", s:"up"} ]},
   ]},
+
+  /* ─────────────────────────────────────────────────────────────
+     DIX PHRASES A JUGER. Le sujet est le meme partout : le lieu est
+     a eux, le travail est a eux, et trema ne fait que la page.
+     Aucune ne parle de trema a la premiere personne — c'est toujours
+     le commercant qui est le sujet de la phrase.
+
+     Une regle de metier avant de choisir : le corps du bloc est fixe
+     par le MOT LE PLUS LONG. "Everything" et "creative" tirent donc
+     tout le bloc vers le bas, et la composition devient petite et
+     serree. Les phrases faites de mots courts respirent beaucoup
+     plus. La 20 est mise expres pour montrer ce que coute un mot
+     long : c'est la meme methode, et le resultat est deux fois moins
+     fort.
+     ───────────────────────────────────────────────────────────── */
+  {n:"Fait par vous", l:[
+    {w:1, g:[ {t:"Made", s:"up"} ]},
+    {w:1, g:[ {t:"by you.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Found", s:"up"} ]},
+    {w:1, g:[ {t:"by everyone.", s:"it", r:IT} ]},
+  ]},
+  {n:"Le lieu et la page", l:[
+    {w:1, g:[ {t:"You made", s:"up"} ]},
+    {w:1, g:[ {t:"the place.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"We made", s:"up"} ]},
+    {w:1, g:[ {t:"the page.", s:"it", r:IT} ]},
+  ]},
+  {n:"Tout est a vous", l:[
+    {w:1, g:[ {t:"The place", s:"up"} ]},
+    {w:1, g:[ {t:"is yours.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"So is", s:"up"}, {t:"the page.", s:"it", r:IT} ]},
+  ]},
+  {n:"Chacun son travail", l:[
+    {w:1, g:[ {t:"You do", s:"up"}, {t:"the place.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"We do", s:"up"}, {t:"the rest.", s:"it", r:IT} ]},
+  ]},
+  {n:"Un bon lieu", l:[
+    {w:1, g:[ {t:"A good", s:"up"}, {t:"place", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Deserves", s:"up"} ]},
+    {w:1, g:[ {t:"a good", s:"it", r:IT}, {t:"Page.", s:"up"} ]},
+  ]},
+  {n:"Votre metier, votre coin", l:[
+    {w:1, g:[ {t:"Your craft.", s:"up"} ]},
+    {w:1, g:[ {t:"your corner.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"One link.", s:"up"} ]},
+  ]},
+  {n:"Le lieu, pas la plateforme", l:[
+    {w:1, g:[ {t:"Show", s:"up"}, {t:"the place,", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Not", s:"up"}, {t:"the platform.", s:"it", r:IT} ]},
+  ]},
+  {n:"Le travail est le site", l:[
+    {w:1, g:[ {t:"Your work", s:"up"} ]},
+    {w:1, g:[ {t:"is the", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Website.", s:"up"} ]},
+  ]},
+  {n:"Rien a construire", l:[
+    {w:1, g:[ {t:"Nothing", s:"up"} ]},
+    {w:1, g:[ {t:"to build.", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Everything", s:"up"} ]},
+    {w:1, g:[ {t:"to show.", s:"it", r:IT} ]},
+  ]},
+  /* Le temoin du mot long : "creative" fait huit signes et il passe
+     deux fois. Comparee a "Fait par vous", la meme methode rend ici
+     un bloc nettement plus petit. C'est le cout du mot long, montre
+     plutot qu'explique. */
+  {n:"Le mot long — temoin", l:[
+    {w:1, g:[ {t:"Creative", s:"up"} ]},
+    {w:1, g:[ {t:"places", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Deserve", s:"up"} ]},
+    {w:1, g:[ {t:"creative", s:"it", r:IT} ]},
+    {w:1, g:[ {t:"Pages.", s:"up"} ]},
+  ]},
 ];
 const LIGNES = TITRES[0].l;
 /* Ce qui change d'un bouton a l'autre, c'est le texte 1 seulement.
@@ -668,8 +766,21 @@ function fitTitre(hote){
     /* le plus petit facteur gagne : c'est la ligne la plus longue qui
        commande, sinon elle deborderait. */
     const kf = Math.min(...k.filter(x=>x>0));
-    lignes.forEach(ligne=>[...ligne.children]
-      .forEach(x=>x.style.fontSize=(100*(+x.dataset.r||1)*kf)+"px"));
+    const pose = f => lignes.forEach(ligne=>[...ligne.children]
+      .forEach(x=>x.style.fontSize=(100*(+x.dataset.r||1)*f)+"px"));
+    pose(kf);
+
+    /* Et on cale aussi en HAUTEUR, quand le conteneur en impose une.
+       Dans la galerie le bloc pousse sa boite et il n'y a rien a faire ;
+       dans le feed le cadre est fixe en 4:5, et une composition de cinq
+       lignes en sortait par le bas. La largeur donne un plafond, la
+       hauteur en donne un autre, c'est le plus petit qui gagne. */
+    const cadre = bloc.closest(".post");
+    if (cadre) {
+      const st = getComputedStyle(cadre);
+      const dispo = cadre.clientHeight - parseFloat(st.paddingTop) - parseFloat(st.paddingBottom);
+      if (dispo > 0 && bloc.scrollHeight > dispo) pose(kf * dispo / bloc.scrollHeight);
+    }
   });
 }
 
@@ -685,11 +796,26 @@ const charge = () => Promise.all([
   document.fonts.load('italic 600 40px "Cormorant Garamond"'),
 ]);
 
+/* Les fonds du feed. Deux sombres ne se suivent jamais : c'est la seule
+   regle, et elle suffit a donner son rythme a la colonne. */
+const FONDS = ["k","w","e","l"];
+
+/* La galerie a disparu : elle montrait les memes compositions a pleine
+   mesure, et une composition ne se juge pas a pleine mesure — elle se
+   juge au format ou elle sera publiee. Il ne reste donc que le feed.
+
+   Chaque carte porte son numero : c'est lui qui permet de valider a
+   voix haute, « on garde le 04 », sans avoir a decrire. Meme cle que
+   sur la banque de photos et sur les compositions — une seule facon de
+   nommer dans tout le livre. */
+const CLE = i => String(i + 1).padStart(2, "0");
+
 function rendre(){
   un.className = "ft-cormorant";
-  un.innerHTML = `<div class="galerie">` + TITRES.map(t =>
-    `<div><h4 class="titnom">${t.n}</h4>` + dessine(false, t.l) + `</div>`).join("")
-    + `</div>`;
+  un.innerHTML = `<div class="feed">` + TITRES.map((t,i) =>
+      `<div><div class="post ${FONDS[i % FONDS.length]}">` + dessine(false, t.l) +
+      `</div><p class="feednom"><b>${CLE(i)}</b>${t.n}</p></div>`)
+      .join("") + `</div>`;
   charge().then(()=> fitTitre(un));
 }
 addEventListener("resize", ()=> fitTitre(un), {passive:true});
