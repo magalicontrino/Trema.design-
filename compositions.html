@@ -487,10 +487,19 @@ function ajuste(){
       if (box) {
         const lignes = [...bloc.children];
         if (unCorps) {
-          lignes.forEach(l=>[...(l.children.length?l.children:[l])].forEach(x=>x.style.fontSize="100px"));
-          const k = Math.min(...lignes.map(l=>l.scrollWidth ? box*part/l.scrollWidth : Infinity));
-          if (isFinite(k)) lignes.forEach(l=>[...(l.children.length?l.children:[l])]
-            .forEach(x=>x.style.fontSize=(100*k)+"px"));
+          const pose = t => lignes.forEach(l=>[...(l.children.length?l.children:[l])]
+            .forEach(x=>x.style.fontSize=t+"px"));
+          pose(100);
+          let k = Math.min(...lignes.map(l=>l.scrollWidth ? box*part/l.scrollWidth : Infinity));
+          if (!isFinite(k)) return;
+          pose(100*k);
+          /* Et on cale aussi en HAUTEUR. La largeur ne suffit pas : le
+             sommaire, six lignes portant chacune un picto, sortait du
+             cadre de 248 px sur 359 disponibles. La largeur donne un
+             plafond, la hauteur en donne un autre, c'est le plus petit
+             qui gagne. */
+          const dispo = cadre.clientHeight - 2*parseFloat(getComputedStyle(cadre).paddingTop);
+          if (dispo > 0 && bloc.scrollHeight > dispo) pose(100*k*dispo/bloc.scrollHeight);
         } else {
           lignes.forEach(x=>{
             const wm = x.classList.contains("wm");
