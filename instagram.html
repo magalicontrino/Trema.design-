@@ -144,11 +144,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    des textes change : c'est donc bien elle qu'on compare.
    Les boutons restent discrets — ce sont des reglages, pas une
    navigation. */
-.tabs{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
-.tabs button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  padding:4px 0;opacity:.4;border-bottom:1.4px solid transparent;cursor:pointer}
-.tabs button:hover{opacity:.75}
-.tabs button.on{opacity:1;border-bottom-color:currentColor}
 
 
 
@@ -185,157 +180,16 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   width:7.5cqw;aspect-ratio:78/91;background:currentColor;opacity:.5;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
-/* quand le signe occupe deja tout le cadre, la signature s'efface */
-/* le petit signe de pied s'efface la ou le grand a deja parle */
-.fx-creatif .post.t-edge .sig,.fx-creatif .post.t-bleed .sig,
-.fx-creatif .post.t-pat1 .sig,.fx-creatif .post.t-pat2 .sig{display:none}
 /* le cadre "coin" porte deja le logotype : signature en haut a gauche */
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
-/* ── LES PHOTOS PARTICIPENT AUSSI ───────────────────────────
-   Dans le style creatif seulement : parfois une ligne posee sur
-   l'image, parfois le signe, parfois le logotype qui la traverse,
-   et le plus souvent rien du tout. C'est l'alternance qui fait
-   que chaque intervention garde sa force. */
-.post .cut,.post .shade,.post .ovl,.post .omark,.post .oedge{display:none}
-
-/* la decoupe : le signe devient une fenetre. Derriere, la meme
-   photo floutee et devitalisee ; dedans, elle est nette. L'ombre
-   portee est franche, sans flou — c'est un decoupage, pas un relief. */
-.post .cut{position:absolute;inset:0;z-index:3}
-.post .cut i{position:absolute;inset:0;display:block;
-  -webkit-mask:url("Logo.svg") no-repeat center/auto 74%;
-  mask:url("Logo.svg") no-repeat center/auto 74%}
-.post .cut .sh{background:rgba(0,0,0,.55);transform:translate(2.6cqw,3.2cqw)}
-.post .cut .sharp{background-position:center;background-size:cover}
-.fx-creatif .post.p-cut .cut{display:block}
-/* on agrandit le fond avant de le flouter : sinon le flou laisse un
-   liser transparent le long des quatre bords du cadre */
-.fx-creatif .post.p-cut > img{filter:blur(11px) saturate(.28) brightness(1.06);
-  transform:scale(1.14)}
-
-/* le signe pose en coin. C'est son ombre qui le detache — sur une
-   photo claire comme sur une sombre, le decalage suffit a le lire. */
-.post .omark{position:absolute;left:8%;top:8%;z-index:3;width:26cqw;
-  aspect-ratio:78/91;background:#fff;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
-  filter:drop-shadow(2.2cqw 2.7cqw 0 rgba(0,0,0,.5))}
-.fx-creatif .post.p-mark .omark{display:block}
-
-/* le signe qui sort du cadre par la gauche */
-.post .oedge{position:absolute;left:-13%;top:50%;transform:translateY(-50%);z-index:3;
-  height:98%;aspect-ratio:78/91;background:#fff;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
-  filter:drop-shadow(2.4cqw 3cqw 0 rgba(0,0,0,.45))}
-.fx-creatif .post.p-edge .oedge{display:block}
-
-/* une ligne posee sur l'image, sur un degrade qui tient le blanc */
-.post .shade{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.12) 55%,transparent)}
-.post .ovl{position:absolute;left:8%;right:8%;bottom:8%;z-index:3;color:#fff}
-.post .ovl span{display:block;white-space:nowrap;font-family:var(--fd);
-  font-variation-settings:"wght" 1000,"FLAR" 100;line-height:.9;text-transform:uppercase;
-  letter-spacing:.01em}
-.fx-creatif .post.p-line .shade,
-.fx-creatif .post.p-line .ovl{display:block}
-
-
-/* le cadre-signe : le picto seul, coupe par le format, dans tous
-   les styles. Il ne passe pas par la rotation du creatif — il est
-   ecrit dans le feed, donc il tient aussi en Typo. */
-.feed .post.tx.sgn{padding:0!important;overflow:hidden;
-  background:var(--noir)!important;color:#fff!important}
-/* il sort du cadre des deux cotes : le signe fait 111 % de la largeur,
-   on le centre pour qu'il morde a gauche comme a droite plutot que de
-   laisser un liser d'un seul cote. */
-.feed .post.tx.sgn .edge{display:block;left:-6%}
-
-/* ── le drapeau ────────────────────────────────────────────
-   Une seule taille pour tout le bloc : c'est la ligne la plus
-   longue qui la fixe, les autres tombent ou elles tombent.
-   L'inverse de la regle de la maison, et c'est voulu — une
-   question se lit comme une phrase, pas comme une affiche
-   justifiee. Bas de casse, sans capitales forcees. */
-.post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
-.post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
-.post.tx.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
-  background:currentColor;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-.post.tx.rag .fit .wm-line em{font-style:normal}
-
-/* l'italique : l'axe slnt de la variable, pas une fausse oblique
-   penchee par transformation. Le dessin du logotype, lui, ne
-   penche pas — ce n'est pas de la typo. */
-.post.tx.it .fit{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
-
-/* ══ CREATIF ═══════════════════════════════════════════════
-   Le signe prend le pouvoir : en tuile, en debordement, en
-   decoupe geante. Le texte passe dessus ou disparait. Quatre
-   traitements en rotation pour qu'aucun ne s'use. */
-.post .pat,.post .bleed,.post .giant{display:none}
-.post.ph .pat,.post.ph .bleed,.post.ph .giant,.post.ph .edge{display:none!important}
-
-/* la tuile : le signe repete, exactement 78 x 91, sans espace */
-.post .pat{position:absolute;inset:0;z-index:1;background:currentColor;
-  -webkit-mask:url("Logo.svg") repeat center/26px 30.3px;
-  mask:url("Logo.svg") repeat center/26px 30.3px}
-
-/* le logotype qui sort du cadre a gauche ET a droite */
-.post .bleed{position:absolute;left:-14%;right:-14%;top:50%;transform:translateY(-50%);z-index:2}
-.post .bleed .wordmark{display:block;width:100%;aspect-ratio:4;background:currentColor;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
-  mask:url("logotrema.svg") no-repeat center/contain}
-
-/* le signe en decoupe geante, coupe par le format */
-.post .giant{position:absolute;inset:0;z-index:1;overflow:hidden}
-.post .giant svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:150%;height:auto;fill:currentColor;opacity:.16}
-
-.fx-creatif .post.tx{padding:8%}
-
-/* Les gestes ne sont plus poses par nth-child : les series modulo
-   se croisaient et deux signes finissaient colles. C'est feed.js
-   qui les attribue, avec cinq cases au moins entre deux — le
-   voisin du dessous compris. La classe arrive avec le cadre. */
-
-/* 1 · le picto qui sort du cadre. C'est le signe qui deborde, pas
-   le logotype : le nom garde sa rarete, le dessin se reconnait. */
-.fx-creatif .post.t-edge{background:var(--noir)!important;color:#fff!important;padding:0}
-.fx-creatif .post.t-edge .fit{display:none}
-.fx-creatif .post.t-edge .edge{display:block}
+/* le picto plein cadre : il sort du format des deux cotes. Ecrit
+   dans le feed et non pose par un style, c'est l'affiche du 04. */
 .post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
   height:104%;aspect-ratio:78/91;z-index:2;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
   filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
-
-/* 2 · le signe geant coupe par le format, le texte par-dessus */
-.fx-creatif .post.t-giant{background:var(--encre)!important;color:var(--papier)!important}
-.fx-creatif .post.t-giant .giant{display:block}
-
-/* 3 · le logotype entier qui deborde des deux cotes — une seule
-   fois par tour de douze, et sans texte */
-.fx-creatif .post.t-bleed{background:var(--noir)!important;color:#fff!important}
-.fx-creatif .post.t-bleed .bleed{display:block}
-.fx-creatif .post.t-bleed .fit{display:none}
-
-/* 4 · la tuile pleine, sans texte — la respiration. Jamais a la
-   meme echelle : une serree en noir sur blanc, une bien plus
-   grande en inverse. Repetee a l'identique, elle fait papier peint. */
-.fx-creatif .post.t-pat1,.fx-creatif .post.t-pat2{padding:0}
-.fx-creatif .post.t-pat1 .fit,.fx-creatif .post.t-pat2 .fit{display:none}
-.fx-creatif .post.t-pat1{background:var(--blanc)!important;color:var(--encre)!important}
-.fx-creatif .post.t-pat1 .pat{display:block;
-  -webkit-mask-size:20px 23.3px;mask-size:20px 23.3px}
-.fx-creatif .post.t-pat2{background:var(--encre)!important;color:var(--papier)!important}
-.fx-creatif .post.t-pat2 .pat{display:block;
-  -webkit-mask-size:58px 67.7px;mask-size:58px 67.7px}
-
-
-/* C · l'editorial — Light, beaucoup d'air, le texte ne crie pas */
-.fx-edito .post.tx{background:var(--papier)!important;color:var(--encre)!important;padding:15%}
-.fx-edito .post.tx .fit{font-variation-settings:"wght" 300,"FLAR" 0;line-height:1.06;letter-spacing:.02em}
 
 /* D · typo — les deux affiches en alternance : le bloc de capitales,
    puis le mot cale en bas a gauche avec sa mention en haut a droite */
@@ -447,8 +301,9 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   online address of a place, that it is already built from what they publish on Instagram and Google Maps,
   and that it stays current on its own. Captions below, in the order they go out.</p>
 
-  <div class="tabs" id="tabs"></div>
-  <p class="mono dim" id="tabnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch"></p>
+  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
+    alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
+    a droite. Les photos ne portent rien.</p>
 
   <div class="feed fx-typo" id="feed"></div>
 
@@ -487,23 +342,12 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
 "use strict";
 document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
 
-const STYLES = [
-  {k:"typo",    t:"Typo",        d:"Deux affiches en alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut a droite."},
-  {k:"edito",   t:"L'editorial", d:"Light 300, beaucoup d'air. Ce sont les photos qui portent, les mots legendent."},
-  {k:"creatif", t:"Creatif",     d:"Le signe prend le pouvoir : en tuile, en debordement des deux cotes, en decoupe geante. Le texte passe dessus, ou se tait."},
-];
+/* Un seul feed. Le selecteur est parti avec les autres styles : on ne
+   choisit plus, on compose. La classe reste sur le conteneur, c'est
+   elle qui porte les regles des deux affiches. */
 const feed = document.querySelector("#feed");
-const tabs = document.querySelector("#tabs");
-const note = document.querySelector("#tabnote");
-tabs.innerHTML = STYLES.map((s, i) => `<button data-k="${s.k}" class="${i ? "" : "on"}">${s.t}</button>`).join("");
-function show(k) {
-  feed.className = "feed fx-" + k;
-  note.textContent = STYLES.find(s => s.k === k).d;
-  tabs.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === k));
-  renderFeed(feed, "pics/feed");
-}
-tabs.addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.k); });
-show("typo");
+feed.className = "feed fx-typo";
+renderFeed(feed, "pics/feed");
 
 document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
   `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");

@@ -118,72 +118,6 @@ window.TREMA_FEED = [
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
 ];
 
-/* ── la rotation du style creatif ─────────────────────────────
-   Les gestes ne sont plus poses par nth-child. Les series modulo
-   se croisaient sans le savoir et deux signes se retrouvaient
-   colles : 25 contre 26, puis 2 juste au-dessus de 5 — dans une
-   grille a trois colonnes, le voisin du dessous est a +3, pas
-   seulement celui de droite a +1.
-
-   Ils sont donc attribues ici, en marchant le feed, avec une
-   seule regle absolue : quatre cases au moins entre deux gestes
-   charges. Ca couvre le voisin de droite comme celui du dessous,
-   quelle que soit la colonne. Un geste isole porte ; deux gestes
-   cote a cote s'annulent.
-
-   Le picto domine : c'est lui qui deborde du cadre, qui decoupe
-   l'image, qui se pose en coin. Le logotype entier ne sort qu'une
-   fois par tour — sinon le nom se banalise a force d'etre ecrit. */
-window.TREMA_LOOK = function (list) {
-  const CYCLE = ["p-cut", "t-edge", "p-mark", "t-giant", "p-edge", "t-bleed",
-                 "p-cut", "t-pat1", "p-mark", "t-giant", "p-edge", "t-pat2"];
-  const ECART = 5;                    /* cases minimum entre deux gestes */
-  const look  = list.map(() => "");
-  /* dernier = 0 et non -99 : la photo d'ouverture reste nue. C'est
-     elle qui doit se lire d'un coup, sans avoir a etre dechiffree —
-     le premier geste attend donc le cinquieme cadre suivant, et
-     meme la ligne posee sur l'image la laisse tranquille. */
-  let c = 0, dernier = 0, ligne = 0;
-
-  list.forEach((o, i) => {
-    const ph = !!o.p, tx = !!o.t && !o.car;
-    /* le cadre-signe porte deja le picto en propre : on le compte comme
-       un geste, sinon le creatif en poserait un second juste a cote. */
-    if (o.sgn) { dernier = i; return; }
-    if (!ph && !tx) return;           /* le carousel et le cadre coin restent nus */
-
-    /* on ne saute pas dans le cycle : on attend le cadre qui va
-       avec le geste en tete. A pas fixe on retombait toujours sur
-       un rang impair, et pas un seul cadre de texte n'etait servi. */
-    if (i - dernier >= ECART) {
-      const g = CYCLE[c % CYCLE.length];
-      if (g[0] === "p" ? ph : tx) { look[i] = g; c++; dernier = i; return; }
-    }
-    /* pas de geste ici : une ligne posee sur l'image de temps en
-       temps, pour que les photos ne soient pas toutes muettes */
-    if (ph && i - ligne >= 7) { look[i] = "p-line"; ligne = i; }
-  });
-  return look;
-};
-
-/* ── la ligne posee sur une image ─────────────────────────────
-   Cassee en lignes courtes et d'egale longueur, puis chacune mise
-   a la mesure : d'un seul jet, une phrase longue devient un ruban
-   de trois pixels de haut a cote d'un "A BAR" qui claque. Toutes
-   les lignes affleurent les deux bords, c'est la regle de la maison. */
-function casseLigne(txt) {
-  const mots = txt.split(" ");
-  const n = Math.min(4, Math.max(1, Math.round(txt.length / 13)));
-  const cible = txt.length / n;
-  const out = [""];
-  mots.forEach(m => {
-    const cur = out[out.length - 1];
-    if (cur && cur.length + m.length + 1 > cible * 1.2 && out.length < n) out.push(m);
-    else out[out.length - 1] = cur ? cur + " " + m : m;
-  });
-  return out.filter(Boolean);
-}
-
 /* ── rendu ────────────────────────────────────────────────────
    Une seule fonction pour les deux pages. `dir` est le dossier
    des photos, `small` reduit les marges pour l'apercu. */
@@ -193,28 +127,15 @@ window.renderFeed = function (host, dir, small) {
               w:"background:var(--blanc);color:var(--encre)",
               l:"background:var(--lait);color:var(--encre)"};
 
-  const look = window.TREMA_LOOK(window.TREMA_FEED);
-
   host.innerHTML = window.TREMA_FEED.map((o, i) => {
     const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`;
-    const k = look[i] ? " " + look[i] : "";
     if (o.p) {
       /* Couches emises pour chaque photo mais masquees : seul le
          style creatif les revele, en rotation. Le texte pose sur
          l'image est la premiere proposition de la legende, coupee
          au premier point — au-dela ca ne se lit plus sur une photo. */
-      const line = (o.c || "").split(".")[0].trim();
-      const src  = `${dir}/${o.p}.jpg`;
-      /* la decoupe reprend la meme image en fond de couche : nette
-         dans le signe, tandis que celle du dessous part au flou */
-      return `<div class="post ph${k}">${n}
-        <img src="${src}" alt="" loading="lazy">
-        <div class="cut"><i class="sh"></i>
-          <i class="sharp" style="background-image:url('${src}')"></i></div>
-        <div class="shade"></div>
-        <div class="ovl">${casseLigne(line).map(l => `<span>${l}</span>`).join("")}</div>
-        <i class="omark"></i>
-        <i class="oedge"></i></div>`;
+      return `<div class="post ph">${n}
+        <img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
     }
     if (o.car) {
       const slides = o.car.map((sl, k) => {
@@ -272,11 +193,7 @@ window.renderFeed = function (host, dir, small) {
     /* Couches decoratives emises pour chaque texte mais masquees :
        seul le style "creatif" les revele, en rotation. Emettre plutot
        que re-rendre garde une seule source pour le message. */
-    return `<div class="post tx${mod}${k}" style="${BG[o.s]}">${n}
-      <div class="pat"></div>
-      <div class="bleed"><i class="wordmark"></i></div>
-      <div class="giant"><svg viewBox="0 0 78 91"><use href="#tm"/></svg></div>
-      <i class="edge"></i>
+    return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
       <div class="fit">${lines}</div>
       <div class="cnr"><b>${word}</b><i>${note}</i></div>
       <i class="sig"></i></div>`;
@@ -321,12 +238,6 @@ function mesure(sp, box) {
 function fitAll(host) {
   /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
      il doit etre entier, pas rogne par le bord */
-  /* le texte pose sur une photo se cale sur la largeur, comme le reste */
-  host.querySelectorAll(".post .ovl span").forEach(sp => {
-    const cell = sp.closest(".post");
-    mesure(sp, cell ? cell.clientWidth * 0.84 : 0);
-  });
-
   host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
     const cell = b.closest(".post");
     const box = cell ? cell.clientWidth * 0.92 : 0;
