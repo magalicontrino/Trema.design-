@@ -123,7 +123,9 @@ window.TREMA_FEED = [
 
   /* ── 7 · la preuve ── */
   {p:"35-wine-terrazzo",  c:"Already published, and growing."},
-  {t:["380+","tremas"], s:"k", big:1,
+  /* le nom au pluriel reste le dessin : "380+" au-dessus du logotype.
+     Le compter en typo composerait la marque en police — interdit. */
+  {t:["380+","@mark"], s:"k", big:1,
    c:"380+ tremas published, heading to 1,000+."},
 
   /* ── 8 · l'appel ── */
@@ -212,30 +214,11 @@ window.renderFeed = function (host, dir, small) {
     const mod = (o.big ? " big" : "") + (o.slab ? " slab" : "")
               + (o.rag ? " rag" : "") + (o.it ? " it" : "");
 
-    /* Le cadre "coin" est emis pour chaque texte mais masque : le
-       style D le revele une fois sur deux. Emettre les deux plutot
-       que de re-rendre evite de dupliquer la source du message. */
-    const flat = o.t.filter(l => l !== "@mark");
-    /* INTERDIT : composer le nom de la marque en typo, et a plus
-       forte raison au pluriel. Des que le mot tombe sur "trema" ou
-       "tremas", on sort le fichier logotrema.svg. Le point derriere
-       est permis, il ne fait pas partie du dessin. */
-    const last = flat[flat.length - 1] || "trema";
-    const raw = last.split(" ").pop().toLowerCase().replace(/[.,]$/, "");
-    const isMark = /^tremas?$/.test(raw);
-    const word = isMark
-      ? `<i class="wordmark"></i><em>.</em>`
-      : raw + ".";
-    /* `n` permet d'ecrire la mention du coin a la main : elle ne dit
-       pas toujours la meme chose que le mot pose en bas. */
-    const note = (o.n || flat.join(" ")).toUpperCase();
-
-    /* Couches decoratives emises pour chaque texte mais masquees :
-       seul le style "creatif" les revele, en rotation. Emettre plutot
-       que re-rendre garde une seule source pour le message. */
+    /* Deux types de titres, pas plus : le bloc de capitales ici, le
+       titre compose plus haut. La couche "coin" n'est plus emise —
+       le mot cale en coin ne vit que la ou il est ecrit dans le feed. */
     return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
       <div class="fit">${lines}</div>
-      <div class="cnr"><b>${word}</b><i>${note}</i></div>
       <i class="sig"></i></div>`;
   }).join("");
 
@@ -300,7 +283,7 @@ function fitAll(host) {
 
   /* le mot du cadre "coin" se cale sur la largeur, comme les lignes :
      il doit etre entier, pas rogne par le bord */
-  host.querySelectorAll(".post .cnr b, .post.cn b").forEach(b => {
+  host.querySelectorAll(".post.cn b").forEach(b => {
     const cell = b.closest(".post");
     const box = cell ? cell.clientWidth * 0.92 : 0;
     if (!box) return;
