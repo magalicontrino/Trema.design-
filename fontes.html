@@ -1,0 +1,65 @@
+<!doctype html><meta charset=utf-8><title>Trois fontes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Recursive:CASL,CRSV,MONO,slnt,wght@0..1,0..1,0..1,-15..0,300..1000&display=block" rel="stylesheet">
+<style>
+@font-face{font-family:"GT Flaire";src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");font-weight:300 1000}
+:root{--papier:#F2F1EF;--encre:#141414}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:ui-monospace,Menlo,monospace}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px}
+h3{font:400 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;
+   margin:22px 0 6px 4px;opacity:.5}
+.post{position:relative;aspect-ratio:4/5;overflow:hidden;display:grid;place-items:center;padding:9%}
+.k{background:#000;color:#fff}.w{background:#F2F1EF;color:#1E1E1E;padding:0}
+.fit{width:100%}
+.fit span{display:block;white-space:nowrap;text-transform:uppercase;line-height:.86;letter-spacing:.012em}
+.rag .fit span{text-transform:none;line-height:.92;letter-spacing:0;width:max-content}
+.cnr b{position:absolute;left:4%;bottom:4%;width:max-content;line-height:.8;white-space:nowrap;font-weight:400}
+.cnr i{position:absolute;right:6%;top:15%;font-style:normal;font-family:-apple-system,Helvetica,sans-serif;
+  font-size:3.8cqw;font-weight:700;letter-spacing:.02em}
+.post{container-type:inline-size}
+.f0 .fit,.f0 .cnr b{font-family:"GT Flaire";font-variation-settings:"wght" 1000,"FLAR" 100}
+.f1 .fit,.f1 .cnr b{font-family:"Fraunces";font-variation-settings:"opsz" 144,"wght" 900,"SOFT" 100,"WONK" 1}
+.f2 .fit,.f2 .cnr b{font-family:"Recursive";font-variation-settings:"CASL" 1,"wght" 1000,"slnt" 0,"CRSV" 0}
+.ital .fit span:last-child{font-style:italic}
+.f0.ital .fit span:last-child{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
+.f2.ital .fit span:last-child{font-variation-settings:"CASL" 1,"wght" 1000,"slnt" -15,"CRSV" 1}
+</style>
+<h3>Remplacer GT Flaire</h3>
+<p style="font:400 12px/1.6 -apple-system,Helvetica,sans-serif;max-width:64ch;margin:0 0 18px 4px">
+Meme composition, meme regle de mise a la mesure, trois fontes.
+<b>Colonne 1</b> GT Flaire, l'actuelle, payante et chere.
+<b>Colonne 2</b> Fraunces, libre (OFL) : axes opsz, wght, SOFT et WONK, vraie italique.
+<b>Colonne 3</b> Recursive, libre (OFL) : axes wght 300-1000, CASL, slnt et CRSV — c'est CASL qui
+joue le role de l'axe FLAR, et CRSV donne une vraie cursive, pas une oblique penchee.
+Les trois sont bien chargees : chasses mesurees 1810, 1556 et 1688 px pour la meme chaine,
+contre 1396 pour la police de secours. Aucune substitution silencieuse.</p>
+<div class="row" id="r"></div>
+<script>
+const CADRES=[
+ {c:"k", l:["Every place","has an","address"]},
+ {c:"k rag", l:["Why","vinyl","bars","love","trema?"]},
+ {c:"w cnr", mot:"menu.", note:"YOUR PLACE"},
+];
+let out="";
+CADRES.forEach(cd=>{ for(let f=0;f<3;f++){
+  const cls=`post f${f} ${cd.c}`;
+  out += cd.mot
+   ? `<div class="${cls}"><div class="cnr"><b>${cd.mot}</b><i>${cd.note}</i></div></div>`
+   : `<div class="${cls}"><div class="fit">${cd.l.map(x=>`<span>${x}</span>`).join("")}</div></div>`;
+}});
+document.querySelector("#r").innerHTML=out;
+document.fonts.ready.then(()=>{
+  document.querySelectorAll(".fit").forEach(fit=>{
+    const box=fit.clientWidth, rag=fit.closest(".rag");
+    const sp=[...fit.children];
+    if(rag){let mx=0;sp.forEach(s=>{s.style.fontSize="10px";mx=Math.max(mx,s.scrollWidth)});
+      const fs=Math.min(10*box/mx, fit.closest(".post").clientHeight*.82/(sp.length*.92));
+      sp.forEach(s=>s.style.fontSize=fs+"px");}
+    else sp.forEach(s=>{s.style.fontSize="10px";s.style.width="max-content";
+      const w=s.scrollWidth;s.style.width="";if(w)s.style.fontSize=(10*box/w)+"px";});});
+  document.querySelectorAll(".cnr b").forEach(b=>{
+    const box=b.closest(".post").clientWidth*.92;
+    b.style.fontSize="10px";const w=b.scrollWidth;if(w)b.style.fontSize=(10*box/w)+"px";});
+});
+</script>
