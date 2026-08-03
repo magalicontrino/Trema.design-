@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Compositions</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -261,34 +261,52 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* le cadre : meme format et meme conteneur que dans le feed */
 .cadre{position:relative;aspect-ratio:4/5;overflow:hidden;container-type:inline-size;
   background:var(--papier);color:var(--encre);display:grid;place-items:center;padding:9%}
-.cadre.k{background:var(--noir);color:#fff}
-.cadre.e{background:var(--encre);color:var(--papier)}
-.cadre.w{background:var(--blanc);color:var(--encre)}
-.cadre.l{background:var(--lait);color:var(--encre)}
+.cadre.k{background:var(--noir);color:#fff;--trait:var(--noir)}
+.cadre.e{background:var(--encre);color:var(--papier);--trait:var(--encre)}
+.cadre.w{background:var(--blanc);color:var(--encre);--trait:var(--blanc)}
+.cadre.l{background:var(--lait);color:var(--encre);--trait:var(--lait)}
 .bloc{width:100%}
 .bloc span{display:block;white-space:nowrap;font-family:var(--fd);
   font-variation-settings:"wght" 900;line-height:.86;text-transform:uppercase;
   letter-spacing:.012em}
 
 /* 03 le titre compose : capitales et italique bord a bord */
+/* les lignes se chevauchent : les ascendantes de l'italique montent
+   dans la ligne du dessus, et le contour de la couleur du fond les
+   detache. Sans lui, tout se souderait. */
 .cadre.ti .bloc{line-height:.80}
+.cadre.ti .bloc .ln + .ln{margin-top:.02em}
 .cadre.ti .bloc .ln{display:flex;align-items:baseline;width:max-content;white-space:nowrap}
 .cadre.ti .bloc .seg{position:relative;z-index:1;
-  -webkit-text-stroke:.05em var(--bg2,var(--papier));paint-order:stroke fill}
+  -webkit-text-stroke:.05em var(--trait,var(--papier));paint-order:stroke fill}
 .cadre.ti .bloc .seg + .seg{margin-left:-.06em}
 .cadre.ti .bloc .seg.up{text-transform:uppercase;font-variation-settings:"wght" 900;
   letter-spacing:-.04em}
-.cadre.ti .bloc .seg.it{z-index:2;font-family:"EB Garamond",Garamond,serif;font-style:italic;
+.cadre.ti .bloc .seg.it{z-index:2;font-family:"Cormorant Garamond",Garamond,serif;font-style:italic;
   font-weight:600;letter-spacing:-.03em;text-transform:none;line-height:.66}
 
-/* 04 le drapeau : bas de casse, un seul corps, cale a gauche */
-.cadre.rag .bloc{line-height:.92}
-.cadre.rag .bloc span{text-transform:none;letter-spacing:0;width:max-content}
+/* 05 le drapeau : capitales, un seul corps, cale a gauche, le bord
+   droit irregulier. */
+.cadre.rag .bloc{line-height:.86}
+.cadre.rag .bloc span{letter-spacing:-.02em;width:max-content}
 
 /* 06 le signe : le picto sort du format des deux cotes */
 .cadre.sgn{padding:0}
-.cadre.sgn i{position:absolute;left:-6%;top:50%;transform:translateY(-50%);
-  height:104%;aspect-ratio:78/91;background:currentColor;
+/* Le signe prend toute la carte : il deborde des quatre cotes et le
+   format le recadre. Le rapport du dessin est 78 x 91, plus etroit
+   que le cadre en 4:5 — c'est donc la hauteur qui commande, et la
+   largeur suit. A 132 % il mord en haut, en bas et sur les deux
+   cotes a la fois. */
+/* l'adresse posee sur le signe, en bas a droite : la courbe balaie
+   vers la gauche, c'est donc ce coin-la qui reste calme.
+   En difference, parce que le signe couvre toute la carte — selon
+   l'endroit elle a du noir ou du blanc sous elle, et la difference la
+   fait lire dans les deux cas sans qu'on ait a choisir. */
+.cadre.sgn u{position:absolute;right:7%;bottom:6%;z-index:2;text-decoration:none;
+  font-family:var(--fd);font-variation-settings:"wght" 800;font-size:9.5cqw;
+  letter-spacing:-.02em;color:#fff;mix-blend-mode:difference}
+.cadre.sgn i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:132%;aspect-ratio:78/91;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
 
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
@@ -300,13 +318,25 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;max-width:46%}
 
 /* 08 le chiffre : le nombre en grand, le logotype dessous */
-.cadre.num .bloc .wm{display:block;background:currentColor;
+/* le logotype pose sous le mot ou sous le chiffre : c'est un dessin,
+   il est donc dimensionne en pixels par l'ajustement, jamais compose. */
+.cadre.big .bloc .wm,.cadre.num .bloc .wm{display:block;background:currentColor;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
 
-/* 09 la liste : lignes courtes empilees, meme corps, calees a gauche */
-.cadre.liste .bloc{line-height:1.06}
-.cadre.liste .bloc span{width:max-content;font-variation-settings:"wght" 500;
-  letter-spacing:.02em;text-transform:none}
+/* 09 la liste : un inventaire coche. Des cases nues, petites — le
+   signe dedans faisait un pave noir a chaque ligne et on ne lisait
+   plus que lui. Ici c'est la liste qui parle, pas la coche. */
+.cadre.liste .bloc{line-height:1.5}
+.cadre.liste .bloc span{width:max-content;display:flex;align-items:center;gap:.5em;
+  font-variation-settings:"wght" 700;letter-spacing:-.01em;text-transform:none}
+.cadre.liste .bx{position:relative;flex:none;width:.34em;height:.34em;
+  border:.055em solid currentColor}
+.cadre.liste span.on .bx{background:currentColor}
+/* le sommaire : le picto remplace la case, a la meme place et au meme
+   role de reperage. Il est pose en masque, donc il suit la couleur du
+   texte — un picto ne porte jamais la sienne. */
+.cadre.pic .bx{border:0;width:1.05em;height:1.05em;background:currentColor;
+  -webkit-mask:var(--p) no-repeat center/contain;mask:var(--p) no-repeat center/contain}
 
 /* 10 la signature : le logotype seul, centre */
 .cadre.sign{place-items:center}
@@ -358,26 +388,38 @@ const COMPOS = [
   {nom:"Le bloc clair", k:"w", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
    t:["Nothing","to build.","Nothing to","maintain."]},
 
-  {nom:"Le mot seul", k:"e big", d:"Une ou deux lignes, enormes. Pour un mot qui se suffit. Au-dela de deux lignes le mot n'est plus seul.",
-   t:["One","link"]},
+  {nom:"Le mot seul", k:"e big", d:"Une ou deux lignes, enormes, avec le logotype pose dessous. Pour un mot qui se suffit. Au-dela de deux lignes, le mot n'est plus seul.",
+   t:["One","link"], wm:true},
 
-  {nom:"Le titre compose", k:"k ti", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. La composition de la page Titre. Une fois par zone, pas plus.",
-   ti:[[["From","up"],["followers","it"]],[["to","it"],["Regulars.","up"]]]},
+  /* Cinq lignes, la structure exacte de la reference : capitale seule,
+     italique seule, capitale seule, puis des lignes mixtes ou les deux
+     se touchent. C'est cette alternance qui fait le bloc, pas le
+     nombre de mots. */
+  {nom:"Le titre compose", k:"w ti", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. Les lignes se chevauchent, le contour de la couleur du fond les detache. Une fois par zone, pas plus.",
+   ti:[[["Everything","up"]],[["about","it"]],[["Your","up"]],
+       [["place.","up"],["one","it"]],[["link.","up"]]]},
 
-  {nom:"Le drapeau", k:"k rag", d:"Bas de casse, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
-   t:["Why","vinyl","bars","love","trema?"]},
+  {nom:"Le drapeau", k:"k rag", d:"Capitales, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
+   t:["Why","vinyl","bars","love ?"]},
 
   {nom:"Le coin", k:"w coin", d:"Le mot pose en bas a gauche, sa mention en haut a droite. Le vide au milieu fait tout le travail. Rare, sinon il s'use.",
    mot:"Yours.", note:"A BIO LINK LISTS LINKS. YOURS IS THE DESTINATION"},
 
-  {nom:"Le signe", k:"k sgn", d:"Le picto seul, coupe par le format des deux cotes. Aucun mot. C'est la respiration du feed.",
+  {nom:"Le signe", k:"k sgn", d:"Le picto prend toute la carte, le format le recadre. L'adresse posee dessus, en difference : elle se lit sur le noir comme sur le blanc.",
    t:[]},
 
   {nom:"Le chiffre", k:"k num", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
    t:["380+"], wm:true},
 
-  {nom:"La liste", k:"l liste", d:"Des lignes courtes empilees, meme corps, calees a gauche. Pour un inventaire : ce qu'il y a dessus, ce qu'on y trouve.",
-   t:["Menu","Hours","Photos","Reviews","News","Community"]},
+  {nom:"Checklist", k:"w liste", d:"Elle coche toutes les cases, au sens propre. Des cases nues et petites, sur papier : c'est la liste qui parle. Pour dire ce qu'il y a dessus, d'un coup d'oeil.",
+   coches:["Menu","Hours","Photos","Reviews","News","Community"]},
+
+  /* La meme liste, mais chaque rubrique porte son propre picto. La
+     Checklist dit "tout est coche" ; celle-ci dit "voila quoi". */
+  {nom:"Le sommaire", k:"k liste pic",
+   d:"La meme liste, chaque rubrique avec son picto. La Checklist dit que tout est coche ; le sommaire dit ce qu'il y a. Les pictos prennent la couleur du texte, jamais la leur.",
+   pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
+           ["playlist","Playlist"],["post","Post"],["link","Link"]]},
 
   {nom:"La signature", k:"e sign", d:"Le logotype seul, centre, avec une mention discrete. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true, sous:"Nowhere & everywhere"},
@@ -397,7 +439,14 @@ hote.innerHTML = COMPOS.map((c,i)=>{
   } else if (c.wmSeul) {
     dedans = `<i class="wm"></i><em>${esc(c.sous)}</em>`;
   } else if (c.k.includes("sgn")) {
-    dedans = `<i></i>`;
+    dedans = `<i></i><u>tre.ma/</u>`;
+  } else if (c.pictos) {
+    dedans = `<div class="bloc">` + c.pictos.map(([p,l])=>
+      `<span><i class="bx" style="--p:url('picto/web/${p}.svg')"></i>${esc(l)}</span>`).join("")
+      + `</div>`;
+  } else if (c.coches) {
+    dedans = `<div class="bloc">` + c.coches.map(l=>
+      `<span class="on"><i class="bx"></i>${esc(l)}</span>`).join("") + `</div>`;
   } else {
     dedans = `<div class="bloc">` + c.t.map(l=>`<span>${esc(l)}</span>`).join("")
       + (c.wm ? `<span class="wm"></span>` : "") + `</div>`;

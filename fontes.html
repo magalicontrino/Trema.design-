@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Fontes</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -195,8 +195,8 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 /* le picto plein cadre : il sort du format des deux cotes. Ecrit
    dans le feed et non pose par un style, c'est l'affiche du 04. */
-.post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
-  height:104%;aspect-ratio:78/91;z-index:2;background:currentColor;
+.post .edge{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:132%;aspect-ratio:78/91;z-index:2;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain;
   filter:drop-shadow(3.4cqw 4.2cqw 0 rgba(255,255,255,.3))}
 
@@ -239,8 +239,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    grotesque pour les capitales, une Garamond italique pour les
    bas-de-casse. Dans un feed l'italique ne parait qu'au post 02,
    mais c'est justement la qu'on veut la voir en situation. */
-.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif;
-              --fd-it:"EB Garamond",Garamond,serif}
 .ft-cormorant{--fd:"Inter","Helvetica Neue",Arial,sans-serif;
               --fd-it:"Cormorant Garamond",Garamond,serif}
 
@@ -250,9 +248,7 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    .fit — qui reste a 16 px — il se calcule la-bas puis se transmet en
    valeur absolue : -0.64 px, sur des lettres de 100 px. Autant dire
    rien. Sur la ligne, il se calcule sur le corps de la ligne. */
-.ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b,
 .ft-cormorant .post.tx .fit,.ft-cormorant .post.car .fit,.ft-cormorant .cnr b{font-variation-settings:"wght" 900}
-.ft-inter .post.tx .fit > span,.ft-inter .cnr b,
 .ft-cormorant .post.tx .fit > span,.ft-cormorant .cnr b{letter-spacing:-.04em}
 
 /* l'italique du 02, dans la langue de chacune */
@@ -266,20 +262,9 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 /* sur un ecran etroit, trois feeds de front font des cadres de 100 px :
    illisible. Ils s'empilent, chacun a pleine mesure. */
 @media(max-width:700px){.quatre{grid-template-columns:1fr;gap:clamp(30px,8vw,48px) 0}}
-.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
-  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
-.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
-.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
-.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
-  color:inherit;opacity:.45}
-.fontes button:hover{opacity:.75}
-.fontes button.on{opacity:1;border-bottom-color:currentColor}
 
 
 
@@ -408,9 +393,6 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   online address of a place, that it is already built from what they publish on Instagram and Google Maps,
   and that it stays current on its own. Captions below, in the order they go out.</p>
 
-  <div class="fontes" id="fontes"></div>
-  <div class="quatre" id="quatre" hidden></div>
-  <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
   <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux types de titres,
     pas plus : le bloc de capitales, en alternance noir sur blanc, et les titres de la page
     Titre, composes avec le couple du feed. Une seule affiche en coin, la ou elle est le
@@ -461,20 +443,10 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
    d'axes, puis on remesure : les corps sont recalcules a chaque
    bascule, sinon on comparerait des chasses figees sur la fonte
    precedente et l'essai ne voudrait rien dire. */
-const FONTES = [
-  {k:"inter",     t:"Inter + EB Garamond",     i:'"EB Garamond"',
-   d:"Capitales : Inter Black, interlettrage -4%. Bas-de-casse : EB Garamond italique, -3%."},
-  {k:"cormorant", t:"Inter + Cormorant",       i:'"Cormorant Garamond"',
-   d:"Capitales : Inter Black, -4%. Bas-de-casse : Cormorant Garamond italique, -3% — plus legere et plus etroite."},
-];
-const FAMILLES = {inter:'"Inter"', cormorant:'"Inter"'};
-const feed  = document.querySelector("#feed");
-const bar   = document.querySelector("#fontes");
-const fnote = document.querySelector("#fnote");
-const quatre= document.querySelector("#quatre");
 
-bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les deux</button>`;
+const FAMILLES = {cormorant:'"Inter"'};
+const feed  = document.querySelector("#feed");
+
 
 /* Google Fonts decoupe ses fichiers par plage de caracteres : une fonte
    n'est telechargee qu'au moment ou un de ses caracteres est rendu. On
@@ -500,42 +472,16 @@ function styleTitre(hote){
   });
 }
 
-const charge = k => Promise.all([
-  document.fonts.load(`900 40px ${FAMILLES[k]}`),
-  document.fonts.load(`italic 600 40px ${FONTES.find(f=>f.k===k).i}`),
+/* Un seul couple : Inter Black pour les capitales, Cormorant Garamond
+   italique pour les bas-de-casse. Les deux sont chargees avant qu'on
+   rende, sinon la moitie du feed se mesure sur une police de secours. */
+const charge = () => Promise.all([
+  document.fonts.load('900 40px "Inter"'),
+  document.fonts.load('italic 600 40px "Cormorant Garamond"'),
 ]);
 
-function fonte(k){
-  quatre.hidden = true; quatre.innerHTML = ""; feed.hidden = false;
-  feed.className = "feed fx-typo ft-" + k;
-  fnote.textContent = FONTES.find(f=>f.k===k).d;
-  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
-  charge(k).then(()=>{ renderFeed(feed, "pics/feed"); styleTitre(feed); });
-}
-
-/* les quatre cote a cote : chaque colonne est un feed complet. On attend
-   les quatre polices avant de rendre quoi que ce soit, sinon les
-   colonnes se mesurent sur la police de secours et se retrouvent toutes
-   a la meme taille — la comparaison ne voudrait plus rien dire. */
-function cote(){
-  feed.hidden = true; quatre.hidden = false;
-  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent = "Les deux feeds cote a cote, meme ordre, memes photos. "
-    + "Seule la fonte change d'une colonne a l'autre.";
-  quatre.innerHTML = FONTES.map(f =>
-    `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
-  Promise.all(FONTES.map(f=>charge(f.k)))
-    .then(()=> FONTES.forEach(f => {
-      const h = document.querySelector(`#q-${f.k}`);
-      renderFeed(h, "pics/feed"); styleTitre(h);
-    }));
-}
-
-bar.addEventListener("click", e => {
-  const b = e.target.closest("button"); if (!b) return;
-  b.dataset.k === "tout" ? cote() : fonte(b.dataset.k);
-});
-fonte("inter");
+feed.className = "feed fx-typo ft-cormorant";
+charge().then(()=>{ renderFeed(feed, "pics/feed"); styleTitre(feed); });
 
 document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
   `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");

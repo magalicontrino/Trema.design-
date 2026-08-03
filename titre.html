@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Le titre</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -234,29 +234,15 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    variable : memes cadres, meme regle de mise a la mesure, meme
    ordre. Seule la fonte bascule. Tout passe par --fd, donc il
    suffit de la redefinir et de re-mesurer. */
-.ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
 
 /* chaque fonte a ses propres axes : on ne peut pas les regler une
    fois pour toutes, il faut parler la langue de chacune */
-.ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
 
 /* l'italique du 02, dans la langue de chacune */
-.ft-inter     .post.tx.it .fit{font-style:italic}
 
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
-.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
-  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
-.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
-.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
-.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
-  color:inherit;opacity:.45}
-.fontes button:hover{opacity:.75}
-.fontes button.on{opacity:1;border-bottom-color:currentColor}
 
 
 
@@ -270,17 +256,18 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    corps, elle parait deux fois plus petite. Chaque segment porte
    donc son propre rapport, et c'est la ligne entiere qu'on met a
    la mesure — les rapports internes ne bougent pas. */
-/* La mesure de relecture n'est pas celle de l'affiche : a pleine
-   largeur les titres sont trop gros pour qu'on les compare. On les
-   ramene a une colonne etroite et on aere entre eux. La composition
-   ne change pas — tout est relatif a la mesure, seule l'echelle bouge. */
-/* Le blanc autour compte autant que la composition : dans la
-   reference le bloc occupe a peine la moitie du cadre. On le pose en
-   marges et en gouttiere, jamais en padding sur .titre — clientWidth
-   inclut le padding, et la mesure des lignes deborderait dedans. */
-main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
-.titre{position:relative;max-width:min(100%,620px);
-  margin:clamp(26px,3.5vw,44px) 0 clamp(76px,10vw,150px)}
+/* GALERIE — trois par trois, pour voir l'ensemble d'un coup.
+   En une seule colonne il fallait derouler pour comparer deux coupes,
+   et c'est justement la comparaison qui compte ici. Chaque titre est
+   mis a la mesure de SA colonne : la composition ne change pas, seule
+   l'echelle suit. */
+main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
+/* Deux colonnes, pas trois : a trois les titres etaient trop petits
+   pour qu'on juge une composition. Deux colonnes doublent la largeur,
+   donc quadruplent la surface — c'est ce qu'il faut pour comparer. */
+.galerie{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));
+  gap:clamp(40px,5vw,76px) clamp(30px,4vw,56px)}
+.titre{position:relative;max-width:100%;margin:0}
 /* LE CONTOUR BLANC — c'est lui, le truc de la reference.
    Les lignes ne se touchent pas : elles se CHEVAUCHENT. Les
    ascendantes de l'italique montent dans la ligne du dessus, les
@@ -363,8 +350,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
 /* Les trois candidates ne pilotent que les capitales : l'italique
    reste la Garamond dans les trois cas, c'est elle le second texte. */
-.ft-inter    {--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
-              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
 /* Apple Garamond est plus legere et plus etroite qu'EB Garamond.
    Cormorant en est le plus proche des libres — c'est la variante a
    regarder si c'est vraiment ce dessin-la que tu veux. */
@@ -378,17 +363,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    rond — parce que trois rectangles se liraient comme un tableau.
    Le texte reste a l'encre sur les trois : sur ces aplats clairs, du
    blanc ne passerait pas le contraste. */
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
-.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
-  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
-.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
-.fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
-.fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-  background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
-  color:inherit;opacity:.45}
-.fontes button:hover{opacity:.75}
-.fontes button.on{opacity:1;border-bottom-color:currentColor}
 
 
 
@@ -402,17 +376,18 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    corps, elle parait deux fois plus petite. Chaque segment porte
    donc son propre rapport, et c'est la ligne entiere qu'on met a
    la mesure — les rapports internes ne bougent pas. */
-/* La mesure de relecture n'est pas celle de l'affiche : a pleine
-   largeur les titres sont trop gros pour qu'on les compare. On les
-   ramene a une colonne etroite et on aere entre eux. La composition
-   ne change pas — tout est relatif a la mesure, seule l'echelle bouge. */
-/* Le blanc autour compte autant que la composition : dans la
-   reference le bloc occupe a peine la moitie du cadre. On le pose en
-   marges et en gouttiere, jamais en padding sur .titre — clientWidth
-   inclut le padding, et la mesure des lignes deborderait dedans. */
-main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
-.titre{position:relative;max-width:min(100%,620px);
-  margin:clamp(26px,3.5vw,44px) 0 clamp(76px,10vw,150px)}
+/* GALERIE — trois par trois, pour voir l'ensemble d'un coup.
+   En une seule colonne il fallait derouler pour comparer deux coupes,
+   et c'est justement la comparaison qui compte ici. Chaque titre est
+   mis a la mesure de SA colonne : la composition ne change pas, seule
+   l'echelle suit. */
+main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
+/* Deux colonnes, pas trois : a trois les titres etaient trop petits
+   pour qu'on juge une composition. Deux colonnes doublent la largeur,
+   donc quadruplent la surface — c'est ce qu'il faut pour comparer. */
+.galerie{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));
+  gap:clamp(40px,5vw,76px) clamp(30px,4vw,56px)}
+.titre{position:relative;max-width:100%;margin:0}
 /* LE CONTOUR BLANC — c'est lui, le truc de la reference.
    Les lignes ne se touchent pas : elles se CHEVAUCHENT. Les
    ascendantes de l'italique montent dans la ligne du dessus, les
@@ -495,8 +470,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
 
 /* Les trois candidates ne pilotent que les capitales : l'italique
    reste la Garamond dans les trois cas, c'est elle le second texte. */
-.ft-inter    {--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
-              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
 /* Apple Garamond est plus legere et plus etroite qu'EB Garamond.
    Cormorant en est le plus proche des libres — c'est la variante a
    regarder si c'est vraiment ce dessin-la que tu veux. */
@@ -523,14 +496,9 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    Le nom reste dessous, petit et a l'encre : a 9 px il lui faut 4.5
    de contraste, il est a 11.4. */
 
-.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,5vw,72px)}
-.quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
 .titnom{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
-  font-weight:400;opacity:.45;margin:0 0 6px;padding-bottom:6px;border-bottom:var(--rule);
-  max-width:min(100%,660px)}
+  font-weight:400;opacity:.45;margin:0 0 8px;padding-bottom:6px;border-bottom:var(--rule)}
 
-.quatre h4{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
-  font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:var(--rule);opacity:.55}
 
 /* trois colonnes cote a cote n'ont pas de sens sur un ecran etroit :
    les couples s'empilent, chacun a pleine mesure. La mise a la mesure
@@ -565,11 +533,8 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
     bas-de-casse italiques se touchent, sans espace de mot. Deux fontes : Inter Black a -4% pour les capitales, EB Garamond
     italique a -3% pour les bas-de-casse. Le bouton ne change que la premiere.</p>
 
-  <div class="fontes" id="fontes"></div>
-  <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
 
   <div id="un"></div>
-  <div class="quatre" id="quatre" hidden></div>
 </main>
 <script>
 "use strict";
@@ -651,19 +616,11 @@ const LIGNES = TITRES[0].l;
 /* Ce qui change d'un bouton a l'autre, c'est le texte 1 seulement.
    Le texte 2 — la Garamond italique a -3% — ne bouge pas : c'est la
    constante de la composition. */
-const FONTES = [
-  {k:"inter",     t:"Inter + EB Garamond",  i:'"EB Garamond"',
-   d:"Texte 1 : Inter Black, -4%. Texte 2 : EB Garamond italique, -3%."},
-  {k:"cormorant", t:"Inter + Cormorant", i:'"Cormorant Garamond"',
-   d:"Texte 1 : Inter Black, -4%. Texte 2 : Cormorant Garamond italique, -3% — plus legere et plus etroite qu'EB Garamond, c'est la plus proche d'Apple Garamond parmi les libres."},
-];
-const FAMILLES = {inter:'"Inter"', cormorant:'"Inter"'};
+
+const FAMILLES = {cormorant:'"Inter"'};
 
 
-const bar=document.querySelector("#fontes"), fnote=document.querySelector("#fnote");
-const un=document.querySelector("#un"), quatre=document.querySelector("#quatre");
-bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les deux</button>`;
+const un = document.querySelector("#un");
 
 /* La composition seule. Les mentions decoratives sont retirees : le
    bloc se tient tout seul, et c'est plus juste — la reference les
@@ -716,38 +673,27 @@ function fitTitre(hote){
   });
 }
 
-const charge = k => Promise.all([
-  document.fonts.load(`900 40px ${FAMILLES[k]}`),
-  document.fonts.load(`italic 600 40px ${FONTES.find(f=>f.k===k).i}`),
+/* Un seul couple : Inter Black pour les capitales, Cormorant Garamond
+   italique pour les bas-de-casse. On charge les deux AVANT de mesurer,
+   sinon la moitie du bloc se mesure sur une police de secours — et
+   c'est exactement ce qui vient d'arriver : en retirant le selecteur
+   j'ai emporte le tableau FONTES, charge() levait une erreur, la
+   promesse ne se resolvait jamais et fitTitre n'etait jamais appele.
+   Les titres restaient a leur corps par defaut, minuscules. */
+const charge = () => Promise.all([
+  document.fonts.load('900 40px "Inter"'),
+  document.fonts.load('italic 600 40px "Cormorant Garamond"'),
 ]);
 
-function fonte(k){
-  quatre.hidden=true; quatre.innerHTML=""; un.hidden=false;
-  un.className="ft-"+k;
-  un.innerHTML = TITRES.map(t=>
-    `<h4 class="titnom">${t.n}</h4>` + dessine(false, t.l)).join("");
-  fnote.textContent=FONTES.find(f=>f.k===k).d;
-  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
-  charge(k).then(()=>fitTitre(un));
+function rendre(){
+  un.className = "ft-cormorant";
+  un.innerHTML = `<div class="galerie">` + TITRES.map(t =>
+    `<div><h4 class="titnom">${t.n}</h4>` + dessine(false, t.l) + `</div>`).join("")
+    + `</div>`;
+  charge().then(()=> fitTitre(un));
 }
-
-function cote(){
-  un.hidden=true; quatre.hidden=false;
-  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent="Le meme titre, la meme composition, deux couples. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
-  quatre.innerHTML=FONTES.map(f=>
-    `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">`
-    + TITRES.map(t=>dessine(false, t.l)).join('<div style="height:clamp(24px,3vw,44px)"></div>')
-    + `</div></div>`).join("");
-  Promise.all(FONTES.map(f=>charge(f.k)))
-    .then(()=>FONTES.forEach(f=>fitTitre(document.querySelector(`#t-${f.k}`))));
-}
-
-bar.addEventListener("click", e=>{const b=e.target.closest("button"); if(!b) return;
-  b.dataset.k==="tout" ? cote() : fonte(b.dataset.k);});
-addEventListener("resize", ()=>{ quatre.hidden ? fitTitre(un)
-  : FONTES.forEach(f=>fitTitre(document.querySelector(`#t-${f.k}`))); }, {passive:true});
-fonte("inter");
+addEventListener("resize", ()=> fitTitre(un), {passive:true});
+rendre();
 
 })();
 </script>
