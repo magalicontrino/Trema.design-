@@ -30,113 +30,114 @@
 window.TREMA_FEED = [
   /* Le feed est bati sur le vocabulaire, et sur rien d'autre. Chaque
      cadre de texte EST une composition de la page Compositions, avec
-     ses mots a elle — si on la reecrit a chaque emploi, ce n'est plus
-     un vocabulaire, c'est une mise en page refaite chaque fois.
-     Entre deux compositions, une photographie. Toujours.
+     ses mots a elle. Une composition reecrite a chaque emploi n'est
+     plus un vocabulaire, c'est une mise en page refaite chaque fois.
+
+     UNE PHOTO ENTRE CHAQUE COMPOSITION, sans exception. Les trois
+     compositions qui portent deja une image comptent comme des photos
+     — le picto qui la signe, le signe qui la decoupe, la carte de
+     lieu — et occupent donc une place de photo, jamais de texte.
+
+     L'ORDRE N'EST PAS CELUI DE LA PAGE COMPOSITIONS. Range dans
+     l'ordre du vocabulaire, le feed enchainait les six variations du
+     signe : on scrollait a travers six pictos d'affilee et le message
+     disparaissait derriere la marque. Elles sont donc reparties une
+     tous les trois cadres de texte, et entre elles passent les blocs,
+     les titres composes, les listes. Un picto se voit d'autant mieux
+     qu'il est seul de sa rangee.
 
      Les photos alternent strictement un lieu, un objet : sans cette
      regle on enchaine les gros plans de nourriture et on oublie que
-     trema s'adresse a des commercants.
+     trema s'adresse a des commercants. */
 
-     Trois compositions occupent une place de photo, parce que la
-     photographie EST leur sujet : le picto qui la signe, le signe qui
-     la decoupe, et la carte de lieu. */
-
-  /* ── 01 · le bloc ── */
+  /* ── ce que c'est ── */
   {p:"37-journal-titre",  c:"A front page, held out of the sea."},
-  {t:["Every place","has an","address"], s:"k",
+  {nom:"Le bloc", t:["Every place","has an","address"], s:"k",
    c:"Every place has an address. trema is yours online."},
 
-  /* ── 02 · le bloc clair ── */
-  {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
-  {t:["Nothing","to build.","Nothing to","maintain."], s:"w",
-   c:"Nothing to build, nothing to maintain."},
+  /* La carte de lieu en troisieme position, des la premiere rangee.
+     C'est la seule carte qui montre un vrai client : elle doit tomber
+     avant qu'on ait fini d'expliquer ce que trema est, pas apres.
+     Les deux vues echangees sont toutes les deux des lieux, donc
+     l'alternance lieu / objet des photos tient toujours. */
+  {p:"80-salle-restaurant", mot:"lagaleriedesarts", nom:"La carte de lieu",
+   c:"La Galerie des Arts. Every place has an address — here is theirs."},
+  {nom:"Le signe", sgn:1, adr:"tre.ma/", s:"k",
+   c:"Not a website. The address itself."},
 
-  /* ── 03 · le titre compose, un mot par ligne ── */
   {p:"33-espresso-ochre", c:"And what you serve in it."},
-  {ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}], [{t:"Your", s:"up"}],
+  {nom:"Le titre compose", ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}], [{t:"Your", s:"up"}],
        [{t:"place.", s:"it"}], [{t:"One", s:"up"}], [{t:"link", s:"it"}]], s:"w",
    c:"All about your place. One link."},
 
-  /* ── 04 · le meme, retourne et coupe en quatre ── */
   {p:"21-cafe",           c:"A cafe."},
-  {ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}],
+  {nom:"Le chiffre", t:["380+","@mark"], s:"k", big:1,
+   c:"380+ tremas published, heading to 1,000+."},
+
+  /* le masque : premiere des six variations du signe, et la suivante
+     ne viendra que trois cadres plus loin. */
+  {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
+  {nom:"Le masque", sgn:"fil", adr:"Every place has an address", s:"k",
+   c:"Every place has an address — cut into the mark itself."},
+
+  {p:"06-brick-yellow",   c:"A dining room, at opening time."},
+  {nom:"Le bloc clair", t:["Nothing","to build.","Nothing to","maintain."], s:"w",
+   c:"Nothing to build, nothing to maintain."},
+
+  {p:"32-bread-terrazzo", c:"Sourdough, and one hard morning diagonal."},
+  {nom:"Le drapeau", t:["Why","vinyl","bars","love ?"], s:"k", rag:1,
+   c:"Why do vinyl bars love trema? Because everything is already in the menu."},
+
+  {p:"24-gallery",        c:"A gallery. Nothing to build."},
+  {nom:"Le signe et le logotype", sgn:"duo", s:"k",
+   c:"The mark and the name. Both drawn, neither typed."},
+
+  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
+  {nom:"Checklist", coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
+   c:"Menu, hours, photos, reviews, news and community. It is all there."},
+
+  {p:"01-bar-pro",        c:"A bar. Purpose-built for physical places."},
+  {nom:"Le titre compose, clair sur noir", ti:[[{t:"All", s:"up"}], [{t:"about", s:"it"}],
        [{t:"Your", s:"up"}, {t:"place.", s:"it"}],
        [{t:"One", s:"up"}, {t:"link", s:"it"}]], s:"k",
    c:"The same words, cut in four. It is the cut that lets it breathe."},
 
-  /* ── 05 · le mot seul ── */
-  {p:"27-tomme-shadow",   c:"Your menu, exactly as you publish it."},
-  {t:["One","link"], s:"k", big:1,
-   c:"Everything about your place. One link."},
-
-  /* ── 06 · le drapeau ── */
-  {p:"06-brick-yellow",   c:"A dining room, at opening time."},
-  {t:["Why","vinyl","bars","love ?"], s:"k", rag:1,
-   c:"Why do vinyl bars love trema? Because everything is already in the menu."},
-
-  /* ── 07 · le coin ── */
-  {p:"32-bread-terrazzo", c:"Sourdough, and one hard morning diagonal."},
-  {corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
-   c:"A bio link lists your links. Your trema is the destination."},
-
-  /* ── 08 · le signe ── */
-  {p:"24-gallery",        c:"A gallery. Nothing to build."},
-  {sgn:1, adr:"tre.ma/", s:"k",
-   c:"Not a website. The address itself."},
-
-  /* ── 09 · le signe entier ── */
-  {p:"48-cup-coffee",     c:"Two sources, no configuration."},
-  {sgn:"ent", adr:"tre.ma", s:"k",
-   c:"tre.ma — the whole mark, this time."},
-
-  /* ── 10 · le signe centre ── */
-  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
-  {sgn:"ctr", adr:"trema.design", s:"k",
-   c:"trema.design"},
-
-  /* ── 11 · le signe et le logotype ── */
-  {p:"28-tomme-oak",      c:"It does not go stale."},
-  {sgn:"duo", s:"k",
-   c:"The mark and the name. Both drawn, neither typed."},
-
-  /* ── 12 · le masque ── */
-  {p:"11-florist-std",    c:"A florist. Found where people actually look."},
-  {sgn:"fil", adr:"Every place has an address", s:"k",
-   c:"Every place has an address — cut into the mark itself."},
-
-  /* ── 13 · le signe repete, et la photo decoupee avant lui ── */
-  {p:"22-plate", dec:1,   c:"A plate, cut into the mark."},
-  {sgn:"rep", s:"k",
+  {p:"20-magazines", phc:1, nom:"Le picto sur la photo", c:"Signed, not decorated."},
+  {nom:"Le signe repete", sgn:"rep", s:"k",
    c:"Repeat a sign and it stops being one. It becomes a material."},
 
-  /* ── 14 · le chiffre ── */
-  {p:"36-lattice-shadow", c:"A timber screen, and its grid on raw concrete."},
-  {t:["380+","@mark"], s:"k", big:1,
-   c:"380+ tremas published, heading to 1,000+."},
+  {p:"11-florist-std",    c:"A florist. Found where people actually look."},
+  {nom:"Le mot seul", t:["One","link"], s:"k", big:1,
+   c:"Everything about your place. One link."},
 
-  /* ── 15 · la checklist ── */
-  {p:"05-cocktail",       c:"Dappled sun on a coupe."},
-  {coches:["Menu","Hours","Photos","Reviews","News","Community"], s:"w",
-   c:"Menu, hours, photos, reviews, news and community. It is all there."},
-
-  /* ── 16 · le sommaire ── */
-  {p:"34-blue-door",      c:"A door. A website is a project."},
-  {pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
+  {p:"22-plate", dec:1, nom:"La photo decoupee",   c:"A plate, cut into the mark."},
+  {nom:"Le sommaire", pictos:[["menu","Menu"],["gallery","Gallery"],["reviews","Reviews"],
            ["playlist","Playlist"],["post","Page"],["link","Link"]], s:"w",
    c:"Your menu, photos, news, reviews and community — behind one link."},
 
-  /* ── 17 · le picto sur la photo, puis la signature ── */
-  {p:"20-magazines", phc:1, c:"Signed, not decorated."},
-  {sign:1, s:"k",
-   c:"trema."},
+  {p:"36-lattice-shadow", sph:1, nom:"Le signe sur la photo",
+   c:"The mark laid whole over the frame — the inverse of the cut-out."},
+  {nom:"Le signe entier", sgn:"ent", adr:"tre.ma", s:"k",
+   c:"tre.ma — the whole mark, this time."},
 
-  /* ── 18 · la carte de lieu, et l'appel ── */
-  {p:"80-salle-restaurant", mot:"lagaleriedesarts",
-   c:"La Galerie des Arts. Every place has an address — here is theirs."},
-  {t:["Create","your","@mark"], s:"k",
+  {p:"05-cocktail",       c:"Dappled sun on a coupe."},
+  {nom:"Le coin", corner:{w:"Yours.", n:["A BIO LINK","LISTS LINKS.","YOURS IS THE","DESTINATION"]}, s:"w",
+   c:"A bio link lists your links. Your trema is the destination."},
+
+  {p:"34-blue-door",      c:"A door. A website is a project."},
+  {nom:"Le signe centre", sgn:"ctr", adr:"trema.design", s:"k",
+   c:"trema.design"},
+
+  /* ── l'appel, et la signature pour fermer ── */
+  {p:"35-wine-terrazzo",  c:"Amber glass, and a long caustic shadow."},
+  {nom:"Le bloc", t:["Create","your","@mark"], s:"k",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
+
+  {p:"31-teak-room",      c:"A room. No project, no maintenance."},
+  {nom:"La signature", sign:1, s:"k",
+   c:"trema."},
 ];
+
 
 
 /* ── rendu ────────────────────────────────────────────────────
@@ -156,7 +157,11 @@ window.renderFeed = function (host, dir, small) {
                 l:"--bg:var(--lait);--fg:var(--encre)"};
 
   host.innerHTML = window.TREMA_FEED.map((o, i) => {
-    const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`;
+    const n = `<span class="n">${String(i+1).padStart(2,"0")}</span>`
+      /* le nom de la composition, montre au survol seulement : on doit
+         pouvoir nommer un cadre sans quitter le feed, et ne rien voir
+         quand on le regarde pour ce qu'il est. */
+      + (o.nom ? `<span class="nomc">${o.nom}</span>` : "");
     if (o.p) {
       /* Couches emises pour chaque photo mais masquees : seul le
          style creatif les revele, en rotation. Le texte pose sur
@@ -165,7 +170,8 @@ window.renderFeed = function (host, dir, small) {
       /* `phc` signe la photo du picto en coin, `dec` la decoupe dans
          le dessin. Sans l'un ni l'autre, la photo reste nue — c'est le
          cas le plus frequent, et il doit le rester. */
-      const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "") + (o.mot ? " cli" : "");
+      const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "")
+                 + (o.sph ? " sph" : "") + (o.mot ? " cli" : "");
       const nom = o.mot
         ? `<div class="ov"><b><i class="pic"></i><u class="bar"></u><em>${o.mot}</em></b></div>` : "";
       return `<div class="post ph${mode}">${n}
@@ -184,7 +190,7 @@ window.renderFeed = function (host, dir, small) {
         const fond = sl.pic
           ? `<i class="carpic" style="--p:url('picto/web/${sl.pic}.svg')"></i>` : "";
         return `<div class="sl${k ? "" : " on"}${sl.rag ? " rag" : ""}">${fond}
-          <div class="fit">${ls}</div><i class="sig"></i></div>`;
+          <div class="fit">${ls}</div></div>`;
       }).join("");
       const dots = o.car.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("");
       return `<div class="post car" data-n="${o.car.length}" style="${BG[o.s] || ""}">${n}${slides}
@@ -200,7 +206,7 @@ window.renderFeed = function (host, dir, small) {
         l.map(g => `<span class="seg ${g.s}" data-r="${g.s === "it" ? 1.04 : 1}">${g.t}</span>`).join("") +
         `</div>`).join("");
       return `<div class="post tx ti" style="${VARS[o.s] || ""}">${n}
-        <div class="titre">${lignes}</div><i class="sig"></i></div>`;
+        <div class="titre">${lignes}</div></div>`;
     }
     /* le cadre-signe : le picto sort du format des deux cotes, sans
        un mot. Il ne depend d'aucun style, il est ecrit dans le feed —
@@ -222,7 +228,7 @@ window.renderFeed = function (host, dir, small) {
       const lignes = o.coches.map(l =>
         `<span class="on"><i class="bx"></i>${l}</span>`).join("");
       return `<div class="post tx liste" style="${BG[o.s]}">${n}
-        <div class="fit">${lignes}</div><i class="sig"></i></div>`;
+        <div class="fit">${lignes}</div></div>`;
     }
     /* le sommaire : la carte divisee en six, un picto et un mot par
        case. Il ne passe pas par la mise a la mesure — son corps est
@@ -259,7 +265,7 @@ window.renderFeed = function (host, dir, small) {
        le mot cale en coin ne vit que la ou il est ecrit dans le feed. */
     return `<div class="post tx${mod}" style="${BG[o.s]}">${n}
       <div class="fit">${lines}</div>
-      <i class="sig"></i></div>`;
+      </div>`;
   }).join("");
 
   host.querySelectorAll(".post.car").forEach(car => {
@@ -414,5 +420,43 @@ function fitAll(host) {
       if (mark) { mark.style.width = box + "px"; mark.style.height = (box/4) + "px"; return; }
       mesure(sp, box);
     });
+  });
+
+  /* ══ GARDE-FOU DE HAUTEUR ═════════════════════════════════════
+     UNE COMPOSITION VALIDEE DOIT ETRE POSTABLE TELLE QUELLE. Si elle
+     tient sur la page Compositions, elle doit tenir dans le cadre du
+     feed — sinon "valide" ne veut rien dire.
+
+     La mise a la mesure ne regle que la LARGEUR. Six lignes courtes,
+     comme le titre compose un mot par ligne, passent la largeur sans
+     difficulte et sortent par le bas : c'est exactement ce qui vient
+     d'arriver, "One link" etait coupe. La page Compositions, elle,
+     calait deja en hauteur ; le feed non. Les deux le font maintenant.
+
+     On reduit TOUT le bloc dans la meme proportion. Reduire ligne a
+     ligne casserait le corps unique, qui est la regle de la moitie des
+     compositions. Le dessin du logotype suit dans le meme rapport : en
+     pixels il ne se resout pas sur le corps, il faut le remettre a
+     l'echelle a la main. */
+  host.querySelectorAll(".post").forEach(post => {
+    const bloc = post.querySelector(".fit, .titre");
+    if (!bloc) return;
+    const st = getComputedStyle(post);
+    const dispo = post.clientHeight - parseFloat(st.paddingTop) - parseFloat(st.paddingBottom);
+    if (!(dispo > 0) || bloc.scrollHeight <= dispo) return;
+    /* 0.98 et non 1 : cale au pixel pres, un arrondi de rendu suffit a
+       remettre une ligne d'italique un cheveu sous le bord, et une
+       descendante se retrouve rognee. Ce pour-cent d'air ne se voit
+       pas et supprime le cas limite. */
+    const k = dispo * 0.98 / bloc.scrollHeight;
+    const mettre = x => {
+      if (x.style.fontSize) x.style.fontSize = (parseFloat(x.style.fontSize) * k) + "px";
+      if (x.classList.contains("wordmark") && x.style.width) {
+        x.style.width  = (parseFloat(x.style.width) * k) + "px";
+        x.style.height = (parseFloat(x.style.height) * k) + "px";
+      }
+    };
+    mettre(bloc);
+    bloc.querySelectorAll("*").forEach(mettre);
   });
 }

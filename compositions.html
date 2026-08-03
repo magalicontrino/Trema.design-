@@ -438,6 +438,20 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
   clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
 .cadre.cli b em{font-style:normal}
 
+/* 16 le signe sur la photo — l'inverse exact de la decoupe. La, le
+   dessin taillait l'image et le papier passait autour ; ici il se pose
+   dessus, plein, et c'est l'image qui passe autour. Meme dessin, meme
+   taille, deux gestes opposes : l'un evide, l'autre couvre.
+   Blanc en dur et non currentColor : il doit tenir sur une photo, pas
+   sur un fond — et la photo choisie doit etre sombre, sinon le signe
+   s'y dissout. */
+.cadre.sph{padding:0;place-items:stretch}
+.cadre.sph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cadre.sph i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+  height:76%;aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
 .cadre.coin{padding:0}
 .cadre.coin b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
@@ -656,6 +670,10 @@ const COMPOS = [
    d:"L'adresse du lieu, composee comme un titre sur son propre mur. Le logotype est le dessin, la barre est tracee, seul le nom du lieu est compose. C'est l'adresse le produit.",
    ph:"80-salle-restaurant", mot:"lagaleriedesarts"},
 
+  {nom:"Le signe sur la photo", k:"sph", s:"",
+   d:"L'inverse exact de la decoupe : le dessin ne taille plus l'image, il se pose dessus, plein. Meme dessin, meme taille, deux gestes opposes. La photo doit etre sombre, sinon le signe s'y dissout.",
+   ph:"36-lattice-shadow"},
+
   {nom:"La photo decoupee", k:"dec", s:"in",
    d:"Le signe ne se pose plus sur l'image, il la decoupe : la photo n'existe que dans la silhouette du dessin, le papier traverse le reste. Le geste le plus fort de la serie, donc le plus rare.",
    ph:"22-plate"},
@@ -683,7 +701,7 @@ hote.innerHTML = COMPOS.map((c,i)=>{
     /* la photo est la composition : selon la classe, le signe la signe
        en coin, il la decoupe, ou le nom du lieu se pose dessus. */
     dedans = `<img src="pics/bank/${c.ph}.jpg" alt="">`
-           + (c.k.includes("phc") ? `<i></i>` : "")
+           + (c.k.includes("phc") || c.k.includes("sph") ? `<i></i>` : "")
            + (c.mot ? `<div class="ov"><b><i class="pic"></i><u class="bar"></u><em>${esc(c.mot)}</em></b></div>` : "");
   } else if (c.mot) {
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;

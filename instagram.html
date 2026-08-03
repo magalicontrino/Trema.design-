@@ -156,16 +156,25 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   gap:4px;justify-content:center}
 .post.car .dots i{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.25}
 .post.car .dots i.on{opacity:.9}
-.post.car .sig{opacity:.35}
+
 
 /* ── LE SIGNE EST TOUJOURS LA ───────────────────────────────
    Discret par defaut, en bas a droite, a la taille d'une
    signature. Les styles qui le veulent imposant le reprennent
    plus bas. Il n'y a aucun cadre de texte sans lui. */
-.post .sig{position:absolute;right:6%;bottom:6%;z-index:6;display:block;
-  width:7.5cqw;aspect-ratio:78/91;background:currentColor;opacity:.5;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;
-  mask:url("Logo.svg") no-repeat center/contain}
+/* Le picto de signature a ete retire de tous les cadres. Il n'etait
+   dans aucune composition : c'etait un ajout du feed, et il se posait
+   sur des cartes qui ont deja leur facon de signer. On n'ajoute rien
+   qui ne soit pas dans le vocabulaire.
+
+   A la place, le nom de la composition, montre au survol seulement.
+   On doit pouvoir nommer un cadre sans quitter le feed, et ne rien
+   voir quand on le regarde pour ce qu'il est. */
+.post .nomc{position:absolute;left:0;right:0;bottom:0;z-index:8;padding:8px 9px;
+  background:rgba(20,20,20,.88);color:#fff;font-family:var(--fm);font-size:8.5px;
+  letter-spacing:.14em;text-transform:uppercase;opacity:0;transition:opacity .16s ease;
+  pointer-events:none}
+.post:hover .nomc{opacity:1}
 
 
 /* le cadre-signe : le picto seul, coupe par le format, dans tous
@@ -230,7 +239,12 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    L'inverse de la regle de la maison, et c'est voulu — une
    question se lit comme une phrase, pas comme une affiche
    justifiee. Bas de casse, sans capitales forcees. */
-.post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
+/* Le drapeau, EXACTEMENT comme dans la composition : capitales,
+   interligne .86, inter-lettrage -.02em. Le feed le composait en
+   bas-de-casse avec un autre interligne — deux dessins differents sous
+   un seul nom, et le nom ne veut plus rien dire. Une composition
+   validee se pose telle quelle, ou elle n'est pas validee. */
+.post.tx.rag .fit{text-transform:uppercase;line-height:.86;letter-spacing:-.02em}
 .post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
 .post.tx.rag .fit .wm-line .wordmark,
 .post.car .sl.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
@@ -317,6 +331,13 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   margin:0 .16em -.02em;text-decoration:none;background:#fff;
   clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
 .post.ph.cli b em{font-style:normal}
+
+/* Le signe sur la photo : l'inverse de la decoupe. Le dessin ne taille
+   plus l'image, il se pose dessus, plein. */
+.post.ph.sph::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:2;height:76%;aspect-ratio:78/91;background:#fff;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
 
 .post.ph.dec{background:var(--papier)}
 .post.ph.dec img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
