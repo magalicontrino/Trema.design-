@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trema — Instagram</title>
+<title>trema — Compositions</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=block">
 
@@ -240,76 +240,80 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.car .sl.rag .fit{text-transform:none;letter-spacing:0;line-height:.92}
 .post.car .sl.rag .fit > span{display:block;width:max-content;white-space:nowrap}
 
-/* les legendes — une ligne par post, dans l'ordre de publication */
-.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
-@media(max-width:860px){.specs{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.specs{grid-template-columns:1fr}}
-.spec{border-top:var(--rule);padding:10px 0 13px;display:grid;grid-template-columns:26px 1fr;gap:10px;
-  align-items:baseline}
-.spec .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
-.spec p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch}
 
-/* ── THE PICTURES CARRY THE COLOUR ─────────────────────────
-   The graphic system has none, so the photographs are allowed a
-   little more than they came with. Saturation is set once here;
-   each post only dials its own brightness through --br. Keep
-   --sat under 1.3 — past that the food goes plastic. */
-.post img.bgimg,.post .half img,.post .cutmask img,.post .kw .in img{
-  filter:saturate(var(--sat,1.18)) contrast(var(--ct,1.03)) brightness(var(--br,1))}
+/* ── LES COMPOSITIONS ─────────────────────────────────────────
+   Dix facons de composer un cadre de texte, nommees pour qu'on
+   puisse les demander a voix haute. Chacune est rendue au format
+   du feed, 4:5, avec de la vraie copie trema — pas du faux texte :
+   une composition ne se juge qu'avec les mots qu'elle portera.
 
-/* the window cut, applied to a photograph inside a post */
-.post .cutmask{position:absolute;inset:8%;z-index:2;overflow:hidden;
+   Le nom est au-dessus, l'usage en dessous. C'est le nom qui compte :
+   c'est lui qui devient le vocabulaire. */
+.compos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:clamp(26px,3.4vw,52px) var(--gut);margin-top:clamp(24px,3vw,44px)}
+.compo .nom{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.compo .nom b{font-family:var(--fd);font-variation-settings:"wght" 800;
+  font-size:clamp(15px,1.15vw,19px);letter-spacing:-.02em}
+.compo .nom span{font-family:var(--fm);font-size:9px;letter-spacing:.1em;opacity:.4}
+.compo .usage{font-family:var(--fm);font-size:10px;line-height:1.5;opacity:.55;
+  margin-top:9px;max-width:34ch}
+
+/* le cadre : meme format et meme conteneur que dans le feed */
+.cadre{position:relative;aspect-ratio:4/5;overflow:hidden;container-type:inline-size;
+  background:var(--papier);color:var(--encre);display:grid;place-items:center;padding:9%}
+.cadre.k{background:var(--noir);color:#fff}
+.cadre.e{background:var(--encre);color:var(--papier)}
+.cadre.w{background:var(--blanc);color:var(--encre)}
+.cadre.l{background:var(--lait);color:var(--encre)}
+.bloc{width:100%}
+.bloc span{display:block;white-space:nowrap;font-family:var(--fd);
+  font-variation-settings:"wght" 900;line-height:.86;text-transform:uppercase;
+  letter-spacing:.012em}
+
+/* 03 le titre compose : capitales et italique bord a bord */
+.cadre.ti .bloc{line-height:.80}
+.cadre.ti .bloc .ln{display:flex;align-items:baseline;width:max-content;white-space:nowrap}
+.cadre.ti .bloc .seg{position:relative;z-index:1;
+  -webkit-text-stroke:.05em var(--bg2,var(--papier));paint-order:stroke fill}
+.cadre.ti .bloc .seg + .seg{margin-left:-.06em}
+.cadre.ti .bloc .seg.up{text-transform:uppercase;font-variation-settings:"wght" 900;
+  letter-spacing:-.04em}
+.cadre.ti .bloc .seg.it{z-index:2;font-family:"EB Garamond",Garamond,serif;font-style:italic;
+  font-weight:600;letter-spacing:-.03em;text-transform:none;line-height:.66}
+
+/* 04 le drapeau : bas de casse, un seul corps, cale a gauche */
+.cadre.rag .bloc{line-height:.92}
+.cadre.rag .bloc span{text-transform:none;letter-spacing:0;width:max-content}
+
+/* 06 le signe : le picto sort du format des deux cotes */
+.cadre.sgn{padding:0}
+.cadre.sgn i{position:absolute;left:-6%;top:50%;transform:translateY(-50%);
+  height:104%;aspect-ratio:78/91;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
-.post .cutmask img{width:100%;height:100%;object-fit:cover}
 
-/* ── THE KEYLINE WINDOW ─────────────────────────────────────
-   The other way round from the cut-out: the photograph runs
-   right through the frame and the shape re-crops it, drawn as
-   a white keyline. Same image twice, two different scales. */
-.post .kw{position:absolute;inset:9% 8%;z-index:3}
-.post .kw .in{position:absolute;inset:0;overflow:hidden;
-  -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
-.post .kw .in img{position:absolute;left:-38%;top:-34%;width:176%;height:176%;max-width:none;object-fit:cover}
-.post .kw svg{position:absolute;inset:0;fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:round}
+/* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
+.cadre.coin{padding:0}
+.cadre.coin b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
+  font-variation-settings:"wght" 900;line-height:.8;white-space:nowrap;font-weight:400;
+  letter-spacing:-.02em}
+.cadre.coin i{position:absolute;right:6%;top:15%;font-style:normal;font-family:var(--fs);
+  font-size:3.8cqw;font-weight:700;line-height:1.5;letter-spacing:.02em;text-align:right;max-width:46%}
 
-/* ── THE POSTER — solid, offset, with a word inside ─────────
-   The black offset is not a drop shadow: it is a second copy of
-   the same drawing, moved. It never blurs and it never softens.
-   The word sits in the top bar, in viewBox units, so it stays
-   locked to the shape at every size. */
-.post .poster{position:absolute;inset:7% 6% 9%;z-index:3;transform:rotate(-4deg)}
-.post .poster .pw{font-family:var(--fd);font-variation-settings:"wght" 900;
-  font-size:15px;fill:var(--noir);letter-spacing:-.02em}
-
-/* ── THE PAIR — the same drawing, filled and drawn ──────────*/
-.post .pair{margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9cqw;width:86%;align-items:center}
-.post .pair svg{width:100%;height:auto;fill:currentColor}
-.post .pair .out{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round}
-
-/* ── THE CODE — a real QR, the mark sitting in the middle ───
-   Error correction H, so the centre can be covered. The mark
-   carries its own white pad; without it the modules merge. */
-.qrplate{position:relative;background:#fff;display:grid;place-items:center;padding:2%}
-.qrplate img{width:100%;height:auto}
-.qrplate svg{position:absolute;width:19%;height:auto;fill:var(--noir);background:#fff;
-  padding:1.6%;box-sizing:content-box}
-.post .qr{position:absolute;left:7%;bottom:7%;width:31%;z-index:4}
-
-/* gabarits : la zone sûre dessinée */
-.tpl{border:var(--rule);position:relative;overflow:hidden;background:var(--blanc);color:var(--encre)}
-.tpl .safe{position:absolute;border:1.4px dashed currentColor;opacity:.5}
-.tpl .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 9px;border-top:var(--rule);
-  font-family:var(--fm);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;background:var(--blanc)}
-.tpl .rat{position:absolute;top:8px;left:9px;font-family:var(--fm);font-size:9px;opacity:.45}
-
-footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overflow:hidden}
-.wall{margin:0 calc(var(--pad) * -1) clamp(22px,3vw,44px)}
-.wall span{display:block;background:currentColor;aspect-ratio:4;
+/* 08 le chiffre : le nombre en grand, le logotype dessous */
+.cadre.num .bloc .wm{display:block;background:currentColor;
   -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
-.wall .l1{width:116%;margin-left:-11%}
-.wall .l2{width:104%;margin-left:2%}
-.pill{border:var(--rule);border-radius:999px;padding:.45em 1em;font-family:var(--fm);font-size:9.5px;
-  letter-spacing:.15em;text-transform:uppercase;display:inline-block}
+
+/* 09 la liste : lignes courtes empilees, meme corps, calees a gauche */
+.cadre.liste .bloc{line-height:1.06}
+.cadre.liste .bloc span{width:max-content;font-variation-settings:"wght" 500;
+  letter-spacing:.02em;text-transform:none}
+
+/* 10 la signature : le logotype seul, centre */
+.cadre.sign{place-items:center}
+.cadre.sign .wm{display:block;width:64%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;mask:url("logotrema.svg") no-repeat center/contain}
+.cadre.sign em{position:absolute;left:0;right:0;bottom:9%;text-align:center;font-style:normal;
+  font-family:var(--fm);font-size:3.1cqw;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
 </style>
 </head>
 <body>
@@ -318,89 +322,141 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <a href="index.html" class="mk" aria-label="trema studio"></a>
   <nav>
     <a href="index.html">Brand book</a>
-    <a href="instagram.html" class="on">Instagram</a>
+    <a href="instagram.html">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html">Fontes</a>
     <a href="titre.html">Le titre</a>
-    <a href="compositions.html">Compositions</a>
+    <a href="compositions.html" class="on">Compositions</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
+<main class="wrap">
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tm" viewBox="0 0 78 91">
-<path d="M75.9512 0.293213C76.9301 0.32479 77.0254 0.388225 77.0254 1.39868C77.057 12.0083 77.0566 22.6181 77.0566 33.2278C77.0566 34.3644 76.9932 34.428 75.8564 34.428H35.1855C34.9017 34.428 34.6174 34.4277 34.2705 34.4592H32.7852C38.5335 42.9501 51.7859 55.1533 74.9688 56.6106V90.5549C58.9171 90.4496 27.13 85.8183 2.6582 50.6106L24.4424 34.428H1.9668C0.293879 34.428 0.292969 34.4274 0.292969 32.7542V1.68286C0.292969 0.325201 0.325889 0.293219 1.71484 0.293213H75.9512Z"/>
-</symbol></svg>
+  <p class="part">Communication</p>
+  <h1 class="h2" style="margin:0 0 .5em">Compositions</h1>
+  <p style="max-width:64ch;margin:0 0 clamp(10px,1.6vw,20px)">Dix facons de composer un cadre de
+  texte, nommees. Le feed alterne une photographie et une composition : ce sont celles-ci. Chacune
+  est rendue au format du profil avec de la vraie copie — une composition ne se juge qu'avec les
+  mots qu'elle portera.</p>
+  <p class="mono dim" style="max-width:56ch;margin:0 0 clamp(18px,2.4vw,30px)">Le nom est ce qui
+  compte : c'est lui qui devient le vocabulaire. « Prends un Bloc, puis un Coin, puis un Drapeau. »</p>
 
-
-<!-- ═════ THE GRID ═════ -->
-<section class="w">
-  <div class="part">Communication</div>
-  <h1>Everything about<br>your place. One link.</h1>
-
-  <p>Forty-eight posts, sixteen rows: one photograph, one line, one photograph. The feed is built on the
-  message house and reads from the top — the roof, then the three pillars: everything about your place
-  always up to date, found everywhere, and followers turning into regulars.</p>
-  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Three rows in, someone should know that a trema is the
-  online address of a place, that it is already built from what they publish on Instagram and Google Maps,
-  and that it stays current on its own. Captions below, in the order they go out.</p>
-
-  <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux types de titres,
-    pas plus : le bloc de capitales, en alternance noir sur blanc, et les titres de la page
-    Titre — capitales grasses et italique melees. Une seule affiche en coin, la ou elle est
-    le message. Les photos ne portent rien.</p>
-
-  <div class="feed fx-typo" id="feed"></div>
-
-  <div class="specs" id="specs"></div>
-</section>
-
-
-<!-- ═════ EXPORT ═════ -->
-<section class="l">
-  <h2>Export</h2>
-  <p style="margin-bottom:clamp(22px,2.8vw,38px)">Everything is composed 4:5 — the ratio of the profile
-  thumbnail and the one that takes the most height in the feed. The system behind these frames lives in
-  the <a href="index.html" style="text-decoration:underline">brand book</a>.</p>
-  <div class="scrollx"><table>
-    <tr><th>Format</th><th>Export</th><th>Ratio</th><th>Safe area</th><th>Weight</th></tr>
-    <tr><td>Feed</td><td>1080 × 1350</td><td>4:5</td><td>6 % sides · 8 % top and bottom</td><td>&lt; 2 MB</td></tr>
-    <tr><td>Square</td><td>1080 × 1080</td><td>1:1</td><td>8 % margin</td><td>&lt; 2 MB</td></tr>
-    <tr><td>Story / reel</td><td>1080 × 1920</td><td>9:16</td><td>250 px top · 340 px bottom</td><td>&lt; 4 MB</td></tr>
-    <tr><td>Profile grid</td><td>—</td><td>4:5</td><td>nothing useful in the outer 6 %</td><td>—</td></tr>
-  </table></div>
-</section>
-
-
-<footer class="k">
-  <div class="wall" aria-hidden="true"><span class="l1"></span><span class="l2"></span></div>
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:var(--rule);padding-top:18px">
-    <span class="mono dim">© <span data-year>2026</span> trema studio — concept page</span>
-    <span class="mono dim"><a href="index.html" style="text-decoration:underline">← Brand book</a></span>
-  </div>
-</footer>
-
-
-<script src="feed.js"></script>
+  <div class="compos" id="compos"></div>
+</main>
 <script>
-(() => {
 "use strict";
-document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+(function(){
 
-/* Un seul feed. Le selecteur est parti avec les autres styles : on ne
-   choisit plus, on compose. La classe reste sur le conteneur, c'est
-   elle qui porte les regles des deux affiches. */
-const feed = document.querySelector("#feed");
-feed.className = "feed fx-typo";
-renderFeed(feed, "pics/feed");
+/* Les dix compositions. `k` est la clef de style, `t` les lignes.
+   Pour le titre compose, une ligne est une suite de segments qui
+   alternent capitales et italique — c'est la seule qui en ait besoin. */
+const COMPOS = [
+  {nom:"Le bloc", k:"k", d:"Le fond du feed. Chaque ligne mise a la mesure exacte de la case, les mots touchent les deux bords. Quand la phrase doit cogner.",
+   t:["Every place","has an","address"]},
 
-document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>
-  `<div class="spec"><span class="no">${String(i+1).padStart(2,"0")}</span><p>${o.c}</p></div>`).join("");
+  {nom:"Le bloc clair", k:"w", d:"Le meme, retourne. Encre sur papier. Deux blocs sombres ne se suivent jamais : celui-ci respire entre eux.",
+   t:["Nothing","to build.","Nothing to","maintain."]},
 
-/* une photo, un texte : verifie plutot que suppose */
-const bad = TREMA_FEED.map((o, i) => (i % 2 === 0) === !!o.p ? null : i+1).filter(Boolean);
-console.log(bad.length ? "Alternance cassee aux posts " + bad.join(", ")
-                       : `Alternance : ${TREMA_FEED.length} posts, une photo puis un texte ✓`);
+  {nom:"Le mot seul", k:"e big", d:"Une ou deux lignes, enormes. Pour un mot qui se suffit. Au-dela de deux lignes le mot n'est plus seul.",
+   t:["One","link"]},
+
+  {nom:"Le titre compose", k:"k ti", d:"Capitales grasses et bas-de-casse italique, bord a bord, un seul corps pour le bloc. La composition de la page Titre. Une fois par zone, pas plus.",
+   ti:[[["From","up"],["followers","it"]],[["to","it"],["Regulars.","up"]]]},
+
+  {nom:"Le drapeau", k:"k rag", d:"Bas de casse, un seul corps, cale a gauche, le bord droit irregulier. Pour une question ou une phrase parlee.",
+   t:["Why","vinyl","bars","love","trema?"]},
+
+  {nom:"Le coin", k:"w coin", d:"Le mot pose en bas a gauche, sa mention en haut a droite. Le vide au milieu fait tout le travail. Rare, sinon il s'use.",
+   mot:"Yours.", note:"A BIO LINK LISTS LINKS. YOURS IS THE DESTINATION"},
+
+  {nom:"Le signe", k:"k sgn", d:"Le picto seul, coupe par le format des deux cotes. Aucun mot. C'est la respiration du feed.",
+   t:[]},
+
+  {nom:"Le chiffre", k:"k num", d:"Un nombre en grand, le logotype dessous. Le nom de la marque est un dessin, jamais de la typo.",
+   t:["380+"], wm:true},
+
+  {nom:"La liste", k:"l liste", d:"Des lignes courtes empilees, meme corps, calees a gauche. Pour un inventaire : ce qu'il y a dessus, ce qu'on y trouve.",
+   t:["Menu","Hours","Photos","Reviews","News","Community"]},
+
+  {nom:"La signature", k:"e sign", d:"Le logotype seul, centre, avec une mention discrete. Pour fermer une serie, ou ouvrir un compte.",
+   wmSeul:true, sous:"Nowhere & everywhere"},
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const hote = document.querySelector("#compos");
+
+hote.innerHTML = COMPOS.map((c,i)=>{
+  let dedans = "";
+  if (c.ti) {
+    dedans = `<div class="bloc">` + c.ti.map(l =>
+      `<div class="ln">` + l.map(([t,s])=>`<span class="seg ${s}">${esc(t)}</span>`).join("") + `</div>`
+    ).join("") + `</div>`;
+  } else if (c.mot) {
+    dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
+  } else if (c.wmSeul) {
+    dedans = `<i class="wm"></i><em>${esc(c.sous)}</em>`;
+  } else if (c.k.includes("sgn")) {
+    dedans = `<i></i>`;
+  } else {
+    dedans = `<div class="bloc">` + c.t.map(l=>`<span>${esc(l)}</span>`).join("")
+      + (c.wm ? `<span class="wm"></span>` : "") + `</div>`;
+  }
+  return `<div class="compo">
+    <div class="nom"><b>${esc(c.nom)}</b><span>${String(i+1).padStart(2,"0")}</span></div>
+    <div class="cadre ${c.k}">${dedans}</div>
+    <p class="usage">${esc(c.d)}</p>
+  </div>`;
+}).join("");
+
+/* La mise a la mesure. Trois regles seulement, et c'est tout le
+   systeme : chaque ligne a la mesure, un seul corps pour le bloc, ou
+   une taille fixe declaree en cqw. */
+function ajuste(){
+  document.querySelectorAll(".compo .cadre").forEach(cadre=>{
+    const bloc = cadre.querySelector(".bloc");
+    const liste = cadre.classList.contains("liste");
+    const unCorps = cadre.classList.contains("rag") || cadre.classList.contains("ti") || liste;
+    /* La liste etait figee en cqw : a 230 px de large elle tombait sous
+       11 px, illisible. Elle passe au corps unique comme le reste, mais
+       calee a 62 % de la mesure — une liste ne remplit pas la case,
+       c'est ce retrait qui la fait lire comme une liste. */
+    const part = liste ? .62 : 1;
+    const fixe = false;
+
+    if (bloc && !fixe) {
+      const box = bloc.clientWidth;
+      if (box) {
+        const lignes = [...bloc.children];
+        if (unCorps) {
+          lignes.forEach(l=>[...(l.children.length?l.children:[l])].forEach(x=>x.style.fontSize="100px"));
+          const k = Math.min(...lignes.map(l=>l.scrollWidth ? box*part/l.scrollWidth : Infinity));
+          if (isFinite(k)) lignes.forEach(l=>[...(l.children.length?l.children:[l])]
+            .forEach(x=>x.style.fontSize=(100*k)+"px"));
+        } else {
+          lignes.forEach(x=>{
+            const wm = x.classList.contains("wm");
+            if (wm) { x.style.width = box+"px"; x.style.height = (box/4)+"px"; return; }
+            x.style.fontSize="10px"; x.style.width="max-content";
+            const w=x.scrollWidth; x.style.width="";
+            if (w) x.style.fontSize=(10*box/w)+"px";
+          });
+        }
+      }
+    }
+    /* le mot du coin se cale sur la largeur, entier, jamais rogne */
+    const b = cadre.querySelector("b");
+    if (b) {
+      const box = cadre.clientWidth*0.92;
+      b.style.fontSize="10px";
+      const w=b.scrollWidth;
+      if (w) b.style.fontSize=(10*box/w)+"px";
+    }
+  });
+}
+document.fonts.ready.then(ajuste);
+addEventListener("resize", ajuste, {passive:true});
+
 })();
 </script>
 </body>

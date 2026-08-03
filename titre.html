@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Le titre</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -235,23 +235,18 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    ordre. Seule la fonte bascule. Tout passe par --fd, donc il
    suffit de la redefinir et de re-mesurer. */
 .ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
-.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
 
 /* chaque fonte a ses propres axes : on ne peut pas les regler une
    fois pour toutes, il faut parler la langue de chacune */
 .ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
-.ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
 
 /* l'italique du 02, dans la langue de chacune */
 .ft-inter     .post.tx.it .fit{font-style:italic}
-/* Bricolage n'a pas d'italique : on ne la simule pas en penchant
-   les lettres, la ligne reste droite. C'est une vraie limite, pas
-   un detail — le 02 repose dessus. */
 
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
@@ -342,12 +337,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    On resserre sa boite a elle, pas l'interligne general — dans une
    ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
 .seg.it{z-index:2;line-height:.66}
-/* Bricolage a une hauteur de capitale de 0.71 du corps contre 0.727
-   pour Inter : a corps egal ses capitales sont plus courtes, donc la
-   boite de l'italique pese relativement plus lourd et la ligne
-   d'italique seule creuse a nouveau. On la resserre pour ce couple
-   seulement — regler la valeur commune aurait tasse les deux autres. */
-.ft-bricolage .seg.it{line-height:.60}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
@@ -381,9 +370,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    regarder si c'est vraiment ce dessin-la que tu veux. */
 .ft-cormorant{--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
               --fd-it:"Cormorant Garamond",Garamond,serif; --po-it:600}
-.ft-bricolage{--fd-up:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-              --ax-up:"opsz" 96,"wdth" 100,"wght" 800;
-              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
 
 /* Les mentions prennent la couleur, comme dans la reference. C'est le
    seul endroit du systeme qui en porte : la typographie reste noire,
@@ -392,7 +378,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    rond — parce que trois rectangles se liraient comme un tableau.
    Le texte reste a l'encre sur les trois : sur ces aplats clairs, du
    blanc ne passerait pas le contraste. */
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 .quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
@@ -483,12 +469,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    On resserre sa boite a elle, pas l'interligne general — dans une
    ligne mixte ce sont les capitales qui commandent, rien ne bouge. */
 .seg.it{z-index:2;line-height:.66}
-/* Bricolage a une hauteur de capitale de 0.71 du corps contre 0.727
-   pour Inter : a corps egal ses capitales sont plus courtes, donc la
-   boite de l'italique pese relativement plus lourd et la ligne
-   d'italique seule creuse a nouveau. On la resserre pour ce couple
-   seulement — regler la valeur commune aurait tasse les deux autres. */
-.ft-bricolage .seg.it{line-height:.60}
 /* Les segments ne se posent pas cote a cote, ils se RENTRENT dedans.
    Dans la reference l'italique recule sur le mot qui la precede — le
    m de "myself" passe sous l'epaule du R, le s de "so" sous le S de
@@ -522,9 +502,6 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    regarder si c'est vraiment ce dessin-la que tu veux. */
 .ft-cormorant{--fd-up:"Inter","Helvetica Neue",Arial,sans-serif; --ax-up:"wght" 900;
               --fd-it:"Cormorant Garamond",Garamond,serif; --po-it:600}
-.ft-bricolage{--fd-up:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-              --ax-up:"opsz" 96,"wdth" 100,"wght" 800;
-              --fd-it:"EB Garamond",Garamond,serif; --po-it:600}
 
 /* Les mentions prennent la couleur, comme dans la reference. C'est le
    seul endroit du systeme qui en porte : la typographie reste noire,
@@ -546,7 +523,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
    Le nom reste dessous, petit et a l'encre : a 9 px il lui faut 4.5
    de contraste, il est a 11.4. */
 
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,5vw,72px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,5vw,72px)}
 .quatre .titre{max-width:100%;margin-bottom:clamp(34px,5vw,64px)}
 .titnom{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
   font-weight:400;opacity:.45;margin:0 0 6px;padding-bottom:6px;border-bottom:var(--rule);
@@ -575,6 +552,7 @@ main.wrap{padding:0 var(--pad) clamp(70px,9vw,130px)}
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html">Fontes</a>
     <a href="titre.html" class="on">Le titre</a>
+    <a href="compositions.html">Compositions</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -676,19 +654,16 @@ const LIGNES = TITRES[0].l;
 const FONTES = [
   {k:"inter",     t:"Inter + EB Garamond",  i:'"EB Garamond"',
    d:"Texte 1 : Inter Black, -4%. Texte 2 : EB Garamond italique, -3%."},
-  {k:"bricolage", t:"Bricolage + EB Garamond", i:'"EB Garamond"',
-   d:"Texte 1 : Bricolage 800, -4%. Texte 2 : EB Garamond italique, -3%."},
   {k:"cormorant", t:"Inter + Cormorant", i:'"Cormorant Garamond"',
    d:"Texte 1 : Inter Black, -4%. Texte 2 : Cormorant Garamond italique, -3% — plus legere et plus etroite qu'EB Garamond, c'est la plus proche d'Apple Garamond parmi les libres."},
 ];
-const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"',
-                  cormorant:'"Inter"'};
+const FAMILLES = {inter:'"Inter"', cormorant:'"Inter"'};
 
 
 const bar=document.querySelector("#fontes"), fnote=document.querySelector("#fnote");
 const un=document.querySelector("#un"), quatre=document.querySelector("#quatre");
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les trois</button>`;
+  + `<button data-k="tout">Les deux</button>`;
 
 /* La composition seule. Les mentions decoratives sont retirees : le
    bloc se tient tout seul, et c'est plus juste — la reference les
@@ -759,7 +734,7 @@ function fonte(k){
 function cote(){
   un.hidden=true; quatre.hidden=false;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent="Le meme titre, la meme composition, trois couples. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
+  fnote.textContent="Le meme titre, la meme composition, deux couples. Les mentions sont retirees ici : ce qu'on compare, c'est la typographie.";
   quatre.innerHTML=FONTES.map(f=>
     `<div><h4>${f.t}</h4><div class="ft-${f.k}" id="t-${f.k}">`
     + TITRES.map(t=>dessine(false, t.l)).join('<div style="height:clamp(24px,3vw,44px)"></div>')

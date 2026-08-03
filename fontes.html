@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>trema — Fontes</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -229,10 +229,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
   font-variation-settings:"wght" 900}
 .post.tx.ti .seg.it{z-index:2;line-height:.66;font-family:var(--fd-it);
   font-style:italic;font-weight:600;letter-spacing:-.03em}
-/* Bricolage parle sa langue a elle : ses axes, et une italique
-   resserree — sa hauteur de capitale est plus courte (cf. page Titre) */
-.ft-bricolage .post.tx.ti .seg.up{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
-.ft-bricolage .post.tx.ti .seg.it{line-height:.60}
 
 /* ── L'ESSAI DE FONTE ───────────────────────────────────────
    Le seul moyen honnete de comparer, c'est de ne changer qu'une
@@ -244,8 +240,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
    bas-de-casse. Dans un feed l'italique ne parait qu'au post 02,
    mais c'est justement la qu'on veut la voir en situation. */
 .ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif;
-              --fd-it:"EB Garamond",Garamond,serif}
-.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
               --fd-it:"EB Garamond",Garamond,serif}
 .ft-cormorant{--fd:"Inter","Helvetica Neue",Arial,sans-serif;
               --fd-it:"Cormorant Garamond",Garamond,serif}
@@ -260,8 +254,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .ft-cormorant .post.tx .fit,.ft-cormorant .post.car .fit,.ft-cormorant .cnr b{font-variation-settings:"wght" 900}
 .ft-inter .post.tx .fit > span,.ft-inter .cnr b,
 .ft-cormorant .post.tx .fit > span,.ft-cormorant .cnr b{letter-spacing:-.04em}
-.ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
-.ft-bricolage .post.tx .fit > span,.ft-bricolage .cnr b{letter-spacing:-.04em}
 
 /* l'italique du 02, dans la langue de chacune */
 /* le texte 2 du couple : la Garamond italique, a -3%, sur la ligne
@@ -270,14 +262,11 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.tx.it .fit{font-family:var(--fd-it);font-style:italic;font-weight:600;
   font-variation-settings:normal}
 .post.tx.it .fit > span{letter-spacing:-.03em}
-/* Bricolage n'a pas d'italique : on ne la simule pas en penchant
-   les lettres, la ligne reste droite. C'est une vraie limite, pas
-   un detail — le 02 repose dessus. */
 
 /* les quatre d'un coup : chaque colonne est un feed complet avec sa
    propre fonte. En petit, mais c'est la seule facon de voir lequel
    tient a l'echelle ou on regarde vraiment un compte. */
-.quatre{display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(10px,1.4vw,20px)}
 /* sur un ecran etroit, trois feeds de front font des cadres de 100 px :
    illisible. Ils s'empilent, chacun a pleine mesure. */
 @media(max-width:700px){.quatre{grid-template-columns:1fr;gap:clamp(30px,8vw,48px) 0}}
@@ -397,6 +386,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
     <a href="facebook.html">Facebook</a>
     <a href="fontes.html" class="on">Fontes</a>
     <a href="titre.html">Le titre</a>
+    <a href="compositions.html">Compositions</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -474,20 +464,17 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
 const FONTES = [
   {k:"inter",     t:"Inter + EB Garamond",     i:'"EB Garamond"',
    d:"Capitales : Inter Black, interlettrage -4%. Bas-de-casse : EB Garamond italique, -3%."},
-  {k:"bricolage", t:"Bricolage + EB Garamond", i:'"EB Garamond"',
-   d:"Capitales : Bricolage 800, -4%. Bas-de-casse : EB Garamond italique, -3%."},
   {k:"cormorant", t:"Inter + Cormorant",       i:'"Cormorant Garamond"',
    d:"Capitales : Inter Black, -4%. Bas-de-casse : Cormorant Garamond italique, -3% — plus legere et plus etroite."},
 ];
-const FAMILLES = {inter:'"Inter"', bricolage:'"Bricolage Grotesque"',
-                  cormorant:'"Inter"'};
+const FAMILLES = {inter:'"Inter"', cormorant:'"Inter"'};
 const feed  = document.querySelector("#feed");
 const bar   = document.querySelector("#fontes");
 const fnote = document.querySelector("#fnote");
 const quatre= document.querySelector("#quatre");
 
 bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
-  + `<button data-k="tout">Les trois</button>`;
+  + `<button data-k="tout">Les deux</button>`;
 
 /* Google Fonts decoupe ses fichiers par plage de caracteres : une fonte
    n'est telechargee qu'au moment ou un de ses caracteres est rendu. On
@@ -533,7 +520,7 @@ function fonte(k){
 function cote(){
   feed.hidden = true; quatre.hidden = false;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
-  fnote.textContent = "Les trois feeds cote a cote, meme ordre, memes photos. "
+  fnote.textContent = "Les deux feeds cote a cote, meme ordre, memes photos. "
     + "Seule la fonte change d'une colonne a l'autre.";
   quatre.innerHTML = FONTES.map(f =>
     `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
