@@ -31,14 +31,15 @@ window.TREMA_FEED = [
   /* Le feed est bati sur le vocabulaire, et sur rien d'autre. Chaque
      cadre de texte EST une composition de la page Compositions, avec
      ses mots a elle. UNE PHOTO ENTRE CHAQUE COMPOSITION, sans
-     exception : les quatre compositions qui portent deja une image
-     comptent comme des photos et occupent une place de photo.
+     exception : les compositions qui portent deja une image comptent
+     comme des photos et occupent une place de photo.
 
-     Vingt-sept cadres, neuf rangees pleines. Le compte n'est pas
-     libre : le profil affiche trois colonnes, et une rangee entamee se
-     voit tout de suite. Quatorze compositions, treize photos — le feed
-     ouvre et ferme donc sur une composition, la premiere disant ce que
-     c'est, la derniere appelant a le faire.
+     Trente-trois cadres, onze rangees pleines. Le compte n'est pas
+     libre. Le profil affiche trois colonnes, donc le total doit tomber
+     juste ; et l'alternance stricte veut qu'il y ait au plus un cadre
+     d'ecart entre les photos et les compositions. Seize photos et dix-
+     sept compositions est la seule combinaison qui tienne les deux a
+     la fois — d'ou le feed qui ouvre et ferme sur une composition.
 
      TROIS ALTERNANCES, et elles font tout le rythme.
 
@@ -53,15 +54,20 @@ window.TREMA_FEED = [
      commercants.
 
      Les variations du signe : une tous les trois ou quatre cadres de
-     texte. Rangees dans l'ordre du vocabulaire elles s'enchainaient,
-     et on scrollait a travers plusieurs pictos d'affilee.
+     texte, jamais deux de suite.
 
-     QUATRE COMPOSITIONS RESTENT HORS DU FEED, et c'est voulu : le
-     sommaire, le signe repete, le signe centre et la signature. Elles
-     restent au vocabulaire — une composition n'a pas a etre postee
-     pour exister. Le sommaire est une carte a lire, pas a survoler ;
-     le signe repete est une matiere, un fond ; le signe centre et la
-     signature ferment un document, et un feed ne se ferme pas. */
+     Quatre compositions se repetent avec d'autres mots — deux blocs,
+     un bloc clair, un drapeau. C'est le propre d'un vocabulaire : une
+     composition sert plusieurs fois, ce sont les phrases qui changent.
+
+     DEUX CARTES DE LIEU, pas une : un feed qui ne montre qu'un client
+     montre un cas, deux montrent une methode.
+
+     Quatre compositions restent hors du feed, et c'est voulu : le
+     sommaire, le signe repete, le signe centre et la signature. Le
+     sommaire est une carte a lire, pas a survoler ; le signe repete est
+     une matiere ; les deux dernieres ferment un document, et un feed ne
+     se ferme pas. */
 
   {nom:"Le bloc", t:["Every place","has an","address"], s:"k",
    c:"Every place has an address. trema is yours online."},
@@ -88,7 +94,8 @@ window.TREMA_FEED = [
 
   {nom:"Le bloc clair", t:["Nothing","to build.","Nothing to","maintain."], s:"w",
    c:"Nothing to build, nothing to maintain."},
-  {p:"52-red-panel",      c:"Perforated red wood, one brass bar."},
+  {p:"52-red-panel", mot:"lecomptoirrouge", nom:"La carte de lieu",
+   c:"Le Comptoir Rouge. A second address, on a flat red wall."},
 
   {nom:"Le drapeau", t:["Why","vinyl","bars","love ?"], s:"k", rag:1,
    c:"Why do vinyl bars love trema? Because everything is already in the menu."},
@@ -120,9 +127,22 @@ window.TREMA_FEED = [
    c:"A bio link lists your links. Your trema is the destination."},
   {p:"34-blue-door",      c:"A door. A website is a project."},
 
-  {nom:"Le bloc", t:["Create","your","@mark"], s:"w",
+  {nom:"Le bloc", t:["Always","up to","date"], s:"w",
+   c:"Publish an event, an offer, a new menu — in minutes."},
+  {p:"33-espresso-ochre", c:"And what you serve in it."},
+
+  {nom:"Le drapeau", t:["From","followers to","Regulars."], s:"k", rag:1,
+   c:"Instagram gives you reach. Your trema gives you regulars."},
+  {p:"06-brick-yellow",   c:"A dining room, at opening time."},
+
+  {nom:"Le bloc clair", t:["Instagram","+ Google","Maps"], s:"w",
+   c:"Connected to both, and kept current from the same sources."},
+  {p:"32-bread-terrazzo", c:"Sourdough, and one hard morning diagonal."},
+
+  {nom:"Le bloc", t:["Create","your","@mark"], s:"k",
    c:"Create and customize your trema in minutes. Start free — your trema already exists."},
 ];
+
 
 
 
