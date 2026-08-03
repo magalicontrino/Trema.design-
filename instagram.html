@@ -249,6 +249,20 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .post.ph.phc::after{content:"";position:absolute;left:7%;top:6%;z-index:2;
   width:19%;aspect-ratio:78/91;background:#fff;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;mask:url("Logo.svg") no-repeat center/contain}
+/* La carte de lieu : l'adresse du client, seule, composee comme un
+   titre. Le nom et le logotype en sont sortis — poses en petit sur une
+   photo ils ne se voyaient pas. C'est l'adresse le produit. */
+.post.ph.cli .ov{position:absolute;left:7%;right:7%;top:7%;z-index:2;color:var(--encre)}
+.post.ph.cli b{display:block;width:max-content;white-space:nowrap;font-family:var(--fd);
+  font-variation-settings:"wght" 900;line-height:.95;letter-spacing:-.035em}
+.post.ph.cli b .wordmark{display:inline-block;vertical-align:baseline;width:2.9em;height:.72em;
+  background:currentColor;-webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.post.ph.cli b .bar{display:inline-block;vertical-align:baseline;width:.42em;height:.86em;
+  margin:0 .12em -.02em;text-decoration:none;background:#fff;
+  clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
+.post.ph.cli b em{font-style:normal}
+
 .post.ph.dec{background:var(--papier)}
 .post.ph.dec img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:88%;height:auto;aspect-ratio:78/91;

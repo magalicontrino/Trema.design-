@@ -325,9 +325,15 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    sujet — un signe se regle, il ne se redessine pas. ── */
 
 /* 08b entier : le meme dessin, mais contenu. On le voit en entier, il
-   ne mord plus le format. Plus lisible, moins brutal. */
-.cadre.sgn.ent i{height:76%}
-.cadre.sgn.ent u{font-size:7cqw}
+   ne mord plus le format. Plus lisible, moins brutal.
+
+   Il remonte a 44 % au lieu de 50 : centre geometriquement, le signe
+   parait tomber vers le bas — sa masse est en haut, sa courbe s'evide
+   en dessous, et l'oeil suit le vide. Et l'adresse repasse au centre :
+   le coin bas-droit n'est calme que lorsque le signe deborde du
+   format ; ici il ne deborde plus, elle s'y cognait. */
+.cadre.sgn.ent i{height:70%;top:44%}
+.cadre.sgn.ent u{left:0;right:0;bottom:7%;text-align:center;font-size:7cqw}
 
 /* 08c centre : petit, cale au milieu, le nom dessous en monospace tres
    espace. Le signe ne remplit plus rien, il signe. Le nom est en
@@ -398,30 +404,34 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 
-/* 15 la carte de lieu. C'est la seule composition qui ne parle pas de
-   trema mais d'un client : son nom en grand, et dessous le logotype
-   suivi de son adresse. La marque n'est pas au-dessus du lieu, elle est
-   sous lui — c'est tout le propos, et c'est pour ca que le nom est deux
-   fois plus gros que le reste.
+/* 15 la carte de lieu. La seule composition qui ne parle pas de trema
+   mais d'un client — et elle ne dit qu'une chose : son adresse.
+   Le nom du lieu et le logotype en sont sortis. Poses en petit sur une
+   photo, ils ne se voyaient pas et ne ressemblaient a rien de ce que
+   fait la marque ; l'adresse seule, composee comme un titre, se lit de
+   loin et dit deja tout. C'est l'adresse le produit.
 
-   Le nom est compose, l'adresse est composee, mais le logotype entre
-   les deux reste un dessin. On le pose donc en pixels, cale sur la
-   hauteur de l'adresse, jamais en em d'une police.
-
-   Encre sur la photo et non blanc : les vues de la banque choisies pour
-   ca ont toutes une grande surface claire et calme, et un texte sombre
-   y tient sans qu'on ait besoin de voiler l'image. */
+   Encre et non blanc : les vues gardees pour cette carte ont toutes une
+   grande surface claire et calme, et un texte sombre y tient sans qu'on
+   ait a voiler l'image. */
 .cadre.cli{padding:0;place-items:stretch}
 .cadre.cli img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cadre.cli .ov{position:absolute;left:8%;right:8%;top:8%;z-index:2;color:var(--encre)}
-.cadre.cli b{display:block;font-family:var(--fd);font-variation-settings:"wght" 900;
-  font-size:12.5cqw;line-height:.92;letter-spacing:-.035em}
-.cadre.cli .lo{display:flex;align-items:center;gap:2.4cqw;margin-top:5cqw}
-.cadre.cli .lo i{flex:none;display:block;width:19cqw;aspect-ratio:4;background:currentColor;
-  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+.cadre.cli .ov{position:absolute;left:7%;right:7%;top:7%;z-index:2;color:var(--encre)}
+/* Le nom de la marque est un DESSIN, jamais une police — la regle du
+   chapitre 03 vaut aussi dans une adresse. On compose donc
+   « [logotype] / handle » : le logotype pose en em du meme corps que le
+   texte, la barre tracee au trait et non tapee, le handle compose.
+   La barre est blanche et penchee : c'est le seul element clair de la
+   carte, et c'est lui qui separe la marque du lieu. */
+.cadre.cli b{display:block;width:max-content;white-space:nowrap;font-family:var(--fd);
+  font-variation-settings:"wght" 900;line-height:.95;letter-spacing:-.035em}
+.cadre.cli b .wordmark{display:inline-block;vertical-align:baseline;width:2.9em;height:.72em;
+  background:currentColor;-webkit-mask:url("logotrema.svg") no-repeat center/contain;
   mask:url("logotrema.svg") no-repeat center/contain}
-.cadre.cli .lo em{font-style:normal;font-family:var(--fm);font-size:4.2cqw;
-  letter-spacing:.12em;opacity:.75}
+.cadre.cli b .bar{display:inline-block;vertical-align:baseline;width:.42em;height:.86em;
+  margin:0 .12em -.02em;text-decoration:none;background:#fff;
+  clip-path:polygon(62% 0,100% 0,38% 100%,0 100%)}
+.cadre.cli b em{font-style:normal}
 
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
 .cadre.coin{padding:0}
@@ -628,7 +638,7 @@ const COMPOS = [
   /* Deux cartes ou la photographie EST la composition. Il y aura
      toujours des images dans le feed ; ce qui en fait des cartes de la
      marque, c'est ce qu'on fait du signe dessus. */
-  {nom:"Le picto sur la photo", k:"phc", s:"",
+  {nom:"Le picto sur la photo", k:"phc", s:"in",
    d:"La photo n'est pas decoree, elle est signee : le picto en blanc, petit, toujours au meme coin et a la meme taille. C'est la repetition qui en fait une signature.",
    ph:"20-magazines"},
 
@@ -638,12 +648,12 @@ const COMPOS = [
      Le nom du lieu est deux fois plus gros que l'adresse, et la marque
      passe dessous — elle porte le lieu, elle ne se pose pas sur lui. */
   {nom:"La carte de lieu", k:"cli", s:"",
-   d:"Le nom du lieu en grand sur son propre mur, et dessous le logotype suivi de son adresse. La marque n'est pas au-dessus du lieu, elle est sous lui.",
-   ph:"80-salle-restaurant", mot:"La Galerie des Arts", note:"tre.ma/lagaleriedesarts"},
+   d:"L'adresse du lieu, composee comme un titre sur son propre mur. Le logotype est le dessin, la barre est tracee, seul le nom du lieu est compose. C'est l'adresse le produit.",
+   ph:"80-salle-restaurant", mot:"lagaleriedesarts"},
 
-  {nom:"La photo decoupee", k:"dec", s:"",
+  {nom:"La photo decoupee", k:"dec", s:"in",
    d:"Le signe ne se pose plus sur l'image, il la decoupe : la photo n'existe que dans la silhouette du dessin, le papier traverse le reste. Le geste le plus fort de la serie, donc le plus rare.",
-   ph:"46-cocktail-2"},
+   ph:"22-plate"},
 
   {nom:"La signature", k:"e sign", s:"in", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true},
@@ -659,17 +669,19 @@ hote.innerHTML = COMPOS.map((c,i)=>{
       `<div class="ln">` + l.map(([t,s,r])=>
         `<span class="seg ${s}" data-r="${r||1}">${esc(t)}</span>`).join("") + `</div>`
     ).join("") + `</div>`;
-  } else if (c.mot) {
-    dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.wmSeul) {
     dedans = `<i class="wm"></i>`;
+  /* La photo passe AVANT le mot. La carte de lieu porte les deux — une
+     image et un nom — et elle tombait dans la branche du Coin, qui ne
+     teste que le mot : le nom s'affichait, la photo jamais. */
   } else if (c.ph) {
     /* la photo est la composition : selon la classe, le signe la signe
        en coin, il la decoupe, ou le nom du lieu se pose dessus. */
     dedans = `<img src="pics/bank/${c.ph}.jpg" alt="">`
            + (c.k.includes("phc") ? `<i></i>` : "")
-           + (c.mot ? `<div class="ov"><b>${esc(c.mot)}</b>
-               <span class="lo"><i></i><em>${esc(c.note)}</em></span></div>` : "");
+           + (c.mot ? `<div class="ov"><b><i class="wordmark"></i><u class="bar"></u><em>${esc(c.mot)}</em></b></div>` : "");
+  } else if (c.mot) {
+    dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.k.includes("sgn")) {
     dedans = `<i></i>` + (c.wm ? `<span class="wm"></span>` : "")
       + `<u>${esc(c.adr || "tre.ma/")}</u>`;
@@ -749,7 +761,10 @@ function ajuste(){
         }
       }
     }
-    /* le mot du coin se cale sur la largeur, entier, jamais rogne */
+    /* le mot du coin, et l'adresse de la carte de lieu, se calent sur
+       la largeur : entiers, jamais rognes. Les deux sont en
+       width:max-content, sinon la largeur lue serait celle du bloc et
+       non celle du texte, et le corps retomberait a rien. */
     const b = cadre.querySelector("b");
     if (b) {
       const box = cadre.clientWidth*0.92;

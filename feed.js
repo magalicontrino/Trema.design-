@@ -157,6 +157,15 @@ window.TREMA_FEED = [
    c:"It's yours. Someone laid that in the floor a hundred years ago."},
   {sign:1, s:"k",
    c:"trema. Every place has an address."},
+
+  /* LA CARTE DE LIEU, tout a la fin. Le feed a parle de trema pendant
+     quarante-quatre cadres ; le dernier parle d'un lieu, et la marque
+     y passe sous son nom. C'est la seule carte ou trema n'est pas le
+     sujet, et c'est pour ca qu'elle ferme.
+     Elle remplit aussi la derniere rangee : le profil affiche trois
+     colonnes, et une rangee incomplete se voit tout de suite. */
+  {p:"80-salle-restaurant", mot:"lagaleriedesarts",
+   c:"La Galerie des Arts — tre.ma/lagaleriedesarts. Every place has an address."},
 ];
 
 /* ── rendu ────────────────────────────────────────────────────
@@ -185,9 +194,11 @@ window.renderFeed = function (host, dir, small) {
       /* `phc` signe la photo du picto en coin, `dec` la decoupe dans
          le dessin. Sans l'un ni l'autre, la photo reste nue — c'est le
          cas le plus frequent, et il doit le rester. */
-      const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "");
+      const mode = (o.phc ? " phc" : "") + (o.dec ? " dec" : "") + (o.mot ? " cli" : "");
+      const nom = o.mot
+        ? `<div class="ov"><b><i class="wordmark"></i><u class="bar"></u><em>${o.mot}</em></b></div>` : "";
       return `<div class="post ph${mode}">${n}
-        <img src="${dir}/${o.p}.jpg" alt="" loading="lazy"></div>`;
+        <img src="${dir}/${o.p}.jpg" alt="" loading="lazy">${nom}</div>`;
     }
     if (o.car) {
       /* chaque vue porte ses propres reglages : drapeau, picto de fond,
@@ -358,6 +369,15 @@ function fitAll(host) {
     }
     mesure(b, box);
   });
+  /* l'adresse de la carte de lieu : mise a la mesure, sur une ligne.
+     Une taille fixe ne peut pas convenir — la longueur de l'adresse
+     change a chaque lieu, et c'est elle qui doit remplir la ligne. */
+  host.querySelectorAll(".post.ph.cli b").forEach(b => {
+    const cell = b.closest(".post");
+    const box = cell ? cell.clientWidth * 0.86 : 0;
+    if (box) mesure(b, box);
+  });
+
   /* le drapeau : une seule taille pour le bloc entier. On mesure
      chaque ligne a 10 px, la plus longue donne l'echelle. Le dessin
      du logotype compte pour sa largeur reelle — quatre fois sa
