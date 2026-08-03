@@ -93,9 +93,9 @@ window.TREMA_FEED = [
      temoignage : on nomme le lieu, on pose la question, on repond.
      Clique le cadre pour faire defiler. */
   {car:[
-     {t:["Why","the Vinyl Bar","likes","@mark"], s:"k"},
-     {t:["No algorithm","decides who","sees their","menu"], s:"w"},
-     {t:["Their regulars","find them","direct"], s:"e"},
+     {t:["Why","the Vinyl Bar","likes","@mark"]},
+     {t:["No","algorithm","decides","who sees","their menu."]},
+     {t:["Their","regulars","find them","direct."]},
    ],
    c:"Why the Vinyl Bar likes trema → no algorithm decides who sees their menu, and their regulars find them direct. Swipe."},
 
@@ -137,7 +137,7 @@ window.renderFeed = function (host, dir, small) {
         const ls = sl.t.map(l => l === "@mark"
           ? `<span class="wm-line"><i class="wordmark"></i></span>`
           : `<span>${l}</span>`).join("");
-        return `<div class="sl${k ? "" : " on"}" style="${BG[sl.s]}"><div class="fit">${ls}</div>
+        return `<div class="sl${k ? "" : " on"}"><div class="fit">${ls}</div>
           <i class="sig"></i></div>`;
       }).join("");
       const dots = o.car.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("");

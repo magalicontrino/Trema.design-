@@ -149,6 +149,31 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 
 
 
+
+/* ══ CARROUSEL ═════════════════════════════════════════════
+   Capitales noires sur blanc, lignes empilees, chacune a la
+   mesure exacte — l'affiche "work hard dream big".
+   Une seule diapo affichee, le clic fait defiler. */
+.post.car{background:#fff;color:#111}
+.post.car .sl{position:absolute;inset:0;display:none;align-content:center;padding:7%}
+.post.car .sl.on{display:grid}
+.post.car .fit{width:100%;font-family:var(--fd);line-height:.84;letter-spacing:0;
+  text-transform:uppercase;font-variation-settings:"wght" 1000,"FLAR" 0}
+.post.car .fit span{display:block;white-space:nowrap}
+/* le logotype garde sa place dans la pile, sans deborder */
+.post.car .fit .wm-line{display:block;padding:.04em 0}
+.post.car .fit .wordmark{display:block;width:100%;aspect-ratio:4;background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;
+  mask:url("logotrema.svg") no-repeat left center/contain}
+/* l'indicateur de carrousel, comme sur la plateforme */
+.post.car .swipe{position:absolute;top:6px;right:7px;z-index:7;font-family:var(--fm);
+  font-size:8px;letter-spacing:.1em;opacity:.5}
+.post.car .dots{position:absolute;left:0;right:0;bottom:5%;z-index:7;display:flex;
+  gap:4px;justify-content:center}
+.post.car .dots i{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.25}
+.post.car .dots i.on{opacity:.9}
+.post.car .sig{opacity:.35}
+
 /* ── LE SIGNE EST TOUJOURS LA ───────────────────────────────
    Discret par defaut, en bas a droite, a la taille d'une
    signature. Les styles qui le veulent imposant le reprennent
