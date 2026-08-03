@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trema — Selection</title>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#141414">
+
+<style>
+@font-face{
+  font-family:"GT Flaire";
+  src:url("GT%20Flaire%202024-10-23%20(UKWN)/Variable%20(WF)/GTFlaireVF.ttf") format("truetype");
+  font-weight:300 1000;font-display:block;
+}
+
+:root{
+  --blanc:#FFFFFF; --papier:#F2F1EF; --lait:#E4E3E1; --brume:#B4B4B3;
+  --beton:#767676; --graphite:#3D3D3D; --encre:#141414; --noir:#000000;
+  --bg:var(--papier); --fg:var(--encre);
+  --fd:"GT Flaire","Helvetica Neue",Arial,sans-serif;
+  --fs:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --fm:ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:clamp(14px,2vw,28px);
+  --pad:clamp(18px,4vw,72px);
+  --rule:1.4px solid currentColor;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--fs);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+
+/* header */
+#top{position:sticky;top:0;z-index:9995;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(12px,1.6vw,20px) var(--pad);background:var(--papier);color:var(--encre);
+  border-bottom:var(--rule)}
+#top .mk{width:78px;height:19.5px;background:currentColor;flex:0 0 auto;
+  -webkit-mask:url("logotrema.svg") no-repeat left center/contain;mask:url("logotrema.svg") no-repeat left center/contain}
+#top nav{display:flex;gap:clamp(14px,2vw,30px);align-items:center;
+  font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+#top nav a{padding-bottom:2px;border-bottom:1.4px solid transparent}
+#top nav a.on,#top nav a:hover{border-bottom-color:currentColor}
+
+section{position:relative;padding:clamp(46px,7vw,110px) var(--pad);border-top:var(--rule)}
+section:first-of-type{border-top:0}
+.w{--bg:var(--blanc);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+.l{--bg:var(--lait);--fg:var(--encre);background:var(--bg);color:var(--fg)}
+
+.part{font-family:var(--fm);font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.4;margin-bottom:.9em}
+h1{font-family:var(--fd);font-size:clamp(40px,8.4vw,132px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-transform:uppercase;text-wrap:balance;margin-bottom:.34em}
+h2{font-family:var(--fd);font-size:clamp(28px,4.4vw,64px);line-height:.98;
+  font-variation-settings:"wght" 900,"FLAR" 100;text-transform:uppercase;margin-bottom:.4em}
+h4{font-family:var(--fm);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  opacity:.55;margin-bottom:.9em}
+p{font-size:clamp(14px,1.05vw,16.5px);line-height:1.58;letter-spacing:-.005em;max-width:66ch}
+p + p{margin-top:.9em}
+.mono{font-family:var(--fm);font-size:10.5px;letter-spacing:.04em;line-height:1.72}
+.dim{opacity:.55}
+.grid{display:grid;gap:var(--gut)}
+.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){.c3{grid-template-columns:1fr}}
+.box{border:var(--rule);padding:clamp(14px,1.9vw,24px)}
+
+/* ══ THE SELECTION — twelve frames, in the order they would go out
+   Same 4:5 as the feed, same 3-up grid, so what is judged here is
+   what would be seen on the profile. Numbered so a swap can be
+   asked for by number rather than described. */
+.sel{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
+  border:var(--rule);max-width:760px}
+.shot{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg)}
+.shot img{width:100%;height:100%;object-fit:cover;
+  filter:saturate(var(--sat,1.1)) contrast(1.02) brightness(var(--br,1))}
+.shot .n{position:absolute;top:6px;left:7px;z-index:3;font-family:var(--fm);font-size:8px;
+  letter-spacing:.14em;color:#fff;mix-blend-mode:difference}
+
+/* the list underneath: number, name, one line on what it is for */
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);
+  margin-top:clamp(26px,3.4vw,48px)}
+@media(max-width:860px){.legend{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.legend{grid-template-columns:1fr}}
+.leg{border-top:var(--rule);padding:10px 0 13px;display:grid;grid-template-columns:26px 1fr;gap:10px;
+  align-items:baseline}
+.leg .no{font-family:var(--fm);font-size:9px;opacity:.38;letter-spacing:.14em}
+.leg b{display:block;font-family:var(--fd);font-variation-settings:"wght" 800,"FLAR" 40;
+  font-size:clamp(13px,1.2vw,16px);font-weight:400;text-transform:uppercase;line-height:1.1}
+.leg p{font-size:clamp(12.5px,.95vw,14px);line-height:1.42;max-width:38ch;margin-top:.25em}
+.leg .src{font-family:var(--fm);font-size:9px;opacity:.4;letter-spacing:.08em;display:block;margin-top:.4em}
+
+/* ══ THE ALTERNATION — what the merged feed would look like ══
+   One photograph, one text, one photograph. Shown small: the point
+   is the rhythm of the column, not the content of each frame. */
+.alt{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:currentColor;
+  border:var(--rule);max-width:470px}
+.cell{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg)}
+.cell img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1)}
+.cell.txt{background:var(--encre);color:var(--papier);display:grid;place-items:center;padding:9%}
+.cell.txt.pap{background:var(--blanc);color:var(--encre)}
+.cell.txt span{font-family:var(--fd);font-variation-settings:"wght" 1000,"FLAR" 100;
+  font-size:13cqw;line-height:.88;text-transform:uppercase;letter-spacing:-.03em;text-align:center}
+.cell{container-type:inline-size}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <a href="index.html" class="mk" aria-label="trema"></a>
+  <nav>
+    <a href="index.html">Brand book</a>
+    <a href="instagram.html">Instagram</a>
+    <a href="selection.html" class="on">Selection</a>
+    <a href="facebook.html">Facebook</a>
+  </nav>
+  <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
+</header>
+
+
+<!-- ═════ THE TWELVE ═════ -->
+<section class="w">
+  <div class="part">Communication</div>
+  <h1>Twelve frames,<br>in order</h1>
+  <p>A second grid, photographs only, laid out in the order they would go out. It is not a feed yet:
+  it is the shortlist, shown at the size and the ratio of the real profile so that what gets judged here
+  is what would actually be seen.</p>
+  <p style="margin-bottom:clamp(28px,3.6vw,52px)">Each frame is numbered — a swap can be asked for by
+  number. Once the twelve and their order are settled, they get merged into the main feed one photograph,
+  one text, one photograph, so that every picture is answered by a line.</p>
+
+  <div class="sel" id="sel"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+
+<!-- ═════ THE ALTERNATION ═════ -->
+<section class="l">
+  <h2>Photo, text, photo</h2>
+  <p style="margin-bottom:clamp(24px,3vw,44px)">What the merge would look like, in miniature. The
+  photographs carry the place, the texts carry the message, and neither has to do the other's job. Read
+  down the column rather than across: on a profile grid, alternating one for one puts a text next to a
+  photograph on every row, which is what keeps the block from reading as a mood board.</p>
+  <div class="alt" id="alt"></div>
+  <p class="mono dim" style="margin-top:14px">Twelve photographs and twelve texts make twenty-four —
+  eight complete rows, the length the feed is already at.</p>
+</section>
+
+
+<footer style="padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule)">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <span class="mono dim">© <span data-year>2026</span> trema — concept page</span>
+    <span class="mono dim"><a href="instagram.html" style="text-decoration:underline">← Instagram</a></span>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s);
+document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date().getFullYear());
+
+/* Les douze, dans l'ordre. `br` et `sat` ne servent qu'a rattraper
+   les ecarts d'exposition entre les sources : la selection doit se
+   juger sur une meme base, pas sur les reglages de chaque image. */
+const SHOTS = [
+  {f:"01-bar",        t:"The bar",        d:"Raw concrete and blond oak, two coupes, one brass lamp. The calmest wall of the set — the one frame with real room for a line of display."},
+  {f:"02-florist",    t:"The florist",    d:"Ranunculus laid in a row on wet concrete, seen from straight above. Repetition and a single coral accent.", br:1.02},
+  {f:"03-chair",      t:"The chair",      d:"One bentwood chair against lime plaster. The most minimal frame, and the most open to typography."},
+  {f:"04-cuisine",    t:"The plate",      d:"Sea urchin in its shell, a flower set with tweezers. The craft frame: it says a professional works here."},
+  {f:"05-cocktail",   t:"The cocktail",   d:"Dappled sun across a coupe on dark wood. Deep blacks, one warm accent — the evening frame."},
+  {f:"06-brick",      t:"The corner",     d:"Brick, bare bulbs, yellow chairs. Colour coming out of raw decor rather than added on top."},
+  {f:"07-stilllife",  t:"The still life", d:"Books, coffee, a folded crepe on marble. The morning counterpart to the cocktail."},
+  {f:"08-darkbar",    t:"Night",          d:"Three acid-green lamps in near total darkness. The breathing frame — it carries almost nothing.", br:1.08},
+  {f:"09-terracotta", t:"The material",   d:"Terracotta plaster meeting brushed steel. Texture as the subject, framed like a sample."},
+  {f:"10-street",     t:"The street",     d:"A shopfront in motion, blurred passers-by. The only frame that shows the outside."},
+  {f:"11-cafe",       t:"The table",      d:"Steel table, good light, one glass. Plain, unstyled, and the closest to a real customer's view."},
+  {f:"12-pour",       t:"The pour",       d:"Coffee going into the glass. The one gesture in the set, and the only motion."},
+];
+
+$("#sel").innerHTML = SHOTS.map((s, i) => {
+  const st = [s.br ? `--br:${s.br}` : "", s.sat ? `--sat:${s.sat}` : ""].filter(Boolean).join(";");
+  return `<div class="shot"><span class="n">${String(i+1).padStart(2,"0")}</span>
+    <img src="pics/grid/${s.f}.jpg" alt="${s.t}" style="${st}"></div>`;
+}).join("");
+
+$("#legend").innerHTML = SHOTS.map((s, i) =>
+  `<div class="leg"><span class="no">${String(i+1).padStart(2,"0")}</span>
+    <div><b>${s.t}</b><p>${s.d}</p><span class="src">pics/grid/${s.f}.jpg</span></div></div>`).join("");
+
+/* L'alternance : une photo, un texte, une photo. Les lignes viennent
+   de la message house — ce sont celles qui portent deja le feed. */
+const LINES = ["One link", "Always up to date", "Found everywhere", "From followers to regulars",
+               "Your menu", "No algorithm", "Already there", "Purpose-built", "One link",
+               "Your trema", "Found by AIs", "tre.ma"];
+
+let out = "", li = 0;
+SHOTS.forEach((s, i) => {
+  out += `<div class="cell"><img src="pics/grid/${s.f}.jpg" alt=""></div>`;
+  out += `<div class="cell txt${i % 2 ? " pap" : ""}"><span>${LINES[li++ % LINES.length]}</span></div>`;
+});
+$("#alt").innerHTML = out;
+})();
+</script>
+</body>
+</html>
