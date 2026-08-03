@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trema — Instagram</title>
+<title>trema — Fontes</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=block">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -186,6 +186,31 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
+/* le cadre-signe : le picto seul, coupe par le format, dans tous
+   les styles. Il ne passe pas par la rotation du creatif — il est
+   ecrit dans le feed, donc il tient aussi en Typo. */
+.post.tx.sgn{padding:0;overflow:hidden}
+.post.tx.sgn .edge{display:block}
+
+/* ── le drapeau ────────────────────────────────────────────
+   Une seule taille pour tout le bloc : c'est la ligne la plus
+   longue qui la fixe, les autres tombent ou elles tombent.
+   L'inverse de la regle de la maison, et c'est voulu — une
+   question se lit comme une phrase, pas comme une affiche
+   justifiee. Bas de casse, sans capitales forcees. */
+.post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
+.post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
+.post.tx.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
+  background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.post.tx.rag .fit .wm-line em{font-style:normal}
+
+/* l'italique : l'axe slnt de la variable, pas une fausse oblique
+   penchee par transformation. Le dessin du logotype, lui, ne
+   penche pas — ce n'est pas de la typo. */
+.post.tx.it .fit{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
+
 /* le picto plein cadre : il sort du format des deux cotes. Ecrit
    dans le feed et non pose par un style, c'est l'affiche du 04. */
 .post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
@@ -201,7 +226,6 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .fit{display:none}
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .cnr{display:block}
 
-
 /* ── L'ESSAI DE FONTE ───────────────────────────────────────
    Le seul moyen honnete de comparer, c'est de ne changer qu'une
    variable : memes cadres, meme regle de mise a la mesure, meme
@@ -210,22 +234,36 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .ft-flaire  {--fd:"GT Flaire","Helvetica Neue",Arial,sans-serif}
 .ft-fraunces {--fd:"Fraunces",Georgia,serif}
 .ft-inter    {--fd:"Inter","Helvetica Neue",Arial,sans-serif}
+.ft-bricolage{--fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
 
 /* chaque fonte a ses propres axes : on ne peut pas les regler une
    fois pour toutes, il faut parler la langue de chacune */
 .ft-fraunces .post.tx .fit,.ft-fraunces .post.car .fit,.ft-fraunces .cnr b{font-variation-settings:"opsz" 144,"wght" 900,"SOFT" 100,"WONK" 1}
 .ft-inter .post.tx .fit,.ft-inter .post.car .fit,.ft-inter .cnr b{font-variation-settings:"wght" 900}
+.ft-bricolage .post.tx .fit,.ft-bricolage .post.car .fit,.ft-bricolage .cnr b{font-variation-settings:"opsz" 96,"wdth" 100,"wght" 800}
 
 /* l'italique du 02, dans la langue de chacune */
 .ft-fraunces  .post.tx.it .fit{font-style:italic}
 .ft-inter     .post.tx.it .fit{font-style:italic}
+/* Bricolage n'a pas d'italique : on ne la simule pas en penchant
+   les lettres, la ligne reste droite. C'est une vraie limite, pas
+   un detail — le 02 repose dessus. */
 
+/* les quatre d'un coup : chaque colonne est un feed complet avec sa
+   propre fonte. En petit, mais c'est la seule facon de voir lequel
+   tient a l'echelle ou on regarde vraiment un compte. */
+.quatre{display:grid;grid-template-columns:repeat(4,1fr);gap:0 clamp(10px,1.4vw,20px)}
+.quatre > div > h4{position:sticky;top:0;z-index:9;background:var(--papier);
+  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;margin:0 0 6px;padding:6px 0;border-bottom:var(--rule)}
+.quatre .feed{grid-template-columns:repeat(3,1fr);gap:2px}
 .fontes{display:flex;flex-wrap:wrap;gap:0 22px;margin:0 0 8px}
 .fontes button{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
   background:none;border:0;border-bottom:1px solid transparent;padding:0 0 3px;cursor:pointer;
   color:inherit;opacity:.45}
 .fontes button:hover{opacity:.75}
 .fontes button.on{opacity:1;border-bottom-color:currentColor}
+
 
 /* les legendes — une ligne par post, dans l'ordre de publication */
 .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--gut);margin-top:clamp(26px,3.4vw,48px)}
@@ -305,9 +343,10 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   <a href="index.html" class="mk" aria-label="trema studio"></a>
   <nav>
     <a href="index.html">Brand book</a>
-    <a href="instagram.html" class="on">Instagram</a>
+    <a href="instagram.html">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
+    <a href="fontes.html" class="on">Fontes</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
@@ -330,6 +369,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
   and that it stays current on its own. Captions below, in the order they go out.</p>
 
   <div class="fontes" id="fontes"></div>
+  <div class="quatre" id="quatre" hidden></div>
   <p class="mono dim" id="fnote" style="margin:0 0 clamp(16px,2vw,26px);max-width:60ch"></p>
   <p class="mono dim" style="margin:0 0 clamp(16px,2vw,26px);max-width:52ch">Deux affiches en
     alternance : le bloc de capitales, ou le mot cale en bas a gauche avec sa mention en haut
@@ -375,30 +415,63 @@ document.querySelectorAll("[data-year]").forEach(e => e.textContent = new Date()
 /* Un seul feed. Le selecteur est parti avec les autres styles : on ne
    choisit plus, on compose. La classe reste sur le conteneur, c'est
    elle qui porte les regles des deux affiches. */
-/* Le meme feed, quatre fontes. On ne change que --fd et les reglages
+/* ── LE BANC D'ESSAI ──────────────────────────────────────────
+   Le meme feed, quatre fontes. On ne change que --fd et les reglages
    d'axes, puis on remesure : les corps sont recalcules a chaque
    bascule, sinon on comparerait des chasses figees sur la fonte
    precedente et l'essai ne voudrait rien dire. */
 const FONTES = [
-  {k:"flaire",   t:"GT Flaire",  d:"L'actuelle. Payante, et chere. Axes wght 300-1000, FLAR, italique."},
-  {k:"fraunces", t:"Fraunces",   d:"Libre, OFL. Axes opsz, wght 100-900, SOFT, WONK, vraie italique. Une serif assumee."},
-  {k:"inter",    t:"Inter",      d:"Libre, OFL. Axes opsz, wght 100-900, italique. Neutre : elle ne raconte rien, elle informe."},
+  {k:"flaire",   t:"GT Flaire", d:"L'actuelle. Payante, et chere. Axes wght 300-1000, FLAR, italique."},
+  {k:"fraunces", t:"Fraunces",  d:"Libre, OFL. Axes opsz, wght 100-900, SOFT, WONK, vraie italique. Une serif assumee."},
+  {k:"inter",    t:"Inter",     d:"Libre, OFL. Axes opsz, wght 100-900, italique. Neutre : elle n'raconte rien, elle informe."},
+  {k:"bricolage",t:"Bricolage", d:"Libre, OFL. Axes opsz 12-96, wdth 75-100, wght 200-800. Pas d'italique dessinee : la ligne du 02 reste droite, on ne la penche pas."},
 ];
-const feed = document.querySelector("#feed");
-const bar  = document.querySelector("#fontes");
-const fnote= document.querySelector("#fnote");
-bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("");
+const FAMILLES = {flaire:'"GT Flaire"', fraunces:'"Fraunces"',
+                  inter:'"Inter"', bricolage:'"Bricolage Grotesque"'};
+const feed  = document.querySelector("#feed");
+const bar   = document.querySelector("#fontes");
+const fnote = document.querySelector("#fnote");
+const quatre= document.querySelector("#quatre");
+
+bar.innerHTML = FONTES.map((f,i)=>`<button data-k="${f.k}" class="${i?"":"on"}">${f.t}</button>`).join("")
+  + `<button data-k="tout">Les quatre</button>`;
+
+/* Google Fonts decoupe ses fichiers par plage de caracteres : une fonte
+   n'est telechargee qu'au moment ou un de ses caracteres est rendu. On
+   la force donc a charger AVANT de mesurer, sinon on mesure la police
+   de secours et tous les corps tombent a cote. */
+const charge = k => Promise.all([
+  document.fonts.load(`900 40px ${FAMILLES[k]}`),
+  document.fonts.load(`italic 900 40px ${FAMILLES[k]}`),
+]);
+
 function fonte(k){
+  quatre.hidden = true; quatre.innerHTML = ""; feed.hidden = false;
   feed.className = "feed fx-typo ft-" + k;
   fnote.textContent = FONTES.find(f=>f.k===k).d;
   bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k===k));
-  const FAM = {flaire:'"GT Flaire"', fraunces:'"Fraunces"', inter:'"Inter"'};
-  Promise.all([
-    document.fonts.load(`900 40px ${FAM[k]}`),
-    document.fonts.load(`italic 900 40px ${FAM[k]}`),
-  ]).then(()=> renderFeed(feed, "pics/feed"));
+  charge(k).then(()=> renderFeed(feed, "pics/feed"));
 }
-bar.addEventListener("click", e => { const b=e.target.closest("button"); if(b) fonte(b.dataset.k); });
+
+/* les quatre cote a cote : chaque colonne est un feed complet. On attend
+   les quatre polices avant de rendre quoi que ce soit, sinon les
+   colonnes se mesurent sur la police de secours et se retrouvent toutes
+   a la meme taille — la comparaison ne voudrait plus rien dire. */
+function cote(){
+  feed.hidden = true; quatre.hidden = false;
+  bar.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.k==="tout"));
+  fnote.textContent = "Les quatre feeds cote a cote, meme ordre, memes photos. "
+    + "Seule la fonte change d'une colonne a l'autre.";
+  quatre.innerHTML = FONTES.map(f =>
+    `<div><h4>${f.t}</h4><div class="feed fx-typo ft-${f.k}" id="q-${f.k}"></div></div>`).join("");
+  Promise.all(FONTES.map(f=>charge(f.k)))
+    .then(()=> FONTES.forEach(f => renderFeed(document.querySelector(`#q-${f.k}`), "pics/feed")));
+}
+
+bar.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  b.dataset.k === "tout" ? cote() : fonte(b.dataset.k);
+});
 fonte("flaire");
 
 document.querySelector("#specs").innerHTML = TREMA_FEED.map((o, i) =>

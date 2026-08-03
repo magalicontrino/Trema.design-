@@ -184,6 +184,31 @@ th{letter-spacing:.15em;text-transform:uppercase;font-weight:400;opacity:.55;fon
 .fx-typo .post.tx:not(.sgn):nth-of-type(4n+4) .sig{right:auto;left:6%;top:6%;bottom:auto;opacity:.35}
 
 
+/* le cadre-signe : le picto seul, coupe par le format, dans tous
+   les styles. Il ne passe pas par la rotation du creatif — il est
+   ecrit dans le feed, donc il tient aussi en Typo. */
+.post.tx.sgn{padding:0;overflow:hidden}
+.post.tx.sgn .edge{display:block}
+
+/* ── le drapeau ────────────────────────────────────────────
+   Une seule taille pour tout le bloc : c'est la ligne la plus
+   longue qui la fixe, les autres tombent ou elles tombent.
+   L'inverse de la regle de la maison, et c'est voulu — une
+   question se lit comme une phrase, pas comme une affiche
+   justifiee. Bas de casse, sans capitales forcees. */
+.post.tx.rag .fit{text-transform:none;line-height:.92;letter-spacing:0}
+.post.tx.rag .fit > span{display:block;width:max-content;white-space:nowrap}
+.post.tx.rag .fit .wm-line .wordmark{display:inline-block;vertical-align:baseline;
+  background:currentColor;
+  -webkit-mask:url("logotrema.svg") no-repeat center/contain;
+  mask:url("logotrema.svg") no-repeat center/contain}
+.post.tx.rag .fit .wm-line em{font-style:normal}
+
+/* l'italique : l'axe slnt de la variable, pas une fausse oblique
+   penchee par transformation. Le dessin du logotype, lui, ne
+   penche pas — ce n'est pas de la typo. */
+.post.tx.it .fit{font-variation-settings:"wght" 1000,"FLAR" 100,"slnt" 15}
+
 /* le picto plein cadre : il sort du format des deux cotes. Ecrit
    dans le feed et non pose par un style, c'est l'affiche du 04. */
 .post .edge{display:none;position:absolute;left:-13%;top:50%;transform:translateY(-50%);
@@ -280,6 +305,7 @@ footer{padding:clamp(40px,5vw,80px) var(--pad) 30px;border-top:var(--rule);overf
     <a href="instagram.html" class="on">Instagram</a>
     <a href="selection.html">Photos</a>
     <a href="facebook.html">Facebook</a>
+    <a href="fontes.html">Fontes</a>
   </nav>
   <span class="mono dim" style="font-size:9px;letter-spacing:.18em">NOWHERE &amp; EVERYWHERE</span>
 </header>
