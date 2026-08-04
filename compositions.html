@@ -822,7 +822,14 @@ function ajuste(){
       /* La carte de lieu ne remplit pas la mesure comme le Coin : elle
          s'arrete a 80 %, et c'est cet air a droite qui la fait lire
          comme une adresse posee plutot que comme un titre coince. */
-      const box = cadre.clientWidth * (cadre.classList.contains("cli") ? 0.80 : 0.92);
+      /* Le mot du Coin cogne le bord, c'est son sujet, donc 92 %. La
+         carte de lieu s'arrete a 80 % et le verrou a 78 % : ces deux-la
+         se posent AU MILIEU du cadre, et un verrou centre qui touche
+         les deux bords ne se lit plus comme un objet pose mais comme un
+         bandeau. L'air autour fait l'objet. */
+      const part = cadre.classList.contains("sgm") ? 0.78
+                 : cadre.classList.contains("cli") ? 0.80 : 0.92;
+      const box = cadre.clientWidth * part;
       b.style.fontSize="10px";
       const w=b.scrollWidth;
       if (w) b.style.fontSize=(10*box/w)+"px";
@@ -839,6 +846,11 @@ function ajuste(){
 const charge = () => Promise.all([
   '900 40px "Inter"', '800 40px "Inter"', '400 40px "Inter"',
   'italic 600 40px "EB Garamond"', 'italic 600 40px "Cormorant Garamond"',
+  /* La Garamond DROITE grasse : c'est elle qui compose le mot du
+     verrou, et elle manquait a l'appel. Le mot etait donc mesure sur
+     une serif de secours, dont les chasses n'ont rien a voir — d'ou un
+     corps calcule trop grand et un mot qui sortait du cadre. */
+  '700 40px "EB Garamond"', '400 40px "EB Garamond"',
 ].map(f => document.fonts.load(f).catch(()=>null)));
 
 charge().then(ajuste).then(()=>document.fonts.ready).then(ajuste);
