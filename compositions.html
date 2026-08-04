@@ -467,9 +467,19 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
    mot qui fixe le corps. Un mot court se compose enorme, un mot long
    se compose petit — et le verrou garde toujours la meme largeur. */
 .cadre.sgm{place-items:center}
-.cadre.sgm b{display:flex;align-items:baseline;gap:.28em;width:max-content;white-space:nowrap;
-  font-family:var(--fd-it);font-weight:700;font-style:normal;line-height:1;letter-spacing:-.02em}
-.cadre.sgm b i{flex:none;display:block;height:.82em;aspect-ratio:78/91;background:currentColor;
+/* Le verrou n'est PAS une boite flex. En flex, le signe est un element
+   sans texte : son alignement sur la ligne de base est une heuristique,
+   et il tombait cinq pixels sous elle. Compose en ligne, il devient un
+   inline-block sans contenu, et la regle est alors exacte — son bord
+   bas EST la ligne de base, par construction et non par approximation.
+   C'est la meme mecanique que le logotype dans le mot du Coin. */
+.cadre.sgm b{display:block;width:max-content;white-space:nowrap;font-family:var(--fd-it);
+  font-weight:700;font-style:normal;line-height:1;letter-spacing:-.02em}
+/* .72 em : la hauteur de capitale d'une Garamond grasse, a peine
+   depassee. Le signe monte donc juste au-dessus du mot sans l'ecraser,
+   et repose exactement sur sa ligne de base. */
+.cadre.sgm b i{display:inline-block;vertical-align:baseline;height:.72em;aspect-ratio:78/91;
+  margin-right:.24em;background:currentColor;
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 .cadre.sgm b em{font-style:normal}
