@@ -215,6 +215,11 @@ const BANK = [
   {f:"86-seuil-noir",         t:"The threshold",         k:"Pro 2K",    s:"",      d:"IT'S YOURS laid in white tiles on near-black, white tile border, worn timber doors above."},
   {f:"88-seuil-creme",        t:"Threshold, cream",      k:"Pro 2K",    s:"",      d:"The same, inverted: dark letters on cream and terracotta, green painted doors."},
   {f:"87-seuil-bleu",         t:"Threshold, deep blue",  k:"Pro 2K",    s:"",      d:"Double border, blue-black ground, the panel wider and shallower."},
+  /* Le registre de ta reference : lumiere disponible, temperatures
+     melangees, du bruit dans les noirs. Une vraie salle, pas un decor. */
+  {f:"89-bar-cadres",        t:"The gallery wall",     k:"Pro 2K",    s:"",      d:"Mur moutarde, grappe de cadres, lampes de laiton, poutres. La salle du fond."},
+  {f:"91-bar-comptoir",      t:"The counter, late",    k:"Pro 2K",    s:"",      d:"Bout de comptoir, rail de laiton, bouteilles floues derriere."},
+  {f:"90-bar-banquette",     t:"The booth",            k:"Pro 2K",    s:"",      d:"Un coin de banquette, une lampe, les cadres qui grimpent au mur."},
   {f:"85-piece-picto",                             t:"The room, engraved",                           k:"Composite",               s:"",          d:"Raking sun, foliage shadow, terracotta. The sign is cut into the plaster on the right-hand wall — you find it, it does not announce itself."},
   {f:"80-salle-restaurant",                             t:"Before service",                           k:"Pro 2K",               s:"",          d:"Two laid tables under a bare terracotta wall. The room is empty on purpose."},
 ];
@@ -223,7 +228,7 @@ const LABEL = {in:"In the feed", out:"Set aside", "":"Free"};
 
 /* Les vues qui ont un master 2K. Les autres n'existent qu'en 720 :
    les agrandir ne creerait pas de detail, ca ne ferait que du flou. */
-const HD = new Set(["01-bar-pro", "02-florist-pro", "03-chair-pro", "04-cuisine", "05-cocktail", "27-tomme-shadow", "28-tomme-oak", "31-teak-room", "32-bread-terrazzo", "33-espresso-ochre", "34-blue-door", "35-wine-terrazzo", "36-lattice-shadow", "37-journal-titre", "46-cocktail-2", "47-conceptstore-2", "48-cup-coffee", "49-beet-soup", "50-green-pasta", "52-red-panel", "53-cobalt-latte", "70-creole-turquoise", "71-creole-vermillon", "75-tomates-bocal", "76-tomates-plateau", "77-comptoir-cafe", "78-devanture", "79-fleuriste-mur", "80-salle-restaurant", "81-etagere-vins", "84-ombre-beton", "85-piece-picto", "86-seuil-noir", "87-seuil-bleu", "88-seuil-creme"]);
+const HD = new Set(["01-bar-pro", "02-florist-pro", "03-chair-pro", "04-cuisine", "05-cocktail", "27-tomme-shadow", "28-tomme-oak", "31-teak-room", "32-bread-terrazzo", "33-espresso-ochre", "34-blue-door", "35-wine-terrazzo", "36-lattice-shadow", "37-journal-titre", "46-cocktail-2", "47-conceptstore-2", "48-cup-coffee", "49-beet-soup", "50-green-pasta", "52-red-panel", "53-cobalt-latte", "70-creole-turquoise", "71-creole-vermillon", "75-tomates-bocal", "76-tomates-plateau", "77-comptoir-cafe", "78-devanture", "79-fleuriste-mur", "80-salle-restaurant", "81-etagere-vins", "84-ombre-beton", "85-piece-picto", "86-seuil-noir", "87-seuil-bleu", "88-seuil-creme", "89-bar-cadres", "90-bar-banquette", "91-bar-comptoir"]);
 
 $("#bank").innerHTML = BANK.map((b, i) => `
   <div class="card">
