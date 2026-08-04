@@ -452,6 +452,28 @@ main.wrap{padding:0 var(--pad) clamp(50px,7vw,90px)}
   -webkit-mask:url("Logo.svg") no-repeat center/contain;
   mask:url("Logo.svg") no-repeat center/contain}
 
+/* 17 le signe et le mot. Un verrou horizontal : le picto, puis un mot,
+   sur la meme ligne de base. LE MOT CHANGE — yours, open, here, le nom
+   d'un lieu — le dessin ne change jamais. C'est la composition la plus
+   souple du lot, et la seule ou l'on remplace le texte sans rien
+   rerégler.
+
+   Le mot est compose en Garamond bas-de-casse et non en capitales
+   grasses : a cote d'un signe aussi noir, une capitale grasse ferait
+   deux blocs qui se disputent. La serif laisse le signe parler et se
+   pose a cote de lui, pas contre.
+
+   Mesure a la largeur comme le mot du coin, donc c'est la longueur du
+   mot qui fixe le corps. Un mot court se compose enorme, un mot long
+   se compose petit — et le verrou garde toujours la meme largeur. */
+.cadre.sgm{place-items:center}
+.cadre.sgm b{display:flex;align-items:baseline;gap:.28em;width:max-content;white-space:nowrap;
+  font-family:var(--fd-it);font-weight:700;font-style:normal;line-height:1;letter-spacing:-.02em}
+.cadre.sgm b i{flex:none;display:block;height:.82em;aspect-ratio:78/91;background:currentColor;
+  -webkit-mask:url("Logo.svg") no-repeat center/contain;
+  mask:url("Logo.svg") no-repeat center/contain}
+.cadre.sgm b em{font-style:normal}
+
 /* 07 le coin : le mot en bas a gauche, la mention en haut a droite */
 .cadre.coin{padding:0}
 .cadre.coin b{position:absolute;left:4%;bottom:4%;width:max-content;font-family:var(--fd);
@@ -678,6 +700,10 @@ const COMPOS = [
    d:"Le signe ne se pose plus sur l'image, il la decoupe : la photo n'existe que dans la silhouette du dessin, le papier traverse le reste. Le geste le plus fort de la serie, donc le plus rare.",
    ph:"22-plate"},
 
+  {nom:"Le signe et le mot", k:"w sgm", s:"",
+   d:"Le picto, puis un mot, sur la meme ligne de base. Le mot change — yours, open, here, le nom d'un lieu — le dessin ne change jamais. Le mot est en Garamond bas-de-casse : une capitale grasse ferait deux blocs noirs qui se disputent.",
+   mot:"yours"},
+
   {nom:"La signature", k:"e sign", s:"in", d:"Le logotype seul, centre, et rien d'autre. Pour fermer une serie, ou ouvrir un compte.",
    wmSeul:true},
 ];
@@ -703,6 +729,9 @@ hote.innerHTML = COMPOS.map((c,i)=>{
     dedans = `<img src="pics/bank/${c.ph}.jpg" alt="">`
            + (c.k.includes("phc") || c.k.includes("sph") ? `<i></i>` : "")
            + (c.mot ? `<div class="ov"><b><i class="pic"></i><u class="bar"></u><em>${esc(c.mot)}</em></b></div>` : "");
+  } else if (c.k.includes("sgm")) {
+    /* le verrou : le dessin, puis le mot. Change `mot` et rien d'autre. */
+    dedans = `<b><i></i><em>${esc(c.mot)}</em></b>`;
   } else if (c.mot) {
     dedans = `<b>${esc(c.mot)}</b><i>${esc(c.note)}</i>`;
   } else if (c.k.includes("sgn")) {
