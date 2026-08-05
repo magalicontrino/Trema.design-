@@ -234,6 +234,12 @@ const BANK = [
   {f:"95-listening-bar",     t:"The listening bar",    k:"Pro 2K",    s:"",      d:"Le fond de bar en contreplaque, niches eclairees, l'ampli et la boule a facettes, le marbre devant."},
   {f:"97-listening-barman",  t:"Reaching up",          k:"Pro 2K",    s:"",      d:"Le meme, avec un barman de dos qui attrape une bouteille. La main est nette, pas floue."},
   {f:"96-listening-serre",   t:"The niches",           k:"Pro 2K",    s:"",      d:"Plus serre : les niches remplissent le cadre, le marbre n'est qu'un bandeau."},
+  /* Le mur de disques, tire en registre pellicule : grain, dominante
+     chaude, un seul plan net. C'est la nettete uniforme qui trahit une
+     image faite par machine — ici on l'a retiree exprès. */
+  {f:"98-mur-disques",       t:"The record wall",      k:"Pro 2K",    s:"",      d:"Le haut-parleur encastre dans la menuiserie, les tranches de disques, les verres retournes dessous. Grain et flou."},
+  {f:"100-mur-fauteuil",     t:"From the chair",       k:"Pro 2K",    s:"",      d:"Vue basse depuis un fauteuil, les verres completement flous au premier plan."},
+  {f:"99-mur-biais",         t:"The wall, angled",     k:"Pro 2K",    s:"",      d:"Plan rapproche en biais, les etageres fuient hors du cadre."},
   {f:"85-piece-picto",                             t:"The room, engraved",                           k:"Composite",               s:"",          d:"Raking sun, foliage shadow, terracotta. The sign is cut into the plaster on the right-hand wall — you find it, it does not announce itself."},
   {f:"80-salle-restaurant",                             t:"Before service",                           k:"Pro 2K",               s:"",          d:"Two laid tables under a bare terracotta wall. The room is empty on purpose."},
 ];
@@ -242,7 +248,7 @@ const LABEL = {in:"In the feed", out:"Set aside", "":"Free"};
 
 /* Les vues qui ont un master 2K. Les autres n'existent qu'en 720 :
    les agrandir ne creerait pas de detail, ca ne ferait que du flou. */
-const HD = new Set(["01-bar-pro", "02-florist-pro", "03-chair-pro", "04-cuisine", "05-cocktail", "27-tomme-shadow", "28-tomme-oak", "31-teak-room", "32-bread-terrazzo", "33-espresso-ochre", "34-blue-door", "35-wine-terrazzo", "36-lattice-shadow", "37-journal-titre", "46-cocktail-2", "47-conceptstore-2", "48-cup-coffee", "49-beet-soup", "50-green-pasta", "52-red-panel", "53-cobalt-latte", "70-creole-turquoise", "71-creole-vermillon", "75-tomates-bocal", "76-tomates-plateau", "77-comptoir-cafe", "78-devanture", "79-fleuriste-mur", "80-salle-restaurant", "81-etagere-vins", "84-ombre-beton", "85-piece-picto", "86-seuil-noir", "87-seuil-bleu", "88-seuil-creme", "89-bar-cadres", "90-bar-banquette", "91-bar-comptoir", "92-platine-salle", "93-platine-comptoir", "94-platine-cafe", "95-listening-bar", "96-listening-serre", "97-listening-barman"]);
+const HD = new Set(["01-bar-pro", "02-florist-pro", "03-chair-pro", "04-cuisine", "05-cocktail", "100-mur-fauteuil", "27-tomme-shadow", "28-tomme-oak", "31-teak-room", "32-bread-terrazzo", "33-espresso-ochre", "34-blue-door", "35-wine-terrazzo", "36-lattice-shadow", "37-journal-titre", "46-cocktail-2", "47-conceptstore-2", "48-cup-coffee", "49-beet-soup", "50-green-pasta", "52-red-panel", "53-cobalt-latte", "70-creole-turquoise", "71-creole-vermillon", "75-tomates-bocal", "76-tomates-plateau", "77-comptoir-cafe", "78-devanture", "79-fleuriste-mur", "80-salle-restaurant", "81-etagere-vins", "84-ombre-beton", "85-piece-picto", "86-seuil-noir", "87-seuil-bleu", "88-seuil-creme", "89-bar-cadres", "90-bar-banquette", "91-bar-comptoir", "92-platine-salle", "93-platine-comptoir", "94-platine-cafe", "95-listening-bar", "96-listening-serre", "97-listening-barman", "98-mur-disques", "99-mur-biais"]);
 
 $("#bank").innerHTML = BANK.map((b, i) => `
   <div class="card">
